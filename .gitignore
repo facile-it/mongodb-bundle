@@ -1,0 +1,4 @@
+/composer.lock
+/vendor/
+/bin/
+/.php_cs.cache

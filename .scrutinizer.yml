@@ -1,0 +1,18 @@
+
+filter:
+    excluded_paths:
+        - 'vendor/*'
+        - 'tests/*'
+        - 'bin/*'
+
+checks:
+    php: true
+
+coding_style:
+    php:
+        spaces:
+            before_keywords:
+                catch: false
+
+tools:
+    external_code_coverage: true
