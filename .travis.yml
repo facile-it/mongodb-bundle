@@ -4,6 +4,9 @@ php:
   - '7.0'
   - nightly
 
+services:
+  - mongodb
+
 env:
   global:
     - PATH="$HOME/bin:./vendor/bin:$PATH"
@@ -41,6 +44,7 @@ before_install:
   - if [ "$SYMFONY" != "" ]; then composer require "symfony/symfony:${SYMFONY}" --no-update; fi;
 
 install:
+  - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - mkdir --parents "${HOME}/bin"
   - composer global require --prefer-dist --no-interaction sllh/composer-lint:@stable
   - composer update --prefer-dist --no-interaction ${COMPOSER_FLAGS}

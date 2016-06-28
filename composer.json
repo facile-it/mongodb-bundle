@@ -23,7 +23,6 @@
     "autoload": {
         "psr-4": { "MongoBundle\\": "src/" }
     },
-    "minimum-stability": "stable",
     "config": {
         "sort-packages": true
     },

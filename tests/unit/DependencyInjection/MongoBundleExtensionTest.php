@@ -32,11 +32,6 @@ class MongoBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertSame('telegraf', $defaultConnection->getDatabaseName());
     }
 
-    public function test_load_multiple_connections()
-    {
-        $this->markTestIncomplete();
-    }
-
     /**
      * Return an array of container extensions you need to be registered for each test (usually just the container
      * extension you are testing.
