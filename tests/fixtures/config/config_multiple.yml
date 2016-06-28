@@ -1,0 +1,14 @@
+mongo_bundle:
+    default_connection: test
+    connections:
+        default:
+            database: telegraf
+            host: localhost
+            username: foo
+            password: bar
+        test:
+            database: test
+            host: localhost
+            port: 27018
+            username: foo
+            password: bar
