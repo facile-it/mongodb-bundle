@@ -1,6 +1,6 @@
 <?php
 
-namespace MongoBundle\Tests\unit\DependencyInjection;
+namespace MongoBundle\Tests\functional\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoBundle\DependencyInjection\MongoBundleExtension;

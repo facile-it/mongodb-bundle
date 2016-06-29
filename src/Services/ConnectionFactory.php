@@ -25,12 +25,7 @@ class ConnectionFactory
      */
     public function createConnection(ConnectionConfiguration $configuration): Database
     {
-        // Define the client key to retrieve or create the client instance.
-        $clientKey = sprintf('%s.%s', $configuration->getHost(), $configuration->getPort());
-        if ($configuration->hasCredentials()) {
-            $clientKey .= '.'.$configuration->getUsername();
-        }
-
+        $clientKey = $configuration->getConnectionIdentifier();
         $client = $this->getClientForConfiguration($configuration, $clientKey);
 
         return $client->selectDatabase($configuration->getDatabase());
@@ -43,10 +38,7 @@ class ConnectionFactory
      */
     private function createClient(ConnectionConfiguration $configuration): Client
     {
-        $uri = $this->prepareConnectionUri($configuration);
-        $client = new Client($uri);
-
-        return $client;
+        return new Client($configuration->getConnectionUri());
     }
 
     /**
@@ -63,31 +55,7 @@ class ConnectionFactory
 
             return $client;
         }
-        $client = $this->clients[$clientKey];
 
-        return $client;
-    }
-
-    /**
-     * @param ConnectionConfiguration $configuration
-     *
-     * @return string
-     */
-    private function prepareConnectionUri(ConnectionConfiguration $configuration)
-    {
-        $credentials = '';
-        if ($configuration->hasCredentials()) {
-            $credentials = sprintf('%s:%s@', $configuration->getUsername(), $configuration->getPassword());
-        }
-
-        $uri = sprintf(
-            'mongodb://%s%s:%d/%s',
-            $credentials,
-            $configuration->getHost(),
-            $configuration->getPort(),
-            $configuration->getDatabase()
-        );
-
-        return $uri;
+        return $this->clients[$clientKey];
     }
 }

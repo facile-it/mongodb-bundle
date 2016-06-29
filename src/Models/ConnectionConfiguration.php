@@ -85,4 +85,35 @@ class ConnectionConfiguration
     {
         return $this->password;
     }
+
+    /**
+     * @return string
+     */
+    public function getConnectionIdentifier(): string
+    {
+        $key = sprintf('%s.%d', $this->host, $this->port);
+        $key .= $this->hasCredentials() ? '.'.$this->getUsername() : '';
+
+        return $key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConnectionUri(): string
+    {
+        $credentials = $this->hasCredentials() ?
+            sprintf('%s:%s@', $this->username, $this->password) :
+            '';
+
+        $uri = sprintf(
+            'mongodb://%s%s:%d/%s',
+            $credentials,
+            $this->host,
+            $this->port,
+            $this->database
+        );
+
+        return $uri;
+    }
 }
