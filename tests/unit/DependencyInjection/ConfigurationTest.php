@@ -2,10 +2,10 @@
 
 namespace MongoBundle\Tests\unit\DependencyInjection;
 
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use MongoBundle\DependencyInjection\Configuration;
 use MongoBundle\DependencyInjection\MongoBundleExtension;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
@@ -54,6 +54,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             __DIR__.'/../../fixtures/config/config_full.yml',
         ]);
     }
+
     public function test_multiple_connections_configuration_process()
     {
         $expectedConfiguration = [

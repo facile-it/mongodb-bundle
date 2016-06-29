@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace MongoBundle;
 
@@ -8,7 +8,7 @@ use MongoBundle\DependencyInjection\MongoBundleExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class MongoBundle
+ * Class MongoBundle.
  */
 final class MongoBundle extends Bundle
 {

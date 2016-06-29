@@ -22,14 +22,13 @@ class ConnectionFactory
      * @param ConnectionConfiguration $configuration
      *
      * @return Database
-     *
      */
     public function createConnection(ConnectionConfiguration $configuration): Database
     {
         // Define the client key to retrieve or create the client instance.
         $clientKey = sprintf('%s.%s', $configuration->getHost(), $configuration->getPort());
         if ($configuration->hasCredentials()) {
-            $clientKey .= ".".$configuration->getUsername();
+            $clientKey .= '.'.$configuration->getUsername();
         }
 
         $client = $this->getClientForConfiguration($configuration, $clientKey);
@@ -80,9 +79,9 @@ class ConnectionFactory
         if ($configuration->hasCredentials()) {
             $credentials = sprintf('%s:%s@', $configuration->getUsername(), $configuration->getPassword());
         }
-        
+
         $uri = sprintf(
-            "mongodb://%s%s:%d/%s",
+            'mongodb://%s%s:%d/%s',
             $credentials,
             $configuration->getHost(),
             $configuration->getPort(),
