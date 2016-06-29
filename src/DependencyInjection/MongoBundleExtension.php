@@ -2,6 +2,7 @@
 
 namespace MongoBundle\DependencyInjection;
 
+use MongoBundle\Models\ConnectionConfiguration;
 use MongoDB\Client;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -41,12 +42,15 @@ class MongoBundleExtension extends Extension
      */
     private function createConnection(ContainerBuilder $container, $connection, array $config)
     {
-        // Create the connection based from the abstract one.
-        $connectionDefinition = new Definition(Client::class, [
+        $configuration = new ConnectionConfiguration(
             $config['host'],
             $config['port'],
-            $config['database']
-        ]);
+            $config['database'],
+            $config['username'],
+            $config['password']
+        );
+        // Create the connection based from the abstract one.
+        $connectionDefinition = new Definition(Client::class, [$configuration]);
         $connectionDefinition->setFactory([new Reference('mongo.connection_factory'), 'createConnection']);
         // E.g.: mongo.connection.default
         $container->setDefinition('mongo.connection.'.$connection, $connectionDefinition);

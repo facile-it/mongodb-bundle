@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace MongoBundle\Services;
 
+use MongoBundle\Models\ConnectionConfiguration;
 use MongoDB\Client;
 use MongoDB\Database;
 
@@ -18,46 +19,47 @@ class ConnectionFactory
     private $clients = [];
 
     /**
-     * @param string $host
-     * @param int    $port
-     * @param string $database
+     * @param ConnectionConfiguration $configuration
      *
      * @return Database
+     *
      */
-    public function createConnection(string $host, int $port, string $database): Database
+    public function createConnection(ConnectionConfiguration $configuration): Database
     {
         // Define the client key to retrieve or create the client instance.
-        $clientKey = sprintf('%s.%s', $host, $port);
-        $client = $this->getClientForConfiguration($host, $port, $clientKey);
+        $clientKey = sprintf('%s.%s', $configuration->getHost(), $configuration->getPort());
+        if (!empty($configuration->getUsername())) {
+            $clientKey .= ".".$configuration->getUsername();
+        }
 
-        return $client->selectDatabase($database);
+        $client = $this->getClientForConfiguration($configuration, $clientKey);
+
+        return $client->selectDatabase($configuration->getDatabase());
     }
 
     /**
-     * @param string $host
-     * @param int    $port
+     * @param ConnectionConfiguration $configuration
      *
      * @return Client
      */
-    private function createClient(string $host, int $port): Client
+    private function createClient(ConnectionConfiguration $configuration): Client
     {
-        $uri = sprintf("mongodb://%s:%s", $host, $port);
+        $uri = $this->prepareConnectionUri($configuration);
         $client = new Client($uri);
 
         return $client;
     }
 
     /**
-     * @param string $host
-     * @param int    $port
-     * @param string $clientKey
+     * @param ConnectionConfiguration $configuration
+     * @param string                  $clientKey
      *
      * @return Client
      */
-    private function getClientForConfiguration(string $host, int $port, string $clientKey): Client
+    private function getClientForConfiguration(ConnectionConfiguration $configuration, string $clientKey): Client
     {
         if (!array_key_exists($clientKey, $this->clients)) {
-            $client = $this->createClient($host, $port);
+            $client = $this->createClient($configuration);
             $this->clients[$clientKey] = $client;
 
             return $client;
@@ -65,5 +67,28 @@ class ConnectionFactory
         $client = $this->clients[$clientKey];
 
         return $client;
+    }
+
+    /**
+     * @param ConnectionConfiguration $configuration
+     *
+     * @return string
+     */
+    private function prepareConnectionUri(ConnectionConfiguration $configuration)
+    {
+        $credentials = '';
+        if ($configuration->hasCredentials()) {
+            $credentials = sprintf('%s:%s@', $configuration->getUsername(), $configuration->getPassword());
+        }
+        
+        $uri = sprintf(
+            "mongodb://%s%s:%d/%s",
+            $credentials,
+            $configuration->getHost(),
+            $configuration->getPort(),
+            $configuration->getDatabase()
+        );
+
+        return $uri;
     }
 }
