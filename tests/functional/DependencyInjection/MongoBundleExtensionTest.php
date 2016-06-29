@@ -48,7 +48,7 @@ class MongoBundleExtensionTest extends AbstractExtensionTestCase
                     ],
                     'test' => [
                         'host' => 'localhost',
-                        'database' => 'telegraf',
+                        'database' => 'tele',
                         'username' => 'test',
                         'password' => 'password',
                     ],
@@ -65,9 +65,15 @@ class MongoBundleExtensionTest extends AbstractExtensionTestCase
         // 'default' connections
         $this->assertContainerBuilderHasService('mongo.connection.default', Client::class);
         $defaultConnection = $this->container->get('mongo.connection.default');
-
         $this->assertInstanceOf(Database::class, $defaultConnection);
         $this->assertSame('telegraf', $defaultConnection->getDatabaseName());
+
+        // 'test' connections
+        $this->assertContainerBuilderHasService('mongo.connection.test', Client::class);
+        $testConnection = $this->container->get('mongo.connection.test');
+
+        $this->assertInstanceOf(Database::class, $testConnection);
+        $this->assertSame('tele', $testConnection->getDatabaseName());
     }
 
     /**
