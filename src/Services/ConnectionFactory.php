@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace MongoBundle\Services;
 
@@ -9,7 +9,7 @@ use MongoDB\Client;
 use MongoDB\Database;
 
 /**
- * Class ConnectionFactory
+ * Class ConnectionFactory.
  */
 class ConnectionFactory
 {
@@ -28,7 +28,7 @@ class ConnectionFactory
     {
         // Define the client key to retrieve or create the client instance.
         $clientKey = sprintf('%s.%s', $configuration->getHost(), $configuration->getPort());
-        if (!empty($configuration->getUsername())) {
+        if ($configuration->hasCredentials()) {
             $clientKey .= ".".$configuration->getUsername();
         }
 

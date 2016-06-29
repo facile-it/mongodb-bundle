@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class MongoBundleExtension
+ * Class MongoBundleExtension.
  */
 class MongoBundleExtension extends Extension
 {
@@ -26,9 +26,9 @@ class MongoBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('factory.xml');
         // If the default connection if not defined, get the first one.
-        $defaultConnection = isset($config['default_connection']) ? $config['default_connection'] : key(
-            $config['connections']
-        );
+        $defaultConnection = isset($config['default_connection']) ?
+            $config['default_connection'] :
+            key($config['connections']);
         $this->buildConnections($container, $config);
         $this->setDefaultConnectionAlias($container, $defaultConnection);
 

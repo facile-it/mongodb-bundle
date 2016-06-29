@@ -1,11 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace MongoBundle\Models;
 
 /**
- * Class ConnectionConfiguration
+ * Class ConnectionConfiguration.
  */
 class ConnectionConfiguration
 {

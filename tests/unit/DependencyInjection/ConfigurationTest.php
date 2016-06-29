@@ -73,6 +73,13 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'username' => 'foo',
                     'password' => 'bar',
                 ],
+                'test2' => [
+                    'database' => 'test2',
+                    'host' => 'localhost',
+                    'port' => 27017,
+                    'username' => 'foo',
+                    'password' => 'bar',
+                ],
             ],
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [

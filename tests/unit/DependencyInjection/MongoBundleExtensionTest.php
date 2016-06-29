@@ -16,6 +16,8 @@ class MongoBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'host' => 'localhost',
                 'database' => 'telegraf',
+                'username' => 'test',
+                'password' => 'password'
             ]
         );
         $this->compile();
