@@ -2,6 +2,9 @@
 
 Bundle service integration of official [mongodb/mongo-php-library](https://github.com/mongodb/mongo-php-library) driver library, ([mongodb/mongodb](https://packagist.org/packages/mongodb/mongodb) on packagist)
 
+[![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg) [![StyleCI](https://styleci.io/repos/61825783/shield)](https://styleci.io/repos/61825783) [![Build Status](https://travis-ci.org/Algatux/mongo-bundle.svg?branch=master)](https://travis-ci.org/Algatux/mongo-bundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Algatux/mongo-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Algatux/mongo-bundle/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Algatux/mongo-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Algatux/mongo-bundle/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/algatux/mongo-bundle/v/stable)](https://packagist.org/packages/algatux/mongo-bundle) [![Latest Unstable Version](https://poser.pugx.org/algatux/mongo-bundle/v/unstable)](https://packagist.org/packages/algatux/mongo-bundle) [![License](https://poser.pugx.org/algatux/mongo-bundle/license)](https://packagist.org/packages/algatux/mongo-bundle)
+
 ### Installation
 
 First of all, you need to require this library through composer:
@@ -60,7 +63,7 @@ mongo_bundle:
     # Your MongoDB host address
     host:                 ~ # Required
 
-    # Your InfluxDB database name
+    # Your MongoDB database name
     database:             ~ # Required
     
     port:                 27017
