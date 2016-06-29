@@ -17,7 +17,43 @@ class MongoBundleExtensionTest extends AbstractExtensionTestCase
                 'host' => 'localhost',
                 'database' => 'telegraf',
                 'username' => 'test',
-                'password' => 'password'
+                'password' => 'password',
+            ]
+        );
+        $this->compile();
+        // Alias connections
+        $this->assertContainerBuilderHasService('mongo.connection', Client::class);
+        $defaultConnection = $this->container->get('mongo.connection');
+        $this->assertInstanceOf(Database::class, $defaultConnection);
+        $this->assertSame('telegraf', $defaultConnection->getDatabaseName());
+        // 'default' connections
+        $this->assertContainerBuilderHasService('mongo.connection.default', Client::class);
+        $defaultConnection = $this->container->get('mongo.connection.default');
+
+        $this->assertInstanceOf(Database::class, $defaultConnection);
+        $this->assertSame('telegraf', $defaultConnection->getDatabaseName());
+    }
+
+    public function test_load_multiple()
+    {
+        $this->load(
+            [
+                'default_connection' => 'default',
+                'connections' => [
+                    'default' => [
+                        'host' => 'localhost',
+                        'database' => 'telegraf',
+                        'username' => 'test',
+                        'password' => 'password',
+                    ],
+                    'test' => [
+                        'host' => 'localhost',
+                        'database' => 'telegraf',
+                        'username' => 'test',
+                        'password' => 'password',
+                    ],
+                ],
+
             ]
         );
         $this->compile();

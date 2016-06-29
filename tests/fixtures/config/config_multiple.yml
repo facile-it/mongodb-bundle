@@ -12,8 +12,8 @@ mongo_bundle:
             port: 27018
             username: foo
             password: bar
-        test2:
-            database: test2
+        test_again:
+            database: test_again
             host: localhost
             username: foo
             password: bar

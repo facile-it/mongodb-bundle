@@ -73,8 +73,8 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'username' => 'foo',
                     'password' => 'bar',
                 ],
-                'test2' => [
-                    'database' => 'test2',
+                'test_again' => [
+                    'database' => 'test_again',
                     'host' => 'localhost',
                     'port' => 27017,
                     'username' => 'foo',
