@@ -22,12 +22,12 @@ class MongoBundleExtensionTest extends AbstractExtensionTestCase
         );
         $this->compile();
         // Alias connections
-        $this->assertContainerBuilderHasService('mongo.connection', Client::class);
+        $this->assertContainerBuilderHasService('mongo.connection', Database::class);
         $defaultConnection = $this->container->get('mongo.connection');
         $this->assertInstanceOf(Database::class, $defaultConnection);
         $this->assertSame('telegraf', $defaultConnection->getDatabaseName());
         // 'default' connections
-        $this->assertContainerBuilderHasService('mongo.connection.default', Client::class);
+        $this->assertContainerBuilderHasService('mongo.connection.default', Database::class);
         $defaultConnection = $this->container->get('mongo.connection.default');
 
         $this->assertInstanceOf(Database::class, $defaultConnection);
@@ -58,20 +58,18 @@ class MongoBundleExtensionTest extends AbstractExtensionTestCase
         );
         $this->compile();
         // Alias connections
-        $this->assertContainerBuilderHasService('mongo.connection', Client::class);
+        $this->assertContainerBuilderHasService('mongo.connection', Database::class);
         $defaultConnection = $this->container->get('mongo.connection');
         $this->assertInstanceOf(Database::class, $defaultConnection);
         $this->assertSame('telegraf', $defaultConnection->getDatabaseName());
         // 'default' connections
-        $this->assertContainerBuilderHasService('mongo.connection.default', Client::class);
+        $this->assertContainerBuilderHasService('mongo.connection.default', Database::class);
         $defaultConnection = $this->container->get('mongo.connection.default');
         $this->assertInstanceOf(Database::class, $defaultConnection);
         $this->assertSame('telegraf', $defaultConnection->getDatabaseName());
-
         // 'test' connections
-        $this->assertContainerBuilderHasService('mongo.connection.test', Client::class);
+        $this->assertContainerBuilderHasService('mongo.connection.test', Database::class);
         $testConnection = $this->container->get('mongo.connection.test');
-
         $this->assertInstanceOf(Database::class, $testConnection);
         $this->assertSame('tele', $testConnection->getDatabaseName());
     }

@@ -20,15 +20,15 @@ class ConnectionFactory
 
     /**
      * @param ConnectionConfiguration $configuration
+     * @param string                  $connectionKey
      *
      * @return Database
      */
-    public function createConnection(ConnectionConfiguration $configuration): Database
+    public function createConnection(ConnectionConfiguration $configuration, string $connectionKey): Database
     {
-        $clientKey = $configuration->getConnectionIdentifier();
-        $client = $this->getClientForConfiguration($configuration, $clientKey);
-
-        return $client->selectDatabase($configuration->getDatabase());
+        return $this
+            ->getClientForConfiguration($configuration, $connectionKey)
+            ->selectDatabase($configuration->getDatabase());
     }
 
     /**

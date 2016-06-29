@@ -3,7 +3,7 @@
 namespace MongoBundle\DependencyInjection;
 
 use MongoBundle\Models\ConnectionConfiguration;
-use MongoDB\Client;
+use MongoDB\Database;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -42,17 +42,15 @@ class MongoBundleExtension extends Extension
      */
     private function createConnection(ContainerBuilder $container, $connection, array $config)
     {
-        $configuration = new ConnectionConfiguration(
-            $config['host'],
-            $config['port'],
-            $config['database'],
-            $config['username'],
-            $config['password']
+        $confDefinitionKey = $this->prepareConfigurationDefinition($container, $config);
+        $connectionDefinition = new Definition(
+            Database::class,
+            [
+                new Reference($confDefinitionKey),
+                $this->makeConnectionIdentifier($config),
+            ]
         );
-        // Create the connection based from the abstract one.
-        $connectionDefinition = new Definition(Client::class, [$configuration]);
         $connectionDefinition->setFactory([new Reference('mongo.connection_factory'), 'createConnection']);
-        // E.g.: mongo.connection.default
         $container->setDefinition('mongo.connection.'.$connection, $connectionDefinition);
     }
 
@@ -74,5 +72,46 @@ class MongoBundleExtension extends Extension
     private function setDefaultConnectionAlias(ContainerBuilder $container, string $defaultConnection)
     {
         $container->setAlias('mongo.connection', 'mongo.connection.'.$defaultConnection);
+    }
+
+    /**
+     * @param array $config
+     * @param bool  $dbName
+     *
+     * @return string
+     */
+    private function makeConnectionIdentifier(array $config, bool $dbName = false): string
+    {
+        $key = sprintf('%s.%d', $config['host'], $config['port']);
+        $key .= !empty($config['username']) ? '.'.$config['username'] : '';
+        $key .= $dbName ? $config['database'] : '';
+
+        return $key;
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     *
+     * @return string
+     */
+    private function prepareConfigurationDefinition(ContainerBuilder $container, array $config): string
+    {
+        $confDefinition = new Definition(
+            ConnectionConfiguration::class,
+            [
+                $config['host'],
+                $config['port'],
+                $config['database'],
+                $config['username'],
+                $config['password'],
+            ]
+        );
+        $confDefinition->setPublic(false);
+
+        $confDefinitionKey = 'mongo.connection_configuration'.$this->makeConnectionIdentifier($config, true);
+        $container->setDefinition($confDefinitionKey, $confDefinition);
+
+        return $confDefinitionKey;
     }
 }

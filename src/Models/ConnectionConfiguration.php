@@ -89,17 +89,6 @@ class ConnectionConfiguration
     /**
      * @return string
      */
-    public function getConnectionIdentifier(): string
-    {
-        $key = sprintf('%s.%d', $this->host, $this->port);
-        $key .= $this->hasCredentials() ? '.'.$this->getUsername() : '';
-
-        return $key;
-    }
-
-    /**
-     * @return string
-     */
     public function getConnectionUri(): string
     {
         $credentials = $this->hasCredentials() ?

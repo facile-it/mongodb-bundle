@@ -26,8 +26,7 @@ class ConnectionConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test', $conf->getDatabase());
         $this->assertEquals('admin', $conf->getUsername());
         $this->assertEquals('admin_password', $conf->getPassword());
-
-        $this->assertEquals('localhost.27017.admin', $conf->getConnectionIdentifier());
+        
         $this->assertEquals('mongodb://admin:admin_password@localhost:27017/test', $conf->getConnectionUri());
     }
 
@@ -46,8 +45,7 @@ class ConnectionConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test', $conf->getDatabase());
         $this->assertEquals('', $conf->getUsername());
         $this->assertEquals('', $conf->getPassword());
-
-        $this->assertEquals('localhost.27017', $conf->getConnectionIdentifier());
+        
         $this->assertEquals('mongodb://localhost:27017/test', $conf->getConnectionUri());
     }
 }
