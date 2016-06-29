@@ -38,7 +38,7 @@ class MongoBundleExtension extends Extension
     /**
      * @param ContainerBuilder $container
      * @param string           $connection The connection name
-     * @param array            $config The connection configuration
+     * @param array            $config     The connection configuration
      */
     private function createConnection(ContainerBuilder $container, $connection, array $config)
     {
