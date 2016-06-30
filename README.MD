@@ -2,6 +2,8 @@
 
 Bundle service integration of official [mongodb/mongo-php-library](https://github.com/mongodb/mongo-php-library) driver library, ([mongodb/mongodb](https://packagist.org/packages/mongodb/mongodb) on packagist)
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5467e16c-b5f3-42c4-83e1-c4e065f7b2dc/mini.png)](https://insight.sensiolabs.com/projects/5467e16c-b5f3-42c4-83e1-c4e065f7b2dc)
+
 [![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg) [![StyleCI](https://styleci.io/repos/61825783/shield)](https://styleci.io/repos/61825783) [![Build Status](https://travis-ci.org/Algatux/mongo-bundle.svg?branch=master)](https://travis-ci.org/Algatux/mongo-bundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Algatux/mongo-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Algatux/mongo-bundle/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Algatux/mongo-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Algatux/mongo-bundle/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/algatux/mongo-bundle/v/stable)](https://packagist.org/packages/algatux/mongo-bundle) [![Latest Unstable Version](https://poser.pugx.org/algatux/mongo-bundle/v/unstable)](https://packagist.org/packages/algatux/mongo-bundle) [![License](https://poser.pugx.org/algatux/mongo-bundle/license)](https://packagist.org/packages/algatux/mongo-bundle)
 
