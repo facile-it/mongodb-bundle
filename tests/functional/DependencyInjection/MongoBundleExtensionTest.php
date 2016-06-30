@@ -4,7 +4,6 @@ namespace MongoBundle\Tests\functional\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoBundle\DependencyInjection\MongoBundleExtension;
-use MongoDB\Client;
 use MongoDB\Database;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
