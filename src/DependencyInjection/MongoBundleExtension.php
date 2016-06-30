@@ -84,7 +84,7 @@ class MongoBundleExtension extends Extension
     {
         $key = sprintf('%s.%d', $config['host'], $config['port']);
         $key .= !empty($config['username']) ? '.'.$config['username'] : '';
-        $key .= $dbName ? $config['database'] : '';
+        $key .= $dbName ? '.'.$config['database'] : '';
 
         return $key;
     }
