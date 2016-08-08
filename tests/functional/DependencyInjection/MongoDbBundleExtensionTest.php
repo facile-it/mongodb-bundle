@@ -3,11 +3,11 @@
 namespace Facile\MongoDbBundle\Tests\functional\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Facile\MongoDbBundle\DependencyInjection\MongoBundleExtension;
+use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
 use MongoDB\Database;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-class MongoBundleExtensionTest extends AbstractExtensionTestCase
+class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 {
     public function test_load()
     {
@@ -82,7 +82,7 @@ class MongoBundleExtensionTest extends AbstractExtensionTestCase
     protected function getContainerExtensions()
     {
         return [
-            new MongoBundleExtension(),
+            new MongoDbBundleExtension(),
         ];
     }
 }

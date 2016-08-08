@@ -4,7 +4,7 @@ namespace Facile\MongoDbBundle\Tests\unit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Facile\MongoDbBundle\DependencyInjection\Configuration;
-use Facile\MongoDbBundle\DependencyInjection\MongoBundleExtension;
+use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
@@ -93,7 +93,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
      */
     protected function getContainerExtension()
     {
-        return new MongoBundleExtension();
+        return new MongoDbBundleExtension();
     }
 
     /**

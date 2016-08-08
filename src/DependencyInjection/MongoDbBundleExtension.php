@@ -12,9 +12,9 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class MongoBundleExtension.
+ * Class MongoDbBundleExtension.
  */
-class MongoBundleExtension extends Extension
+class MongoDbBundleExtension extends Extension
 {
     /**
      * {@inheritdoc}

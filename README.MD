@@ -24,7 +24,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new MongoBundle\MongoBundle(),
+        new Facile\MongoDbBundle\FacileMongoDbBundle(),
     );
 
     // ...
