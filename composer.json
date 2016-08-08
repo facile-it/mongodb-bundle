@@ -1,5 +1,5 @@
 {
-    "name": "algatux/mongo-bundle",
+    "name": "facile-it/mongo-bundle",
     "description": "Bundle service integration of official [mongodb/mongo-php-library](https://github.com/mongodb/mongo-php-library) driver library",
     "keywords": ["MongoDB", "Symfony", "Database"],
     "type": "symfony-bundle",
@@ -20,14 +20,14 @@
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6"
     },
     "autoload": {
-        "psr-4": { "MongoBundle\\": "src/" }
+        "psr-4": { "Facile\\MongoDbBundle\\": "src/" }
     },
     "config": {
         "sort-packages": true
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.x-dev"
+            "dev-master": "0.x-dev"
         }
     }
 }
