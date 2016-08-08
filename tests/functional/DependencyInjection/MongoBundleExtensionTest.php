@@ -1,9 +1,9 @@
 <?php
 
-namespace MongoBundle\Tests\functional\DependencyInjection;
+namespace Facile\MongoDbBundle\Tests\functional\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use MongoBundle\DependencyInjection\MongoBundleExtension;
+use Facile\MongoDbBundle\DependencyInjection\MongoBundleExtension;
 use MongoDB\Database;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 

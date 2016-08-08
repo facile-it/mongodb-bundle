@@ -2,7 +2,7 @@
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
-use MongoBundle\Models\ConnectionConfiguration;
+use Facile\MongoDbBundle\Models\ConnectionConfiguration;
 use MongoDB\Database;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

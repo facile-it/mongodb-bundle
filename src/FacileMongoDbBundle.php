@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace MongoBundle;
+namespace Facile\MongoDbBundle;
 
-use MongoBundle\DependencyInjection\MongoBundleExtension;
+use Facile\MongoDbBundle\DependencyInjection\MongoBundleExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class MongoBundle.
+ * Class FacileMongoDbBundle.
  */
-final class MongoBundle extends Bundle
+final class FacileMongoDbBundle extends Bundle
 {
     /**
      * @return MongoBundleExtension

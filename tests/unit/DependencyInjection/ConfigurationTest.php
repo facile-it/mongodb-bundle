@@ -1,10 +1,10 @@
 <?php
 
-namespace MongoBundle\Tests\unit\DependencyInjection;
+namespace Facile\MongoDbBundle\Tests\unit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
-use MongoBundle\DependencyInjection\Configuration;
-use MongoBundle\DependencyInjection\MongoBundleExtension;
+use Facile\MongoDbBundle\DependencyInjection\Configuration;
+use Facile\MongoDbBundle\DependencyInjection\MongoBundleExtension;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase

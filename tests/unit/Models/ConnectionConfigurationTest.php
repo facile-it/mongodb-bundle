@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MongoBundle\Tests\unit\Models;
 
-use MongoBundle\Models\ConnectionConfiguration;
+use Facile\MongoDbBundle\Models\ConnectionConfiguration;
 
 /**
  * Class ConnectionConfigurationTest.

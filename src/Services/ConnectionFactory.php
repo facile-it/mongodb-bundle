@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
-use MongoBundle\Models\ConnectionConfiguration;
+use Facile\MongoDbBundle\Models\ConnectionConfiguration;
 use MongoDB\Client;
 use MongoDB\Database;
 
