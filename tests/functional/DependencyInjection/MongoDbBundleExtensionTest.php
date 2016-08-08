@@ -2,8 +2,8 @@
 
 namespace Facile\MongoDbBundle\Tests\functional\DependencyInjection;
 
-use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
