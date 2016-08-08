@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MongoBundle\Models;
+namespace Facile\MongoDbBundle\Models;
 
 /**
  * Class ConnectionConfiguration.

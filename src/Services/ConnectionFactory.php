@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MongoBundle\Services;
+namespace Facile\MongoDbBundle\Services;
 
 use MongoBundle\Models\ConnectionConfiguration;
 use MongoDB\Client;

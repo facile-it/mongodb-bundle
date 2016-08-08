@@ -1,6 +1,6 @@
 <?php
 
-namespace MongoBundle\DependencyInjection;
+namespace Facile\MongoDbBundle\DependencyInjection;
 
 use MongoBundle\Models\ConnectionConfiguration;
 use MongoDB\Database;

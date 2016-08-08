@@ -1,5 +1,5 @@
 {
-    "name": "facile-it/mongo-bundle",
+    "name": "facile-it/mongodb-bundle",
     "description": "Bundle service integration of official [mongodb/mongo-php-library](https://github.com/mongodb/mongo-php-library) driver library",
     "keywords": ["MongoDB", "Symfony", "Database"],
     "type": "symfony-bundle",

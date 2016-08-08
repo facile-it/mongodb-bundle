@@ -6,7 +6,7 @@
 
     <services>
         <service id="mongo.connection_factory"
-                 class="MongoBundle\Services\ConnectionFactory"
+                 class="Facile\MongoDbBundle\Services\ConnectionFactory"
                  public="false" />
 
     </services>
