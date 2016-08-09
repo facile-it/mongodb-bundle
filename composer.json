@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
-        "phpunit/phpunit": "^5.0"
+        "phpunit/phpunit": "^5.4"
     },
     "autoload": {
         "psr-4": { "Facile\\MongoDbBundle\\": "src/" }
