@@ -46,7 +46,6 @@ before_install:
 install:
   - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - mkdir --parents "${HOME}/bin"
-  - composer global require --prefer-dist --no-interaction sllh/composer-lint:@stable
   - composer update --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
 before_script:
