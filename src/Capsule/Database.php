@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -9,10 +9,10 @@ use MongoDB\Database as MongoDatabase;
 /**
  * Class Database.
  */
-class Database extends MongoDatabase
+final class Database extends MongoDatabase
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function selectCollection(string $collectionName, array $options = [])
     {

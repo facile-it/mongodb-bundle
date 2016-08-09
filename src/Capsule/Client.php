@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -9,10 +9,10 @@ use MongoDB\Client as MongoClient;
 /**
  * Class Client.
  */
-class Client extends MongoClient
+final class Client extends MongoClient
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function selectDatabase($databaseName, array $options = [])
     {
@@ -25,7 +25,7 @@ class Client extends MongoClient
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function selectCollection($databaseName, $collectionName, array $options = [])
     {
