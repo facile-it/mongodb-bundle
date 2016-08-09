@@ -43,7 +43,7 @@ public function registerBundles()
 Here is the configuration reference:
 
 ```yaml
-mongo_bundle:
+mongo_db_bundle:
 
     # If not defined, the first connection will be taken.
     default_connection:   ~

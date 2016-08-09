@@ -16,7 +16,7 @@ final class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('mongo_bundle');
+        $rootNode = $treeBuilder->root('mongo_db_bundle');
         $rootNode
             ->beforeNormalization()
             ->ifTrue(
