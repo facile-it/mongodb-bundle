@@ -11,12 +11,20 @@ use MongoDB\Database;
 /**
  * Class ConnectionFactory.
  */
-class ConnectionFactory
+final class ConnectionFactory
 {
+    /** @var ConnectionRegistry */
+    private $registry;
+
     /**
-     * @var Client[]
+     * ConnectionFactory constructor.
+     *
+     * @param ConnectionRegistry $registry
      */
-    private $clients = [];
+    public function __construct(ConnectionRegistry $registry)
+    {
+        $this->registry = $registry;
+    }
 
     /**
      * @param ConnectionConfiguration $configuration
@@ -26,9 +34,9 @@ class ConnectionFactory
      */
     public function createConnection(ConnectionConfiguration $configuration, string $connectionKey): Database
     {
-        return $this
-            ->getClientForConfiguration($configuration, $connectionKey)
-            ->selectDatabase($configuration->getDatabase());
+        $client = $this->getClientForConfiguration($configuration, $connectionKey);
+
+        return $client->selectDatabase($configuration->getDatabase());
     }
 
     /**
@@ -49,13 +57,13 @@ class ConnectionFactory
      */
     private function getClientForConfiguration(ConnectionConfiguration $configuration, string $clientKey): Client
     {
-        if (!array_key_exists($clientKey, $this->clients)) {
+        if (!$this->registry->hasClient($clientKey)) {
             $client = $this->createClient($configuration);
-            $this->clients[$clientKey] = $client;
+            $this->registry->addClient($clientKey, $client);
 
             return $client;
         }
 
-        return $this->clients[$clientKey];
+        return $this->registry->getClient($clientKey);
     }
 }

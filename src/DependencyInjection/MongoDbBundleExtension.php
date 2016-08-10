@@ -24,7 +24,7 @@ class MongoDbBundleExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('factory.xml');
+        $loader->load('services.xml');
         // If the default connection if not defined, get the first one.
         $defaultConnection = isset($config['default_connection']) ?
             $config['default_connection'] :
