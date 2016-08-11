@@ -1,3 +1,0 @@
-mongo_db_bundle:
-    host: localhost
-    database: telegraf

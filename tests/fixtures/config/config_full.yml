@@ -1,7 +1,12 @@
 mongo_db_bundle:
-    default_connection: default # No sense to specify it. This is it just for test coverage.
-    host: localhost
-    database: testdb
-    port: 27017
-    username: 'foo'
-    password: 'bar'
+    clients:
+      test_client:
+        host: localhost
+        port: 8080
+        username: foo
+        password: bar
+
+    connections:
+      test_db:
+        client_name: test_client
+        database_name: testdb
