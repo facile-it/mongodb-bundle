@@ -5,35 +5,31 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Models;
 
 /**
- * Class ConnectionConfiguration.
+ * Class ClientConfiguration.
  */
-class ConnectionConfiguration
+class ClientConfiguration
 {
     /** @var string */
     private $host;
     /** @var int */
     private $port;
     /** @var string */
-    private $database;
-    /** @var string */
     private $username;
     /** @var string */
     private $password;
 
     /**
-     * ConnectionConfiguration constructor.
+     * ClientConfiguration constructor.
      *
      * @param string $host
      * @param int    $port
-     * @param string $database
      * @param string $username
      * @param string $password
      */
-    public function __construct(string $host, int $port, string $database, string $username, string $password)
+    public function __construct(string $host, int $port, string $username = '', string $password = '')
     {
         $this->host = $host;
         $this->port = $port;
-        $this->database = $database;
         $this->username = $username;
         $this->password = $password;
     }
@@ -52,14 +48,6 @@ class ConnectionConfiguration
     public function getPort(): int
     {
         return $this->port;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDatabase(): string
-    {
-        return $this->database;
     }
 
     /**
@@ -87,22 +75,13 @@ class ConnectionConfiguration
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getConnectionUri(): string
+    public function getCredentialsArray(): array
     {
-        $credentials = $this->hasCredentials() ?
-            sprintf('%s:%s@', $this->username, $this->password) :
-            '';
-
-        $uri = sprintf(
-            'mongodb://%s%s:%d/%s',
-            $credentials,
-            $this->host,
-            $this->port,
-            $this->database
-        );
-
-        return $uri;
+        return [
+            'username' => $this->username,
+            'password' => $this->password,
+        ];
     }
 }

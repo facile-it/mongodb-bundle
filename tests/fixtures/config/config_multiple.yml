@@ -1,19 +1,23 @@
 mongo_db_bundle:
-    default_connection: test
+    clients:
+      test_client:
+        host: localhost
+        port: 8080
+        username: foo
+        password: bar
+      other_client:
+        host: localhost.dev
+        port: 8081
+        username: mee
+        password: zod
+
     connections:
-        default:
-            database: telegraf
-            host: localhost
-            username: foo
-            password: bar
-        test:
-            database: test
-            host: localhost
-            port: 27018
-            username: foo
-            password: bar
-        test_again:
-            database: test_again
-            host: localhost
-            username: foo
-            password: bar
+      test_db:
+        client_name: test_client
+        database_name: testdb
+      other_db:
+        client_name: other_client
+        database_name: otherdb
+      test_db_2:
+        client_name: test_client
+        database_name: testdb_2

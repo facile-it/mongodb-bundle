@@ -45,37 +45,35 @@ Here is the configuration reference:
 ```yaml
 mongo_db_bundle:
 
-    # If not defined, the first connection will be taken.
-    default_connection:   ~
-    connections:
-
-        # Prototype
-        name:
-
-            # Your MongoDB host address
-            host:                 ~ # Required
-
-            # Your MongoDB database name
-            database:             ~ # Required
-
-            port:                 27017
-            username:             ''
-            password:             ''
-```
-
-If you have only one connection to configure, this can be simplified to this:
-
-```yaml
-mongo_bundle:
-    # Your MongoDB host address
-    host:                 ~ # Required
-
-    # Your MongoDB database name
-    database:             ~ # Required
+    # clients section, here you can define connection to different servers or with different credentials
+    clients:
     
-    port:                 27017
-    username:             ''
-    password:             ''
+      client_name:    #choose your client name
+        host:         ~ # Required
+        port:         27017
+        username:     ''
+        password:     ''
+        
+      other_client:   #choose your client name
+        host:         ~ # Required
+        port:         27017
+        username:     ''
+        password:     ''
+
+    # connections section, theese represents your Database object reference
+    connections:
+    
+      test_db:
+        client_name:    ~ # Required - your client name
+        database_name:  ~ # Required
+        
+      other_db:
+        client_name:    ~ # Required - your client name
+        database_name:  ~ # Required
+        
+      test_db_2:
+        client_name:    ~ # Required - your client name
+        database_name:  ~ # Required
 ```
 
 ### Services
@@ -83,8 +81,8 @@ mongo_bundle:
 You can directly access to the `MongoDB\Database` with those services:
 
 ```php
-$this->get('mongo.connection'); // Default connection
-$this->get('mongo.connection.{connectionName}'); // default if not specified
+$this->get('mongo.connection'); // Default connection (first declared)
+$this->get('mongo.connection.{connectionName}'); // [test_db, other_db, test_db_2] for example
 ```
 
 To manipulate the database, please read the official [documentation](http://mongodb.github.io/mongo-php-library/classes/database/)

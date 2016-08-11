@@ -14,7 +14,7 @@ final class Database extends MongoDatabase
     /**
      * {@inheritdoc}
      */
-    public function selectCollection(string $collectionName, array $options = [])
+    public function selectCollection($collectionName, array $options = [])
     {
         $debug = $this->__debugInfo();
         $options += [

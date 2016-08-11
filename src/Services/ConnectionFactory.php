@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
-use Facile\MongoDbBundle\Models\ConnectionConfiguration;
+use Facile\MongoDbBundle\Models\ClientConfiguration;
 use MongoDB\Client;
 use MongoDB\Database;
 
@@ -13,49 +13,29 @@ use MongoDB\Database;
  */
 class ConnectionFactory
 {
-    /**
-     * @var Client[]
-     */
-    private $clients = [];
+    /** @var ClientRegistry */
+    private $clientRegistry;
 
     /**
-     * @param ConnectionConfiguration $configuration
-     * @param string                  $connectionKey
+     * ConnectionFactory constructor.
+     *
+     * @param ClientRegistry $clientRegistry
+     */
+    public function __construct(ClientRegistry $clientRegistry)
+    {
+        $this->clientRegistry = $clientRegistry;
+    }
+
+    /**
+     * @param string $clientName
+     * @param string $databaseName
      *
      * @return Database
      */
-    public function createConnection(ConnectionConfiguration $configuration, string $connectionKey): Database
+    public function createConnection(string $clientName, string $databaseName): Database
     {
-        return $this
-            ->getClientForConfiguration($configuration, $connectionKey)
-            ->selectDatabase($configuration->getDatabase());
-    }
-
-    /**
-     * @param ConnectionConfiguration $configuration
-     *
-     * @return Client
-     */
-    private function createClient(ConnectionConfiguration $configuration): Client
-    {
-        return new Client($configuration->getConnectionUri());
-    }
-
-    /**
-     * @param ConnectionConfiguration $configuration
-     * @param string                  $clientKey
-     *
-     * @return Client
-     */
-    private function getClientForConfiguration(ConnectionConfiguration $configuration, string $clientKey): Client
-    {
-        if (!array_key_exists($clientKey, $this->clients)) {
-            $client = $this->createClient($configuration);
-            $this->clients[$clientKey] = $client;
-
-            return $client;
-        }
-
-        return $this->clients[$clientKey];
+        return $this->clientRegistry
+            ->getClientForDatabase($clientName,$databaseName)
+            ->selectDatabase($databaseName);
     }
 }

@@ -5,9 +5,13 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
         <service id="mongo.connection_factory"
                  class="Facile\MongoDbBundle\Services\ConnectionFactory"
-                 public="false" />
+                 public="false">
+            <argument type="service" id="mongo.client_registry" />
+        </service>
 
     </services>
+
 </container>
