@@ -30,6 +30,9 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'port' => 8080,
                     'username' => 'foo',
                     'password' => 'bar',
+                    'replicaSet' => null,
+                    'ssl' => false,
+                    'connectTimeoutMS' => null,
                 ],
             ],
             'connections' => [
@@ -44,6 +47,32 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
+    public function test_options_configuration_process()
+    {
+        $expectedConfiguration = [
+            'clients' => [
+                'test_client' => [
+                    'host' => 'localhost',
+                    'port' => 8080,
+                    'username' => 'foo',
+                    'password' => 'bar',
+                    'replicaSet' => 'testReplica',
+                    'ssl' => true,
+                    'connectTimeoutMS' => 3000,
+                ],
+            ],
+            'connections' => [
+                'test_db' => [
+                    'client_name' => 'test_client',
+                    'database_name' => 'testdb',
+                ],
+            ],
+        ];
+        $this->assertProcessedConfigurationEquals($expectedConfiguration, [
+            __DIR__.'/../../fixtures/config/config_options.yml',
+        ]);
+    }
+
     public function test_multiple_connections_configuration_process()
     {
         $expectedConfiguration = [
@@ -53,12 +82,18 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'port' => 8080,
                     'username' => 'foo',
                     'password' => 'bar',
+                    'replicaSet' => null,
+                    'ssl' => false,
+                    'connectTimeoutMS' => null,
                 ],
                 'other_client' => [
                     'host' => 'localhost.dev',
                     'port' => 8081,
                     'username' => 'mee',
                     'password' => 'zod',
+                    'replicaSet' => null,
+                    'ssl' => false,
+                    'connectTimeoutMS' => null,
                 ],
             ],
             'connections' => [

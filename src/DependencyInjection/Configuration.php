@@ -26,7 +26,10 @@ final class Configuration implements ConfigurationInterface
                     ->scalarNode('host')->isRequired()->info('Your MongoDB host address')->end()
                     ->integerNode('port')->defaultValue(27017)->end()
                     ->scalarNode('username')->defaultValue('')->end()
-                    ->scalarNode('password')->defaultValue('')->end();
+                    ->scalarNode('password')->defaultValue('')->end()
+                    ->scalarNode('replicaSet')->defaultValue(null)->end()
+                    ->booleanNode('ssl')->defaultValue(false)->end()
+                    ->integerNode('connectTimeoutMS')->defaultValue(null)->end();
         $rootNode
             ->children()
             ->arrayNode('connections')->isRequired()->requiresAtLeastOneElement()

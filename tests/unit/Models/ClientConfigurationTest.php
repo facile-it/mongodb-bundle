@@ -20,10 +20,17 @@ class ClientConfigurationTest extends \PHPUnit_Framework_TestCase
             'admin_password'
         );
 
-        $this->assertEquals('localhost', $conf->getHost());
-        $this->assertEquals(27017, $conf->getPort());
-        $this->assertEquals('admin', $conf->getUsername());
-        $this->assertEquals('admin_password', $conf->getPassword());
+        self::assertEquals('localhost', $conf->getHost());
+        self::assertEquals(27017, $conf->getPort());
+        self::assertEquals('admin', $conf->getUsername());
+        self::assertEquals('admin_password', $conf->getPassword());
+        self::assertEquals(
+            [
+                'username' => "admin",
+                'password' => "admin_password",
+            ],
+            $conf->getOptions()
+        );
     }
 
     public function test_construction_empty_credentials()
@@ -35,9 +42,77 @@ class ClientConfigurationTest extends \PHPUnit_Framework_TestCase
             ''
         );
 
-        $this->assertEquals('localhost', $conf->getHost());
-        $this->assertEquals(27017, $conf->getPort());
-        $this->assertEquals('', $conf->getUsername());
-        $this->assertEquals('', $conf->getPassword());
+        self::assertEquals('localhost', $conf->getHost());
+        self::assertEquals(27017, $conf->getPort());
+        self::assertEquals('', $conf->getUsername());
+        self::assertEquals('', $conf->getPassword());
+        self::assertEquals(
+            [],
+            $conf->getOptions()
+        );
+    }
+
+    /**
+     * @param array $options
+     * @param array $expectedOptions
+     *
+     * @dataProvider optionsDataProvider
+     */
+    public function test_construction_with_options(array $options, array $expectedOptions)
+    {
+        $conf = new ClientConfiguration(
+            'localhost',
+            27017,
+            '',
+            '',
+            $options
+        );
+
+        self::assertEquals('localhost', $conf->getHost());
+        self::assertEquals(27017, $conf->getPort());
+        self::assertEquals('', $conf->getUsername());
+        self::assertEquals('', $conf->getPassword());
+        self::assertEquals(
+            $expectedOptions,
+            $conf->getOptions()
+        );
+    }
+
+    public function optionsDataProvider()
+    {
+        return [
+            [   // set 1
+                [   // provided
+                    'replicaSet' => '',
+                    'ssl' => false,
+                    'connectTimeoutMS' => '',
+                ],
+                [   // expected
+                    'ssl' => false
+                ]
+            ],
+            [   // set 2
+                [   // provided
+                    'replicaSet' => 'testReplica',
+                    'ssl' => true,
+                    'connectTimeoutMS' => 100,
+                ],
+                [   // expected
+                    'replicaSet' => "testReplica",
+                    'ssl' => true,
+                    'connectTimeoutMS' => 100,
+                ]
+            ],
+            [   // set 3
+                [   // provided
+                    'replicaSet' => null,
+                    'ssl' => true,
+                    'connectTimeoutMS' => null,
+                ],
+                [   // expected
+                    'ssl' => true,
+                ]
+            ],
+        ];
     }
 }

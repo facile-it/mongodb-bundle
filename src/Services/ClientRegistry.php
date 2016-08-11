@@ -32,12 +32,7 @@ class ClientRegistry
      */
     public function addClientConfiguration(string $name, array $conf)
     {
-        $this->configurations[$name] = new ClientConfiguration(
-            $conf['host'],
-            $conf['port'],
-            $conf['username'],
-            $conf['password']
-        );
+        $this->configurations[$name] = $this->buildClientConfiguration($conf);
     }
 
     /**
@@ -64,10 +59,30 @@ class ClientRegistry
         if (!isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s:%d', $conf->getHost(), $conf->getPort());
-            $options = array_merge($conf->getCredentialsArray(), ['db' => $databaseName]);
+            $options = array_merge(['db' => $databaseName], $conf->getOptions());
             $this->clients[$clientKey] = new Client($uri, $options);
         }
 
         return $this->clients[$clientKey];
+    }
+
+    /**
+     * @param array $conf
+     *
+     * @return ClientConfiguration
+     */
+    private function buildClientConfiguration(array $conf): ClientConfiguration
+    {
+        return new ClientConfiguration(
+            $conf['host'],
+            $conf['port'],
+            $conf['username'],
+            $conf['password'],
+            [
+                'replicaSet' => $conf['replicaSet'],
+                'ssl' => $conf['ssl'],
+                'connectTimeoutMS' => $conf['connectTimeoutMS'],
+            ]
+        );
     }
 }
