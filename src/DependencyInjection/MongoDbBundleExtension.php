@@ -3,7 +3,6 @@
 namespace Facile\MongoDbBundle\DependencyInjection;
 
 use Facile\MongoDbBundle\Services\ClientRegistry;
-use Facile\MongoDbBundle\Services\ClientUriBuilder;
 use MongoDB\Database;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -19,6 +18,7 @@ class MongoDbBundleExtension extends Extension
 {
     /** @var ContainerBuilder */
     private $containerBuilder;
+
     /**
      * {@inheritdoc}
      */
@@ -37,7 +37,7 @@ class MongoDbBundleExtension extends Extension
     }
 
     /**
-     * @param array            $clientsConfig
+     * @param array $clientsConfig
      *
      * @return Definition
      */
@@ -50,7 +50,7 @@ class MongoDbBundleExtension extends Extension
                     'addClientConfiguration',
                     [
                         $name,
-                        $conf
+                        $conf,
                     ]
                 );
         }
@@ -59,11 +59,11 @@ class MongoDbBundleExtension extends Extension
     }
 
     /**
-     * @param array            $connections
+     * @param array $connections
      */
     private function defineConnections(array $connections)
     {
-        foreach ($connections as $name => $conf){
+        foreach ($connections as $name => $conf) {
             $connectionDefinition = new Definition(
                 Database::class,
                 [
@@ -74,6 +74,6 @@ class MongoDbBundleExtension extends Extension
             $connectionDefinition->setFactory([new Reference('mongo.connection_factory'), 'createConnection']);
             $this->containerBuilder->setDefinition('mongo.connection.'.$name, $connectionDefinition);
         }
-        $this->containerBuilder->setAlias('mongo.connection', 'mongo.connection.' . array_keys($connections)[0]);
+        $this->containerBuilder->setAlias('mongo.connection', 'mongo.connection.'.array_keys($connections)[0]);
     }
 }

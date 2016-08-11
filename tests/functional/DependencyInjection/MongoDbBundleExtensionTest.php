@@ -19,7 +19,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                         'port' => 8080,
                         'username' => 'foo',
                         'password' => 'bar',
-                    ]
+                    ],
                 ],
                 'connections' => [
                     'test_db' => [

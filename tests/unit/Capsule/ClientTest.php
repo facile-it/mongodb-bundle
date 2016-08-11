@@ -18,7 +18,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $database = $client->selectDatabase('test');
         self::assertInstanceOf(MongoDatabase::class, $database);
 
-        $collection = $client->selectCollection('test','test_collection');
+        $collection = $client->selectCollection('test', 'test_collection');
         self::assertInstanceOf(MongoCollection::class, $collection);
     }
 }

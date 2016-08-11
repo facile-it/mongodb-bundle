@@ -30,7 +30,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'port' => 8080,
                     'username' => 'foo',
                     'password' => 'bar',
-                ]
+                ],
             ],
             'connections' => [
                 'test_db' => [
