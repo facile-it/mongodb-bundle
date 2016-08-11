@@ -59,14 +59,6 @@ class ClientConfiguration
     }
 
     /**
-     * @return bool
-     */
-    public function hasCredentials(): bool
-    {
-        return !empty($this->username);
-    }
-
-    /**
      * @return string
      */
     public function getPassword(): string
