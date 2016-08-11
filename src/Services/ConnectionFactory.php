@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
-use Facile\MongoDbBundle\Models\ClientConfiguration;
-use MongoDB\Client;
 use MongoDB\Database;
 
 /**
@@ -35,7 +33,7 @@ class ConnectionFactory
     public function createConnection(string $clientName, string $databaseName): Database
     {
         return $this->clientRegistry
-            ->getClientForDatabase($clientName,$databaseName)
+            ->getClientForDatabase($clientName, $databaseName)
             ->selectDatabase($databaseName);
     }
 }
