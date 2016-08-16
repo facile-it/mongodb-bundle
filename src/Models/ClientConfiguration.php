@@ -17,6 +17,10 @@ class ClientConfiguration
     private $username;
     /** @var string */
     private $password;
+    /**
+     * @var array
+     */
+    private $options;
 
     /**
      * ClientConfiguration constructor.
@@ -25,13 +29,20 @@ class ClientConfiguration
      * @param int    $port
      * @param string $username
      * @param string $password
+     * @param array  $options
      */
-    public function __construct(string $host, int $port, string $username = '', string $password = '')
-    {
+    public function __construct(
+        string $host,
+        int $port,
+        string $username = '',
+        string $password = '',
+        array $options = []
+    ) {
         $this->host = $host;
         $this->port = $port;
         $this->username = $username;
         $this->password = $password;
+        $this->options = $options;
     }
 
     /**
@@ -69,11 +80,26 @@ class ClientConfiguration
     /**
      * @return array
      */
-    public function getCredentialsArray(): array
+    public function getOptions(): array
     {
-        return [
-            'username' => $this->username,
-            'password' => $this->password,
-        ];
+        return $this->cleanOptions(array_merge(
+            [
+                'username' => $this->username,
+                'password' => $this->password,
+            ],
+            $this->options
+        ));
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
+    private function cleanOptions(array $options): array
+    {
+        return array_filter($options, function ($value) {
+            return !empty($value) || is_int($value) || is_bool($value) || is_float($value);
+        });
     }
 }

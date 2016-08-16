@@ -48,32 +48,31 @@ mongo_db_bundle:
     # clients section, here you can define connection to different servers or with different credentials
     clients:
     
-      client_name:    #choose your client name
-        host:         ~ # Required
-        port:         27017
-        username:     ''
-        password:     ''
+      foo_client_name:    #choose your client name
+        host:             ~ # Required
+        port:             27017
+        username:         ''
+        password:         ''
+        replicaSet:       '' # default null (no replica)
+        ssl:              false
+        connectTimeoutMS: 3000 # default null (no timeout)
         
-      other_client:   #choose your client name
-        host:         ~ # Required
-        port:         27017
-        username:     ''
-        password:     ''
-
+      other_client:   ~ # same as upper configuration
+      
     # connections section, theese represents your Database object reference
     connections:
     
-      test_db:
-        client_name:    ~ # Required - your client name
-        database_name:  ~ # Required
+      foo_db:
+        client_name:    foo_client_name # Required - your client name in clients section
+        database_name:  'foo_db' # Required
         
       other_db:
-        client_name:    ~ # Required - your client name
-        database_name:  ~ # Required
+        client_name:    ~
+        database_name:  ~
         
-      test_db_2:
-        client_name:    ~ # Required - your client name
-        database_name:  ~ # Required
+      foo_db_2:
+        client_name:    ~
+        database_name:  ~
 ```
 
 ### Services
