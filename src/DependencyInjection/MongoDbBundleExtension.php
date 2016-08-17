@@ -3,7 +3,9 @@
 namespace Facile\MongoDbBundle\DependencyInjection;
 
 use Facile\MongoDbBundle\Services\ClientRegistry;
+use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use MongoDB\Database;
+use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -18,6 +20,7 @@ class MongoDbBundleExtension extends Extension
 {
     /** @var ContainerBuilder */
     private $containerBuilder;
+    private $env;
 
     /**
      * {@inheritdoc}
@@ -30,10 +33,23 @@ class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('factory.xml');
 
+        $this->env = $container->getParameter("kernel.environment");
+        if ($this->env === 'dev' && class_exists(WebProfilerBundle::class)) {
+            $loader->load('web_profiler.xml');
+        }
+
+        $this->defineLoggers();
         $this->defineClientRegistry($config['clients']);
         $this->defineConnections($config['connections']);
 
         return $config;
+    }
+
+    private function defineLoggers()
+    {
+        $loggerDefinition = new Definition(DataCollectorLoggerInterface::class);
+        $loggerDefinition->setFactory([new Reference('mongo.logger_factory'), 'createLogger']);
+        $this->containerBuilder->setDefinition('facile_mongo_db.logger', $loggerDefinition);
     }
 
     /**
@@ -43,7 +59,12 @@ class MongoDbBundleExtension extends Extension
      */
     private function defineClientRegistry(array $clientsConfig)
     {
-        $clientRegistryDefinition = new Definition(ClientRegistry::class);
+        $clientRegistryDefinition = new Definition(
+            ClientRegistry::class,
+            [
+                new Reference('facile_mongo_db.logger'),
+            ]
+        );
         foreach ($clientsConfig as $name => $conf) {
             $clientRegistryDefinition
                 ->addMethodCall(
@@ -63,6 +84,7 @@ class MongoDbBundleExtension extends Extension
      */
     private function defineConnections(array $connections)
     {
+
         foreach ($connections as $name => $conf) {
             $connectionDefinition = new Definition(
                 Database::class,

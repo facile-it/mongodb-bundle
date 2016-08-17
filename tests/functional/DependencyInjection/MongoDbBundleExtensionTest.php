@@ -3,12 +3,24 @@
 namespace Facile\MongoDbBundle\Tests\functional\DependencyInjection;
 
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
+use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
+use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
+use Facile\MongoDbBundle\Services\Loggers\NullLogger;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->setParameter('kernel.environment', 'dev');
+        $this->container->setDefinition('debug.stopwatch', new Definition(Stopwatch::class));
+    }
+
     public function test_load()
     {
         $this->load(
@@ -42,6 +54,38 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 
         $this->assertInstanceOf(Database::class, $defaultConnection);
         $this->assertSame('testdb', $defaultConnection->getDatabaseName());
+
+        $this->assertContainerBuilderHasService('facile_mongo_db.logger', DataCollectorLoggerInterface::class);
+        $logger = $this->container->get('facile_mongo_db.logger');
+        $this->assertInstanceOf(MongoLogger::class, $logger);
+    }
+
+    public function test_load_env_prod()
+    {
+        $this->setParameter('kernel.environment', 'prod');
+        $this->load(
+            [
+                'clients' => [
+                    'test_client' => [
+                        'host' => 'localhost',
+                        'port' => 8080,
+                        'username' => 'foo',
+                        'password' => 'bar',
+                    ],
+                ],
+                'connections' => [
+                    'test_db' => [
+                        'client_name' => 'test_client',
+                        'database_name' => 'testdb',
+                    ],
+                ],
+            ]
+        );
+        $this->compile();
+
+        $this->assertContainerBuilderHasService('facile_mongo_db.logger', DataCollectorLoggerInterface::class);
+        $logger = $this->container->get('facile_mongo_db.logger');
+        $this->assertInstanceOf(NullLogger::class, $logger);
     }
 
     public function test_load_multiple()

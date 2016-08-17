@@ -12,6 +12,12 @@
             <argument type="service" id="mongo.client_registry" />
         </service>
 
+        <service id="mongo.logger_factory"
+                 class="Facile\MongoDbBundle\Services\LoggerFactory"
+                 public="false">
+            <argument>%kernel.environment%</argument>
+        </service>
+
     </services>
 
 </container>

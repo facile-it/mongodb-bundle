@@ -6,6 +6,7 @@ namespace Facile\MongoDbBundle\Services;
 
 use Facile\MongoDbBundle\Capsule\Client;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
+use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 
 /**
  * Class ClientRegistry.
@@ -16,14 +17,19 @@ class ClientRegistry
     private $clients;
     /** @var ClientConfiguration[] */
     private $configurations;
+    /** @var DataCollectorLoggerInterface */
+    private $logger;
 
     /**
      * ClientRegistry constructor.
+     *
+     * @param DataCollectorLoggerInterface $logger
      */
-    public function __construct()
+    public function __construct(DataCollectorLoggerInterface $logger)
     {
         $this->clients = [];
         $this->configurations = [];
+        $this->logger = $logger;
     }
 
     /**
@@ -60,7 +66,8 @@ class ClientRegistry
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s:%d', $conf->getHost(), $conf->getPort());
             $options = array_merge(['db' => $databaseName], $conf->getOptions());
-            $this->clients[$clientKey] = new Client($uri, $options);
+            $this->clients[$clientKey] = new Client($uri, $options, [], $this->logger);
+            $this->logger->addConnection($clientKey);
         }
 
         return $this->clients[$clientKey];
