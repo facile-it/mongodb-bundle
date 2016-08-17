@@ -4,5 +4,5 @@
 /.travis.yml        export-ignore
 /.scrutinizer.yml   export-ignore
 /.php_cs            export-ignore
-/.stylecy.yml       export-ignore
+/.styleci.yml       export-ignore
 /phpunit.xml.dist   export-ignore
