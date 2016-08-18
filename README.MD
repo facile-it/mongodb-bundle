@@ -2,7 +2,7 @@
 
 Bundle service integration of official [mongodb/mongo-php-library](https://github.com/mongodb/mongo-php-library) driver library, ([mongodb/mongodb](https://packagist.org/packages/mongodb/mongodb) on packagist)
 
-[![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)
+[![PHP Version](https://img.shields.io/badge/php-%5E7.0-blue.svg)](https://img.shields.io/badge/php-%5E7.0-blue.svg)
 [![Latest Stable Version](https://poser.pugx.org/facile-it/mongodb-bundle/v/stable)](https://packagist.org/packages/facile-it/mongodb-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/facile-it/mongodb-bundle/v/unstable)](https://packagist.org/packages/facile-it/mongodb-bundle)
 [![License](https://poser.pugx.org/facile-it/mongodb-bundle/license)](https://packagist.org/packages/facile-it/mongodb-bundle)
@@ -11,6 +11,8 @@ Bundle service integration of official [mongodb/mongo-php-library](https://githu
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/f220fc5f-de85-42ed-a3fb-b895818ea0ac/mini.png)](https://insight.sensiolabs.com/projects/f220fc5f-de85-42ed-a3fb-b895818ea0ac)
+
+[![Dependency Status](https://www.versioneye.com/user/projects/57b5b728090d4d0039befc7c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57b5b728090d4d0039befc7c)
 
 ### Installation
 
