@@ -20,7 +20,6 @@ class MongoDbBundleExtension extends Extension
 {
     /** @var ContainerBuilder */
     private $containerBuilder;
-    private $env;
 
     /**
      * {@inheritdoc}
@@ -33,8 +32,7 @@ class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('factory.xml');
 
-        $this->env = $container->getParameter("kernel.environment");
-        if ($this->env === 'dev' && class_exists(WebProfilerBundle::class)) {
+        if ($container->getParameter("kernel.environment") === 'dev' && class_exists(WebProfilerBundle::class)) {
             $loader->load('web_profiler.xml');
         }
 
@@ -54,8 +52,6 @@ class MongoDbBundleExtension extends Extension
 
     /**
      * @param array $clientsConfig
-     *
-     * @return Definition
      */
     private function defineClientRegistry(array $clientsConfig)
     {
