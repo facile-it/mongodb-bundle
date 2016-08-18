@@ -63,7 +63,11 @@ final class Collection extends MongoCollection
      */
     public function findOneAndUpdate($filter, $update, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, __FUNCTION__);
+        $data = [
+            "filter" => $filter,
+            "update" => $update,
+        ];
+        $event = $this->startQueryLogging($data, __FUNCTION__);
         $result = parent::findOneAndUpdate($filter, $update, $options);
         $this->logger->logQuery($event);
 
@@ -113,7 +117,7 @@ final class Collection extends MongoCollection
     {
         $data = [
             "filter" => $filter,
-            "replacement" => is_array($replacement) ? $replacement : $replacement->toArray()
+            "replacement" => $replacement,
         ];
         $event = $this->startQueryLogging($data, __FUNCTION__);
         $result = parent::replaceOne($filter, $replacement, $options);
@@ -135,23 +139,53 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * @param        $filter
+     * @param array  $data
      * @param string $method
      *
      * @return LogEvent
      */
-    private function startQueryLogging($filter, string $method): LogEvent
+    private function startQueryLogging(array $data, string $method): LogEvent
     {
         $debugInfo = $this->__debugInfo();
 
         $event = new LogEvent();
-        $event->setData($filter);
+        $event->setData($this->preserialize($data));
         $event->setMethod($method);
         $event->setCollection($debugInfo['collectionName']);
 
         $this->logger->startLogging($event);
 
         return $event;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    private function preserialize(array $data): array
+    {
+        foreach ($data as $key => $item) {
+
+            if (method_exists($item, 'getArrayCopy')) {
+                $data[$key] = $this->preserialize($item->getArrayCopy());
+            }
+
+            if (method_exists($item, '__toString')) {
+                $data[$key] = $item->__toString();
+            }
+
+            if (is_array($item)) {
+                $data[$key] = $this->preserialize($item);
+            }
+
+            if ($item instanceof \Serializable) {
+                continue;
+            }
+
+        }
+
+        return $data;
     }
 }
 
