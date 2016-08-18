@@ -81,4 +81,40 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
         $coll->insertOne([]);
     }
+
+    public function test_deleteMany()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
+        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+
+        $coll->deleteMany([]);
+    }
+
+    public function test_deleteOne()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
+        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+
+        $coll->deleteOne([]);
+    }
+
+    public function test_replaceOne()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
+        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+
+        $coll->replaceOne([], []);
+    }
 }

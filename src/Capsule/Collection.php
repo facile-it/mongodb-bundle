@@ -85,6 +85,46 @@ final class Collection extends MongoCollection
     /**
      * {@inheritdoc}
      */
+    public function deleteMany($filter, array $options = [])
+    {
+        $event = $this->startQueryLogging($filter, __FUNCTION__);
+        $result = parent::deleteMany($filter, $options);
+        $this->logger->logQuery($event);
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteOne($filter, array $options = [])
+    {
+        $event = $this->startQueryLogging($filter, __FUNCTION__);
+        $result = parent::deleteOne($filter, $options);
+        $this->logger->logQuery($event);
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function replaceOne($filter, $replacement, array $options = [])
+    {
+        $data = [
+            "filter" => $filter,
+            "replacement" => is_array($replacement) ? $replacement : $replacement->toArray()
+        ];
+        $event = $this->startQueryLogging($data, __FUNCTION__);
+        $result = parent::replaceOne($filter, $replacement, $options);
+        $this->logger->logQuery($event);
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function insertOne($document, array $options = [])
     {
         $event = $this->startQueryLogging($document, __FUNCTION__);
