@@ -149,43 +149,13 @@ final class Collection extends MongoCollection
         $debugInfo = $this->__debugInfo();
 
         $event = new LogEvent();
-        $event->setData($this->preserialize($data));
+        $event->setData($data);
         $event->setMethod($method);
         $event->setCollection($debugInfo['collectionName']);
 
         $this->logger->startLogging($event);
 
         return $event;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return array
-     */
-    private function preserialize(array $data): array
-    {
-        foreach ($data as $key => $item) {
-
-            if (method_exists($item, 'getArrayCopy')) {
-                $data[$key] = $this->preserialize($item->getArrayCopy());
-            }
-
-            if (method_exists($item, '__toString')) {
-                $data[$key] = $item->__toString();
-            }
-
-            if (is_array($item)) {
-                $data[$key] = $this->preserialize($item);
-            }
-
-            if ($item instanceof \Serializable) {
-                continue;
-            }
-
-        }
-
-        return $data;
     }
 }
 

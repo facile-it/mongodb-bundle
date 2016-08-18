@@ -105,7 +105,7 @@ class LogEvent
      */
     public function setData(array $data)
     {
-        $this->data = $data;
+        $this->data = $this->prepareUnserializableData($data);
     }
 
     /**
@@ -122,6 +122,36 @@ class LogEvent
     public function setExecutionTime(float $executionTime)
     {
         $this->executionTime = $executionTime;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    private function prepareUnserializableData(array $data): array
+    {
+        foreach ($data as $key => $item) {
+
+            if (method_exists($item, 'getArrayCopy')) {
+                $data[$key] = $this->prepareUnserializableData($item->getArrayCopy());
+            }
+
+            if (method_exists($item, '__toString')) {
+                $data[$key] = $item->__toString();
+            }
+
+            if (is_array($item)) {
+                $data[$key] = $this->prepareUnserializableData($item);
+            }
+
+            if ($item instanceof \Serializable) {
+                continue;
+            }
+
+        }
+
+        return $data;
     }
 }
 
