@@ -65,7 +65,7 @@ class ClientRegistry
         if (!isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s:%d', $conf->getHost(), $conf->getPort());
-            $options = array_merge(['db' => $databaseName], $conf->getOptions());
+            $options = array_merge(['database' => $databaseName], $conf->getOptions());
             $this->clients[$clientKey] = new Client($uri, $options, [], $this->logger);
             $this->logger->addConnection($clientKey);
         }
