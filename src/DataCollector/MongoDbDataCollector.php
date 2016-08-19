@@ -49,7 +49,7 @@ final class MongoDbDataCollector extends DataCollector
             $event = $this->logger->getLoggedEvent();
 
             // with extension version under 1.2.0 some Mongo objects can't be automatically serialized
-            if (phpversion("mongodb") < "1.2.0") {
+            if (-1 === strcmp(phpversion('mongodb'), '1.2.0')) {
                 $eventData = $this->prepareUnserializableData($event->getData());
                 $event->setData($eventData);
             }

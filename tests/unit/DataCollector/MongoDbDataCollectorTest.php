@@ -37,7 +37,7 @@ class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
         $logEvent = new LogEvent();
         $logEvent->setData(
             [
-                "data" => new BSONDocument([]),
+                "data" => new BSONDocument(["test"]),
                 "date" => new UTCDatetime(10000),
             ]
         );
