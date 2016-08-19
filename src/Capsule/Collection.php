@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
+use Facile\MongoDbBundle\Models\LogEvent;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
-use Facile\MongoDbBundle\Services\Loggers\Model\LogEvent;
 use MongoDB\Collection as MongoCollection;
 use MongoDB\Driver\Manager;
 

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers\Model;
 
-use Facile\MongoDbBundle\Services\Loggers\Model\LogEvent;
-use MongoDB\BSON\UTCDatetime;
-use MongoDB\Model\BSONDocument;
+use Facile\MongoDbBundle\Models\LogEvent;
 
 class LogEventTest extends \PHPUnit_Framework_TestCase
 {

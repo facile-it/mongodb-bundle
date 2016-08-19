@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests;
 
-use Facile\MongoDbBundle\Services\Loggers\Model\LogEvent;
+use Facile\MongoDbBundle\Models\LogEvent;
 use Facile\MongoDbBundle\Services\Loggers\NullLogger;
 
 /**

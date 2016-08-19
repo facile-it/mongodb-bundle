@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
+use Facile\MongoDbBundle\Models\LogEvent;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
-use Facile\MongoDbBundle\Services\Loggers\Model\LogEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;

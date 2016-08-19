@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services\Loggers;
 
-use Facile\MongoDbBundle\Services\Loggers\Model\LogEvent;
-use Symfony\Component\Stopwatch\Stopwatch;
+use Facile\MongoDbBundle\Models\LogEvent;
 
 /**
  * Class MongoLogger

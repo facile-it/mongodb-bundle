@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\Services\Loggers\Model;
+namespace Facile\MongoDbBundle\Models;
 
 /**
  * Class LogEvent.
@@ -116,4 +116,3 @@ class LogEvent
         $this->executionTime = $executionTime;
     }
 }
-

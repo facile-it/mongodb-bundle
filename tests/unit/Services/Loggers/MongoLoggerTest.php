@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers;
 
-use Facile\MongoDbBundle\Services\Loggers\Model\LogEvent;
+use Facile\MongoDbBundle\Models\LogEvent;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
-use Prophecy\Argument;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Symfony\Component\Stopwatch\StopwatchEvent;
 
 /**
  * Class MongoLoggerTest.

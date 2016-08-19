@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Facile\MongoDbBundle\Tests\unit\DataCollector;
 
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
-use Facile\MongoDbBundle\Services\Loggers\Model\LogEvent;
+use Facile\MongoDbBundle\Models\LogEvent;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use Facile\MongoDbBundle\Services\Loggers\NullLogger;
 use MongoDB\BSON\UTCDatetime;
