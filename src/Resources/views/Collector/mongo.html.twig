@@ -33,6 +33,18 @@
 
 {% block head %}
     {{ parent() }}
+    <style>
+        .query-data { cursor: pointer; }
+        .query-data > span { max-height: 40px; overflow: hidden; }
+        pre { outline: 1px solid #ccc; padding: 2px; margin: 0; }
+        .hidden { display: none; }
+        .string { color: green; }
+        .number { color: darkorange; }
+        .boolean { color: blue; }
+        .null { color: magenta; }
+        .key { color: red; }
+        .small-font { font-size: 9px; color: darkslategray }
+    </style>
 {% endblock %}
 
 {% block menu %}
@@ -92,7 +104,7 @@
             <th width="3%">#</th>
             <th width="12%">Method</th>
             <th width="15%">Collection</th>
-            <th width="55%">Query data</th>
+            <th width="55%">Query data <span class="small-font">(click to expand)</span></th>
             <th width="15%">Time</th>
         </tr>
         </thead>
@@ -103,7 +115,9 @@
                 <td>{{ loop.index }}</td>
                 <td>{{ q.method }}</td>
                 <td>{{ q.collection }}</td>
-                <td>{{ q.data|json_encode(128) }}</td>
+                <td onclick="return QueryParser.toggleDetails(this);">
+                    <div class="query-data"><span>{{ q.data|json_encode(128) }}</span></div>
+                </td>
                 <td>{{ "%.2f"|format(q.executionTime * 1000) }} ms</td>
             </tr>
         {% else %}
@@ -113,4 +127,52 @@
         {% endfor  %}
         </tbody>
     </table>
+
+    <script type="text/javascript">
+        var QueryParser = {
+
+            prettify: function(json) {
+                json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                    var cls = 'number';
+                    if (/^"/.test(match)) {
+                        if (/:$/.test(match)) {
+                            cls = 'key';
+                        } else {
+                            cls = 'string';
+                        }
+                    } else if (/true|false/.test(match)) {
+                        cls = 'boolean';
+                    } else if (/null/.test(match)) {
+                        cls = 'null';
+                    }
+                    return '<span class="' + cls + '">' + match + '</span>';
+                });
+            },
+
+            bootstrap: function(){
+                var elements = document.getElementsByClassName('query-data');
+                for (var i = 0; i < elements.length; i++) {
+                    var el = elements[i];
+                    var spanContent = el.getElementsByTagName('span')[0].innerText;
+                    if (spanContent.length > 60) {
+                        el.getElementsByTagName('span')[0].innerText = spanContent.substring(0, 60) + "... }";
+                    }
+                    var json = JSON.stringify(JSON.parse(spanContent), undefined, 4);
+                    var pre = document.createElement('pre');
+                    pre.classList.add('hidden');
+                    el.appendChild(pre).innerHTML = this.prettify(json);
+                }
+            },
+
+            toggleDetails: function(element) {
+                element.getElementsByTagName('pre')[0].classList.toggle('hidden');
+                element.getElementsByTagName('span')[0].classList.toggle('hidden');
+            }
+
+        };
+
+        QueryParser.bootstrap();
+    </script>
+
 {% endblock %}
