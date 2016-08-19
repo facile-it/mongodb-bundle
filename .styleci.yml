@@ -4,3 +4,11 @@ enabled:
   - newline_after_open_tag
   - short_array_syntax
 
+finder:
+  exclude:
+    - "tests"
+  name:
+    - "*.php"
+  not-name:
+    - "*Stub.php"
+
