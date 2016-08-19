@@ -93,19 +93,11 @@ class LogEvent
     }
 
     /**
-     * @return string
-     */
-    public function getDataJson(): string
-    {
-        return json_encode($this->data);
-    }
-
-    /**
      * @param array $data
      */
     public function setData(array $data)
     {
-        $this->data = $this->prepareUnserializableData($data);
+        $this->data = $data;
     }
 
     /**
@@ -122,36 +114,6 @@ class LogEvent
     public function setExecutionTime(float $executionTime)
     {
         $this->executionTime = $executionTime;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return array
-     */
-    private function prepareUnserializableData(array $data): array
-    {
-        foreach ($data as $key => $item) {
-
-            if (method_exists($item, 'getArrayCopy')) {
-                $data[$key] = $this->prepareUnserializableData($item->getArrayCopy());
-            }
-
-            if (method_exists($item, '__toString')) {
-                $data[$key] = $item->__toString();
-            }
-
-            if (is_array($item)) {
-                $data[$key] = $this->prepareUnserializableData($item);
-            }
-
-            if ($item instanceof \Serializable) {
-                continue;
-            }
-
-        }
-
-        return $data;
     }
 }
 

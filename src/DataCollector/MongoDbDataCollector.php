@@ -48,6 +48,12 @@ final class MongoDbDataCollector extends DataCollector
             /** @var LogEvent $event */
             $event = $this->logger->getLoggedEvent();
 
+            // with extension version under 1.2.0 some Mongo objects can't be automatically serialized
+            if (phpversion("mongodb") < "1.2.0") {
+                $eventData = $this->prepareUnserializableData($event->getData());
+                $event->setData($eventData);
+            }
+
             $this->data[self::QUERY_KEYWORD][] = $event;
             $this->data[self::TIME_KEYWORD] += $event->getExecutionTime();
         }
@@ -100,5 +106,29 @@ final class MongoDbDataCollector extends DataCollector
     public function getName()
     {
         return 'mongodb';
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    private function prepareUnserializableData(array $data): array
+    {
+        foreach ($data as $key => $item) {
+            if (method_exists($item, 'getArrayCopy')) {
+                $data[$key] = $this->prepareUnserializableData($item->getArrayCopy());
+            }
+
+            if (method_exists($item, '__toString')) {
+                $data[$key] = $item->__toString();
+            }
+
+            if (is_array($item)) {
+                $data[$key] = $this->prepareUnserializableData($item);
+            }
+        }
+
+        return $data;
     }
 }

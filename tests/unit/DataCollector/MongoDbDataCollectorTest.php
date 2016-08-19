@@ -8,10 +8,10 @@ use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Services\Loggers\Model\LogEvent;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use Facile\MongoDbBundle\Services\Loggers\NullLogger;
+use MongoDB\BSON\UTCDatetime;
+use MongoDB\Model\BSONDocument;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,12 +34,20 @@ class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
 
     public function test_construction_logger()
     {
+        $logEvent = new LogEvent();
+        $logEvent->setData(
+            [
+                "data" => new BSONDocument([]),
+                "date" => new UTCDatetime(10000),
+            ]
+        );
+
         $logger = new MongoLogger();
+        $logger->logQuery($logEvent);
+        $logger->addConnection('test_conenction');
 
         $collector = new MongoDbDataCollector();
         $collector->setLogger($logger);
-        $logger->logQuery(new LogEvent());
-        $logger->addConnection('test_conenction');
 
         $collector->collect(new Request(), new Response());
 

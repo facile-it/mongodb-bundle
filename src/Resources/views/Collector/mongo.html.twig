@@ -103,7 +103,7 @@
                 <td>{{ loop.index }}</td>
                 <td>{{ q.method }}</td>
                 <td>{{ q.collection }}</td>
-                <td>{{ q.dataJson }}</td>
+                <td>{{ q.data|json_encode(128) }}</td>
                 <td>{{ "%.2f"|format(q.executionTime * 1000) }} ms</td>
             </tr>
         {% else %}
