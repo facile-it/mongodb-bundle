@@ -7,7 +7,6 @@ namespace Facile\MongoDbBundle\Services;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use Facile\MongoDbBundle\Services\Loggers\NullLogger;
-use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
  * Class LoggerFactory.

@@ -14,5 +14,7 @@
             </call>
             <tag name="data_collector" template="FacileMongoDbBundle:Collector:mongo.html.twig" id="mongodb" priority="250" />
         </service>
+
     </services>
+
 </container>
