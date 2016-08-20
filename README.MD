@@ -10,7 +10,7 @@ Bundle service integration of official [mongodb/mongo-php-library](https://githu
 [![Build Status](https://travis-ci.org/facile-it/mongodb-bundle.svg?branch=master)](https://travis-ci.org/facile-it/mongodb-bundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/f220fc5f-de85-42ed-a3fb-b895818ea0ac/mini.png)](https://insight.sensiolabs.com/projects/f220fc5f-de85-42ed-a3fb-b895818ea0ac)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/2e0f3eab-5641-489b-8444-3c9174c0a7da/mini.png)](https://insight.sensiolabs.com/projects/2e0f3eab-5641-489b-8444-3c9174c0a7da)
 
 [![Dependency Status](https://www.versioneye.com/user/projects/57b5b728090d4d0039befc7c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57b5b728090d4d0039befc7c)
 
