@@ -3,6 +3,7 @@ filter:
     excluded_paths:
         - 'vendor/*'
         - 'tests/*'
+        - 'docs/*'
         - 'bin/*'
 
 checks:

@@ -87,3 +87,11 @@ $this->get('mongo.connection.{connectionName}'); // [test_db, other_db, test_db_
 ```
 
 To manipulate the database, please read the official [documentation](http://mongodb.github.io/mongo-php-library/classes/database/)
+
+### Query Profiling
+
+On dev environment all queries executed by the library MongoDB\Collection class are profiled and showed inside the symfony web profiler.
+
+[![Profiler Toolbar](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)
+
+[![Profiler Panel](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)
