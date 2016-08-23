@@ -55,7 +55,7 @@ mongo_db_bundle:
         port:             27017
         username:         ''
         password:         ''
-        replicaSet:       '' # default null (no replica)
+        replicaSet:       '' # default null (no replica) (experimental)
         ssl:              false
         connectTimeoutMS: 3000 # default null (no timeout)
         
@@ -76,6 +76,10 @@ mongo_db_bundle:
         client_name:    ~
         database_name:  ~
 ```
+
+### Authentication
+
+Actually only target database autentication is supported, this means that user registered on admin database can't be authenticated correctly.
 
 ### Services
 
