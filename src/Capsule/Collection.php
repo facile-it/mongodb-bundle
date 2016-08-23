@@ -39,7 +39,7 @@ final class Collection extends MongoCollection
      */
     public function find($filter = [], array $options = [])
     {
-        $event = $this->startQueryLogging($filter, __FUNCTION__);
+        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
         $result = parent::find($filter, $options);
         $this->logger->logQuery($event);
 
@@ -51,7 +51,7 @@ final class Collection extends MongoCollection
      */
     public function findOne($filter = [], array $options = [])
     {
-        $event = $this->startQueryLogging($filter, __FUNCTION__);
+        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
         $result = parent::findOne($filter, $options);
         $this->logger->logQuery($event);
 
@@ -63,11 +63,7 @@ final class Collection extends MongoCollection
      */
     public function findOneAndUpdate($filter, $update, array $options = [])
     {
-        $data = [
-            "filter" => $filter,
-            "update" => $update,
-        ];
-        $event = $this->startQueryLogging($data, __FUNCTION__);
+        $event = $this->startQueryLogging($filter, $update, __FUNCTION__);
         $result = parent::findOneAndUpdate($filter, $update, $options);
         $this->logger->logQuery($event);
 
@@ -79,7 +75,7 @@ final class Collection extends MongoCollection
      */
     public function findOneAndDelete($filter, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, __FUNCTION__);
+        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
         $result = parent::findOneAndDelete($filter, $options);
         $this->logger->logQuery($event);
 
@@ -91,7 +87,7 @@ final class Collection extends MongoCollection
      */
     public function deleteMany($filter, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, __FUNCTION__);
+        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
         $result = parent::deleteMany($filter, $options);
         $this->logger->logQuery($event);
 
@@ -103,7 +99,7 @@ final class Collection extends MongoCollection
      */
     public function deleteOne($filter, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, __FUNCTION__);
+        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
         $result = parent::deleteOne($filter, $options);
         $this->logger->logQuery($event);
 
@@ -115,11 +111,7 @@ final class Collection extends MongoCollection
      */
     public function replaceOne($filter, $replacement, array $options = [])
     {
-        $data = [
-            "filter" => $filter,
-            "replacement" => $replacement,
-        ];
-        $event = $this->startQueryLogging($data, __FUNCTION__);
+        $event = $this->startQueryLogging($filter, $replacement, __FUNCTION__);
         $result = parent::replaceOne($filter, $replacement, $options);
         $this->logger->logQuery($event);
 
@@ -131,7 +123,7 @@ final class Collection extends MongoCollection
      */
     public function insertOne($document, array $options = [])
     {
-        $event = $this->startQueryLogging($document, __FUNCTION__);
+        $event = $this->startQueryLogging([], $document, __FUNCTION__);
         $result = parent::insertOne($document, $options);
         $this->logger->logQuery($event);
 
@@ -139,16 +131,18 @@ final class Collection extends MongoCollection
     }
 
     /**
+     * @param array  $filters
      * @param array  $data
      * @param string $method
      *
      * @return LogEvent
      */
-    private function startQueryLogging(array $data, string $method): LogEvent
+    private function startQueryLogging(array $filters, $data = null, string $method): LogEvent
     {
         $debugInfo = $this->__debugInfo();
 
         $event = new LogEvent();
+        $event->setFilters($filters);
         $event->setData($data);
         $event->setMethod($method);
         $event->setCollection($debugInfo['collectionName']);

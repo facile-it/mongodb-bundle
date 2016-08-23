@@ -34,6 +34,10 @@
 {% block head %}
     {{ parent() }}
     <style>
+        table.query-profiler tr td {
+            word-break: keep-all;
+            font-size: 12px;
+        }
         .query-data { cursor: pointer; }
         .query-data > span { max-height: 40px; overflow: hidden; }
         pre { outline: 1px solid #ccc; padding: 2px; margin: 0; }
@@ -77,7 +81,7 @@
         </div>
     </div>
     <h2>Connections list</h2>
-    <table>
+    <table class="query-profiler">
         <thead>
         <tr>
             <th width="5%">#</th>
@@ -98,14 +102,15 @@
         </tbody>
     </table>
     <h2>Queries Details</h2>
-    <table>
+    <table class="query-profiler">
         <thead>
         <tr>
-            <th width="3%">#</th>
-            <th width="12%">Method</th>
-            <th width="15%">Collection</th>
-            <th width="55%">Query data <span class="small-font">(click to expand)</span></th>
-            <th width="15%">Time</th>
+            <th>#</th>
+            <th>Method</th>
+            <th>Collection</th>
+            <th>Filters<span class="small-font">(click to expand)</span></th>
+            <th>Query data <span class="small-font">(click to expand)</span></th>
+            <th width="50px">Time</th>
         </tr>
         </thead>
         <tbody>
@@ -115,6 +120,9 @@
                 <td>{{ loop.index }}</td>
                 <td>{{ q.method }}</td>
                 <td>{{ q.collection }}</td>
+                <td onclick="return QueryParser.toggleDetails(this);">
+                    <div class="query-data"><span>{{ q.filters|json_encode(128) }}</span></div>
+                </td>
                 <td onclick="return QueryParser.toggleDetails(this);">
                     <div class="query-data"><span>{{ q.data|json_encode(128) }}</span></div>
                 </td>
@@ -156,7 +164,7 @@
                     var el = elements[i];
                     var spanContent = el.getElementsByTagName('span')[0].innerText;
                     if (spanContent.length > 60) {
-                        el.getElementsByTagName('span')[0].innerText = spanContent.substring(0, 60) + "... }";
+                        el.getElementsByTagName('span')[0].innerText = spanContent.substring(0, 30) + "... }";
                     }
                     var json = JSON.stringify(JSON.parse(spanContent), undefined, 4);
                     var pre = document.createElement('pre');
