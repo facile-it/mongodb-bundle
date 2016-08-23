@@ -11,16 +11,14 @@ class LogEvent
 {
     /** @var float */
     private $start;
-
     /** @var string */
     private $method;
-
     /** @var string */
     private $collection;
-
+    /** @var array */
+    private $filters;
     /** @var array */
     private $data;
-
     /** @var int */
     private $executionTime;
 
@@ -32,6 +30,7 @@ class LogEvent
         $this->start = 0.0;
         $this->collection = 'undefined';
         $this->method = 'undefined';
+        $this->filters = [];
         $this->data = [];
         $this->executionTime = 0;
     }
@@ -87,17 +86,33 @@ class LogEvent
     /**
      * @return array
      */
-    public function getData(): array
+    public function getFilters(): array
+    {
+        return $this->filters;
+    }
+
+    /**
+     * @param array $filters
+     */
+    public function setFilters($filters)
+    {
+        $this->filters = $filters ?? [];
+    }
+
+    /**
+     * @return array|object
+     */
+    public function getData()
     {
         return $this->data;
     }
 
     /**
-     * @param array $data
+     * @param array|object $data
      */
-    public function setData(array $data)
+    public function setData($data)
     {
-        $this->data = $data;
+        $this->data = $data ?? [];
     }
 
     /**
