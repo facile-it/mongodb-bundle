@@ -20,6 +20,30 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         self::assertInstanceOf(\MongoDB\Collection::class, $coll);
     }
 
+    public function test_insertOne()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
+        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+
+        $coll->insertOne(['test' => 1]);
+    }
+
+    public function test_count()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
+        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+
+        $coll->count(['test' => 1]);
+    }
+
     public function test_find()
     {
         $manager = new Manager('mongodb://localhost');
@@ -68,30 +92,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $coll->findOneAndDelete([]);
     }
 
-    public function test_insertOne()
-    {
-        $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
-
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
-
-        $coll->insertOne([]);
-    }
-
-    public function test_deleteMany()
-    {
-        $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
-
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
-
-        $coll->deleteMany([]);
-    }
-
     public function test_deleteOne()
     {
         $manager = new Manager('mongodb://localhost');
@@ -115,4 +115,42 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
         $coll->replaceOne([], []);
     }
+
+    public function test_log_event_instantiation()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = new FakeLogger();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger);
+
+        $coll->replaceOne(['filter' => 1], ['replace' => 1], ['option' => true]);
+
+        self::assertTrue($logger->hasLoggedEvents());
+        $event = $logger->getLoggedEvent();
+        self::assertFalse($logger->hasLoggedEvents());
+
+        self::assertEquals('test_collection',$event->getCollection());
+        self::assertNotEmpty($event->getExecutionTime());
+        self::assertEquals(['filter' => 1], $event->getFilters());
+        self::assertEquals(['replace' => 1],$event->getData());
+        self::assertEquals(['option' => true],$event->getOptions());
+
+    }
+
+    /** leave this test as last one to clean the collection*/
+    public function test_deleteMany()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
+        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+
+        $coll->deleteMany([]);
+    }
+}
+
+class FakeLogger extends \Facile\MongoDbBundle\Services\Loggers\MongoLogger
+{
 }

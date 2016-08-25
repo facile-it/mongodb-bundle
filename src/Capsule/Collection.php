@@ -37,9 +37,21 @@ final class Collection extends MongoCollection
     /**
      * {@inheritdoc}
      */
+    public function count($filter = [], array $options = [])
+    {
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
+        $result = parent::count($filter, $options);
+        $this->logger->logQuery($event);
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function find($filter = [], array $options = [])
     {
-        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
         $result = parent::find($filter, $options);
         $this->logger->logQuery($event);
 
@@ -51,7 +63,7 @@ final class Collection extends MongoCollection
      */
     public function findOne($filter = [], array $options = [])
     {
-        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
         $result = parent::findOne($filter, $options);
         $this->logger->logQuery($event);
 
@@ -63,7 +75,7 @@ final class Collection extends MongoCollection
      */
     public function findOneAndUpdate($filter, $update, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, $update, __FUNCTION__);
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, $update, $options);
         $result = parent::findOneAndUpdate($filter, $update, $options);
         $this->logger->logQuery($event);
 
@@ -75,7 +87,7 @@ final class Collection extends MongoCollection
      */
     public function findOneAndDelete($filter, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
         $result = parent::findOneAndDelete($filter, $options);
         $this->logger->logQuery($event);
 
@@ -87,7 +99,7 @@ final class Collection extends MongoCollection
      */
     public function deleteMany($filter, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
         $result = parent::deleteMany($filter, $options);
         $this->logger->logQuery($event);
 
@@ -99,7 +111,7 @@ final class Collection extends MongoCollection
      */
     public function deleteOne($filter, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, null, __FUNCTION__);
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
         $result = parent::deleteOne($filter, $options);
         $this->logger->logQuery($event);
 
@@ -111,7 +123,7 @@ final class Collection extends MongoCollection
      */
     public function replaceOne($filter, $replacement, array $options = [])
     {
-        $event = $this->startQueryLogging($filter, $replacement, __FUNCTION__);
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, $replacement, $options);
         $result = parent::replaceOne($filter, $replacement, $options);
         $this->logger->logQuery($event);
 
@@ -123,7 +135,7 @@ final class Collection extends MongoCollection
      */
     public function insertOne($document, array $options = [])
     {
-        $event = $this->startQueryLogging([], $document, __FUNCTION__);
+        $event = $this->startQueryLogging(__FUNCTION__, [], $document, $options);
         $result = parent::insertOne($document, $options);
         $this->logger->logQuery($event);
 
@@ -131,19 +143,21 @@ final class Collection extends MongoCollection
     }
 
     /**
+     * @param string $method
      * @param array  $filters
      * @param array  $data
-     * @param string $method
+     * @param array  $options
      *
      * @return LogEvent
      */
-    private function startQueryLogging(array $filters, $data = null, string $method): LogEvent
+    private function startQueryLogging(string $method, array $filters, $data = null, array $options): LogEvent
     {
         $debugInfo = $this->__debugInfo();
 
         $event = new LogEvent();
         $event->setFilters($filters);
         $event->setData($data);
+        $event->setOptions($options);
         $event->setMethod($method);
         $event->setCollection($debugInfo['collectionName']);
 

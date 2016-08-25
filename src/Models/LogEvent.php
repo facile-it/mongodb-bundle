@@ -19,6 +19,8 @@ class LogEvent
     private $filters;
     /** @var array */
     private $data;
+    /** @var array */
+    private $options;
     /** @var int */
     private $executionTime;
 
@@ -113,6 +115,22 @@ class LogEvent
     public function setData($data)
     {
         $this->data = $data ?? [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
     }
 
     /**
