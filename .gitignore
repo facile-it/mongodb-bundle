@@ -1,4 +1,6 @@
 /composer.lock
+/tests/Functional/TestApp/cache
+/tests/Functional/TestApp/logs
 /vendor/
 /bin/
 /.php_cs.cache
