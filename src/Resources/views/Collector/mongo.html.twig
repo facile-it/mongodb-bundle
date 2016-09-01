@@ -24,7 +24,7 @@
         </div>
         <div class="sf-toolbar-info-piece">
             <b>Query time</b>
-            <span>{{ "%.2f"|format(collector.time) }} ms</span>
+            <span class="sf-toolbar-status {{ collector.time > 30 ? 'sf-toolbar-status-yellow' : '' }}">{{ "%.2f"|format(collector.time) }} ms</span>
         </div>
     {% endset %}
 
@@ -34,11 +34,14 @@
 {% block head %}
     {{ parent() }}
     <style>
-        table.query-profiler tr td {
-            word-break: keep-all;
-            font-size: 12px;
-        }
-        .query-data { cursor: pointer; }
+        table.query-profiler tr td { word-break: keep-all;  font-size: 12px; }
+        table.query-profiler ul {  list-style-type: none;  padding : 0;  margin: 0; }
+        table.query-profiler ul li{ margin : 0; }
+        table.query-profiler ul li:nth-child(even){ margin-bottom : 5px; }
+        table.query-profiler #query-number { width:20px; }
+        table.query-profiler #query-info { width:150px; }
+        /*table.query-profiler #query-number { width:20px; }*/
+        table.query-profiler #query-time { width:60px; }
         .query-data > span { max-height: 40px; overflow: hidden; }
         pre { outline: 1px solid #ccc; padding: 2px; margin: 0; }
         .hidden { display: none; }
@@ -47,7 +50,11 @@
         .boolean { color: red; }
         .null { color: mediumvioletred; }
         .key { color: darkolivegreen; }
-        .small-font { font-size: 9px; color: darkslategray }
+        .small-font { font-size: 10px; }
+        .bold-font { font-weight: bold }
+        .click-to-expand { color: darkslateblue; cursor: pointer;}
+        .time-warning { color:orangered; font-weight: bold }
+
     </style>
 {% endblock %}
 
@@ -105,12 +112,10 @@
     <table class="query-profiler">
         <thead>
         <tr>
-            <th>#</th>
-            <th>Method</th>
-            <th>Collection</th>
-            <th>Filters<span class="small-font">(click to expand)</span></th>
-            <th>Query data <span class="small-font">(click to expand)</span></th>
-            <th width="50px">Time</th>
+            <th id="query-number">#</th>
+            <th id="query-info">Info</th>
+            <th id="query-data">Data</th>
+            <th id="query-time">Time</th>
         </tr>
         </thead>
         <tbody>
@@ -118,15 +123,39 @@
             {# q \Facile\MongoDbBundle\Models\LogEvent #}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ q.method }}</td>
-                <td>{{ q.collection }}</td>
-                <td onclick="return QueryParser.toggleDetails(this);">
-                    <div class="query-data"><span>{{ q.filters|json_encode(128) }}</span></div>
+                <td>
+                    <div>
+                        <ul>
+                            <li> <span class="small-font bold-font">Method:</span></li>
+                            <li>{{ q.method }}</li>
+                            <li><span class="small-font bold-font">Collection:</span></li>
+                            <li>{{ q.collection }}</li>
+                        </ul>
+                    </div>
                 </td>
-                <td onclick="return QueryParser.toggleDetails(this);">
-                    <div class="query-data"><span>{{ q.data|json_encode(128) }}</span></div>
+                <td>
+                    {% if q.filters | length > 0 %}
+                        <div class="query-data" onclick="return QueryParser.toggleDetails(this);">
+                            <span class="small-font bold-font">Filters:</span><br/>
+                            <span class="click-to-expand small-font">{{ q.filters|json_encode(128) }}</span>
+                        </div>
+                    {% endif %}
+                    {% if q.data | length > 0 %}
+                        <div class="query-data"  onclick="return QueryParser.toggleDetails(this);">
+                            <span class="small-font bold-font">Data:</span><br />
+                            <span class="click-to-expand small-font">{{ q.data|json_encode(128) }}</span>
+                        </div>
+                    {% endif %}
+                    {% if q.options | length > 0 %}
+                        <div class="query-data"  onclick="return QueryParser.toggleDetails(this);">
+                            <span class="small-font bold-font">Options:</span><br />
+                            <span class="click-to-expand small-font">{{ q.options|json_encode(128) }}</span>
+                        </div>
+                    {% endif %}
                 </td>
-                <td>{{ "%.2f"|format(q.executionTime * 1000) }} ms</td>
+                <td class="{{ q.executionTime * 1000 > 2.0 ? 'time-warning' : '' }}">
+                    {{ "%.2f"|format(q.executionTime * 1000) }} ms
+                </td>
             </tr>
         {% else %}
             <tr>
@@ -162,9 +191,9 @@
                 var elements = document.getElementsByClassName('query-data');
                 for (var i = 0; i < elements.length; i++) {
                     var el = elements[i];
-                    var spanContent = el.getElementsByTagName('span')[0].innerText;
-                    if (spanContent.length > 60) {
-                        el.getElementsByTagName('span')[0].innerText = spanContent.substring(0, 30) + "... }";
+                    var spanContent = el.getElementsByClassName('click-to-expand')[0].innerText;
+                    if (spanContent.length > 120) {
+                        el.getElementsByClassName('click-to-expand')[0].innerText = spanContent.substring(0, 100) + "... }";
                     }
                     var json = JSON.stringify(JSON.parse(spanContent), undefined, 4);
                     var pre = document.createElement('pre');
@@ -175,7 +204,7 @@
 
             toggleDetails: function(element) {
                 element.getElementsByTagName('pre')[0].classList.toggle('hidden');
-                element.getElementsByTagName('span')[0].classList.toggle('hidden');
+                element.getElementsByClassName('click-to-expand')[0].classList.toggle('hidden');
             }
 
         };
