@@ -15,7 +15,7 @@ class LogEvent
     private $method;
     /** @var string */
     private $collection;
-    /** @var array */
+    /** @var array|object */
     private $filters;
     /** @var array */
     private $data;
@@ -34,6 +34,7 @@ class LogEvent
         $this->method = 'undefined';
         $this->filters = [];
         $this->data = [];
+        $this->options = [];
         $this->executionTime = 0;
     }
 
@@ -94,11 +95,11 @@ class LogEvent
     }
 
     /**
-     * @param array $filters
+     * @param array|object $filters
      */
     public function setFilters($filters)
     {
-        $this->filters = $filters ?? [];
+        $this->filters = (array) $filters ?? [];
     }
 
     /**
