@@ -92,6 +92,13 @@ $this->get('mongo.connection.{connectionName}'); // [test_db, other_db, test_db_
 
 To manipulate the database, please read the official [documentation](http://mongodb.github.io/mongo-php-library/classes/database/)
 
+### Commands
+
+Some commands are provided:
+
+* `mongodb:database:drop`: To drop a database.
+* `mongodb:collection:drop`: To drop a collection.
+
 ### Query Profiling
 
 On dev environment all queries executed by the library MongoDB\Collection class are profiled and showed inside the symfony web profiler.
