@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Facile\MongoDbBundle\Tests\unit\Capsule;
+namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
 
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Capsule\Database;
