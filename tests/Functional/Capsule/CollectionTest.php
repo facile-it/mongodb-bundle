@@ -32,6 +32,18 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $coll->insertOne(['test' => 1]);
     }
 
+    public function test_updateOne()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
+        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+
+        $coll->updateOne(['filter' => 1],['$set' => ['testField' => 1]]);
+    }
+
     public function test_count()
     {
         $manager = new Manager('mongodb://localhost');

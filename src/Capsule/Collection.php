@@ -143,6 +143,18 @@ final class Collection extends MongoCollection
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function updateOne($filter, $update, array $options = [])
+    {
+        $event = $this->startQueryLogging(__FUNCTION__, $filter, $update, $options);
+        $result = parent::updateOne($filter, $update, $options);
+        $this->logger->logQuery($event);
+
+        return $result;
+    }
+
+    /**
      * @param string $method
      * @param array  $filters
      * @param array  $data
