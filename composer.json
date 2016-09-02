@@ -14,16 +14,17 @@
         "php" : "^7.0",
         "ext-mongodb": "^1.1.0",
         "mongodb/mongodb": "^1.0",
-        "symfony/framework-bundle": "^2.8 || ^3.0",
-        "symfony/console": "^2.8 || ^3.0"
+        "symfony/framework-bundle": "^2.8 || ^3.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
         "symfony/phpunit-bridge": "^2.8 || ^3.0",
-        "symfony/web-profiler-bundle": "^2.8 || ^3.0"
+        "symfony/web-profiler-bundle": "^2.8 || ^3.0",
+        "symfony/console": "^2.8 || ^3.0"
     },
     "suggest": {
-        "symfony/web-profiler-bundle": "Enables profiling of mongodb queries"
+        "symfony/web-profiler-bundle": "Enables profiling of mongodb queries",
+        "symfony/console": "Enables console commands"
     },
     "autoload": {
         "psr-4": { "Facile\\MongoDbBundle\\": "src/" }

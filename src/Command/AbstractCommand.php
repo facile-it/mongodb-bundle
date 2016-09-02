@@ -38,9 +38,17 @@ abstract class AbstractCommand extends ContainerAwareCommand
     {
         parent::initialize($input, $output);
         $this->io = new SymfonyStyle($input, $output);
-        $this->connection = $input->getOption('connection')
-            ? $this->getContainer()->get('mongo.connection.'.$input->getOption('connection'))
-            : $this->getContainer()->get('mongo.connection')
-        ;
+
+        $connectionName = 'mongo.connection';
+
+        if ($input->getOption('connection')) {
+            $connectionName .= '.'.$input->getOption('connection');
+        }
+
+        if (!$this->getContainer()->has($connectionName)) {
+            throw new \LogicException(sprintf('No connection named \'%s\' found', $input->getOption('connection')));
+        }
+
+        $this->connection = $this->getContainer()->get($connectionName);
     }
 }

@@ -16,6 +16,7 @@ class DropCollectionCommandTest extends CommandTestCase
         $conn = $this->getContainer()->get('mongo.connection');
         self::assertEquals('testFunctionaldb', $conn->getDatabaseName());
 
+        $conn->dropCollection('testFunctionalCollection');
         $conn->createCollection('testFunctionalCollection');
 
         $this->getApplication()->add(new DropCollectionCommand());
@@ -23,8 +24,9 @@ class DropCollectionCommandTest extends CommandTestCase
         $command = $this->getApplication()->find('mongo:collection:drop');
 
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName(), 'collection' => 'testFunctionalCollection'));
+        $commandTester->execute(['command' => $command->getName(), 'collection' => 'testFunctionalCollection']);
 
         self:self::assertContains('Collection dropped', $commandTester->getDisplay());
     }
+
 }
