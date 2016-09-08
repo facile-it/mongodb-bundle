@@ -37,6 +37,18 @@ final class Collection extends MongoCollection
     /**
      * {@inheritdoc}
      */
+    public function aggregate(array $pipeline, array $options = [])
+    {
+        $event = $this->startQueryLogging(__FUNCTION__, null, $pipeline, $options);
+        $result = parent::aggregate($pipeline, $options);
+        $this->logger->logQuery($event);
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function count($filter = [], array $options = [])
     {
         $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
@@ -162,7 +174,7 @@ final class Collection extends MongoCollection
      *
      * @return LogEvent
      */
-    private function startQueryLogging(string $method, array $filters, $data = null, array $options): LogEvent
+    private function startQueryLogging(string $method, array $filters = null, $data = null, array $options): LogEvent
     {
         $debugInfo = $this->__debugInfo();
 

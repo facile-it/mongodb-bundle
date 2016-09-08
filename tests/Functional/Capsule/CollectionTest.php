@@ -149,6 +149,36 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function test_aggregate()
+    {
+        $manager = new Manager('mongodb://localhost');
+        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
+        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+
+        $coll->deleteMany([]);
+
+        $coll->insertOne(['group' => 'a', 'testValue' => 2]);
+        $coll->insertOne(['group' => 'a', 'testValue' => 3]);
+        $coll->insertOne(['group' => 'b', 'testValue' => 2]);
+
+        $result = $coll->aggregate([
+            ['$match' => ['group' => 'a']],
+            ['$group' => ['_id' => '$group', 'value' => ['$sum'=>'$testValue']]]
+        ]);
+
+        $results = [];
+        foreach ($result as $res) {
+            $results[] = ['group' => $res['_id'], 'value' => $res['value']];
+        }
+
+        self::assertCount(1, $results);
+        self::assertEquals('a', $results[0]['group']);
+        self::assertEquals(5, $results[0]['value']);
+    }
+
     /** leave this test as last one to clean the collection*/
     public function test_deleteMany()
     {
