@@ -171,6 +171,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
         $results = [];
         foreach ($result as $res) {
+            $res = (array)$res;
             $results[] = ['group' => $res['_id'], 'value' => $res['value']];
         }
 
