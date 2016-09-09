@@ -15,22 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_construction_null_logger()
-    {
-        $collector = new MongoDbDataCollector();
-        $collector->setLogger(new NullLogger());
-        $collector->collect(new Request(), new Response());
-
-        self::assertEquals(0, $collector->getQueryCount());
-        self::assertEmpty($collector->getQueries());
-
-        self::assertEquals(0, $collector->getTime());
-
-        self::assertEmpty($collector->getConnections());
-        self::assertEquals(0, $collector->getConnectionsCount());
-
-        self::assertEquals('mongodb', $collector->getName());
-    }
 
     public function test_construction_logger()
     {

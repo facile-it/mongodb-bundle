@@ -5,9 +5,9 @@ namespace Facile\MongoDbBundle\Tests\functional\DependencyInjection;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
-use Facile\MongoDbBundle\Services\Loggers\NullLogger;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;
+use Facile\MongoDbBundle\Capsule\Database as LoggerDatabase;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -46,6 +46,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('mongo.connection', Database::class);
         $defaultConnection = $this->container->get('mongo.connection');
         $this->assertInstanceOf(Database::class, $defaultConnection);
+        $this->assertInstanceOf(LoggerDatabase::class, $defaultConnection);
         $this->assertSame('testdb', $defaultConnection->getDatabaseName());
 
         // 'test_db' connection
@@ -53,9 +54,10 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $defaultConnection = $this->container->get('mongo.connection.test_db');
 
         $this->assertInstanceOf(Database::class, $defaultConnection);
+        $this->assertInstanceOf(LoggerDatabase::class, $defaultConnection);
         $this->assertSame('testdb', $defaultConnection->getDatabaseName());
 
-        $this->assertContainerBuilderHasService('facile_mongo_db.logger', DataCollectorLoggerInterface::class);
+        $this->assertContainerBuilderHasService('facile_mongo_db.logger', MongoLogger::class);
         $logger = $this->container->get('facile_mongo_db.logger');
         $this->assertInstanceOf(MongoLogger::class, $logger);
     }
@@ -83,9 +85,13 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         );
         $this->compile();
 
-        $this->assertContainerBuilderHasService('facile_mongo_db.logger', DataCollectorLoggerInterface::class);
-        $logger = $this->container->get('facile_mongo_db.logger');
-        $this->assertInstanceOf(NullLogger::class, $logger);
+        // 'test_db' connection
+        $this->assertContainerBuilderHasService('mongo.connection.test_db', Database::class);
+        $defaultConnection = $this->container->get('mongo.connection.test_db');
+
+        $this->assertInstanceOf(Database::class, $defaultConnection);
+        $this->assertNotInstanceOf(LoggerDatabase::class, $defaultConnection);
+        $this->assertSame('testdb', $defaultConnection->getDatabaseName());
     }
 
     public function test_load_multiple()
