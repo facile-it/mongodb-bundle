@@ -1,12 +1,13 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Services;
 
-use Facile\MongoDbBundle\Capsule\Client;
+use Facile\MongoDbBundle\Capsule\Client as LoggerClient;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
+use MongoDB\Client;
 
 /**
  * Class ClientRegistry.
@@ -19,17 +20,21 @@ class ClientRegistry
     private $configurations;
     /** @var DataCollectorLoggerInterface */
     private $logger;
+    /** @var string */
+    private $environment;
 
     /**
      * ClientRegistry constructor.
      *
      * @param DataCollectorLoggerInterface $logger
+     * @param string                       $environment
      */
-    public function __construct(DataCollectorLoggerInterface $logger)
+    public function __construct(DataCollectorLoggerInterface $logger, string $environment)
     {
         $this->clients = [];
         $this->configurations = [];
         $this->logger = $logger;
+        $this->environment = $environment;
     }
 
     /**
@@ -66,11 +71,27 @@ class ClientRegistry
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s:%d', $conf->getHost(), $conf->getPort());
             $options = array_merge(['database' => $databaseName], $conf->getOptions());
-            $this->clients[$clientKey] = new Client($uri, $options, [], $this->logger);
+            $this->clients[$clientKey] = $this->buildClient($uri, $options, []);
             $this->logger->addConnection($clientKey);
         }
 
         return $this->clients[$clientKey];
+    }
+
+    /**
+     * @param                              $uri
+     * @param array                        $options
+     * @param array                        $driverOptions
+     *
+     * @return Client
+     */
+    private function buildClient($uri, array $options, array $driverOptions): Client
+    {
+        if ('dev' === $this->environment) {
+            return new LoggerClient($uri, $options, $driverOptions, $this->logger);
+        }
+
+        return new Client($uri, $options, $driverOptions);
     }
 
     /**

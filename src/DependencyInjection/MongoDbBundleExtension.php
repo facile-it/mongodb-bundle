@@ -4,6 +4,7 @@ namespace Facile\MongoDbBundle\DependencyInjection;
 
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
+use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\Config\FileLocator;
@@ -37,7 +38,7 @@ class MongoDbBundleExtension extends Extension
         }
 
         $this->defineLoggers();
-        $this->defineClientRegistry($config['clients']);
+        $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
         $this->defineConnections($config['connections']);
 
         return $config;
@@ -45,20 +46,21 @@ class MongoDbBundleExtension extends Extension
 
     private function defineLoggers()
     {
-        $loggerDefinition = new Definition(DataCollectorLoggerInterface::class);
-        $loggerDefinition->setFactory([new Reference('mongo.logger_factory'), 'createLogger']);
+        $loggerDefinition = new Definition(MongoLogger::class);
         $this->containerBuilder->setDefinition('facile_mongo_db.logger', $loggerDefinition);
     }
 
     /**
-     * @param array $clientsConfig
+     * @param array  $clientsConfig
+     * @param string $environment
      */
-    private function defineClientRegistry(array $clientsConfig)
+    private function defineClientRegistry(array $clientsConfig, string $environment)
     {
         $clientRegistryDefinition = new Definition(
             ClientRegistry::class,
             [
                 new Reference('facile_mongo_db.logger'),
+                $environment,
             ]
         );
         foreach ($clientsConfig as $name => $conf) {
