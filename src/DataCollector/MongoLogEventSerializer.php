@@ -22,11 +22,11 @@ class MongoLogEventSerializer
     }
 
     /**
-     * @param array $data
+     * @param array|object $data
      *
-     * @return array
+     * @return array|object
      */
-    private static function prepareUnserializableData(array $data): array
+    private static function prepareUnserializableData($data)
     {
         foreach ($data as $key => $item) {
             if (method_exists($item, 'getArrayCopy')) {
