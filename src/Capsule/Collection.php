@@ -168,13 +168,13 @@ final class Collection extends MongoCollection
 
     /**
      * @param string $method
-     * @param array  $filters
-     * @param array  $data
+     * @param array|object  $filters
+     * @param array|object  $data
      * @param array  $options
      *
      * @return LogEvent
      */
-    private function startQueryLogging(string $method, array $filters = null, $data = null, array $options): LogEvent
+    private function startQueryLogging(string $method, $filters = null, $data = null, array $options): LogEvent
     {
         $debugInfo = $this->__debugInfo();
 
