@@ -7,8 +7,7 @@ namespace Facile\MongoDbBundle\Tests\unit\DataCollector;
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Models\LogEvent;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
-use Facile\MongoDbBundle\Services\Loggers\NullLogger;
-use MongoDB\BSON\UTCDatetime;
+use MongoDB\BSON\UTCDateTime;
 use MongoDB\Model\BSONDocument;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +21,7 @@ class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
         $logEvent->setData(
             [
                 "data" => new BSONDocument(["test"]),
-                "date" => new UTCDatetime(10000),
+                "date" => $this->getUtcDateTime(),
             ]
         );
 
@@ -44,5 +43,16 @@ class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
         self::assertEquals(1, $collector->getConnectionsCount());
 
         self::assertEquals('mongodb', $collector->getName());
+    }
+
+    public function getUtcDateTime()
+    {
+        if (phpversion('mongodb') === '1.2.0-dev') {
+            return new UTCDateTime('1000');
+        }
+
+        if (-1 === version_compare(phpversion('mongodb'), '1.2.0')) {
+            return new UTCDateTime(1000);
+        }
     }
 }

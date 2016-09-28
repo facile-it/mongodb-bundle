@@ -16,6 +16,8 @@ matrix:
   include:
     - php: '7.0'
       env: COMPOSER_FLAGS="--prefer-lowest"
+    - php: '7.0'
+      env: MONGO_EXT_VERSION="latest"
     - php: hhvm
       env: COMPOSER_FLAGS="--prefer-lowest --ignore-platform-reqs"
     - php: hhvm
@@ -44,7 +46,8 @@ before_install:
   - if [ "$SYMFONY" != "" ]; then composer require "symfony/symfony:${SYMFONY}" --no-update; fi;
 
 install:
-  - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - if [ "$MONGO_EXT_VERSION" = "" ]; then pecl install -f mongodb-1.1.8; fi;
+  - if [ "$MONGO_EXT_VERSION" = "latest" ]; then echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
   - mkdir --parents "${HOME}/bin"
   - composer update --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
