@@ -3,7 +3,6 @@
 namespace Facile\MongoDbBundle\DependencyInjection;
 
 use Facile\MongoDbBundle\Services\ClientRegistry;
-use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
