@@ -3,7 +3,6 @@
 namespace Facile\MongoDbBundle\Tests\functional\DependencyInjection;
 
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
-use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;

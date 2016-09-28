@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Facile\MongoDbBundle\DependencyInjection;
 
+use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Services\ClientRegistry;
+use Facile\MongoDbBundle\Services\ConnectionFactory;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -29,15 +31,15 @@ class MongoDbBundleExtension extends Extension
         $this->containerBuilder = $container;
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('factory.xml');
-
-        if ($container->getParameter("kernel.environment") === 'dev' && class_exists(WebProfilerBundle::class)) {
-            $loader->load('web_profiler.xml');
-        }
 
         $this->defineLoggers();
+
+        if ($container->getParameter("kernel.environment") === 'dev' && class_exists(WebProfilerBundle::class)) {
+            $this->defineDataCollector();
+        }
+
         $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
+        $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
         return $config;
@@ -46,7 +48,18 @@ class MongoDbBundleExtension extends Extension
     private function defineLoggers()
     {
         $loggerDefinition = new Definition(MongoLogger::class);
+        $loggerDefinition->setPublic(false);
+
         $this->containerBuilder->setDefinition('facile_mongo_db.logger', $loggerDefinition);
+    }
+
+    private function defineDataCollector()
+    {
+        $dataCollectorDefinition = new Definition(MongoDbDataCollector::class);
+        $dataCollectorDefinition->addMethodCall('setLogger', [new Reference('facile_mongo_db.logger')]);
+        $dataCollectorDefinition->setPublic(false);
+
+        $this->containerBuilder->setDefinition('facile_mongo_db.data_collector', $dataCollectorDefinition);
     }
 
     /**
@@ -62,6 +75,8 @@ class MongoDbBundleExtension extends Extension
                 $environment,
             ]
         );
+        $clientRegistryDefinition->setPublic(false);
+
         foreach ($clientsConfig as $name => $conf) {
             $clientRegistryDefinition
                 ->addMethodCall(
@@ -76,12 +91,19 @@ class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('mongo.client_registry', $clientRegistryDefinition);
     }
 
+    private function defineConnectionFactory()
+    {
+        $factoryDefinition = new Definition(ConnectionFactory::class, [new Reference('mongo.client_registry')]);
+        $factoryDefinition->setPublic(false);
+
+        $this->containerBuilder->setDefinition('mongo.connection_factory', $factoryDefinition);
+    }
+
     /**
      * @param array $connections
      */
     private function defineConnections(array $connections)
     {
-
         foreach ($connections as $name => $conf) {
             $connectionDefinition = new Definition(
                 Database::class,
