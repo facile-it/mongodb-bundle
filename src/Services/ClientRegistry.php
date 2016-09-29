@@ -38,12 +38,13 @@ class ClientRegistry
     }
 
     /**
-     * @param string $name
-     * @param array  $conf
+     * @param array $configurations
      */
-    public function addClientConfiguration(string $name, array $conf)
+    public function addClientsConfigurations(array $configurations)
     {
-        $this->configurations[$name] = $this->buildClientConfiguration($conf);
+        foreach ($configurations as $name => $conf) {
+            $this->addClientConfiguration($name, $conf);
+        }
     }
 
     /**
@@ -76,6 +77,15 @@ class ClientRegistry
         }
 
         return $this->clients[$clientKey];
+    }
+
+    /**
+     * @param string $name
+     * @param array  $conf
+     */
+    private function addClientConfiguration(string $name, array $conf)
+    {
+        $this->configurations[$name] = $this->buildClientConfiguration($conf);
     }
 
     /**
