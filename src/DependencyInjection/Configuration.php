@@ -7,6 +7,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Class Configuration.
+ * @internal
  */
 final class Configuration implements ConfigurationInterface
 {

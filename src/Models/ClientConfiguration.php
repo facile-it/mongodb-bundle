@@ -6,6 +6,7 @@ namespace Facile\MongoDbBundle\Models;
 
 /**
  * Class ClientConfiguration.
+ * @internal
  */
 class ClientConfiguration
 {

@@ -9,6 +9,7 @@ use MongoDB\Client as MongoClient;
 
 /**
  * Class Client.
+ * @internal
  */
 final class Client extends MongoClient
 {

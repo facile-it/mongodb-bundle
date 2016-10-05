@@ -10,6 +10,7 @@ use MongoDB\Driver\Manager;
 
 /**
  * Class Database.
+ * @internal
  */
 final class Database extends MongoDatabase
 {

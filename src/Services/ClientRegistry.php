@@ -11,6 +11,7 @@ use MongoDB\Client;
 
 /**
  * Class ClientRegistry.
+ * @internal
  */
 class ClientRegistry
 {

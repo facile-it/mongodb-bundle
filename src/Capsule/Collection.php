@@ -11,6 +11,7 @@ use MongoDB\Driver\Manager;
 
 /**
  * Class Collection.
+ * @internal
  */
 final class Collection extends MongoCollection
 {

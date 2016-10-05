@@ -17,6 +17,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Class MongoDbBundleExtension.
+ * @internal
  */
 class MongoDbBundleExtension extends Extension
 {

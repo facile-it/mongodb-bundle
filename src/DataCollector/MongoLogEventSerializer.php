@@ -8,6 +8,7 @@ use Facile\MongoDbBundle\Models\LogEvent;
 
 /**
  * Class MongoLogEventSerializer
+ * @internal
  */
 class MongoLogEventSerializer
 {

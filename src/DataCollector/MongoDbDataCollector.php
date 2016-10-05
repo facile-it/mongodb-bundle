@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
  * Class MongoDbDataCollector.
+ * @internal
  */
 final class MongoDbDataCollector extends DataCollector
 {

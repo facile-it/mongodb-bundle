@@ -8,6 +8,7 @@ use MongoDB\Database;
 
 /**
  * Class ConnectionFactory.
+ * @internal
  */
 class ConnectionFactory
 {
