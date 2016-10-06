@@ -58,6 +58,14 @@ class MongoDbBundleExtension extends Extension
     {
         $dataCollectorDefinition = new Definition(MongoDbDataCollector::class);
         $dataCollectorDefinition->addMethodCall('setLogger', [new Reference('facile_mongo_db.logger')]);
+        $dataCollectorDefinition->addTag(
+            'data_collector',
+            [
+                'template' => 'FacileMongoDbBundle:Collector:mongo.html.twig',
+                'id' => 'mongodb',
+                'priority' => 250,
+            ]
+        );
         $dataCollectorDefinition->setPublic(false);
 
         $this->containerBuilder->setDefinition('facile_mongo_db.data_collector', $dataCollectorDefinition);
