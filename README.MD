@@ -92,12 +92,18 @@ $this->get('mongo.connection.{connectionName}'); // [test_db, other_db, test_db_
 
 To manipulate the database, please read the official [documentation](http://mongodb.github.io/mongo-php-library/classes/database/)
 
+### Fixtures
+This bundle supports doctrine style fixtures, to create one you will need to create a php class in your bundle '/DataFixtures/Mongo' directory for Example 'src/AppBundle/DataFixtures/Mongo/LoadTaskDataFixture.php'
+
+NB: This class must implement at least the MongoFixtureInterface, if you need container support you can extend AbstractContainerAwareFixture to use the getContainer method.
+
 ### Commands
 
 Some commands are provided:
 
 * `mongodb:database:drop`: To drop a database.
 * `mongodb:collection:drop`: To drop a collection.
+* `mongodb:fixtures:load`: To load the fixtures.
 
 ### Query Profiling
 
