@@ -197,32 +197,32 @@
                     {% if q.filters | length > 0 %}
                         <div class="query-data">
                             <span class="bold-font">Filters:</span><br/>
-                            <span id="facile-mongodb-filters">{{ q.filters|json_encode(128) }}</span>
+                            <span id="facile-mongodb-filters{{ loop.index }}">{{ q.filters|json_encode(128) }}</span>
                         </div>
                         <div class="text-small font-normal">
-                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-filters');">Expand</a>
+                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-filters{{ loop.index }}');">Expand</a>
                         </div>
-                        <div id="facile-mongodb-filters-expand"></div>
+                        <div id="facile-mongodb-filters{{ loop.index }}-expand"></div>
                     {% endif %}
                     {% if q.data | length > 0 %}
                         <div class="query-data">
                             <span class="bold-font">Data:</span><br />
-                            <span id="facile-mongodb-data">{{ q.data|json_encode(128) }}</span>
+                            <span id="facile-mongodb-data{{ loop.index }}">{{ q.data|json_encode(128) }}</span>
                         </div>
                         <div class="text-small font-normal">
-                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-data');">Expand</a>
+                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-data{{ loop.index }}');">Expand</a>
                         </div>
-                        <div id="facile-mongodb-data-expand"></div>
+                        <div id="facile-mongodb-data{{ loop.index }}-expand"></div>
                     {% endif %}
                     {% if q.options | length > 0 %}
                         <div class="query-data">
                             <span class="bold-font">Options:</span><br />
-                            <span id="facile-mongodb-options">{{ q.options|json_encode(128) }}</span>
+                            <span id="facile-mongodb-options{{ loop.index }}">{{ q.options|json_encode(128) }}</span>
                         </div>
                         <div class="text-small font-normal">
-                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-options');">Expand</a>
+                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-options{{ loop.index }}');">Expand</a>
                         </div>
-                        <div id="facile-mongodb-options-expand"></div>
+                        <div id="facile-mongodb-options{{ loop.index }}-expand"></div>
                     {% endif %}
                 </td>
                 <td class="{{ q.executionTime * 1000 > 2.0 ? 'time-warning' : '' }}">
