@@ -17,11 +17,13 @@
         "symfony/framework-bundle": "^2.8 || ^3.0"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
-        "symfony/phpunit-bridge": "^2.8 || ^3.0",
-        "symfony/web-profiler-bundle": "^2.8 || ^3.0",
-        "symfony/console": "^2.8 || ^3.0"
+        "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+        "symfony/phpunit-bridge": "^2.8 | ^3.0",
+        "symfony/web-profiler-bundle": "^2.8 | ^3.0",
+        "symfony/console": "^2.8 | ^3.0",
+        "phpunit/phpunit": "^5.7.4"
     },
+    "minimum-stability": "stable",
     "suggest": {
         "symfony/web-profiler-bundle": "Enables profiling of mongodb queries",
         "symfony/console": "Enables console commands"
@@ -36,5 +38,8 @@
         "branch-alias": {
             "dev-master": "0.x-dev"
         }
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }
