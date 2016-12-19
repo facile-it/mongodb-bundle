@@ -40,6 +40,26 @@ class LoadFixturesCommandTest extends CommandTestCase
         self::assertEquals('fixture', $fixtures[0]['type']);
         self::assertEquals('test', $fixtures[0]['data']);
 
+        self::assertContains("Done, loaded 1 fixtures files", $commandTester->getDisplay());
+
+        $conn->dropCollection('testFixturesCollection');
+    }
+
+    public function test_command_not_fixtures_found()
+    {
+        /** @var Database $conn */
+        $conn = $this->getContainer()->get('mongo.connection');
+        self::assertEquals('testFunctionaldb', $conn->getDatabaseName());
+
+        $this->getApplication()->add(new LoadFixturesCommand());
+
+        $command = $this->getApplication()->find('mongodb:fixtures:load');
+
+        $commandTester = new CommandTester($command);
+
+        self::expectException(\InvalidArgumentException::class);
+        $commandTester->execute([]);
+
         $conn->dropCollection('testFixturesCollection');
     }
 }

@@ -11,12 +11,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class LoadFixturesCommand.
  */
 class LoadFixturesCommand extends AbstractCommand
 {
+    /** @var MongoFixturesLoader */
+    private $loader;
+
     /**
      * {@inheritdoc}
      */
@@ -30,6 +34,12 @@ class LoadFixturesCommand extends AbstractCommand
         ;
     }
 
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        parent::initialize($input, $output);
+        $this->loader = new MongoFixturesLoader($this->getContainer());
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -39,28 +49,11 @@ class LoadFixturesCommand extends AbstractCommand
         /** @var Application $application */
         $application = $this->getApplication();
 
-        $paths = [];
+        $paths = $this->prepareSearchPaths($input, $application->getKernel());
 
-        if ($input->getArgument('addFixturesPath')) {
-            $paths[] = $input->getArgument('addFixturesPath');
-        }
+        $this->loadPaths($paths);
 
-        foreach ($application->getKernel()->getBundles() as $bundle) {
-            $paths[] = $bundle->getPath().'/DataFixtures/Mongo';
-        }
-
-        $loader = new MongoFixturesLoader($this->getContainer());
-
-        foreach ($paths as $path) {
-            if (is_dir($path)) {
-                $loader->loadFromDirectory($path);
-            }
-            if (is_file($path)) {
-                $loader->loadFromFile($path);
-            }
-        }
-
-        $fixtures = $loader->getLoadedClasses();
+        $fixtures = $this->loader->getLoadedClasses();
         if (empty($fixtures)) {
             throw new \InvalidArgumentException(
                 sprintf('Could not find any class to load in: %s', "\n\n- ".implode("\n- ", $paths))
@@ -71,7 +64,7 @@ class LoadFixturesCommand extends AbstractCommand
             $this->loadFixture($fixture);
         }
 
-        $this->io->writeln('Done.');
+        $this->io->writeln(sprintf('Done, loaded %d fixtures files', count($fixtures)));
     }
 
     /**
@@ -82,5 +75,41 @@ class LoadFixturesCommand extends AbstractCommand
         $indexList->loadData();
         $indexList->loadIndexes();
         $this->io->writeln('Loaded fixture: '. get_class($indexList));
+    }
+
+    /**
+     * @param InputInterface    $input
+     * @param KernelInterface   $kernel
+     *
+     * @return array
+     */
+    protected function prepareSearchPaths(InputInterface $input, KernelInterface $kernel): array
+    {
+        $paths = [];
+
+        if ($input->getArgument('addFixturesPath')) {
+            $paths[] = $input->getArgument('addFixturesPath');
+        }
+
+        foreach ($kernel->getBundles() as $bundle) {
+            $paths[] = $bundle->getPath().'/DataFixtures/Mongo';
+        }
+
+        return $paths;
+    }
+
+    /**
+     * @param array $paths
+     */
+    protected function loadPaths($paths)
+    {
+        foreach ($paths as $path) {
+            if (is_dir($path)) {
+                $this->loader->loadFromDirectory($path);
+            }
+            if (is_file($path)) {
+                $this->loader->loadFromFile($path);
+            }
+        }
     }
 }
