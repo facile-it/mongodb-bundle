@@ -7,7 +7,9 @@ namespace Facile\MongoDbBundle\Command;
 use Facile\MongoDbBundle\Fixtures\MongoFixturesLoader;
 use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -23,6 +25,7 @@ class LoadFixturesCommand extends AbstractCommand
         parent::configure();
         $this
             ->setName('mongodb:fixtures:load')
+            ->addArgument('addFixturesPath', InputArgument::OPTIONAL, 'Add a path to search in for fixtures files')
             ->setDescription('Load fixtures and applies them');
         ;
     }
@@ -36,7 +39,12 @@ class LoadFixturesCommand extends AbstractCommand
         /** @var Application $application */
         $application = $this->getApplication();
 
-        $paths = array();
+        $paths = [];
+
+        if ($input->getArgument('addFixturesPath')) {
+            $paths[] = $input->getArgument('addFixturesPath');
+        }
+
         foreach ($application->getKernel()->getBundles() as $bundle) {
             $paths[] = $bundle->getPath().'/DataFixtures/Mongo';
         }
