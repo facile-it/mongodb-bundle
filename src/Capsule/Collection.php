@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
-use Facile\MongoDbBundle\Models\LogEvent;
-use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
+use Facile\MongoDbBundle\Event\QueryEvent;
+use Facile\MongoDbBundle\Models\QueryLog;
 use MongoDB\Collection as MongoCollection;
 use MongoDB\Driver\Manager;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class Collection.
@@ -15,24 +16,24 @@ use MongoDB\Driver\Manager;
  */
 final class Collection extends MongoCollection
 {
-    /**
-     * @var DataCollectorLoggerInterface
-     */
-    private $logger;
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
 
     /**
      * Collection constructor.
      *
-     * @param Manager                      $manager
-     * @param string                       $databaseName
-     * @param string                       $collectionName
-     * @param array                        $options
-     * @param DataCollectorLoggerInterface $logger
+     * @param Manager                  $manager
+     * @param string                   $databaseName
+     * @param string                   $collectionName
+     * @param array                    $options
+     * @param EventDispatcherInterface $eventDispatcher
+     *
+     * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct(Manager $manager, $databaseName, $collectionName, array $options = [], DataCollectorLoggerInterface $logger)
+    public function __construct(Manager $manager, $databaseName, $collectionName, array $options = [], EventDispatcherInterface $eventDispatcher)
     {
         parent::__construct($manager, $databaseName, $collectionName, $options);
-        $this->logger = $logger;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -40,9 +41,9 @@ final class Collection extends MongoCollection
      */
     public function aggregate(array $pipeline, array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, null, $pipeline, $options);
+        $event = $this->prepareEvent(__FUNCTION__, null, $pipeline, $options);
         $result = parent::aggregate($pipeline, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -52,9 +53,9 @@ final class Collection extends MongoCollection
      */
     public function count($filter = [], array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
         $result = parent::count($filter, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -64,9 +65,9 @@ final class Collection extends MongoCollection
      */
     public function find($filter = [], array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
         $result = parent::find($filter, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -76,9 +77,9 @@ final class Collection extends MongoCollection
      */
     public function findOne($filter = [], array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
         $result = parent::findOne($filter, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -88,9 +89,9 @@ final class Collection extends MongoCollection
      */
     public function findOneAndUpdate($filter, $update, array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, $update, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, $update, $options);
         $result = parent::findOneAndUpdate($filter, $update, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -100,9 +101,9 @@ final class Collection extends MongoCollection
      */
     public function findOneAndDelete($filter, array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
         $result = parent::findOneAndDelete($filter, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -112,9 +113,9 @@ final class Collection extends MongoCollection
      */
     public function deleteMany($filter, array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
         $result = parent::deleteMany($filter, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -124,9 +125,9 @@ final class Collection extends MongoCollection
      */
     public function deleteOne($filter, array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, null, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
         $result = parent::deleteOne($filter, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -136,9 +137,9 @@ final class Collection extends MongoCollection
      */
     public function replaceOne($filter, $replacement, array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, $replacement, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, $replacement, $options);
         $result = parent::replaceOne($filter, $replacement, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -148,9 +149,9 @@ final class Collection extends MongoCollection
      */
     public function insertOne($document, array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, [], $document, $options);
+        $event = $this->prepareEvent(__FUNCTION__, [], $document, $options);
         $result = parent::insertOne($document, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -160,9 +161,9 @@ final class Collection extends MongoCollection
      */
     public function updateOne($filter, $update, array $options = [])
     {
-        $event = $this->startQueryLogging(__FUNCTION__, $filter, $update, $options);
+        $event = $this->prepareEvent(__FUNCTION__, $filter, $update, $options);
         $result = parent::updateOne($filter, $update, $options);
-        $this->logger->logQuery($event);
+        $this->notifyQueryExecution($event);
 
         return $result;
     }
@@ -173,22 +174,34 @@ final class Collection extends MongoCollection
      * @param array|object  $data
      * @param array  $options
      *
-     * @return LogEvent
+     * @return QueryLog
      */
-    private function startQueryLogging(string $method, $filters = null, $data = null, array $options): LogEvent
+    private function prepareEvent(string $method, $filters = null, $data = null, array $options): QueryLog
     {
         $debugInfo = $this->__debugInfo();
 
-        $event = new LogEvent();
+        $event = new QueryLog();
         $event->setFilters($filters);
         $event->setData($data);
         $event->setOptions($options);
         $event->setMethod($method);
         $event->setCollection($debugInfo['collectionName']);
 
-        $this->logger->startLogging($event);
+        $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, new QueryEvent($event));
 
         return $event;
+    }
+
+    /**
+     * @param QueryLog $queryLog
+     *
+     * @return QueryLog
+     */
+    private function notifyQueryExecution(QueryLog $queryLog)
+    {
+        $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
+
+        $this->eventDispatcher->dispatch(QueryEvent::QUERY_EXECUTED, new QueryEvent($queryLog));
     }
 }
 

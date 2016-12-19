@@ -5,9 +5,10 @@ declare(strict_types = 1);
 namespace Facile\MongoDbBundle\Services;
 
 use Facile\MongoDbBundle\Capsule\Client as LoggerClient;
+use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
-use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use MongoDB\Client;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class ClientRegistry.
@@ -19,23 +20,25 @@ class ClientRegistry
     private $clients;
     /** @var ClientConfiguration[] */
     private $configurations;
-    /** @var DataCollectorLoggerInterface */
-    private $logger;
     /** @var string */
     private $environment;
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
 
     /**
      * ClientRegistry constructor.
      *
-     * @param DataCollectorLoggerInterface $logger
-     * @param string                       $environment
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param string                   $environment
+     *
+     * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct(DataCollectorLoggerInterface $logger, string $environment)
+    public function __construct(EventDispatcherInterface $eventDispatcher, string $environment)
     {
         $this->clients = [];
         $this->configurations = [];
-        $this->logger = $logger;
         $this->environment = $environment;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -74,7 +77,11 @@ class ClientRegistry
             $uri = sprintf('mongodb://%s:%d', $conf->getHost(), $conf->getPort());
             $options = array_merge(['database' => $databaseName], $conf->getOptions());
             $this->clients[$clientKey] = $this->buildClient($uri, $options, []);
-            $this->logger->addConnection($clientKey);
+
+            $this->eventDispatcher->dispatch(
+                ConnectionEvent::CLIENT_CREATED,
+                new ConnectionEvent($clientKey)
+            );
         }
 
         return $this->clients[$clientKey];
@@ -99,7 +106,7 @@ class ClientRegistry
     private function buildClient($uri, array $options, array $driverOptions): Client
     {
         if ('dev' === $this->environment) {
-            return new LoggerClient($uri, $options, $driverOptions, $this->logger);
+            return new LoggerClient($uri, $options, $driverOptions, $this->eventDispatcher);
         }
 
         return new Client($uri, $options, $driverOptions);

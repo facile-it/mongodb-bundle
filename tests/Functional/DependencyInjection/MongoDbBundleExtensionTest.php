@@ -2,13 +2,16 @@
 
 namespace Facile\MongoDbBundle\Tests\functional\DependencyInjection;
 
+use Facile\MongoDbBundle\Capsule\Database as LoggerDatabase;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
+use Facile\MongoDbBundle\Event\ConnectionEvent;
+use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;
-use Facile\MongoDbBundle\Capsule\Database as LoggerDatabase;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
@@ -59,6 +62,14 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('facile_mongo_db.logger', MongoLogger::class);
         $logger = $this->container->get('facile_mongo_db.logger');
         $this->assertInstanceOf(MongoLogger::class, $logger);
+
+        $this->assertContainerBuilderHasService('facile_mongo_db.data_collector.listener');
+
+        /** @var EventDispatcherInterface $ed */
+        $ed = $this->container->get('facile_mongo_db.event_dispatcher');
+        self::assertCount(2, $ed->getListeners());
+        self::assertCount(1, $ed->getListeners(QueryEvent::QUERY_EXECUTED));
+        self::assertCount(1, $ed->getListeners(ConnectionEvent::CLIENT_CREATED));
     }
 
     public function test_load_env_prod()
@@ -87,6 +98,12 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         // 'test_db' connection
         $this->assertContainerBuilderHasService('mongo.connection.test_db', Database::class);
         $defaultConnection = $this->container->get('mongo.connection.test_db');
+
+        $this->assertContainerBuilderNotHasService('facile_mongo_db.data_collector.listener');
+
+        /** @var EventDispatcherInterface $ed */
+        $ed = $this->container->get('facile_mongo_db.event_dispatcher');
+        self::assertEmpty($ed->getListeners());
 
         $this->assertInstanceOf(Database::class, $defaultConnection);
         $this->assertNotInstanceOf(LoggerDatabase::class, $defaultConnection);

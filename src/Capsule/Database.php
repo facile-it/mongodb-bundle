@@ -7,6 +7,7 @@ namespace Facile\MongoDbBundle\Capsule;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use MongoDB\Database as MongoDatabase;
 use MongoDB\Driver\Manager;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class Database.
@@ -14,23 +15,23 @@ use MongoDB\Driver\Manager;
  */
 final class Database extends MongoDatabase
 {
-    /**
-     * @var DataCollectorLoggerInterface
-     */
-    private $logger;
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
 
     /**
      * Database constructor.
      *
-     * @param Manager                      $manager
-     * @param string                       $databaseName
-     * @param array                        $options
-     * @param DataCollectorLoggerInterface $logger
+     * @param Manager                  $manager
+     * @param string                   $databaseName
+     * @param array                    $options
+     * @param EventDispatcherInterface $eventDispatcher
+     *
+     * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct(Manager $manager, $databaseName, array $options = [], DataCollectorLoggerInterface $logger)
+    public function __construct(Manager $manager, $databaseName, array $options = [], EventDispatcherInterface $eventDispatcher)
     {
         parent::__construct($manager, $databaseName, $options);
-        $this->logger = $logger;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -46,6 +47,6 @@ final class Database extends MongoDatabase
             'writeConcern' => $debug['writeConcern'],
         ];
 
-        return new Collection($debug['manager'], $debug['databaseName'], $collectionName, $options, $this->logger);
+        return new Collection($debug['manager'], $debug['databaseName'], $collectionName, $options, $this->eventDispatcher);
     }
 }

@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Tests\Functional\Command;
 
 use Facile\MongoDbBundle\Command\DropDatabaseCommand;
+use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Database;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class DropDatabaseCommandTest extends CommandTestCase
+class DropDatabaseAppTest extends AppTestCase
 {
     public function test_command()
     {

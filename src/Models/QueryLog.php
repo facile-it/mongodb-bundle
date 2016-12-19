@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Models;
 
 /**
- * Class LogEvent.
+ * Class QueryLog.
  * @internal
  */
-class LogEvent
+class QueryLog
 {
     /** @var float */
     private $start;
@@ -26,11 +26,11 @@ class LogEvent
     private $executionTime;
 
     /**
-     * LogEvent constructor.
+     * QueryLog constructor.
      */
     public function __construct()
     {
-        $this->start = 0.0;
+        $this->start = microtime(true);
         $this->collection = 'undefined';
         $this->method = 'undefined';
         $this->filters = [];
@@ -45,14 +45,6 @@ class LogEvent
     public function getStart(): float
     {
         return $this->start;
-    }
-
-    /**
-     * @param float $start
-     */
-    public function setStart(float $start)
-    {
-        $this->start = $start;
     }
 
     /**

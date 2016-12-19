@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services\Loggers;
 
-use Facile\MongoDbBundle\Models\LogEvent;
+use Facile\MongoDbBundle\Models\QueryLog;
 
 /**
  * Interface DataCollectorLoggerInterface
  */
 interface DataCollectorLoggerInterface
 {
-    public function startLogging(LogEvent $event);
-    
     /**
-     * @param LogEvent $event
+     * @param QueryLog $event
      */
-    public function logQuery(LogEvent $event);
+    public function logQuery(QueryLog $event);
 
     /**
      * @return bool
@@ -24,9 +22,9 @@ interface DataCollectorLoggerInterface
     public function hasLoggedEvents(): bool;
 
     /**
-     * @return LogEvent
+     * @return QueryLog
      */
-    public function getLoggedEvent(): LogEvent;
+    public function getLoggedEvent(): QueryLog;
 
     /**
      * @param string $connection

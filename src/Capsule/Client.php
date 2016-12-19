@@ -6,6 +6,7 @@ namespace Facile\MongoDbBundle\Capsule;
 
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use MongoDB\Client as MongoClient;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class Client.
@@ -13,21 +14,23 @@ use MongoDB\Client as MongoClient;
  */
 final class Client extends MongoClient
 {
-    /** @var DataCollectorLoggerInterface */
-    private $logger;
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
 
     /**
      * Client constructor.
      *
-     * @param string                       $uri
-     * @param array                        $uriOptions
-     * @param array                        $driverOptions
-     * @param DataCollectorLoggerInterface $logger
+     * @param string                   $uri
+     * @param array                    $uriOptions
+     * @param array                    $driverOptions
+     * @param EventDispatcherInterface $eventDispatcher
+     *
+     * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct($uri = 'mongodb://localhost:27017', array $uriOptions = [], array $driverOptions = [], DataCollectorLoggerInterface $logger)
+    public function __construct($uri = 'mongodb://localhost:27017', array $uriOptions = [], array $driverOptions = [], EventDispatcherInterface $eventDispatcher)
     {
         parent::__construct($uri, $uriOptions, $driverOptions);
-        $this->logger = $logger;
+        $this->eventDispatcher = $eventDispatcher;
     }
     /**
      * {@inheritdoc}
@@ -39,7 +42,7 @@ final class Client extends MongoClient
             'typeMap' => $debug['typeMap'],
         ];
 
-        return new Database($debug['manager'], $databaseName, $options, $this->logger);
+        return new Database($debug['manager'], $databaseName, $options, $this->eventDispatcher);
     }
 
     /**
@@ -52,6 +55,6 @@ final class Client extends MongoClient
             'typeMap' => $debug['typeMap'],
         ];
 
-        return new Collection($debug['manager'], $databaseName, $collectionName, $options, $this->logger);
+        return new Collection($debug['manager'], $databaseName, $collectionName, $options, $this->eventDispatcher);
     }
 }
