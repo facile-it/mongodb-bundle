@@ -3,19 +3,21 @@
 declare(strict_types=1);
 
 use Facile\MongoDbBundle\Capsule\Collection;
-use Facile\MongoDbBundle\Models\LogEvent;
+use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
+use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Driver\Manager;
 use Prophecy\Argument;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends AppTestCase
 {
     public function test_construction()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $ev = self::prophesize(EventDispatcherInterface::class);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         self::assertInstanceOf(\MongoDB\Collection::class, $coll);
     }
@@ -23,11 +25,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_insertOne()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->insertOne(['test' => 1]);
     }
@@ -35,11 +36,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_updateOne()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->updateOne(['filter' => 1],['$set' => ['testField' => 1]]);
     }
@@ -47,11 +47,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_count()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->count(['test' => 1]);
     }
@@ -59,11 +58,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_find()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->find([]);
     }
@@ -71,11 +69,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_findOne()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->findOne([]);
     }
@@ -83,11 +80,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_findOneAndUpdate()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->findOneAndUpdate([], ['$set' => ['country' => 'us']]);
     }
@@ -95,11 +91,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_findOneAndDelete()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->findOneAndDelete([]);
     }
@@ -107,11 +102,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_deleteOne()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->deleteOne([]);
     }
@@ -119,44 +113,21 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_replaceOne()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->replaceOne([], []);
-    }
-
-    public function test_log_event_instantiation()
-    {
-        $manager = new Manager('mongodb://localhost');
-        $logger = new FakeLogger();
-
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger);
-
-        $coll->replaceOne(['filter' => 1], ['replace' => 1], ['option' => true]);
-
-        self::assertTrue($logger->hasLoggedEvents());
-        $event = $logger->getLoggedEvent();
-        self::assertFalse($logger->hasLoggedEvents());
-
-        self::assertEquals('test_collection',$event->getCollection());
-        self::assertNotEmpty($event->getExecutionTime());
-        self::assertEquals(['filter' => 1], $event->getFilters());
-        self::assertEquals(['replace' => 1],$event->getData());
-        self::assertEquals(['option' => true],$event->getOptions());
-
     }
 
     public function test_aggregate()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->deleteMany([]);
 
@@ -184,16 +155,20 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function test_deleteMany()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
-        $logger->startLogging(Argument::type(LogEvent::class))->shouldBeCalled();
-        $logger->logQuery(Argument::type(LogEvent::class))->shouldBeCalled();
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $logger->reveal());
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->deleteMany([]);
     }
-}
 
-class FakeLogger extends \Facile\MongoDbBundle\Services\Loggers\MongoLogger
-{
+    /**
+     * @param $ev
+     */
+    protected function assertEventsDispatching($ev)
+    {
+        $ev->dispatch(QueryEvent::QUERY_PREPARED, Argument::type(QueryEvent::class))->shouldBeCalled();
+        $ev->dispatch(QueryEvent::QUERY_EXECUTED, Argument::type(QueryEvent::class))->shouldBeCalled();
+    }
 }

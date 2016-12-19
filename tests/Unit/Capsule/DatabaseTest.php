@@ -6,15 +6,15 @@ namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
 
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Capsule\Database;
-use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use MongoDB\Driver\Manager;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DatabaseTest extends \PHPUnit_Framework_TestCase
 {
     public function test_selectCollection()
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(DataCollectorLoggerInterface::class);
+        $logger = self::prophesize(EventDispatcherInterface::class);
 
         $db = new Database($manager, 'testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);

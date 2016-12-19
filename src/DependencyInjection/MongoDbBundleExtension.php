@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\DependencyInjection;
 
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
+use Facile\MongoDbBundle\Event\ConnectionEvent;
+use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;
+use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\ConnectionFactory;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
@@ -13,6 +16,7 @@ use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -33,9 +37,12 @@ class MongoDbBundleExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $this->defineEventManager();
         $this->defineLoggers();
 
-        if ($container->getParameter("kernel.environment") === 'dev' && class_exists(WebProfilerBundle::class)) {
+        if (in_array($container->getParameter("kernel.environment"), ["dev", "test"]) && class_exists(WebProfilerBundle::class)) {
+            $this->defineListeners();
+            $this->attachEventsToEventManager();
             $this->defineDataCollector();
         }
 
@@ -80,7 +87,7 @@ class MongoDbBundleExtension extends Extension
         $clientRegistryDefinition = new Definition(
             ClientRegistry::class,
             [
-                new Reference('facile_mongo_db.logger'),
+                new Reference('facile_mongo_db.event_dispatcher'),
                 $environment,
             ]
         );
@@ -115,5 +122,45 @@ class MongoDbBundleExtension extends Extension
             $this->containerBuilder->setDefinition('mongo.connection.'.$name, $connectionDefinition);
         }
         $this->containerBuilder->setAlias('mongo.connection', 'mongo.connection.'.array_keys($connections)[0]);
+    }
+
+    private function defineEventManager()
+    {
+        $eventManagerDefinition = new Definition(EventDispatcher::class);
+        $eventManagerDefinition->setPublic(false);
+
+        $this->containerBuilder->setDefinition('facile_mongo_db.event_dispatcher', $eventManagerDefinition);
+    }
+
+    private function defineListeners()
+    {
+        $dataCollectorListenerDefinition = new Definition(
+            DataCollectorListener::class,
+            [
+                new Reference('facile_mongo_db.logger')
+            ]
+        );
+        $dataCollectorListenerDefinition->setPublic(false);
+
+        $this->containerBuilder->setDefinition('facile_mongo_db.data_collector.listener', $dataCollectorListenerDefinition);
+    }
+
+    private function attachEventsToEventManager()
+    {
+        $eventManagerDefinition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
+        $eventManagerDefinition->addMethodCall(
+            'addListener',
+            [
+                ConnectionEvent::CLIENT_CREATED,
+                [new Reference('facile_mongo_db.data_collector.listener'), 'onConnectionClientCreated']
+            ]
+        );
+        $eventManagerDefinition->addMethodCall(
+            'addListener',
+            [
+                QueryEvent::QUERY_EXECUTED,
+                [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted']
+            ]
+        );
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers;
 
-use Facile\MongoDbBundle\Models\LogEvent;
+use Facile\MongoDbBundle\Models\QueryLog;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 
 /**
@@ -12,15 +12,6 @@ use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
  */
 class MongoLoggerTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_logger_start()
-    {
-        $event = new LogEvent();
-        $logger = new MongoLogger();
-        $logger->startLogging($event);
-
-        self::assertNotEmpty($event->getStart());
-    }
-
     public function test_logger_connections()
     {
         $logger = new MongoLogger();
@@ -34,9 +25,9 @@ class MongoLoggerTest extends \PHPUnit_Framework_TestCase
 
     public function test_logger_queries()
     {
-        $event1 = new LogEvent();
+        $event1 = new QueryLog();
         $event1->setCollection('coll1');
-        $event2 = new LogEvent();
+        $event2 = new QueryLog();
         $event2->setCollection('coll2');
 
         $logger = new MongoLogger();
@@ -50,11 +41,9 @@ class MongoLoggerTest extends \PHPUnit_Framework_TestCase
 
         $e1 = $logger->getLoggedEvent();
         self::assertSame($event1, $e1);
-        self::assertTrue($e1->getExecutionTime() > 0);
 
         $e2 = $logger->getLoggedEvent();
         self::assertSame($event2, $e2);
-        self::assertTrue($e2->getExecutionTime() > 0);
 
         self::assertFalse($logger->hasLoggedEvents());
         self::expectException(\LogicException::class);

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Tests\Functional\Command;
 
 use Facile\MongoDbBundle\Command\AbstractCommand;
+use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class AbstractCommandTest extends CommandTestCase
+class AbstractAppTest extends AppTestCase
 {
     /**
      * @dataProvider commandOptionsProvider

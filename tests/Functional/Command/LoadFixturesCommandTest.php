@@ -5,11 +5,12 @@ declare(strict_types = 1);
 namespace Facile\MongoDbBundle\Tests\Functional\Command;
 
 use Facile\MongoDbBundle\Command\LoadFixturesCommand;
+use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Collection;
 use MongoDB\Database;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class LoadFixturesCommandTest extends CommandTestCase
+class LoadFixturesAppTest extends AppTestCase
 {
     public function test_command()
     {

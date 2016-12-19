@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
-use Facile\MongoDbBundle\Models\LogEvent;
+use Facile\MongoDbBundle\Models\QueryLog;
 
 /**
  * Class MongoLogEventSerializer
@@ -13,9 +13,9 @@ use Facile\MongoDbBundle\Models\LogEvent;
 class MongoLogEventSerializer
 {
     /**
-     * @param LogEvent $event
+     * @param QueryLog $event
      */
-    public static function serialize(LogEvent $event)
+    public static function serialize(QueryLog $event)
     {
         $event->setFilters(self::prepareUnserializableData($event->getFilters()));
         $event->setData(self::prepareUnserializableData($event->getData()));
