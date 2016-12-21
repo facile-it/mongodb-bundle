@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Facile\MongoDbBundle\Tests\unit\DataCollector;
 
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
-use Facile\MongoDbBundle\Models\QueryLog;
+use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Model\BSONDocument;
@@ -17,7 +17,7 @@ class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
 
     public function test_construction_logger()
     {
-        $logEvent = new QueryLog();
+        $logEvent = new Query();
         $logEvent->setData(
             [
                 "data" => new BSONDocument(["test"]),

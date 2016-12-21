@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Models;
 
 /**
- * Class QueryLog.
+ * Class Query.
  * @internal
  */
-class QueryLog
+class Query
 {
     /** @var float */
     private $start;
@@ -26,7 +26,7 @@ class QueryLog
     private $executionTime;
 
     /**
-     * QueryLog constructor.
+     * Query constructor.
      */
     public function __construct()
     {

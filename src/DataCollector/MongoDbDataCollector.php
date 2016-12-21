@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
-use Facile\MongoDbBundle\Models\QueryLog;
+use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,7 +46,7 @@ final class MongoDbDataCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         while ($this->logger->hasLoggedEvents()) {
-            /** @var QueryLog $event */
+            /** @var Query $event */
             $event = $this->logger->getLoggedEvent();
 
             // with extension version under 1.2.0 some Mongo objects can't be automatically serialized

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers;
 
-use Facile\MongoDbBundle\Models\QueryLog;
+use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 
 /**
@@ -25,9 +25,9 @@ class MongoLoggerTest extends \PHPUnit_Framework_TestCase
 
     public function test_logger_queries()
     {
-        $event1 = new QueryLog();
+        $event1 = new Query();
         $event1->setCollection('coll1');
-        $event2 = new QueryLog();
+        $event2 = new Query();
         $event2->setCollection('coll2');
 
         $logger = new MongoLogger();

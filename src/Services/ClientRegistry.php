@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Services;
 
-use Facile\MongoDbBundle\Capsule\Client as LoggerClient;
+use Facile\MongoDbBundle\Capsule\Client as BundleClient;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
 use MongoDB\Client;
@@ -106,7 +106,7 @@ class ClientRegistry
     private function buildClient($uri, array $options, array $driverOptions): Client
     {
         if ('dev' === $this->environment) {
-            return new LoggerClient($uri, $options, $driverOptions, $this->eventDispatcher);
+            return new BundleClient($uri, $options, $driverOptions, $this->eventDispatcher);
         }
 
         return new Client($uri, $options, $driverOptions);

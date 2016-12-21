@@ -7,7 +7,7 @@ namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;
 use Facile\MongoDbBundle\Event\QueryEvent;
-use Facile\MongoDbBundle\Models\QueryLog;
+use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
 
 class DataCollectorListenerTest extends \PHPUnit_Framework_TestCase
@@ -30,7 +30,7 @@ class DataCollectorListenerTest extends \PHPUnit_Framework_TestCase
 
     public function test_onQueryExecuted()
     {
-        $query = new QueryLog();
+        $query = new Query();
 
         $event = new QueryEvent($query);
 

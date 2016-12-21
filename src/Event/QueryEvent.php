@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Event;
 
-use Facile\MongoDbBundle\Models\QueryLog;
+use Facile\MongoDbBundle\Models\Query;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -19,18 +19,18 @@ class QueryEvent extends GenericEvent
     /**
      * QueryEvent constructor.
      *
-     * @param QueryLog $queryLog
-     * @param array    $arguments
+     * @param Query $queryLog
+     * @param array $arguments
      */
-    public function __construct(QueryLog $queryLog, array $arguments = [])
+    public function __construct(Query $queryLog, array $arguments = [])
     {
         parent::__construct($queryLog, $arguments);
     }
 
     /**
-     * @return QueryLog
+     * @return Query
      */
-    public function getQueryLog(): QueryLog
+    public function getQueryLog(): Query
     {
         return $this->getSubject();
     }

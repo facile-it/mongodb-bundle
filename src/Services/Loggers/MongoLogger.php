@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services\Loggers;
 
-use Facile\MongoDbBundle\Models\QueryLog;
+use Facile\MongoDbBundle\Models\Query;
 
 /**
  * Class MongoLogger
  */
 class MongoLogger implements DataCollectorLoggerInterface
 {
-    /** @var \SplQueue|QueryLog[] */
+    /** @var \SplQueue|Query[] */
     private $logs;
 
     /** @var array|string[] */
@@ -43,9 +43,9 @@ class MongoLogger implements DataCollectorLoggerInterface
     }
 
     /**
-     * @param QueryLog $event
+     * @param Query $event
      */
-    public function logQuery(QueryLog $event)
+    public function logQuery(Query $event)
     {
         $this->logs->enqueue($event);
     }
@@ -59,9 +59,9 @@ class MongoLogger implements DataCollectorLoggerInterface
     }
 
     /**
-     * @return QueryLog
+     * @return Query
      */
-    public function getLoggedEvent(): QueryLog
+    public function getLoggedEvent(): Query
     {
         if (!$this->hasLoggedEvents()) {
             throw new \LogicException('No more events logged!');

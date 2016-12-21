@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Capsule;
 
 use Facile\MongoDbBundle\Event\QueryEvent;
-use Facile\MongoDbBundle\Models\QueryLog;
+use Facile\MongoDbBundle\Models\Query;
 use MongoDB\Collection as MongoCollection;
 use MongoDB\Driver\Manager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -41,9 +41,9 @@ final class Collection extends MongoCollection
      */
     public function aggregate(array $pipeline, array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, null, $pipeline, $options);
-        $result = parent::aggregate($pipeline, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, null, $pipeline, $options);
+        $result = parent::aggregate($query->getData(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -53,9 +53,9 @@ final class Collection extends MongoCollection
      */
     public function count($filter = [], array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
-        $result = parent::count($filter, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $result = parent::count($query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -65,9 +65,9 @@ final class Collection extends MongoCollection
      */
     public function find($filter = [], array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
-        $result = parent::find($filter, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $result = parent::find($query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -77,9 +77,9 @@ final class Collection extends MongoCollection
      */
     public function findOne($filter = [], array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
-        $result = parent::findOne($filter, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $result = parent::findOne($query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -89,9 +89,9 @@ final class Collection extends MongoCollection
      */
     public function findOneAndUpdate($filter, $update, array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, $update, $options);
-        $result = parent::findOneAndUpdate($filter, $update, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, $update, $options);
+        $result = parent::findOneAndUpdate($query->getFilters(), $query->getData(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -101,9 +101,9 @@ final class Collection extends MongoCollection
      */
     public function findOneAndDelete($filter, array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
-        $result = parent::findOneAndDelete($filter, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $result = parent::findOneAndDelete($query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -113,9 +113,9 @@ final class Collection extends MongoCollection
      */
     public function deleteMany($filter, array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
-        $result = parent::deleteMany($filter, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $result = parent::deleteMany($query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -125,9 +125,9 @@ final class Collection extends MongoCollection
      */
     public function deleteOne($filter, array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, null, $options);
-        $result = parent::deleteOne($filter, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $result = parent::deleteOne($query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -137,9 +137,9 @@ final class Collection extends MongoCollection
      */
     public function replaceOne($filter, $replacement, array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, $replacement, $options);
-        $result = parent::replaceOne($filter, $replacement, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, $replacement, $options);
+        $result = parent::replaceOne($query->getFilters(), $query->getData(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -149,9 +149,9 @@ final class Collection extends MongoCollection
      */
     public function insertOne($document, array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, [], $document, $options);
-        $result = parent::insertOne($document, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, [], $document, $options);
+        $result = parent::insertOne($query->getData(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -161,9 +161,9 @@ final class Collection extends MongoCollection
      */
     public function updateOne($filter, $update, array $options = [])
     {
-        $event = $this->prepareEvent(__FUNCTION__, $filter, $update, $options);
-        $result = parent::updateOne($filter, $update, $options);
-        $this->notifyQueryExecution($event);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, $update, $options);
+        $result = parent::updateOne($query->getFilters(), $query->getData(), $query->getOptions());
+        $this->notifyQueryExecution($query);
 
         return $result;
     }
@@ -174,30 +174,28 @@ final class Collection extends MongoCollection
      * @param array|object  $data
      * @param array  $options
      *
-     * @return QueryLog
+     * @return Query
      */
-    private function prepareEvent(string $method, $filters = null, $data = null, array $options): QueryLog
+    private function prepareQuery(string $method, $filters = null, $data = null, array $options): Query
     {
-        $debugInfo = $this->__debugInfo();
+        $query = new Query();
+        $query->setFilters($filters);
+        $query->setData($data);
+        $query->setOptions($options);
+        $query->setMethod($method);
+        $query->setCollection($this->getCollectionName());
 
-        $event = new QueryLog();
-        $event->setFilters($filters);
-        $event->setData($data);
-        $event->setOptions($options);
-        $event->setMethod($method);
-        $event->setCollection($debugInfo['collectionName']);
+        $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, new QueryEvent($query));
 
-        $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, new QueryEvent($event));
-
-        return $event;
+        return $query;
     }
 
     /**
-     * @param QueryLog $queryLog
+     * @param Query $queryLog
      *
-     * @return QueryLog
+     * @return Query
      */
-    private function notifyQueryExecution(QueryLog $queryLog)
+    private function notifyQueryExecution(Query $queryLog)
     {
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 

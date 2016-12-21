@@ -38,17 +38,16 @@ class MongoDbBundleExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $this->defineEventManager();
-        $this->defineLoggers();
-
-        if (in_array($container->getParameter("kernel.environment"), ["dev", "test"]) && class_exists(WebProfilerBundle::class)) {
-            $this->defineListeners();
-            $this->attachEventsToEventManager();
-            $this->defineDataCollector();
-        }
-
         $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
+
+        if (in_array($container->getParameter("kernel.environment"), ["dev"]) && class_exists(WebProfilerBundle::class)) {
+            $this->defineLoggers();
+            $this->defineDataCollectorListeners();
+            $this->attachDataCollectionListenerToEventManager();
+            $this->defineDataCollector();
+        }
 
         return $config;
     }
@@ -132,7 +131,7 @@ class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('facile_mongo_db.event_dispatcher', $eventManagerDefinition);
     }
 
-    private function defineListeners()
+    private function defineDataCollectorListeners()
     {
         $dataCollectorListenerDefinition = new Definition(
             DataCollectorListener::class,
@@ -145,7 +144,7 @@ class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('facile_mongo_db.data_collector.listener', $dataCollectorListenerDefinition);
     }
 
-    private function attachEventsToEventManager()
+    private function attachDataCollectionListenerToEventManager()
     {
         $eventManagerDefinition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
         $eventManagerDefinition->addMethodCall(

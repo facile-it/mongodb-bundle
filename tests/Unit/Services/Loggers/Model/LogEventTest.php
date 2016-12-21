@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers\Model;
 
-use Facile\MongoDbBundle\Models\QueryLog;
+use Facile\MongoDbBundle\Models\Query;
 
 class LogEventTest extends \PHPUnit_Framework_TestCase
 {
     public function test_construction()
     {
-        $event = new QueryLog();
+        $event = new Query();
         $event->setCollection('test_collection');
         $event->setMethod('find');
         $event->setExecutionTime(1000);
