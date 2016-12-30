@@ -72,6 +72,51 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         self::assertCount(1, $ed->getListeners(ConnectionEvent::CLIENT_CREATED));
     }
 
+    public function test_load_data_collection_disabled()
+    {
+        $this->load(
+            [
+                'clients' => [
+                    'test_client' => [
+                        'host' => 'localhost',
+                        'port' => 8080,
+                        'username' => 'foo',
+                        'password' => 'bar',
+                    ],
+                ],
+                'connections' => [
+                    'test_db' => [
+                        'client_name' => 'test_client',
+                        'database_name' => 'testdb',
+                    ],
+                ],
+                'data_collection' => false,
+            ]
+        );
+        $this->compile();
+        // Alias connections
+        $this->assertContainerBuilderHasService('mongo.connection', Database::class);
+        $defaultConnection = $this->container->get('mongo.connection');
+        $this->assertInstanceOf(Database::class, $defaultConnection);
+        $this->assertInstanceOf(LoggerDatabase::class, $defaultConnection);
+        $this->assertSame('testdb', $defaultConnection->getDatabaseName());
+
+        // 'test_db' connection
+        $this->assertContainerBuilderHasService('mongo.connection.test_db', Database::class);
+        $defaultConnection = $this->container->get('mongo.connection.test_db');
+
+        $this->assertInstanceOf(Database::class, $defaultConnection);
+        $this->assertInstanceOf(LoggerDatabase::class, $defaultConnection);
+        $this->assertSame('testdb', $defaultConnection->getDatabaseName());
+
+        $this->assertContainerBuilderNotHasService('facile_mongo_db.logger');
+        $this->assertContainerBuilderNotHasService('facile_mongo_db.data_collector.listener');
+
+        /** @var EventDispatcherInterface $ed */
+        $ed = $this->container->get('facile_mongo_db.event_dispatcher');
+        self::assertCount(0, $ed->getListeners());
+    }
+
     public function test_load_env_prod()
     {
         $this->setParameter('kernel.environment', 'prod');

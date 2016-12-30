@@ -20,6 +20,8 @@ final class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('mongo_db_bundle');
         $rootNode
             ->children()
+            ->booleanNode('data_collection')->defaultTrue()->info('Use to disable Data Collection if needed')
+            ->end()
             ->arrayNode('clients')->isRequired()->requiresAtLeastOneElement()
                 ->useAttributeAsKey('name')
                 ->prototype('array')

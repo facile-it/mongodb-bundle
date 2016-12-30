@@ -44,7 +44,9 @@ Here is the configuration reference:
 
 ```yaml
 mongo_db_bundle:
-
+    
+    data_collection: true # set to false to disable data collection
+    
     # clients section, here you can define connection to different servers or with different credentials
     clients:
     

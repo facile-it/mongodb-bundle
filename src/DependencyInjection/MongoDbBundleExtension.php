@@ -42,7 +42,7 @@ class MongoDbBundleExtension extends Extension
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
-        if (in_array($container->getParameter("kernel.environment"), ["dev"]) && class_exists(WebProfilerBundle::class)) {
+        if ($this->mustCollectData($config)) {
             $this->defineLoggers();
             $this->defineDataCollectorListeners();
             $this->attachDataCollectionListenerToEventManager();
@@ -50,6 +50,18 @@ class MongoDbBundleExtension extends Extension
         }
 
         return $config;
+    }
+
+    /**
+     * @param array $config
+     *
+     * @return bool
+     */
+    private function mustCollectData(array $config): bool
+    {
+        return in_array($this->containerBuilder->getParameter("kernel.environment"), ["dev"])
+            && class_exists(WebProfilerBundle::class)
+            && $config['data_collection'] === true;
     }
 
     private function defineLoggers()

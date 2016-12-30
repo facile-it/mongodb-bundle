@@ -16,6 +16,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $this->assertProcessedConfigurationEquals([
             'clients' => [],
             'connections' => [],
+            'data_collection' => true,
         ], [
             __DIR__.'/../../fixtures/config/config_empty.yml',
         ]);
@@ -41,6 +42,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'database_name' => 'testdb',
                 ],
             ],
+            'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
             __DIR__.'/../../fixtures/config/config_full.yml',
@@ -67,9 +69,37 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'database_name' => 'testdb',
                 ],
             ],
+            'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
             __DIR__.'/../../fixtures/config/config_options.yml',
+        ]);
+    }
+
+    public function test_data_collection_disabled_configuration_process()
+    {
+        $expectedConfiguration = [
+            'clients' => [
+                'test_client' => [
+                    'host' => 'localhost',
+                    'port' => 8080,
+                    'username' => 'foo',
+                    'password' => 'bar',
+                    'replicaSet' => 'testReplica',
+                    'ssl' => true,
+                    'connectTimeoutMS' => 3000,
+                ],
+            ],
+            'connections' => [
+                'test_db' => [
+                    'client_name' => 'test_client',
+                    'database_name' => 'testdb',
+                ],
+            ],
+            'data_collection' => false,
+        ];
+        $this->assertProcessedConfigurationEquals($expectedConfiguration, [
+            __DIR__.'/../../fixtures/config/config_datacollection_disabled.yml',
         ]);
     }
 
@@ -110,6 +140,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'database_name' => 'testdb_2',
                 ],
             ],
+            'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
             __DIR__.'/../../fixtures/config/config_multiple.yml',
