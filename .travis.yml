@@ -10,7 +10,11 @@ matrix:
   fast_finish: true
   include:
     - php: '7.0'
-      env: MONGO_EXT_VERSION="1.1.8"
+      env: MONGO_EXT_VERSION="1.1.5"
+    - php: '7.0'
+      env: MONGO_EXT_VERSION="1.2.0"
+    - php: '7.0'
+      env: MONGO_EXT_VERSION="1.2.3"
     - php: '7.0'
       env: SYMFONY=2.8.*
     - php: '7.0'
@@ -25,7 +29,6 @@ matrix:
       env: COMPOSER_FLAGS="--prefer-lowest"
   allow_failures:
     - env: SYMFONY=dev-master
-    - env: COMPOSER_FLAGS="--prefer-lowest"
 
 before_install:
   - phpenv config-rm xdebug.ini
