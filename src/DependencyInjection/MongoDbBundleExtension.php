@@ -103,7 +103,6 @@ class MongoDbBundleExtension extends Extension
             ]
         );
         $clientRegistryDefinition->addMethodCall('addClientsConfigurations', [$clientsConfig]);
-        $clientRegistryDefinition->setPublic(false);
 
         $this->containerBuilder->setDefinition('mongo.client_registry', $clientRegistryDefinition);
     }
