@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
@@ -10,7 +8,7 @@ use MongoDB\Database;
  * Class ConnectionFactory.
  * @internal
  */
-class ConnectionFactory
+final class ConnectionFactory
 {
     /** @var ClientRegistry */
     private $clientRegistry;

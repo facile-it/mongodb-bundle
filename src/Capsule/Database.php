@@ -1,10 +1,7 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
-use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use MongoDB\Database as MongoDatabase;
 use MongoDB\Driver\Manager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Fixtures;
 
@@ -9,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class MongoFixturesLoader.
  */
-class MongoFixturesLoader
+final class MongoFixturesLoader
 {
     /** @var  array|MongoFixtureInterface[] */
     private $loadedClasses;

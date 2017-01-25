@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
@@ -14,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * Class ClientRegistry.
  * @internal
  */
-class ClientRegistry
+final class ClientRegistry
 {
     /** @var Client[] */
     private $clients;

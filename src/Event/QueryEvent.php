@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Event;
 
@@ -11,7 +9,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * Class QueryEvent.
  * @internal
  */
-class QueryEvent extends GenericEvent
+final class QueryEvent extends GenericEvent
 {
     const QUERY_PREPARED = 'facile_mongo_db.event.query_prepared';
     const QUERY_EXECUTED = 'facile_mongo_db.event.query_executed';

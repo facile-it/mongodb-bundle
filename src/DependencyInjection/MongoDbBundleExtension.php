@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
@@ -23,7 +21,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * Class MongoDbBundleExtension.
  * @internal
  */
-class MongoDbBundleExtension extends Extension
+final class MongoDbBundleExtension extends Extension
 {
     /** @var ContainerBuilder */
     private $containerBuilder;

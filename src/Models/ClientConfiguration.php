@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Models;
 
@@ -8,7 +6,7 @@ namespace Facile\MongoDbBundle\Models;
  * Class ClientConfiguration.
  * @internal
  */
-class ClientConfiguration
+final class ClientConfiguration
 {
     /** @var string */
     private $host;

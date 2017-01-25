@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Event;
 
@@ -10,7 +8,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * Class ConnectionEvent.
  * @internal
  */
-class ConnectionEvent extends GenericEvent
+final class ConnectionEvent extends GenericEvent
 {
     const CLIENT_CREATED = 'facile_mongo_db.event.connection_client.created';
 

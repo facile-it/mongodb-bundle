@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
@@ -10,7 +8,7 @@ use Facile\MongoDbBundle\Models\Query;
  * Class MongoLogEventSerializer
  * @internal
  */
-class MongoLogEventSerializer
+final class MongoLogEventSerializer
 {
     /**
      * @param Query $event
