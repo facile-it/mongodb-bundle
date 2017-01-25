@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Services\Loggers;
 
@@ -11,7 +11,6 @@ class MongoLogger implements DataCollectorLoggerInterface
 {
     /** @var \SplQueue|Query[] */
     private $logs;
-
     /** @var array|string[] */
     private $connections;
 
@@ -49,14 +48,6 @@ class MongoLogger implements DataCollectorLoggerInterface
     }
 
     /**
-     * @return bool
-     */
-    public function hasLoggedEvents(): bool
-    {
-        return !$this->logs->isEmpty();
-    }
-
-    /**
      * @return Query
      */
     public function getLoggedEvent(): Query
@@ -66,5 +57,13 @@ class MongoLogger implements DataCollectorLoggerInterface
         }
 
         return $this->logs->dequeue();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLoggedEvents(): bool
+    {
+        return !$this->logs->isEmpty();
     }
 }

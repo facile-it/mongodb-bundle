@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Fixtures;
 
@@ -13,18 +13,18 @@ abstract class AbstractContainerAwareFixture
     private $container;
 
     /**
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
-    /**
      * @return ContainerInterface
      */
     protected function getContainer(): ContainerInterface
     {
         return $this->container;
+    }
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function setContainer(ContainerInterface $container)
+    {
+        $this->container = $container;
     }
 }

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Models;
 
@@ -81,13 +81,15 @@ final class ClientConfiguration
      */
     public function getOptions(): array
     {
-        return $this->cleanOptions(array_merge(
-            [
-                'username' => $this->username,
-                'password' => $this->password,
-            ],
-            $this->options
-        ));
+        return $this->cleanOptions(
+            array_merge(
+                [
+                    'username' => $this->username,
+                    'password' => $this->password,
+                ],
+                $this->options
+            )
+        );
     }
 
     /**
@@ -97,8 +99,11 @@ final class ClientConfiguration
      */
     private function cleanOptions(array $options): array
     {
-        return array_filter($options, function ($value) {
-            return !empty($value) || is_int($value) || is_bool($value) || is_float($value);
-        });
+        return array_filter(
+            $options,
+            function ($value) {
+                return !empty($value) || is_int($value) || is_bool($value) || is_float($value);
+            }
+        );
     }
 }

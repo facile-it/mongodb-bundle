@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Services;
 
@@ -51,6 +51,35 @@ final class ClientRegistry
 
     /**
      * @param string $name
+     * @param array  $conf
+     */
+    private function addClientConfiguration(string $name, array $conf)
+    {
+        $this->configurations[$name] = $this->buildClientConfiguration($conf);
+    }
+
+    /**
+     * @param array $conf
+     *
+     * @return ClientConfiguration
+     */
+    private function buildClientConfiguration(array $conf): ClientConfiguration
+    {
+        return new ClientConfiguration(
+            $conf['host'],
+            $conf['port'],
+            $conf['username'],
+            $conf['password'],
+            [
+                'replicaSet' => $conf['replicaSet'],
+                'ssl' => $conf['ssl'],
+                'connectTimeoutMS' => $conf['connectTimeoutMS'],
+            ]
+        );
+    }
+
+    /**
+     * @param string $name
      * @param string $databaseName
      *
      * @return Client
@@ -86,15 +115,6 @@ final class ClientRegistry
     }
 
     /**
-     * @param string $name
-     * @param array  $conf
-     */
-    private function addClientConfiguration(string $name, array $conf)
-    {
-        $this->configurations[$name] = $this->buildClientConfiguration($conf);
-    }
-
-    /**
      * @param                              $uri
      * @param array                        $options
      * @param array                        $driverOptions
@@ -108,25 +128,5 @@ final class ClientRegistry
         }
 
         return new Client($uri, $options, $driverOptions);
-    }
-
-    /**
-     * @param array $conf
-     *
-     * @return ClientConfiguration
-     */
-    private function buildClientConfiguration(array $conf): ClientConfiguration
-    {
-        return new ClientConfiguration(
-            $conf['host'],
-            $conf['port'],
-            $conf['username'],
-            $conf['password'],
-            [
-                'replicaSet' => $conf['replicaSet'],
-                'ssl' => $conf['ssl'],
-                'connectTimeoutMS' => $conf['connectTimeoutMS'],
-            ]
-        );
     }
 }
