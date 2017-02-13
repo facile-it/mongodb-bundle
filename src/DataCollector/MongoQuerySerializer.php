@@ -5,19 +5,19 @@ namespace Facile\MongoDbBundle\DataCollector;
 use Facile\MongoDbBundle\Models\Query;
 
 /**
- * Class MongoLogEventSerializer
+ * Class MongoQuerySerializer
  * @internal
  */
-final class MongoLogEventSerializer
+final class MongoQuerySerializer
 {
     /**
-     * @param Query $event
+     * @param Query $query
      */
-    public static function serialize(Query $event)
+    public static function serialize(Query $query)
     {
-        $event->setFilters(self::prepareUnserializableData($event->getFilters()));
-        $event->setData(self::prepareUnserializableData($event->getData()));
-        $event->setOptions(self::prepareUnserializableData($event->getOptions()));
+        $query->setFilters(self::prepareUnserializableData($query->getFilters()));
+        $query->setData(self::prepareUnserializableData($query->getData()));
+        $query->setOptions(self::prepareUnserializableData($query->getOptions()));
     }
 
     /**

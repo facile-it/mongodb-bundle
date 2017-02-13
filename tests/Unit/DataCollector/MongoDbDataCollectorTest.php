@@ -6,7 +6,7 @@ namespace Facile\MongoDbBundle\Tests\unit\DataCollector;
 
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Models\Query;
-use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
+use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Model\BSONDocument;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $logger = new MongoLogger();
+        $logger = new MongoQueryLogger();
         $logger->logQuery($logEvent);
         $logger->addConnection('test_conenction');
 

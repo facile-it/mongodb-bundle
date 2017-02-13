@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers;
 
 use Facile\MongoDbBundle\Models\Query;
-use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
+use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 
 /**
  * Class MongoLoggerTest.
@@ -14,7 +14,7 @@ class MongoLoggerTest extends \PHPUnit_Framework_TestCase
 {
     public function test_logger_connections()
     {
-        $logger = new MongoLogger();
+        $logger = new MongoQueryLogger();
 
         $logger->addConnection('test_connection');
         $logger->addConnection('test_connection2');
@@ -30,7 +30,7 @@ class MongoLoggerTest extends \PHPUnit_Framework_TestCase
         $event2 = new Query();
         $event2->setCollection('coll2');
 
-        $logger = new MongoLogger();
+        $logger = new MongoQueryLogger();
         self::assertFalse($logger->hasLoggedEvents());
 
         $logger->logQuery($event1);

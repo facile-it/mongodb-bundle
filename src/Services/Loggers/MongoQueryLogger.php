@@ -5,9 +5,9 @@ namespace Facile\MongoDbBundle\Services\Loggers;
 use Facile\MongoDbBundle\Models\Query;
 
 /**
- * Class MongoLogger
+ * Class MongoQueryLogger
  */
-class MongoLogger implements DataCollectorLoggerInterface
+class MongoQueryLogger implements DataCollectorLoggerInterface
 {
     /** @var \SplQueue|Query[] */
     private $logs;
@@ -15,7 +15,7 @@ class MongoLogger implements DataCollectorLoggerInterface
     private $connections;
 
     /**
-     * MongoLogger constructor.
+     * MongoQueryLogger constructor.
      */
     public function __construct()
     {

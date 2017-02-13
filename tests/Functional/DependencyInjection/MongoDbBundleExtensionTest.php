@@ -6,7 +6,7 @@ use Facile\MongoDbBundle\Capsule\Database as LoggerDatabase;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\QueryEvent;
-use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
+use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;
 use Symfony\Component\DependencyInjection\Definition;
@@ -59,9 +59,9 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertInstanceOf(LoggerDatabase::class, $defaultConnection);
         $this->assertSame('testdb', $defaultConnection->getDatabaseName());
 
-        $this->assertContainerBuilderHasService('facile_mongo_db.logger', MongoLogger::class);
+        $this->assertContainerBuilderHasService('facile_mongo_db.logger', MongoQueryLogger::class);
         $logger = $this->container->get('facile_mongo_db.logger');
-        $this->assertInstanceOf(MongoLogger::class, $logger);
+        $this->assertInstanceOf(MongoQueryLogger::class, $logger);
 
         $this->assertContainerBuilderHasService('facile_mongo_db.data_collector.listener');
 

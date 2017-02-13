@@ -49,7 +49,7 @@ final class MongoDbDataCollector extends DataCollector
 
             // with extension version under 1.2.0 some Mongo objects can't be automatically serialized
             if (-1 === version_compare(phpversion('mongodb'), '1.2.0')) {
-                MongoLogEventSerializer::serialize($event);
+                MongoQuerySerializer::serialize($event);
             }
 
             $this->data[self::QUERY_KEYWORD][] = $event;

@@ -8,7 +8,7 @@ use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\ConnectionFactory;
-use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
+use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -64,7 +64,7 @@ final class MongoDbBundleExtension extends Extension
 
     private function defineLoggers()
     {
-        $loggerDefinition = new Definition(MongoLogger::class);
+        $loggerDefinition = new Definition(MongoQueryLogger::class);
         $loggerDefinition->setPublic(false);
 
         $this->containerBuilder->setDefinition('facile_mongo_db.logger', $loggerDefinition);

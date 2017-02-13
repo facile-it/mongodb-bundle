@@ -8,7 +8,7 @@ use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Models\Query;
-use Facile\MongoDbBundle\Services\Loggers\MongoLogger;
+use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 
 class DataCollectorListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +16,7 @@ class DataCollectorListenerTest extends \PHPUnit_Framework_TestCase
     {
         $event = new ConnectionEvent('test_client');
 
-        $logger = new MongoLogger();
+        $logger = new MongoQueryLogger();
         $listener = new DataCollectorListener($logger);
 
         self::assertCount(0,$logger->getConnections());
@@ -34,7 +34,7 @@ class DataCollectorListenerTest extends \PHPUnit_Framework_TestCase
 
         $event = new QueryEvent($query);
 
-        $logger = new MongoLogger();
+        $logger = new MongoQueryLogger();
         $listener = new DataCollectorListener($logger);
 
         self::assertCount(0,$logger->getConnections());
