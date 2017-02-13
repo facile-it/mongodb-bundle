@@ -201,7 +201,7 @@
                 <td>
                     {% if q.filters | length > 0 %}
                         <div class="query-data">
-                            <span class="bold-font">Filters:</span><br/>
+                            <span class="bold-font">{{ filterLabelTranslate('Filters', q.method) }}:</span><br/>
                             <span id="facile-mongodb-filters{{ loop.index }}">{{ q.filters|json_encode(128) }}</span>
                         </div>
                         <div class="text-small font-normal">
@@ -211,7 +211,7 @@
                     {% endif %}
                     {% if q.data | length > 0 %}
                         <div class="query-data">
-                            <span class="bold-font">Data:</span><br />
+                            <span class="bold-font">{{ dataLabelTranslate('Data', q.method) }}:</span><br />
                             <span id="facile-mongodb-data{{ loop.index }}">{{ q.data|json_encode(128) }}</span>
                         </div>
                         <div class="text-small font-normal">
