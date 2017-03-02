@@ -27,8 +27,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'host' => 'localhost',
-                    'port' => 8080,
+                    'hosts' => 'localhost:8080',
                     'username' => 'foo',
                     'password' => 'bar',
                     'replicaSet' => null,
@@ -54,8 +53,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'host' => 'localhost',
-                    'port' => 8080,
+                    'hosts' => 'localhost:8080',
                     'username' => 'foo',
                     'password' => 'bar',
                     'replicaSet' => 'testReplica',
@@ -81,8 +79,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'host' => 'localhost',
-                    'port' => 8080,
+                    'hosts' => 'localhost:8080',
                     'username' => 'foo',
                     'password' => 'bar',
                     'replicaSet' => 'testReplica',
@@ -108,8 +105,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'host' => 'localhost',
-                    'port' => 8080,
+                    'hosts' => 'localhost:8080',
                     'username' => 'foo',
                     'password' => 'bar',
                     'replicaSet' => null,
@@ -117,8 +113,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'connectTimeoutMS' => null,
                 ],
                 'other_client' => [
-                    'host' => 'localhost.dev',
-                    'port' => 8081,
+                    'hosts' => 'localhost.dev:8081',
                     'username' => 'mee',
                     'password' => 'zod',
                     'replicaSet' => null,

@@ -29,8 +29,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'host' => 'localhost',
-                        'port' => 8080,
+                        'hosts' => 'localhost:8080',
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
@@ -78,8 +77,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'host' => 'localhost',
-                        'port' => 8080,
+                        'hosts' => 'localhost:8080',
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
@@ -124,8 +122,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'host' => 'localhost',
-                        'port' => 8080,
+                        'hosts' => 'localhost:8080',
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
@@ -161,14 +158,12 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'host' => 'localhost',
-                        'port' => 8080,
+                        'hosts' => 'localhost:8080',
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
                     'other_client' => [
-                        'host' => 'localhost.dev',
-                        'port' => 8081,
+                        'hosts' => 'localhost.dev:8081',
                         'username' => 'mee',
                         'password' => 'zod',
                     ],

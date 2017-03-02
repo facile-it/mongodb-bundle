@@ -14,7 +14,7 @@ class CollectionTest extends AppTestCase
 {
     public function test_construction()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
 
         $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
@@ -24,7 +24,7 @@ class CollectionTest extends AppTestCase
 
     public function test_insertOne()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -35,7 +35,7 @@ class CollectionTest extends AppTestCase
 
     public function test_updateOne()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -46,7 +46,7 @@ class CollectionTest extends AppTestCase
 
     public function test_count()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -57,7 +57,7 @@ class CollectionTest extends AppTestCase
 
     public function test_find()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -68,7 +68,7 @@ class CollectionTest extends AppTestCase
 
     public function test_findOne()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -79,7 +79,7 @@ class CollectionTest extends AppTestCase
 
     public function test_findOneAndUpdate()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -90,7 +90,7 @@ class CollectionTest extends AppTestCase
 
     public function test_findOneAndDelete()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -101,7 +101,7 @@ class CollectionTest extends AppTestCase
 
     public function test_deleteOne()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -112,7 +112,7 @@ class CollectionTest extends AppTestCase
 
     public function test_replaceOne()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -123,7 +123,7 @@ class CollectionTest extends AppTestCase
 
     public function test_aggregate()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -154,7 +154,7 @@ class CollectionTest extends AppTestCase
     /** leave this test as last one to clean the collection*/
     public function test_deleteMany()
     {
-        $manager = new Manager('mongodb://localhost');
+        $manager = new Manager('mongodb://localhost:27017');
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 

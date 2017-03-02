@@ -66,8 +66,7 @@ final class ClientRegistry
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
         return new ClientConfiguration(
-            $conf['host'],
-            $conf['port'],
+            $conf['hosts'],
             $conf['username'],
             $conf['password'],
             [
@@ -101,7 +100,7 @@ final class ClientRegistry
 
         if (!isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
-            $uri = sprintf('mongodb://%s:%d', $conf->getHost(), $conf->getPort());
+            $uri = sprintf('mongodb://%s', $conf->getHosts());
             $options = array_merge(['database' => $databaseName], $conf->getOptions());
             $this->clients[$clientKey] = $this->buildClient($uri, $options, []);
 

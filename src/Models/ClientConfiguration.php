@@ -9,36 +9,29 @@ namespace Facile\MongoDbBundle\Models;
 final class ClientConfiguration
 {
     /** @var string */
-    private $host;
-    /** @var int */
-    private $port;
+    private $hosts;
     /** @var string */
     private $username;
     /** @var string */
     private $password;
-    /**
-     * @var array
-     */
+    /** @var array */
     private $options;
 
     /**
      * ClientConfiguration constructor.
      *
-     * @param string $host
-     * @param int    $port
+     * @param string $hosts
      * @param string $username
      * @param string $password
      * @param array  $options
      */
     public function __construct(
-        string $host,
-        int $port,
+        string $hosts,
         string $username = '',
         string $password = '',
         array $options = []
     ) {
-        $this->host = $host;
-        $this->port = $port;
+        $this->hosts = $hosts;
         $this->username = $username;
         $this->password = $password;
         $this->options = $options;
@@ -47,17 +40,9 @@ final class ClientConfiguration
     /**
      * @return string
      */
-    public function getHost(): string
+    public function getHosts(): string
     {
-        return $this->host;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPort(): int
-    {
-        return $this->port;
+        return $this->hosts;
     }
 
     /**

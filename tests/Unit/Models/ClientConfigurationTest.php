@@ -14,14 +14,12 @@ class ClientConfigurationTest extends \PHPUnit_Framework_TestCase
     public function test_construction()
     {
         $conf = new ClientConfiguration(
-            'localhost',
-            27017,
+            'localhost:27017',
             'admin',
             'admin_password'
         );
 
-        self::assertEquals('localhost', $conf->getHost());
-        self::assertEquals(27017, $conf->getPort());
+        self::assertEquals('localhost:27017', $conf->getHosts());
         self::assertEquals('admin', $conf->getUsername());
         self::assertEquals('admin_password', $conf->getPassword());
         self::assertEquals(
@@ -36,14 +34,12 @@ class ClientConfigurationTest extends \PHPUnit_Framework_TestCase
     public function test_construction_empty_credentials()
     {
         $conf = new ClientConfiguration(
-            'localhost',
-            27017,
+            'localhost:27017',
             '',
             ''
         );
 
-        self::assertEquals('localhost', $conf->getHost());
-        self::assertEquals(27017, $conf->getPort());
+        self::assertEquals('localhost:27017', $conf->getHosts());
         self::assertEquals('', $conf->getUsername());
         self::assertEquals('', $conf->getPassword());
         self::assertEquals(
@@ -61,15 +57,13 @@ class ClientConfigurationTest extends \PHPUnit_Framework_TestCase
     public function test_construction_with_options(array $options, array $expectedOptions)
     {
         $conf = new ClientConfiguration(
-            'localhost',
-            27017,
+            'localhost:27017',
             '',
             '',
             $options
         );
 
-        self::assertEquals('localhost', $conf->getHost());
-        self::assertEquals(27017, $conf->getPort());
+        self::assertEquals('localhost:27017', $conf->getHosts());
         self::assertEquals('', $conf->getUsername());
         self::assertEquals('', $conf->getPassword());
         self::assertEquals(

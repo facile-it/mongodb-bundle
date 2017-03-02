@@ -1,8 +1,7 @@
 mongo_db_bundle:
     clients:
       test_client:
-        host: localhost
-        port: 8080
+        hosts: localhost:8080
         username: foo
         password: bar
 
