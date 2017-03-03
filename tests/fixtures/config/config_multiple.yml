@@ -8,6 +8,7 @@ mongo_db_bundle:
       other_client:
         hosts:
           - { host: localhost.dev, port: 8081 }
+          - { host: localhost.dev2 }
         username: mee
         password: zod
 

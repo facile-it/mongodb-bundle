@@ -122,7 +122,8 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 ],
                 'other_client' => [
                     'hosts' => [
-                        ['host' => 'localhost.dev', 'port' => 8081]
+                        ['host' => 'localhost.dev', 'port' => 8081],
+                        ['host' => 'localhost.dev2', 'port' => 27017]
                     ],
                     'username' => 'mee',
                     'password' => 'zod',
