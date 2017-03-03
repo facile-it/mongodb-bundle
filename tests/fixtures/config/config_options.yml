@@ -2,7 +2,7 @@ mongo_db_bundle:
     clients:
       test_client:
         hosts:
-          - { host:localhost, port:8080 }
+          - { host: localhost, port: 8080 }
         username: foo
         password: bar
         replicaSet: 'testReplica'
