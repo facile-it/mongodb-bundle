@@ -7,7 +7,32 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ClientRegistryTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_client_connection_url_generation()
+    public function test_client_connection_url_generation_singlehost()
+    {
+        $ed = $this->prophesize(EventDispatcherInterface::class);
+
+
+        $registry = new ClientRegistry($ed->reveal(), 'prod');
+
+        $testConf = [
+            'test_client' => [
+                'hosts' => [
+                    ['host' => 'host1', 'port' => 8080],
+                ],
+                'username' => 'foo',
+                'password' => 'bar',
+                'replicaSet' => 'testReplica',
+                'ssl' => true,
+                'connectTimeoutMS' => 3000,
+            ],
+        ];
+
+        $registry->addClientsConfigurations($testConf);
+        $client = $registry->getClient('test_client');
+
+        $this->assertEquals('mongodb://host1:8080',$client->__debugInfo()['uri']);
+    }
+    public function test_client_connection_url_generation_multyhost()
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
@@ -33,5 +58,4 @@ class ClientRegistryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('mongodb://host1:8080,host2:8081',$client->__debugInfo()['uri']);
     }
-    
 }
