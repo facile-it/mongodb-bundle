@@ -51,8 +51,9 @@ mongo_db_bundle:
     clients:
     
       foo_client_name:    #choose your client name
-        host:             ~ # Required
-        port:             27017
+        hosts:            # Required - will compose your mongo connection url (mongodb://host1:3062,host2:27017)
+            - { host:host1, port:3062 } # this 
+            - { host:host2 }
         username:         ''
         password:         ''
         replicaSet:       '' # default null (no replica) (experimental)
