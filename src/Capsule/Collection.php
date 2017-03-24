@@ -167,6 +167,18 @@ final class Collection extends MongoCollection
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function distinct($fieldName, $filter = [], array $options = [])
+    {
+        $query = $this->prepareQuery(__FUNCTION__, $filter, ['fieldName' => $fieldName], $options);
+        $result = parent::distinct($fieldName, $query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
+
+        return $result;
+    }
+
+    /**
      * @param string $method
      * @param array|object  $filters
      * @param array|object  $data
