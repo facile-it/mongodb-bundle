@@ -163,6 +163,17 @@ class CollectionTest extends AppTestCase
         $coll->deleteMany([]);
     }
 
+    public function test_distinct()
+    {
+        $manager = new Manager('mongodb://localhost:27017');
+        $ev = self::prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
+
+        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+
+        $coll->distinct('field');
+    }
+
     /**
      * @param $ev
      */
