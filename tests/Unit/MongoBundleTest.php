@@ -6,8 +6,9 @@ namespace MongoBundle\Tests\unit;
 
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
 use Facile\MongoDbBundle\FacileMongoDbBundle;
+use PHPUnit\Framework\TestCase;
 
-class MongoBundleTest extends \PHPUnit_Framework_TestCase
+class MongoBundleTest extends TestCase
 {
     public function test_bundle()
     {

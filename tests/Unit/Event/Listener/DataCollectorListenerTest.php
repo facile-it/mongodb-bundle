@@ -9,8 +9,9 @@ use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
+use PHPUnit\Framework\TestCase;
 
-class DataCollectorListenerTest extends \PHPUnit_Framework_TestCase
+class DataCollectorListenerTest extends TestCase
 {
     public function test_onConnectionClientCreated()
     {

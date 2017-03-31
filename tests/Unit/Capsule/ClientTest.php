@@ -6,9 +6,10 @@ use Facile\MongoDbBundle\Capsule\Client;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database as MongoDatabase;
 use MongoDB\Collection as MongoCollection;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     public function test_mongodb_client_encapsulation()
     {

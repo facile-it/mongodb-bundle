@@ -9,10 +9,11 @@ use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Model\BSONDocument;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class MongoDbDataCollectorTest extends \PHPUnit_Framework_TestCase
+class MongoDbDataCollectorTest extends TestCase
 {
 
     public function test_construction_logger()

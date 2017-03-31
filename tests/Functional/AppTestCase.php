@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Tests\Functional;
 
 use Facile\MongoDbBundle\Tests\Functional\TestApp\TestKernel;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class AppTestCase.
  */
-class AppTestCase extends \PHPUnit_Framework_TestCase
+class AppTestCase extends TestCase
 {
     /** @var  Application */
     private $application;

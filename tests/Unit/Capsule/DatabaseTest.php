@@ -7,9 +7,10 @@ namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Capsule\Database;
 use MongoDB\Driver\Manager;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class DatabaseTest extends \PHPUnit_Framework_TestCase
+class DatabaseTest extends TestCase
 {
     public function test_selectCollection()
     {

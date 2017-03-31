@@ -6,11 +6,12 @@ namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers;
 
 use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class MongoLoggerTest.
  */
-class MongoLoggerTest extends \PHPUnit_Framework_TestCase
+class MongoLoggerTest extends TestCase
 {
     public function test_logger_connections()
     {

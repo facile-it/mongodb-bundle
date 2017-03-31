@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers\Model;
 
 use Facile\MongoDbBundle\Models\Query;
+use PHPUnit\Framework\TestCase;
 
-class LogEventTest extends \PHPUnit_Framework_TestCase
+class LogEventTest extends TestCase
 {
     public function test_construction()
     {
