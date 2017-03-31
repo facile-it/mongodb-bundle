@@ -3,9 +3,10 @@
 namespace Facile\MongoDbBundle\Tests\Unit\Services;
 
 use Facile\MongoDbBundle\Services\ClientRegistry;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ClientRegistryTest extends \PHPUnit_Framework_TestCase
+class ClientRegistryTest extends TestCase
 {
     public function test_client_connection_url_generation_singlehost()
     {
