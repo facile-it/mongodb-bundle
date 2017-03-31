@@ -6,7 +6,8 @@ framework:
 mongo_db_bundle:
     clients:
       test_client:
-        hosts: localhost:27017
+        hosts:
+          - { host: localhost, port: 27017 }
 
     connections:
       test_db:

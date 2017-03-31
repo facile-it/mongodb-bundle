@@ -27,7 +27,9 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'hosts' => 'localhost:8080',
+                    'hosts' => [
+                        ['host' => 'localhost', 'port' => 8080]
+                    ],
                     'username' => 'foo',
                     'password' => 'bar',
                     'replicaSet' => null,
@@ -53,7 +55,9 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'hosts' => 'localhost:8080',
+                    'hosts' => [
+                        ['host' => 'localhost', 'port' => 8080]
+                    ],
                     'username' => 'foo',
                     'password' => 'bar',
                     'replicaSet' => 'testReplica',
@@ -79,7 +83,9 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'hosts' => 'localhost:8080',
+                    'hosts' => [
+                        ['host' => 'localhost', 'port' => 8080]
+                    ],
                     'username' => 'foo',
                     'password' => 'bar',
                     'replicaSet' => 'testReplica',
@@ -105,7 +111,9 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'hosts' => 'localhost:8080',
+                    'hosts' => [
+                        ['host' => 'localhost', 'port' => 8080],
+                    ],
                     'username' => 'foo',
                     'password' => 'bar',
                     'replicaSet' => null,
@@ -113,7 +121,10 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'connectTimeoutMS' => null,
                 ],
                 'other_client' => [
-                    'hosts' => 'localhost.dev:8081',
+                    'hosts' => [
+                        ['host' => 'localhost.dev', 'port' => 8081],
+                        ['host' => 'localhost.dev2', 'port' => 27017]
+                    ],
                     'username' => 'mee',
                     'password' => 'zod',
                     'replicaSet' => null,

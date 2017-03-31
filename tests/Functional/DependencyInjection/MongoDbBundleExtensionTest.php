@@ -29,7 +29,9 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'hosts' => 'localhost:8080',
+                        'hosts' => [
+                            ['host' => 'localhost', 'port' => 8080]
+                        ],
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
@@ -77,7 +79,9 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'hosts' => 'localhost:8080',
+                        'hosts' => [
+                            ['host' => 'localhost', 'port' => 8080]
+                        ],
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
@@ -122,7 +126,9 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'hosts' => 'localhost:8080',
+                        'hosts' => [
+                            ['host' => 'localhost', 'port' => 8080]
+                        ],
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
@@ -158,12 +164,16 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'hosts' => 'localhost:8080',
+                        'hosts' => [
+                            ['host' => 'localhost', 'port' => 8080]
+                        ],
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
                     'other_client' => [
-                        'hosts' => 'localhost.dev:8081',
+                        'hosts' => [
+                            ['host' => 'localhost.dev', 'port' => 8081]
+                        ],
                         'username' => 'mee',
                         'password' => 'zod',
                     ],

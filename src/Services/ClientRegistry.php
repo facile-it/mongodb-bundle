@@ -66,7 +66,15 @@ final class ClientRegistry
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
         return new ClientConfiguration(
-            $conf['hosts'],
+            implode(
+                ',',
+                array_map(
+                    function (array $host) {
+                        return sprintf("%s:%d", $host['host'], $host['port']);
+                    },
+                    $conf['hosts']
+                )
+            ),
             $conf['username'],
             $conf['password'],
             [
