@@ -66,15 +66,7 @@ final class ClientRegistry
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
         return new ClientConfiguration(
-            implode(
-                ',',
-                array_map(
-                    function (array $host) {
-                        return sprintf("%s:%d", $host['host'], $host['port']);
-                    },
-                    $conf['hosts']
-                )
-            ),
+            $this->buildConnectionUri($conf['hosts']),
             $conf['username'],
             $conf['password'],
             [
@@ -82,6 +74,24 @@ final class ClientRegistry
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
             ]
+        );
+    }
+
+    /**
+     * @param array $hosts
+     *
+     * @return string
+     */
+    private function buildConnectionUri(array $hosts): string
+    {
+        return implode(
+            ',',
+            array_map(
+                function (array $host) {
+                    return sprintf("%s:%d", $host['host'], $host['port']);
+                },
+                $hosts
+            )
         );
     }
 
