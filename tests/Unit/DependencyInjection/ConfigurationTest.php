@@ -4,8 +4,12 @@ namespace Facile\MongoDbBundle\Tests\unit\DependencyInjection;
 
 use Facile\MongoDbBundle\DependencyInjection\Configuration;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
+use Matthias\SymfonyConfigTest\PhpUnit\ProcessedConfigurationEqualsConstraint;
+use Matthias\SymfonyDependencyInjectionTest\Loader\ExtensionConfigurationBuilder;
+use Matthias\SymfonyDependencyInjectionTest\Loader\LoaderFactory;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
@@ -35,6 +39,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'replicaSet' => null,
                     'ssl' => false,
                     'connectTimeoutMS' => null,
+                    'readPreference' => 'primaryPreferred',
                 ],
             ],
             'connections' => [
@@ -63,6 +68,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'replicaSet' => 'testReplica',
                     'ssl' => true,
                     'connectTimeoutMS' => 3000,
+                    'readPreference' => 'primaryPreferred',
                 ],
             ],
             'connections' => [
@@ -91,6 +97,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'replicaSet' => 'testReplica',
                     'ssl' => true,
                     'connectTimeoutMS' => 3000,
+                    'readPreference' => 'primaryPreferred',
                 ],
             ],
             'connections' => [
@@ -119,6 +126,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'replicaSet' => null,
                     'ssl' => false,
                     'connectTimeoutMS' => null,
+                    'readPreference' => 'primaryPreferred',
                 ],
                 'other_client' => [
                     'hosts' => [
@@ -130,6 +138,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'replicaSet' => null,
                     'ssl' => false,
                     'connectTimeoutMS' => null,
+                    'readPreference' => 'primaryPreferred',
                 ],
             ],
             'connections' => [
@@ -151,6 +160,24 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
             __DIR__.'/../../fixtures/config/config_multiple.yml',
         ]);
+    }
+
+    public function test_configuration_blocks_invalid_read_preference_options()
+    {
+        $extensionConfigurationBuilder = new ExtensionConfigurationBuilder(new LoaderFactory());
+        $extensionConfiguration = $extensionConfigurationBuilder
+            ->setExtension($this->getContainerExtension())
+            ->setSources([__DIR__.'/../../fixtures/config/config_wrong_readPreference.yml',]);
+
+        $processor = new Processor();
+        $configuration = new Configuration();
+
+        $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionMessage('Invalid configuration for path "mongo_db_bundle.clients.test_client.readPreference": Invalid readPreference option "fakeOption", must be one of [primary, primaryPreferred, secondary, secondaryPreferred, nearest]');
+        $processor->processConfiguration(
+            $configuration,
+            $extensionConfiguration->getConfiguration()
+        );
     }
 
     /**

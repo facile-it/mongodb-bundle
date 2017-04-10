@@ -25,6 +25,7 @@ class ClientRegistryTest extends TestCase
                 'replicaSet' => 'testReplica',
                 'ssl' => true,
                 'connectTimeoutMS' => 3000,
+                'readPreference' => 'primary',
             ],
         ];
 
@@ -51,6 +52,7 @@ class ClientRegistryTest extends TestCase
                 'replicaSet' => 'testReplica',
                 'ssl' => true,
                 'connectTimeoutMS' => 3000,
+                'readPreference' => 'primary',
             ],
         ];
 

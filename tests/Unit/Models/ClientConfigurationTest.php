@@ -103,9 +103,11 @@ class ClientConfigurationTest extends TestCase
                     'replicaSet' => null,
                     'ssl' => true,
                     'connectTimeoutMS' => null,
+                    'readPreference' => 'primary'
                 ],
                 [   // expected
                     'ssl' => true,
+                    'readPreference' => 'primary'
                 ]
             ],
         ];
