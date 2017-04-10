@@ -16,6 +16,8 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
+        $readPreferenceValidOptions = ['primary', 'primaryPreferred', 'secondary', 'secondaryPreferred', 'nearest'];
+
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('mongo_db_bundle');
         $rootNode
@@ -36,6 +38,13 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                     ->scalarNode('username')->defaultValue('')->end()
                     ->scalarNode('password')->defaultValue('')->end()
+                    ->scalarNode('readPreference')
+                        ->defaultValue('primaryPreferred')
+                        ->validate()
+                            ->ifNotInArray($readPreferenceValidOptions)
+                            ->thenInvalid('Invalid readPreference option %s, must be one of ['.implode(", ", $readPreferenceValidOptions).']')
+                        ->end()
+                    ->end()
                     ->scalarNode('replicaSet')->defaultValue(null)->end()
                     ->booleanNode('ssl')->defaultValue(false)->end()
                     ->integerNode('connectTimeoutMS')->defaultValue(null)->end();

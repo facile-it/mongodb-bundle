@@ -73,6 +73,7 @@ final class ClientRegistry
                 'replicaSet' => $conf['replicaSet'],
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
+                'readPreference' => $conf['readPreference'],
             ]
         );
     }
