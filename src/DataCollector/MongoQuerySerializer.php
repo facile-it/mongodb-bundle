@@ -53,6 +53,10 @@ final class MongoQuerySerializer
             return $item->__toString();
         }
 
+        if (method_exists($item, 'bsonSerialize')) {
+            return $item->bsonSerialize();
+        }
+
         if (is_array($item) || is_object($item)) {
             return self::prepareUnserializableData((array)$item);
         }
