@@ -33,6 +33,8 @@ class ClientRegistryTest extends TestCase
         $client = $registry->getClient('test_client');
 
         $this->assertEquals('mongodb://host1:8080',$client->__debugInfo()['uri']);
+
+        $this->assertEquals(['test_client'], $registry->getClientNames());
     }
     public function test_client_connection_url_generation_multyhost()
     {

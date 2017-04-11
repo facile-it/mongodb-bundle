@@ -108,6 +108,14 @@ final class ClientRegistry
     }
 
     /**
+     * @return array
+     */
+    public function getClientNames(): array
+    {
+        return array_keys($this->clients);
+    }
+
+    /**
      * @param string $name
      * @param string $databaseName
      *
