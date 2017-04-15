@@ -46,7 +46,7 @@ final class MongoQuerySerializer
         }
 
         if (method_exists($item, 'toDateTime')) {
-            return $item->toDateTime()->format('r');
+            return 'ISODate("' . $item->toDateTime()->format('c') . '")';
         }
 
         if (method_exists($item, '__toString')) {
