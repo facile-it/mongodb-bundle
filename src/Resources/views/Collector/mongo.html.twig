@@ -175,7 +175,6 @@
             <th id="query-number">#</th>
             <th id="query-info">Info</th>
             <th id="query-data">Data</th>
-            <th id="query-time">Time</th>
         </tr>
         </thead>
         <tbody>
@@ -189,7 +188,13 @@
                             <li> <span class="bold-font">Method:</span></li>
                             <li>{{ q.method }}</li>
                             <li><span class="bold-font">Collection:</span></li>
-                            <li>{{ q.collection }}</li>
+                            <li title="{{ q.collection }}">
+                                {{ q.collection|length > 12 ? q.collection|slice(0,12)~'...' : q.collection }}
+                            </li>
+                            <li><span class="bold-font">Exceution time:</span></li>
+                            <li  class="{{ q.executionTime * 1000 > 2.0 ? 'time-warning' : '' }}">
+                                {{ "%.2f"|format(q.executionTime * 1000) }} ms
+                            </li>
                         </ul>
                     </div>
                 </td>
@@ -224,9 +229,6 @@
                         </div>
                         <div id="facile-mongodb-options{{ loop.index }}-expand"></div>
                     {% endif %}
-                </td>
-                <td class="{{ q.executionTime * 1000 > 2.0 ? 'time-warning' : '' }}">
-                    {{ "%.2f"|format(q.executionTime * 1000) }} ms
                 </td>
             </tr>
         {% else %}
