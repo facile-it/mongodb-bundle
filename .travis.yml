@@ -20,7 +20,7 @@ matrix:
         - MONGO_EXT_VERSION="1.2.3"
     - php: '7.0'
       env:
-        - MONGO_EXT_VERSION="1.2.8"
+        - MONGO_EXT_VERSION="1.2.9"
     - php: '7.0'
       env:
         - SYMFONY=2.8.*
@@ -29,10 +29,7 @@ matrix:
         - SYMFONY=3.0.*
     - php: '7.0'
       env:
-        - SYMFONY=3.1.*
-    - php: '7.0'
-      env:
-        - SYMFONY=3.2.*
+        - SYMFONY=3.3.*
     - php: '7.0'
       env:
         - SYMFONY=dev-master
