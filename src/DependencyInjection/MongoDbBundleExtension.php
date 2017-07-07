@@ -9,6 +9,7 @@ use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\ConnectionFactory;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
+use Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -45,6 +46,7 @@ final class MongoDbBundleExtension extends Extension
             $this->defineDataCollectorListeners();
             $this->attachDataCollectionListenerToEventManager();
             $this->defineDataCollector();
+            $this->attachTwigExtesion();
         }
 
         return $config;
@@ -170,5 +172,14 @@ final class MongoDbBundleExtension extends Extension
                 [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted']
             ]
         );
+    }
+
+    private function attachTwigExtesion()
+    {
+        $extesion = new Definition(FacileMongoDbBundleExtension::class);
+        $extesion->setPublic(false);
+        $extesion->addTag('twig.extension');
+
+        $this->containerBuilder->setDefinition('facile_mongo_db.twig_extesion', $extesion);
     }
 }
