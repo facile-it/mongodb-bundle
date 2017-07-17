@@ -1,0 +1,20 @@
+version: "3.1"
+
+services:
+  php-cli:
+    build:
+      context: .
+      dockerfile: docker/php-cli/Dockerfile
+    volumes:
+        - ./:/root/project
+    tty: true
+    depends_on:
+      - mongo
+    container_name: mb_php
+  mongo:
+    image: mongo:3.4.2
+    entrypoint:
+      - mongod
+      - --quiet
+      - --logpath=/dev/null
+    container_name: mb_mongo

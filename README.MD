@@ -97,7 +97,7 @@ To manipulate the database, please read the official [documentation](http://mong
 ### Fixtures
 This bundle supports doctrine style fixtures, to create one you will need to create a php class in your bundle '/DataFixtures/Mongo' directory for Example 'src/AppBundle/DataFixtures/Mongo/LoadTaskDataFixture.php'
 
-NB: This class must implement at least the MongoFixtureInterface, if you need container support you can extend AbstractContainerAwareFixture to use the getContainer method.
+Note: This class must implement at least the MongoFixtureInterface, if you need container support you can extend AbstractContainerAwareFixture to use the getContainer method.
 
 ### Commands
 
@@ -114,3 +114,22 @@ On dev environment all queries executed by the library MongoDB\Collection class 
 [![Profiler Toolbar](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)
 
 [![Profiler Panel](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)
+
+### Contributing
+
+Feel free to contribute by opening a pull request, if you find a bug or to suggest a new feature.
+If you like docker, this repository is provided with a dev environment with some scripts to prepare and use it.
+All you need is docker and docker-compose installed on your system.
+
+```
+ ./setup.sh  # will build the needed containers and setup the project
+```
+
+```
+ ./start.sh  # will start the needed containers and put you inside the php-cli container
+```
+
+```
+ ./test.sh  # will launch the test suite
+```
+Note: All these scripts are meant to be used outside the containers.

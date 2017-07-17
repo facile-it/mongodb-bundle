@@ -30,12 +30,18 @@ class TestKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        if (version_compare(Kernel::VERSION, '3.2.0') === -1) {
-            $loader->load(__DIR__.'/config_test.yml');
+        $suffix = '';
+        $version = '';
+
+        if ('docker' === getenv('TEST_ENV')) {
+            $suffix = '_docker';
         }
 
         if (version_compare(Kernel::VERSION, '3.2.0') >= 0) {
-            $loader->load(__DIR__.'/config_test_32.yml');
+            $version = '_32';
         }
+
+        $configFile = sprintf('/config_test%s%s.yml', $version, $suffix);
+        $loader->load(__DIR__.$configFile);
     }
 }

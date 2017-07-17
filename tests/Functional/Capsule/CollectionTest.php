@@ -1,20 +1,28 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Event\QueryEvent;
-use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Driver\Manager;
+use MongoDB\Driver\Server;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CollectionTest extends AppTestCase
 {
+    private function getManager(): Manager
+    {
+        /** @var \Facile\MongoDbBundle\Services\ClientRegistry $reg */
+        $reg = $this->getContainer()->get('mongo.client_registry');
+        /** @var \MongoDB\Client $client */
+        $client = $reg->getClient('test_client');
+        /** @var Server[] $servers */
+        return $client->__debugInfo()['manager'];
+    }
+
     public function test_construction()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
 
         $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
@@ -24,7 +32,7 @@ class CollectionTest extends AppTestCase
 
     public function test_insertOne()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -35,7 +43,7 @@ class CollectionTest extends AppTestCase
 
     public function test_updateOne()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -46,7 +54,7 @@ class CollectionTest extends AppTestCase
 
     public function test_count()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -57,7 +65,7 @@ class CollectionTest extends AppTestCase
 
     public function test_find()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -68,7 +76,7 @@ class CollectionTest extends AppTestCase
 
     public function test_findOne()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -79,7 +87,7 @@ class CollectionTest extends AppTestCase
 
     public function test_findOneAndUpdate()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -90,7 +98,7 @@ class CollectionTest extends AppTestCase
 
     public function test_findOneAndDelete()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -101,7 +109,7 @@ class CollectionTest extends AppTestCase
 
     public function test_deleteOne()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -112,7 +120,7 @@ class CollectionTest extends AppTestCase
 
     public function test_replaceOne()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -123,7 +131,7 @@ class CollectionTest extends AppTestCase
 
     public function test_aggregate()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -154,7 +162,7 @@ class CollectionTest extends AppTestCase
     /** leave this test as last one to clean the collection*/
     public function test_deleteMany()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
@@ -165,7 +173,7 @@ class CollectionTest extends AppTestCase
 
     public function test_distinct()
     {
-        $manager = new Manager('mongodb://localhost:27017');
+        $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
