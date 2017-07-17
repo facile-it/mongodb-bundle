@@ -2,6 +2,7 @@
 filter:
     excluded_paths:
         - 'vendor/*'
+        - 'docker/*'
         - 'tests/*'
         - 'docs/*'
         - 'bin/*'
