@@ -88,7 +88,7 @@ final class ClientRegistry
         return implode(
             ',',
             array_map(
-                function (array $host) {
+                function(array $host) {
                     return sprintf("%s:%d", $host['host'], $host['port']);
                 },
                 $hosts

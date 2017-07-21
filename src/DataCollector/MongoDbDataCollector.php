@@ -20,6 +20,8 @@ final class MongoDbDataCollector extends DataCollector
 
     /** @var DataCollectorLoggerInterface */
     private $logger;
+    /** @var array */
+    protected $data;
 
     public function __construct()
     {
@@ -80,7 +82,7 @@ final class MongoDbDataCollector extends DataCollector
      */
     public function getTime(): float
     {
-        return (float)($this->data[self::TIME_KEYWORD] * 1000);
+        return (float) ($this->data[self::TIME_KEYWORD] * 1000);
     }
 
     /**

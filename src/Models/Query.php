@@ -90,7 +90,7 @@ final class Query
      */
     public function setFilters($filters)
     {
-        $this->filters = (array)$filters ?? [];
+        $this->filters = (array) $filters ?? [];
     }
 
     /**

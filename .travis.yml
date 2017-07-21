@@ -1,7 +1,7 @@
 language: php
-
-php:
-  - '7.0'
+cache:
+  directories:
+    - $HOME/.composer/cache/files
 
 services:
   - mongodb
@@ -18,6 +18,7 @@ matrix:
     - php: '7.0'
       env:
         - MONGO_EXT_VERSION="1.2.3"
+        - TEST_COVERAGE=true
     - php: '7.0'
       env:
         - MONGO_EXT_VERSION="1.2.9"
@@ -36,6 +37,8 @@ matrix:
     - php: '7.0'
       env:
         -COMPOSER_FLAGS="--prefer-lowest"
+    - php: '7.1'
+
   allow_failures:
     - env:
         - SYMFONY=dev-master
@@ -60,8 +63,8 @@ script:
   - bin/phpunit -c ./phpunit.xml.dist --coverage-clover=./build/coverage/coverage.clover
 
 after_success:
-  - wget https://scrutinizer-ci.com/ocular.phar --output-document="${HOME}/bin/ocular" && chmod +x "${HOME}/bin/ocular"
-  - ocular code-coverage:upload --format=php-clover ./build/coverage/coverage.clover
+  - if [[ $TEST_COVERAGE ]]; then wget https://scrutinizer-ci.com/ocular.phar --output-document="${HOME}/bin/ocular" && chmod +x "${HOME}/bin/ocular"; fi
+  - if [[ $TEST_COVERAGE ]]; then ocular code-coverage:upload --format=php-clover ./build/coverage/coverage.clover; fi
 
 notifications:
   on_success: never

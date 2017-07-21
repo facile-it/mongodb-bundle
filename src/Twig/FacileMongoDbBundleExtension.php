@@ -4,12 +4,20 @@ namespace Facile\MongoDbBundle\Twig;
 
 class FacileMongoDbBundleExtension extends \Twig_Extension
 {
+    private $methodDataTranslationMap  = [
+        'aggregate' => 'Pipeline',
+        'insertOne' => 'Document',
+        'updateOne' => 'Update',
+        'findOneAndUpdate' => 'Update',
+        'replaceOne' => 'Replacement',
+    ];
+
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_Simplefunction('filterLabelTranslate', array($this, 'queryFilterTranslate')),
             new \Twig_Simplefunction('dataLabelTranslate', array($this, 'queryDataTranslate')),
-        );
+        ];
     }
 
     /**
@@ -18,12 +26,9 @@ class FacileMongoDbBundleExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function queryFilterTranslate(string $label, string $methodName)
+    public function queryFilterTranslate(string $label, string $methodName): string
     {
-        switch(strtolower($methodName)) {
-            default:
-                return $label;
-        }
+        return $label;
     }
 
     /**
@@ -32,21 +37,9 @@ class FacileMongoDbBundleExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function queryDataTranslate(string $label, string $methodName)
+    public function queryDataTranslate(string $label, string $methodName): string
     {
-        switch(strtolower($methodName)) {
-            case 'aggregate':
-                return 'Pipeline';
-            case 'insertOne':
-                return 'Document';
-            case 'updateOne':
-            case 'findOneAndUpdate':
-                return 'Update';
-            case 'replaceOne':
-                return 'Replacement';
-            default:
-                return $label;
-        }
+        return $this->methodDataTranslationMap[$methodName] ?? $label;
     }
 
     /**

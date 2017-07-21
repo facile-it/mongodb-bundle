@@ -58,7 +58,7 @@ class LoadFixturesCommand extends AbstractCommand
             );
         }
 
-        foreach ($fixtures as $fixture){
+        foreach ($fixtures as $fixture) {
             $this->loadFixture($fixture);
         }
 
@@ -72,7 +72,7 @@ class LoadFixturesCommand extends AbstractCommand
     {
         $indexList->loadData();
         $indexList->loadIndexes();
-        $this->io->writeln('Loaded fixture: '. get_class($indexList));
+        $this->io->writeln('Loaded fixture: '.get_class($indexList));
     }
 
     /**
