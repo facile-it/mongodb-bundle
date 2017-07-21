@@ -2,11 +2,9 @@ version: "3.1"
 
 services:
   php-cli:
-    build:
-      context: .
-      dockerfile: docker/php-cli/Dockerfile
+    image: algatux/php-cli-mongodb:1.0
     volumes:
-        - ./:/root/project
+        - ./:/home/user-dev/project
     tty: true
     depends_on:
       - mongo

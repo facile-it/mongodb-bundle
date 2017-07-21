@@ -54,4 +54,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 ENV TEST_ENV=docker
 
-WORKDIR /root/project
+RUN useradd -m user-dev
+
+USER user-dev
+
+RUN mkdir -p /home/user-dev/project
+
+WORKDIR /home/user-dev/project
