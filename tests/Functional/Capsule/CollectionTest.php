@@ -2,6 +2,8 @@
 
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Event\QueryEvent;
+use Facile\MongoDbBundle\Models\Query;
+use Facile\MongoDbBundle\Services\ExplainQueryService;
 use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\Server;
@@ -16,7 +18,7 @@ class CollectionTest extends AppTestCase
         $reg = $this->getContainer()->get('mongo.client_registry');
         /** @var \MongoDB\Client $client */
         $client = $reg->getClient('test_client');
-        /** @var Server[] $servers */
+
         return $client->__debugInfo()['manager'];
     }
 
@@ -182,6 +184,18 @@ class CollectionTest extends AppTestCase
         $coll->distinct('field');
     }
 
+    public function test_explainQuery()
+    {
+        $query = new Query();
+        $query->setCollection('agenda_task');
+        $query->setMethod('count');
+        $query->setFilters([
+            "target" => null
+        ]);
+
+        $service = new ExplainQueryService($this->getContainer()->get('mongo.client_registry'));
+        $service->execute('mongo.connection.test_db', $query);
+    }
     /**
      * @param $ev
      */
