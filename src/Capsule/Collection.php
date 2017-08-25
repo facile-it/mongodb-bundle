@@ -196,7 +196,7 @@ final class Collection extends MongoCollection
         $query->setMethod($method);
         $query->setCollection($this->getCollectionName());
         $query->setReadPreference(
-            $this->translateReadPreference($this->__debugInfo()['readPreference'])
+            $this->translateReadPreference($options['readPreference'] ?? $this->__debugInfo()['readPreference'])
         );
 
         $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, new QueryEvent($query));
