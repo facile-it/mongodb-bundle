@@ -46,4 +46,20 @@ final class Database extends MongoDatabase
 
         return new Collection($debug['manager'], $debug['databaseName'], $collectionName, $options, $this->eventDispatcher);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withOptions(array $options = [])
+    {
+        $debug = $this->__debugInfo();
+        $options += [
+            'readConcern' => $debug['readConcern'],
+            'readPreference' => $debug['readPreference'],
+            'typeMap' => $debug['typeMap'],
+            'writeConcern' => $debug['writeConcern'],
+        ];
+
+        return new self($debug['manager'], $debug['databaseName'], $options, $this->eventDispatcher);
+    }
 }

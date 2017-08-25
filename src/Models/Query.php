@@ -22,6 +22,8 @@ final class Query
     private $options;
     /** @var int */
     private $executionTime;
+    /** @var string */
+    private $readPreference;
 
     /**
      * Query constructor.
@@ -35,6 +37,7 @@ final class Query
         $this->data = [];
         $this->options = [];
         $this->executionTime = 0;
+        $this->readPreference = 'undefined';
     }
 
     /**
@@ -90,7 +93,7 @@ final class Query
      */
     public function setFilters($filters)
     {
-        $this->filters = (array) $filters ?? [];
+        $this->filters = (array)$filters ?? [];
     }
 
     /**
@@ -139,5 +142,21 @@ final class Query
     public function setExecutionTime(float $executionTime)
     {
         $this->executionTime = $executionTime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReadPreference(): string
+    {
+        return $this->readPreference;
+    }
+
+    /**
+     * @param string $readPreference
+     */
+    public function setReadPreference(string $readPreference)
+    {
+        $this->readPreference = $readPreference;
     }
 }

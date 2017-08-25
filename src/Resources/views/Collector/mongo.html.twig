@@ -187,6 +187,8 @@
                         <ul>
                             <li> <span class="bold-font">Method:</span></li>
                             <li>{{ q.method }}</li>
+                            <li> <span class="bold-font">Read preference:</span></li>
+                            <li>{{ q.readPreference }}</li>
                             <li><span class="bold-font">Collection:</span></li>
                             <li title="{{ q.collection }}">
                                 {{ q.collection|length > 12 ? q.collection|slice(0,12)~'...' : q.collection }}

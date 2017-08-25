@@ -6,6 +6,7 @@ use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Models\Query;
 use MongoDB\Collection as MongoCollection;
 use MongoDB\Driver\Manager;
+use MongoDB\Driver\ReadPreference;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -179,10 +180,10 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * @param string $method
+     * @param string        $method
      * @param array|object  $filters
      * @param array|object  $data
-     * @param array  $options
+     * @param array         $options
      *
      * @return Query
      */
@@ -194,10 +195,36 @@ final class Collection extends MongoCollection
         $query->setOptions($options);
         $query->setMethod($method);
         $query->setCollection($this->getCollectionName());
+        $query->setReadPreference(
+            $this->translateReadPreference($this->__debugInfo()['readPreference'])
+        );
 
         $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, new QueryEvent($query));
 
         return $query;
+    }
+
+    /**
+     * @param ReadPreference $readPreference
+     *
+     * @return string
+     */
+    private function translateReadPreference(ReadPreference $readPreference): string
+    {
+        switch($readPreference->getMode()){
+            case ReadPreference::RP_PRIMARY:
+                return 'primary';
+            case ReadPreference::RP_PRIMARY_PREFERRED:
+                return 'primaryPreferred';
+            case ReadPreference::RP_SECONDARY:
+                return 'secondary';
+            case ReadPreference::RP_SECONDARY_PREFERRED:
+                return 'secondaryPreferred';
+            case ReadPreference::RP_NEAREST:
+                return 'nearest';
+            default:
+                return 'undefined';
+        }
     }
 
     /**
