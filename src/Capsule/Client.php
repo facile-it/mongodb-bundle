@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -13,6 +13,8 @@ final class Client extends MongoClient
 {
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+    /** @var string */
+    private $clientName;
 
     /**
      * Client constructor.
@@ -20,15 +22,23 @@ final class Client extends MongoClient
      * @param string                   $uri
      * @param array                    $uriOptions
      * @param array                    $driverOptions
+     * @param string                   $clientName
      * @param EventDispatcherInterface $eventDispatcher
      *
      * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct($uri = 'mongodb://localhost:27017', array $uriOptions = [], array $driverOptions = [], EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        $uri = 'mongodb://localhost:27017',
+        array $uriOptions = [],
+        array $driverOptions = [],
+        string $clientName,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         parent::__construct($uri, $uriOptions, $driverOptions);
         $this->eventDispatcher = $eventDispatcher;
+        $this->clientName = $clientName;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -39,7 +49,7 @@ final class Client extends MongoClient
             'typeMap' => $debug['typeMap'],
         ];
 
-        return new Database($debug['manager'], $databaseName, $options, $this->eventDispatcher);
+        return new Database($debug['manager'], $this->clientName, $databaseName, $options, $this->eventDispatcher);
     }
 
     /**
@@ -52,6 +62,6 @@ final class Client extends MongoClient
             'typeMap' => $debug['typeMap'],
         ];
 
-        return new Collection($debug['manager'], $databaseName, $collectionName, $options, $this->eventDispatcher);
+        return new Collection($debug['manager'], $this->clientName, $databaseName, $collectionName, $options, $this->eventDispatcher);
     }
 }

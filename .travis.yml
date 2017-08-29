@@ -3,9 +3,6 @@ cache:
   directories:
     - $HOME/.composer/cache/files
 
-services:
-  - mongodb
-
 matrix:
   fast_finish: true
   include:
@@ -50,6 +47,9 @@ before_install:
   - if [ "$SYMFONY" != "" ]; then composer require "symfony/symfony:${SYMFONY}" --no-update; fi;
 
 install:
+  - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.14.tgz
+  - tar xzf mongodb-linux-x86_64-3.0.14.tgz
+  - ${PWD}/mongodb-linux-x86_64-3.0.14/bin/mongod --version
   - if [ "$MONGO_EXT_VERSION" != "" ]; then pecl install -f mongodb-${MONGO_EXT_VERSION}; fi;
   - if [ "$MONGO_EXT_VERSION" = "" ]; then echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
   - mkdir --parents "${HOME}/bin"
@@ -57,6 +57,8 @@ install:
 
 before_script:
   - echo "zend_extension=xdebug.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - mkdir ${PWD}/mongodb-linux-x86_64-3.0.14/data
+  - ${PWD}/mongodb-linux-x86_64-3.0.14/bin/mongod --dbpath ${PWD}/mongodb-linux-x86_64-3.0.14/data --logpath ${PWD}/mongodb-linux-x86_64-3.0.14/mongodb.log --fork
 
 script:
   - composer validate

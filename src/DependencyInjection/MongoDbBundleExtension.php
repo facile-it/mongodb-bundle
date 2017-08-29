@@ -8,6 +8,7 @@ use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\ConnectionFactory;
+use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension;
 use MongoDB\Database;
@@ -47,7 +48,9 @@ final class MongoDbBundleExtension extends Extension
             $this->attachDataCollectionListenerToEventManager();
             $this->defineDataCollector();
             $this->attachTwigExtesion();
+            $this->defineExplainQueryService();
         }
+
 
         return $config;
     }
@@ -181,5 +184,16 @@ final class MongoDbBundleExtension extends Extension
         $extesion->addTag('twig.extension');
 
         $this->containerBuilder->setDefinition('facile_mongo_db.twig_extesion', $extesion);
+    }
+
+    private function defineExplainQueryService()
+    {
+        $explainServiceDefinition = new Definition(
+            ExplainQueryService::class,
+            [new Reference('mongo.client_registry')]
+        );
+        $explainServiceDefinition->setPublic(true);
+
+        $this->containerBuilder->setDefinition('mongo.explain_query_service', $explainServiceDefinition);
     }
 }

@@ -1,4 +1,4 @@
-{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+{% extends app.request.isXmlHttpRequest ? '@WebProfiler/Profiler/ajax_layout.html.twig' : '@WebProfiler/Profiler/layout.html.twig' %}
 {# collector \Facile\MongoDbBundle\DataCollector\MongoDbDataCollector #}
 {% block toolbar %}
     {% set icon %}
@@ -131,6 +131,18 @@
 {% endblock %}
 
 {% block panel %}
+    {% if 'explain' == page %}
+        {{ render(controller('FacileMongoDbBundle:Profiler:explain', {
+            token: token,
+            panel: 'mongodb',
+            queryNumber: app.request.query.get('queryNumber')
+        })) }}
+    {% else %}
+        {{ block('queries') }}
+    {% endif %}
+{% endblock panel %}
+
+{% block queries %}
     {# Optional, for showing the most details. #}
     <h2>Mongo DB Query Metrics</h2>
     <div class="metrics">
@@ -194,7 +206,7 @@
                                 {{ q.collection|length > 12 ? q.collection|slice(0,12)~'...' : q.collection }}
                             </li>
                             <li><span class="bold-font">Exceution time:</span></li>
-                            <li  class="{{ q.executionTime * 1000 > 2.0 ? 'time-warning' : '' }}">
+                            <li  class="{{ q.executionTime * 1000 > 100.0 ? 'time-warning' : '' }}">
                                 {{ "%.2f"|format(q.executionTime * 1000) }} ms
                             </li>
                         </ul>
@@ -203,34 +215,40 @@
                 <td>
                     {% if q.filters | length > 0 %}
                         <div class="query-data">
-                            <span class="bold-font">{{ filterLabelTranslate('Filters', q.method) }}:</span><br/>
-                            <span id="facile-mongodb-filters{{ loop.index }}">{{ q.filters|json_encode(128) }}</span>
-                        </div>
-                        <div class="text-small font-normal">
+                            <span class="bold-font">{{ filterLabelTranslate('Filters', q.method) }}: </span>
                             <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-filters{{ loop.index }}');">Expand</a>
+                            <br/>
+                            <span id="facile-mongodb-filters{{ loop.index }}">{{ q.filters|json_encode(128) }}</span>
                         </div>
                         <div id="facile-mongodb-filters{{ loop.index }}-expand"></div>
                     {% endif %}
                     {% if q.data | length > 0 %}
                         <div class="query-data">
-                            <span class="bold-font">{{ dataLabelTranslate('Data', q.method) }}:</span><br />
-                            <span id="facile-mongodb-data{{ loop.index }}">{{ q.data|json_encode(128) }}</span>
-                        </div>
-                        <div class="text-small font-normal">
+                            <span class="bold-font">{{ dataLabelTranslate('Data', q.method) }}: </span>
                             <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-data{{ loop.index }}');">Expand</a>
+                            <br />
+                            <span id="facile-mongodb-data{{ loop.index }}">{{ q.data|json_encode(128) }}</span>
                         </div>
                         <div id="facile-mongodb-data{{ loop.index }}-expand"></div>
                     {% endif %}
                     {% if q.options | length > 0 %}
                         <div class="query-data">
-                            <span class="bold-font">Options:</span><br />
-                            <span id="facile-mongodb-options{{ loop.index }}">{{ q.options|json_encode(128) }}</span>
-                        </div>
-                        <div class="text-small font-normal">
+                            <span class="bold-font">Options: </span>
                             <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-options{{ loop.index }}');">Expand</a>
+                            <br />
+                            <span id="facile-mongodb-options{{ loop.index }}">{{ q.options|json_encode(128) }}</span>
                         </div>
                         <div id="facile-mongodb-options{{ loop.index }}-expand"></div>
                     {% endif %}
+                    {% if isQueryExplainable(q.method) %}
+                        <div class="text-small font-normal">
+                            <a class="link-inverse" data-index="{{ loop.index0 }}" onclick="doExplainQuery(this)"
+                               href="#!"
+                               data-link="{{ path('_profiler', { panel: 'mongodb', token: token, page: 'explain', queryNumber: loop.index0 }) }}"
+                            >Explain query</a>
+                        </div>
+                    {% endif %}
+                    <div id="facile-mongodb-explain-{{ loop.index0 }}-expand" class="hidden"></div>
                 </td>
             </tr>
         {% else %}
@@ -274,6 +292,33 @@
                 return '<span class="' + cssClass + '">' + match + '</span>';
             });
         }
+
+        var doExplainQuery = function (el) {
+            var elId = 'facile-mongodb-explain-'+el.getAttribute('data-index')+'-expand';
+            var target = document.getElementById(elId);
+
+            Sfjs.load(
+                elId,
+                el.getAttribute('data-link'),
+                function (response) {
+                    var explain = JSON.stringify(JSON.parse(response.responseText), undefined, 4);
+                    target.innerHTML = '<pre>' + facileMongoDbBundlePrettify(explain) + '</pre>';
+                },
+                function(xhr, el) {
+                    document.getElementById(elId).innerHTML = 'An error occurred while loading the query explanation.';
+                }
+            );
+
+            if (target.classList.contains('hidden')) {
+                el.innerHTML = 'Close explain';
+                target.classList.remove('hidden');
+
+                return;
+            }
+
+            el.innerHTML = 'Explain query';
+            target.classList.add('hidden');
+        };
     </script>
 
 {% endblock %}

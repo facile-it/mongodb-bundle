@@ -129,7 +129,7 @@ final class ClientRegistry
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s', $conf->getHosts());
             $options = array_merge(['database' => $databaseName], $conf->getOptions());
-            $this->clients[$clientKey] = $this->buildClient($uri, $options, []);
+            $this->clients[$clientKey] = $this->buildClient($name, $uri, $options, []);
 
             $this->eventDispatcher->dispatch(
                 ConnectionEvent::CLIENT_CREATED,
@@ -141,16 +141,17 @@ final class ClientRegistry
     }
 
     /**
-     * @param                              $uri
-     * @param array                        $options
-     * @param array                        $driverOptions
+     * @param string $clientName
+     * @param string $uri
+     * @param array  $options
+     * @param array  $driverOptions
      *
      * @return Client
      */
-    private function buildClient($uri, array $options, array $driverOptions): Client
+    private function buildClient(string $clientName, string $uri, array $options, array $driverOptions): Client
     {
         if ('dev' === $this->environment) {
-            return new BundleClient($uri, $options, $driverOptions, $this->eventDispatcher);
+            return new BundleClient($uri, $options, $driverOptions, $clientName, $this->eventDispatcher);
         }
 
         return new Client($uri, $options, $driverOptions);

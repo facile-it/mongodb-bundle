@@ -2,6 +2,8 @@
 
 namespace Facile\MongoDbBundle\Twig;
 
+use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
+
 class FacileMongoDbBundleExtension extends \Twig_Extension
 {
     private $methodDataTranslationMap  = [
@@ -12,11 +14,15 @@ class FacileMongoDbBundleExtension extends \Twig_Extension
         'replaceOne' => 'Replacement',
     ];
 
+    /**
+     * @return array
+     */
     public function getFunctions()
     {
         return [
             new \Twig_Simplefunction('filterLabelTranslate', array($this, 'queryFilterTranslate')),
             new \Twig_Simplefunction('dataLabelTranslate', array($this, 'queryDataTranslate')),
+            new \Twig_Simplefunction('isQueryExplainable', array($this, 'isQueryExplainable')),
         ];
     }
 
@@ -40,6 +46,11 @@ class FacileMongoDbBundleExtension extends \Twig_Extension
     public function queryDataTranslate(string $label, string $methodName): string
     {
         return $this->methodDataTranslationMap[$methodName] ?? $label;
+    }
+
+    public function isQueryExplainable(string $methodName): bool
+    {
+        return in_array($methodName, ExplainQueryService::$acceptedMethods);
     }
 
     /**

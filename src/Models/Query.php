@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Models;
 
@@ -24,6 +24,10 @@ final class Query
     private $executionTime;
     /** @var string */
     private $readPreference;
+    /** @var string */
+    private $client;
+    /** @var string */
+    private $database;
 
     /**
      * Query constructor.
@@ -31,6 +35,8 @@ final class Query
     public function __construct()
     {
         $this->start = microtime(true);
+        $this->client = 'undefined';
+        $this->database = 'undefined';
         $this->collection = 'undefined';
         $this->method = 'undefined';
         $this->filters = [];
@@ -158,5 +164,37 @@ final class Query
     public function setReadPreference(string $readPreference)
     {
         $this->readPreference = $readPreference;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClient(): string
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param string $client
+     */
+    public function setClient(string $client)
+    {
+        $this->client = $client;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDatabase(): string
+    {
+        return $this->database;
+    }
+
+    /**
+     * @param string $database
+     */
+    public function setDatabase(string $database)
+    {
+        $this->database = $database;
     }
 }

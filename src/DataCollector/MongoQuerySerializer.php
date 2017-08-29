@@ -39,7 +39,7 @@ final class MongoQuerySerializer
      *
      * @return mixed
      */
-    private static function prepareItemData($item)
+    public static function prepareItemData($item)
     {
         if (method_exists($item, 'getArrayCopy')) {
             return self::prepareUnserializableData($item->getArrayCopy());

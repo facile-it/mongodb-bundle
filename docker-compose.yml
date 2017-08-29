@@ -11,6 +11,8 @@ services:
     container_name: mb_php
   mongo:
     image: mongo:3.4.2
+    ports:
+      - 27017:27017
     entrypoint:
       - mongod
       - --quiet

@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -14,21 +14,33 @@ final class Database extends MongoDatabase
 {
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+    /** @var string */
+    private $clientName;
+    /** @var string */
+    private $databaseName;
 
     /**
      * Database constructor.
      *
      * @param Manager                  $manager
+     * @param string                   $clientName
      * @param string                   $databaseName
      * @param array                    $options
      * @param EventDispatcherInterface $eventDispatcher
      *
      * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct(Manager $manager, $databaseName, array $options = [], EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        Manager $manager,
+        string $clientName,
+        string $databaseName,
+        array $options = [],
+        EventDispatcherInterface $eventDispatcher
+    ) {
         parent::__construct($manager, $databaseName, $options);
         $this->eventDispatcher = $eventDispatcher;
+        $this->clientName = $clientName;
+        $this->databaseName = $databaseName;
     }
 
     /**
@@ -44,7 +56,14 @@ final class Database extends MongoDatabase
             'writeConcern' => $debug['writeConcern'],
         ];
 
-        return new Collection($debug['manager'], $debug['databaseName'], $collectionName, $options, $this->eventDispatcher);
+        return new Collection(
+            $debug['manager'],
+            $this->clientName,
+            $this->databaseName,
+            $collectionName,
+            $options,
+            $this->eventDispatcher
+        );
     }
 
     /**
@@ -60,6 +79,6 @@ final class Database extends MongoDatabase
             'writeConcern' => $debug['writeConcern'],
         ];
 
-        return new self($debug['manager'], $debug['databaseName'], $options, $this->eventDispatcher);
+        return new self($debug['manager'], $this->clientName, $debug['databaseName'], $options, $this->eventDispatcher);
     }
 }

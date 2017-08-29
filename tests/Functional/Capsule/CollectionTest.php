@@ -2,11 +2,8 @@
 
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Event\QueryEvent;
-use Facile\MongoDbBundle\Models\Query;
-use Facile\MongoDbBundle\Services\ExplainQueryService;
 use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Driver\Manager;
-use MongoDB\Driver\Server;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -27,7 +24,7 @@ class CollectionTest extends AppTestCase
         $manager = $this->getManager();
         $ev = self::prophesize(EventDispatcherInterface::class);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         self::assertInstanceOf(\MongoDB\Collection::class, $coll);
     }
@@ -38,7 +35,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->insertOne(['test' => 1]);
     }
@@ -49,7 +46,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->updateOne(['filter' => 1],['$set' => ['testField' => 1]]);
     }
@@ -60,7 +57,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->count(['test' => 1]);
     }
@@ -71,7 +68,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->find([]);
     }
@@ -82,7 +79,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->findOne([]);
     }
@@ -93,7 +90,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->findOneAndUpdate([], ['$set' => ['country' => 'us']]);
     }
@@ -104,7 +101,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->findOneAndDelete([]);
     }
@@ -115,7 +112,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->deleteOne([]);
     }
@@ -126,7 +123,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->replaceOne([], []);
     }
@@ -137,7 +134,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->deleteMany([]);
 
@@ -168,7 +165,7 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->deleteMany([]);
     }
@@ -179,23 +176,11 @@ class CollectionTest extends AppTestCase
         $ev = self::prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
-        $coll = new Collection($manager, 'testdb', 'test_collection', [], $ev->reveal());
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->distinct('field');
     }
 
-    public function test_explainQuery()
-    {
-        $query = new Query();
-        $query->setCollection('agenda_task');
-        $query->setMethod('count');
-        $query->setFilters([
-            "target" => null
-        ]);
-
-        $service = new ExplainQueryService($this->getContainer()->get('mongo.client_registry'));
-        $service->execute('mongo.connection.test_db', $query);
-    }
     /**
      * @param $ev
      */

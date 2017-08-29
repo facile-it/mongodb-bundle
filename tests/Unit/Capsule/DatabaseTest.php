@@ -16,7 +16,7 @@ class DatabaseTest extends TestCase
         $manager = new Manager('mongodb://localhost');
         $logger = self::prophesize(EventDispatcherInterface::class);
 
-        $db = new Database($manager, 'testdb', [], $logger->reveal());
+        $db = new Database($manager,'client_name', 'testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);
 
         $coll = $db->selectCollection('test_collection');
@@ -33,7 +33,7 @@ class DatabaseTest extends TestCase
         $manager = new Manager('mongodb://localhost');
         $logger = self::prophesize(EventDispatcherInterface::class);
 
-        $db = new Database($manager, 'testdb', [], $logger->reveal());
+        $db = new Database($manager, 'client_name','testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);
 
         $newDb = $db->withOptions(['readPreference' => new ReadPreference(ReadPreference::RP_NEAREST)]);

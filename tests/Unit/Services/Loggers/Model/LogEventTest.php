@@ -11,15 +11,23 @@ class LogEventTest extends TestCase
 {
     public function test_construction()
     {
-        $event = new Query();
-        $event->setCollection('test_collection');
-        $event->setMethod('find');
-        $event->setExecutionTime(1000);
-        $event->setData(['_id'=>'1000000000001']);
+        $query = new Query();
+        $query->setCollection('test_collection');
+        $query->setMethod('find');
+        $query->setData(['_id'=>'1000000000001']);
+        $query->setExecutionTime(1000);
+        $query->setClient('test_client');
+        $query->setDatabase('test_db');
+        $query->setReadPreference('secondaryPreferred');
 
-        self::assertEquals('test_collection', $event->getCollection());
-        self::assertEquals('find',$event->getMethod());
-        self::assertEquals(1000,$event->getExecutionTime());
-        self::assertEquals(['_id'=>'1000000000001'],$event->getData());
+        $this->assertNotNull($query->getStart());
+        $this->assertEquals('test_collection', $query->getCollection());
+        $this->assertEquals('find',$query->getMethod());
+        $this->assertEquals(1000,$query->getExecutionTime());
+        $this->assertEquals(['_id'=>'1000000000001'],$query->getData());
+        $this->assertEquals('test_client',$query->getClient());
+        $this->assertEquals('test_db',$query->getDatabase());
+        $this->assertEquals('secondaryPreferred',$query->getReadPreference());
+
     }
 }

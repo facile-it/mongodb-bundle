@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -17,11 +17,16 @@ final class Collection extends MongoCollection
 {
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+    /** @var string */
+    private $clientName;
+    /** @var string */
+    private $databaseName;
 
     /**
      * Collection constructor.
      *
      * @param Manager                  $manager
+     * @param string                   $clientName
      * @param string                   $databaseName
      * @param string                   $collectionName
      * @param array                    $options
@@ -29,10 +34,18 @@ final class Collection extends MongoCollection
      *
      * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct(Manager $manager, $databaseName, $collectionName, array $options = [], EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        Manager $manager,
+        string $clientName,
+        string $databaseName,
+        string $collectionName,
+        array $options = [],
+        EventDispatcherInterface $eventDispatcher
+    ) {
         parent::__construct($manager, $databaseName, $collectionName, $options);
         $this->eventDispatcher = $eventDispatcher;
+        $this->clientName = $clientName;
+        $this->databaseName = $databaseName;
     }
 
     /**
@@ -194,6 +207,8 @@ final class Collection extends MongoCollection
         $query->setData($data);
         $query->setOptions($options);
         $query->setMethod($method);
+        $query->setClient($this->getClientName());
+        $query->setDatabase($this->getDatabaseName());
         $query->setCollection($this->getCollectionName());
         $query->setReadPreference(
             $this->translateReadPreference($options['readPreference'] ?? $this->__debugInfo()['readPreference'])
@@ -237,6 +252,22 @@ final class Collection extends MongoCollection
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 
         $this->eventDispatcher->dispatch(QueryEvent::QUERY_EXECUTED, new QueryEvent($queryLog));
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientName(): string
+    {
+        return $this->clientName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDatabaseName(): string
+    {
+        return $this->databaseName;
     }
 }
 

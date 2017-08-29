@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  * Class MongoDbDataCollector.
  * @internal
  */
-final class MongoDbDataCollector extends DataCollector
+class MongoDbDataCollector extends DataCollector
 {
     const QUERY_KEYWORD = 'queries';
     const CONNECTION_KEYWORD = 'connections';

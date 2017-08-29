@@ -17,6 +17,8 @@ class AppTestCase extends TestCase
     /** @var  Application */
     private $application;
 
+    private $env = 'test';
+
     /**
      * {@inheritdoc}
      */
@@ -24,7 +26,7 @@ class AppTestCase extends TestCase
     {
         parent::setUp();
 
-        $kernel = new TestKernel('test', true);
+        $kernel = new TestKernel($this->env, true);
         $kernel->boot();
         $this->application = new Application($kernel);
     }
@@ -52,5 +54,10 @@ class AppTestCase extends TestCase
     protected function getContainer(): ContainerInterface
     {
         return $this->application->getKernel()->getContainer();
+    }
+
+    protected function setEnvDev()
+    {
+        $this->env = 'dev';
     }
 }

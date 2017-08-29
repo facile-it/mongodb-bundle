@@ -6,6 +6,7 @@ use Facile\MongoDbBundle\Capsule\Database as LoggerDatabase;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\QueryEvent;
+use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;
@@ -71,6 +72,8 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         self::assertCount(2, $ed->getListeners());
         self::assertCount(1, $ed->getListeners(QueryEvent::QUERY_EXECUTED));
         self::assertCount(1, $ed->getListeners(ConnectionEvent::CLIENT_CREATED));
+
+        $this->assertContainerBuilderHasService('mongo.explain_query_service', ExplainQueryService::class);
     }
 
     public function test_load_data_collection_disabled()
