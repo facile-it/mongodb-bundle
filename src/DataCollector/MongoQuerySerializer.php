@@ -3,6 +3,7 @@
 namespace Facile\MongoDbBundle\DataCollector;
 
 use Facile\MongoDbBundle\Models\Query;
+use MongoDB\BSON\Serializable;
 
 /**
  * Class MongoQuerySerializer
@@ -27,6 +28,10 @@ final class MongoQuerySerializer
      */
     private static function prepareUnserializableData($data)
     {
+        if ($data instanceof Serializable) {
+            $data = $data->bsonSerialize();
+        }
+
         foreach ($data as $key => $item) {
             $data[$key] = self::prepareItemData($item);
         }
@@ -53,7 +58,7 @@ final class MongoQuerySerializer
             return $item->__toString();
         }
 
-        if (method_exists($item, 'bsonSerialize')) {
+        if ($item instanceof Serializable) {
             return $item->bsonSerialize();
         }
 
