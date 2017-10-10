@@ -61,6 +61,7 @@ class ClientConfigurationTest extends TestCase
             'localhost:27017',
             '',
             '',
+            null,
             $options
         );
 

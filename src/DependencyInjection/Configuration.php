@@ -22,13 +22,13 @@ final class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('mongo_db_bundle');
         $rootNode
             ->children()
-            ->booleanNode('data_collection')->defaultTrue()->info('Use to disable Data Collection if needed')
+            ->booleanNode('data_collection')->defaultTrue()->info('Disables Data Collection if needed')
             ->end()
             ->arrayNode('clients')->isRequired()->requiresAtLeastOneElement()
                 ->useAttributeAsKey('name')
                 ->prototype('array')
                 ->children()
-                    ->arrayNode('hosts')->info('Your MongoDB hosts addresses and ports')
+                    ->arrayNode('hosts')->info('Hosts addresses and ports')
                         ->prototype('array')
                             ->children()
                                 ->scalarNode('host')->isRequired()->end()
@@ -38,6 +38,7 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                     ->scalarNode('username')->defaultValue('')->end()
                     ->scalarNode('password')->defaultValue('')->end()
+                    ->scalarNode('authSource')->defaultValue(null)->info('Database name associated with the user’s credentials')->end()
                     ->scalarNode('readPreference')
                         ->defaultValue('primaryPreferred')
                         ->validate()
@@ -54,8 +55,8 @@ final class Configuration implements ConfigurationInterface
                 ->useAttributeAsKey('name')
                 ->prototype('array')
                 ->children()
-                    ->scalarNode('client_name')->isRequired()->info('Your defined client name')->end()
-                    ->scalarNode('database_name')->isRequired()->info('Your MongoDB database name')->end()
+                    ->scalarNode('client_name')->isRequired()->info('Desired client name')->end()
+                    ->scalarNode('database_name')->isRequired()->info('Database name')->end()
                 ->end()
             ->end();
 

@@ -69,11 +69,12 @@ final class ClientRegistry
             $this->buildConnectionUri($conf['hosts']),
             $conf['username'],
             $conf['password'],
+            $conf['authSource'],
             [
                 'replicaSet' => $conf['replicaSet'],
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
-                'readPreference' => $conf['readPreference'],
+                'readPreference' => $conf['readPreference']
             ]
         );
     }
@@ -128,7 +129,13 @@ final class ClientRegistry
         if (!isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s', $conf->getHosts());
-            $options = array_merge(['database' => $databaseName], $conf->getOptions());
+            $options = array_merge(
+                [
+                    'database' => $databaseName,
+                    'authSource' => $conf->getAuthSource() ?? $databaseName
+                ],
+                $conf->getOptions()
+            );
             $this->clients[$clientKey] = $this->buildClient($name, $uri, $options, []);
 
             $this->eventDispatcher->dispatch(

@@ -58,6 +58,8 @@ mongo_db_bundle:
             - { host: host2 }
         username:         ''
         password:         ''
+        authSource:       '' # the database name associated with the user’s credentials, defaults to connection
+                                database_name if not specified
         replicaSet:       '' # default null (no replica) (experimental)
         ssl:              false
         connectTimeoutMS: 3000 # default null (no timeout)
