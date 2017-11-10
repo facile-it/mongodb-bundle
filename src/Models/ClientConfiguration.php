@@ -16,25 +16,30 @@ final class ClientConfiguration
     private $password;
     /** @var array */
     private $options;
+    /** @var null|string */
+    private $authSource;
 
     /**
      * ClientConfiguration constructor.
      *
-     * @param string $hosts
-     * @param string $username
-     * @param string $password
-     * @param array  $options
+     * @param string      $hosts
+     * @param string      $username
+     * @param string      $password
+     * @param string|null $authSource
+     * @param array       $options
      */
     public function __construct(
         string $hosts,
         string $username = '',
         string $password = '',
+        string $authSource = null,
         array $options = []
     ) {
         $this->hosts = $hosts;
         $this->username = $username;
         $this->password = $password;
         $this->options = $options;
+        $this->authSource = $authSource;
     }
 
     /**
@@ -59,6 +64,14 @@ final class ClientConfiguration
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getAuthSource()
+    {
+        return $this->authSource;
     }
 
     /**

@@ -22,6 +22,7 @@ class ClientRegistryTest extends TestCase
                 ],
                 'username' => 'foo',
                 'password' => 'bar',
+                'authSource' => null,
                 'replicaSet' => 'testReplica',
                 'ssl' => true,
                 'connectTimeoutMS' => 3000,
@@ -30,11 +31,11 @@ class ClientRegistryTest extends TestCase
         ];
 
         $registry->addClientsConfigurations($testConf);
-        $client = $registry->getClient('test_client');
+        $client = $registry->getClient('test_client', 'testdb');
 
         $this->assertEquals('mongodb://host1:8080',$client->__debugInfo()['uri']);
 
-        $this->assertEquals(['test_client'], $registry->getClientNames());
+        $this->assertEquals(['test_client.testdb'], $registry->getClientNames());
     }
     public function test_client_connection_url_generation_multyhost()
     {
@@ -51,6 +52,7 @@ class ClientRegistryTest extends TestCase
                 ],
                 'username' => 'foo',
                 'password' => 'bar',
+                'authSource' => null,
                 'replicaSet' => 'testReplica',
                 'ssl' => true,
                 'connectTimeoutMS' => 3000,
@@ -59,7 +61,7 @@ class ClientRegistryTest extends TestCase
         ];
 
         $registry->addClientsConfigurations($testConf);
-        $client = $registry->getClient('test_client');
+        $client = $registry->getClient('test_client', 'testdb');
 
         $this->assertEquals('mongodb://host1:8080,host2:8081',$client->__debugInfo()['uri']);
     }

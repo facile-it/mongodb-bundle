@@ -13,8 +13,7 @@ services:
     image: mongo:3.4.2
     ports:
       - 27017:27017
-    entrypoint:
-      - mongod
-      - --quiet
-      - --logpath=/dev/null
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootPass
     container_name: mb_mongo

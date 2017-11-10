@@ -59,7 +59,7 @@ class ExplainQueryService
             );
         };
 
-        $manager = $this->clientRegistry->getClient($query->getClient())->__debugInfo()['manager'];
+        $manager = $this->clientRegistry->getClient($query->getClient(),$query->getDatabase())->__debugInfo()['manager'];
 
         return $manager
             ->executeCommand(

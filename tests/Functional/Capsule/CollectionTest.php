@@ -14,7 +14,7 @@ class CollectionTest extends AppTestCase
         /** @var \Facile\MongoDbBundle\Services\ClientRegistry $reg */
         $reg = $this->getContainer()->get('mongo.client_registry');
         /** @var \MongoDB\Client $client */
-        $client = $reg->getClient('test_client');
+        $client = $reg->getClient('test_client', 'testdb');
 
         return $client->__debugInfo()['manager'];
     }
