@@ -132,7 +132,7 @@ final class ClientRegistry
             $options = array_merge(
                 [
                     'database' => $databaseName,
-                    'authSource' => $conf->getAuthSource() ?? $databaseName
+                    'authSource' => $conf->getAuthSource() ?? $databaseName ?? 'admin'
                 ],
                 $conf->getOptions()
             );
