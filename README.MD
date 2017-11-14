@@ -83,10 +83,6 @@ mongo_db_bundle:
         database_name:  ~
 ```
 
-### Authentication
-
-Actually only target database autentication is supported, this means that user registered on admin database can't be authenticated correctly.
-
 ### Services
 
 You can directly access to the `MongoDB\Database` with those services:
