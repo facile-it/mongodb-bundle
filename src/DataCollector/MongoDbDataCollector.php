@@ -49,10 +49,7 @@ class MongoDbDataCollector extends DataCollector
             /** @var Query $event */
             $event = $this->logger->getLoggedEvent();
 
-            // with extension version under 1.2.4 some Mongo objects can't be automatically serialized
-            if (-1 === version_compare(phpversion('mongodb'), '1.2.4')) {
-                MongoQuerySerializer::serialize($event);
-            }
+            MongoQuerySerializer::serialize($event);
 
             $this->data[self::QUERY_KEYWORD][] = $event;
             $this->data[self::TIME_KEYWORD] += $event->getExecutionTime();
