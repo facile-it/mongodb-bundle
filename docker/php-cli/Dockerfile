@@ -47,7 +47,7 @@ RUN apt-get update \
         mbstring \
         zip
 
-RUN pecl install mongodb-1.2.9 \
+RUN pecl install mongodb-1.3.0 \
     && docker-php-ext-enable mongodb
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

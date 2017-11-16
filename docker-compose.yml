@@ -2,7 +2,7 @@ version: "3.1"
 
 services:
   php-cli:
-    image: algatux/php-cli-mongodb:1.0
+    image: algatux/php-cli-mongodb:1.1
     volumes:
         - ./:/home/user-dev/project
     tty: true
