@@ -24,11 +24,11 @@ matrix:
         - SYMFONY=2.8.*
     - php: '7.0'
       env:
-        - SYMFONY=3.0.*
-    - php: '7.0'
-      env:
         - SYMFONY=3.3.*
-    - php: '7.0'
+    - php: '7.1'
+      env:
+        - SYMFONY=4.*
+    - php: '7.1'
       env:
         - SYMFONY=dev-master
     - php: '7.0'
@@ -39,6 +39,8 @@ matrix:
   allow_failures:
     - env:
         - SYMFONY=dev-master
+    - env:
+        - SYMFONY=4.*
 
 before_install:
   - phpenv config-rm xdebug.ini
