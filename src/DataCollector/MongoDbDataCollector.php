@@ -25,6 +25,11 @@ class MongoDbDataCollector extends DataCollector
 
     public function __construct()
     {
+        $this->reset();
+    }
+
+    public function reset()
+    {
         $this->data = [
             self::QUERY_KEYWORD => [],
             self::TIME_KEYWORD => 0.0,
