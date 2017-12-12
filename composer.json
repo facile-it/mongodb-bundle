@@ -14,12 +14,12 @@
         "php" : "^7.0",
         "ext-mongodb": "^1.1.5",
         "mongodb/mongodb": "^1.0",
-        "symfony/framework-bundle": "^2.8 || ^3.0"
+        "symfony/framework-bundle": "^2.8 || ^3.0 || ^4.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^2.3",
-        "symfony/web-profiler-bundle": "^2.8 | ^3.0",
-        "symfony/console": "^2.8 | ^3.0",
+        "symfony/web-profiler-bundle": "^2.8 || ^3.0 || ^4.0",
+        "symfony/console": "^2.8 || ^3.0 || ^4.0",
         "phpunit/phpunit": "^6.0"
     },
     "minimum-stability": "stable",
