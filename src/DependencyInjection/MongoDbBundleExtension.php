@@ -13,6 +13,7 @@ use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
+use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -136,7 +137,7 @@ final class MongoDbBundleExtension extends Extension
             $connectionDefinition->setPublic(true);
             $this->containerBuilder->setDefinition('mongo.connection.'.$name, $connectionDefinition);
         }
-        $this->containerBuilder->setAlias('mongo.connection', 'mongo.connection.'.array_keys($connections)[0]);
+        $this->containerBuilder->setAlias('mongo.connection', new Alias('mongo.connection.'.array_keys($connections)[0], true));
     }
 
     private function defineEventManager()
