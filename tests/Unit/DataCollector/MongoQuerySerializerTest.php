@@ -19,24 +19,50 @@ class MongoQuerySerializerTest extends TestCase
     {
         $query = new Query();
         $query->setFilters($unserializedData);
+        $query->setData($unserializedData);
+        $query->setOptions($unserializedData);
 
         $clone = clone $query;
         MongoQuerySerializer::serialize($query);
 
         $this->assertNotEquals($clone->getFilters(), $query->getFilters());
+        $this->assertNotEquals($clone->getData(), $query->getData());
+        $this->assertNotEquals($clone->getOptions(), $query->getOptions());
         $this->assertEquals($expectedSerialization, $query->getFilters()['test']);
+        $this->assertEquals($expectedSerialization, $query->getData()['test']);
+        $this->assertEquals($expectedSerialization, $query->getOptions()['test']);
     }
 
     public function unserializedDataProvider()
     {
         $date = new UTCDateTime(1000);
         $dateTime = $date->toDateTime();
-        $isoDate = sprintf("ISODate(\"%sT%s+00:00\")", $dateTime->format('Y-m-d'), $dateTime->format('H:i:s'));
+        $isoDate = sprintf('ISODate("%sT%s+00:00")', $dateTime->format('Y-m-d'), $dateTime->format('H:i:s'));
 
         return [
-                [['test' => $date], $isoDate],
-                [['test' => new BSONDocument()], []],
-                [['test' => new \stdClass()], []],
+            [['test' => $date], $isoDate],
+            [['test' => new BSONDocument()], []],
+            [['test' => new \stdClass()], []],
         ];
+    }
+
+    public function test_serializer_regression_with_replaceOne()
+    {
+        $stdClass = new \stdClass();
+        $stdClass->one = 'one';
+        $stdClass->two = 'two';
+        $unserializedData = $this->prophesize(BSONDocument::class);
+        $unserializedData->bsonSerialize()
+            ->shouldBeCalled()
+            ->willReturn($stdClass);
+
+        $query = new Query();
+        $query->setData($unserializedData->reveal());
+
+        $clone = clone $query;
+        MongoQuerySerializer::serialize($query);
+
+        $this->assertNotEquals($clone->getData(), $query->getData());
+        $this->assertEquals(['one' => 'one', 'two' => 'two'], $query->getData());
     }
 }

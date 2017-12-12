@@ -32,11 +32,12 @@ final class MongoQuerySerializer
             $data = $data->bsonSerialize();
         }
 
+        $newData = [];
         foreach ($data as $key => $item) {
-            $data[$key] = self::prepareItemData($item);
+            $newData[$key] = self::prepareItemData($item);
         }
 
-        return $data;
+        return $newData;
     }
 
     /**

@@ -17,7 +17,7 @@ RUN echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/3.4 main" >>
 RUN export DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-   && apt-get install -y \
+    && apt-get install -y \
         libbz2-dev \
         libcurl4-openssl-dev \
         libedit-dev \
@@ -50,7 +50,8 @@ RUN apt-get update \
 RUN pecl install mongodb-1.3.0 \
     && docker-php-ext-enable mongodb
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer global require hirak/prestissimo
 
 ENV TEST_ENV=docker
 
