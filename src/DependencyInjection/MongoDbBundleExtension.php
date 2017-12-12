@@ -133,6 +133,7 @@ final class MongoDbBundleExtension extends Extension
                 ]
             );
             $connectionDefinition->setFactory([new Reference('mongo.connection_factory'), 'createConnection']);
+            $connectionDefinition->setPublic(true);
             $this->containerBuilder->setDefinition('mongo.connection.'.$name, $connectionDefinition);
         }
         $this->containerBuilder->setAlias('mongo.connection', 'mongo.connection.'.array_keys($connections)[0]);
@@ -180,11 +181,11 @@ final class MongoDbBundleExtension extends Extension
 
     private function attachTwigExtesion()
     {
-        $extesion = new Definition(FacileMongoDbBundleExtension::class);
-        $extesion->setPublic(false);
-        $extesion->addTag('twig.extension');
+        $extension = new Definition(FacileMongoDbBundleExtension::class);
+        $extension->setPublic(false);
+        $extension->addTag('twig.extension');
 
-        $this->containerBuilder->setDefinition('facile_mongo_db.twig_extesion', $extesion);
+        $this->containerBuilder->setDefinition('facile_mongo_db.twig_extesion', $extension);
     }
 
     private function defineExplainQueryService()
