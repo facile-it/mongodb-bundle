@@ -1,13 +1,13 @@
 .PHONY: up setup start test
 
-up:
+up: docker-compose.yml
 	docker-compose up -d --force-recreate
 
-setup:
+setup: docker-compose.yml composer.json
 	docker-compose run --rm php-cli composer install
 
 start: up
 	docker exec -ti mb_php bash
 
-test:
+test: docker-compose.yml phpunit.xml.dist
 	docker-compose run --rm php-cli bash -c "sleep 3 && bin/phpunit -c phpunit.xml.dist"
