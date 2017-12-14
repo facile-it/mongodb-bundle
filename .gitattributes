@@ -9,6 +9,4 @@
 /.styleci.yml       export-ignore
 /phpunit.xml.dist   export-ignore
 /docker-compose.yml export-ignore
-/setup.sh           export-ignore
-/start.sh           export-ignore
-/test.sh            export-ignore
+/Makefile           export-ignore
