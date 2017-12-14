@@ -4,7 +4,6 @@ namespace Facile\MongoDbBundle\Tests\unit\DependencyInjection;
 
 use Facile\MongoDbBundle\DependencyInjection\Configuration;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
-use Matthias\SymfonyConfigTest\PhpUnit\ProcessedConfigurationEqualsConstraint;
 use Matthias\SymfonyDependencyInjectionTest\Loader\ExtensionConfigurationBuilder;
 use Matthias\SymfonyDependencyInjectionTest\Loader\LoaderFactory;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
@@ -32,7 +31,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'username' => 'foo',
                     'password' => 'bar',
@@ -62,7 +61,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'username' => 'foo',
                     'password' => 'bar',
@@ -92,7 +91,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'username' => 'foo',
                     'password' => 'bar',
@@ -135,7 +134,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'other_client' => [
                     'hosts' => [
                         ['host' => 'localhost.dev', 'port' => 8081],
-                        ['host' => 'localhost.dev2', 'port' => 27017]
+                        ['host' => 'localhost.dev2', 'port' => 27017],
                     ],
                     'username' => 'mee',
                     'password' => 'zod',
@@ -172,7 +171,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $extensionConfigurationBuilder = new ExtensionConfigurationBuilder(new LoaderFactory());
         $extensionConfiguration = $extensionConfigurationBuilder
             ->setExtension($this->getContainerExtension())
-            ->setSources([__DIR__.'/../../fixtures/config/config_wrong_readPreference.yml',]);
+            ->setSources([__DIR__.'/../../fixtures/config/config_wrong_readPreference.yml']);
 
         $processor = new Processor();
         $configuration = new Configuration();

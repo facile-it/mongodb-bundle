@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
@@ -21,7 +23,6 @@ class DropCollectionCommand extends AbstractCommand
             ->setName('mongodb:collection:drop')
             ->addArgument('collection', InputArgument::REQUIRED, 'collection to drop')
             ->setDescription('Drops a database');
-        ;
     }
 
     /**

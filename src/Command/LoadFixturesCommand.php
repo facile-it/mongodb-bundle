@@ -1,13 +1,14 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
-use Facile\MongoDbBundle\Fixtures\MongoFixturesLoader;
 use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
+use Facile\MongoDbBundle\Fixtures\MongoFixturesLoader;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -29,7 +30,6 @@ class LoadFixturesCommand extends AbstractCommand
             ->setName('mongodb:fixtures:load')
             ->addArgument('addFixturesPath', InputArgument::OPTIONAL, 'Add a path to search in for fixtures files')
             ->setDescription('Load fixtures and applies them');
-        ;
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -76,8 +76,8 @@ class LoadFixturesCommand extends AbstractCommand
     }
 
     /**
-     * @param InputInterface    $input
-     * @param KernelInterface   $kernel
+     * @param InputInterface  $input
+     * @param KernelInterface $kernel
      *
      * @return array
      */

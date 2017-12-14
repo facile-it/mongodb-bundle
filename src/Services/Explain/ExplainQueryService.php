@@ -13,7 +13,7 @@ class ExplainQueryService
     const VERBOSITY_EXECUTION_STATS = 'executionStats';
     const VERBOSITY_ALL_PLAN_EXECUTION = 'allPlansExecution';
 
-    public static $acceptedMethods= [
+    public static $acceptedMethods = [
         'count',
         'distinct',
         'find',
@@ -53,13 +53,13 @@ class ExplainQueryService
      */
     public function execute(Query $query, string $verbosity = self::VERBOSITY_ALL_PLAN_EXECUTION): Cursor
     {
-        if (!in_array($query->getMethod(), self::$acceptedMethods)) {
+        if (! in_array($query->getMethod(), self::$acceptedMethods)) {
             throw new \InvalidArgumentException(
-                'Cannot explain the method \''.$query->getMethod().'\'. Allowed methods: '. implode(', ',self::$acceptedMethods)
+                'Cannot explain the method \''.$query->getMethod().'\'. Allowed methods: '.implode(', ', self::$acceptedMethods)
             );
-        };
+        }
 
-        $manager = $this->clientRegistry->getClient($query->getClient(),$query->getDatabase())->__debugInfo()['manager'];
+        $manager = $this->clientRegistry->getClient($query->getClient(), $query->getDatabase())->__debugInfo()['manager'];
 
         return $manager
             ->executeCommand(
@@ -68,4 +68,3 @@ class ExplainQueryService
             );
     }
 }
-

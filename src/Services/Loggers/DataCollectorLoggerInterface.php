@@ -1,11 +1,13 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services\Loggers;
 
 use Facile\MongoDbBundle\Models\Query;
 
 /**
- * Interface DataCollectorLoggerInterface
+ * Interface DataCollectorLoggerInterface.
  */
 interface DataCollectorLoggerInterface
 {

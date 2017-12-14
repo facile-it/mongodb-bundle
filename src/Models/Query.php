@@ -1,9 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Models;
 
 /**
  * Class Query.
+ *
  * @internal
  */
 final class Query
@@ -99,7 +102,7 @@ final class Query
      */
     public function setFilters($filters)
     {
-        $this->filters = (array)$filters ?? [];
+        $this->filters = (array) $filters ?? [];
     }
 
     /**

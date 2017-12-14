@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
@@ -6,7 +8,8 @@ use Facile\MongoDbBundle\Models\Query;
 use MongoDB\BSON\Serializable;
 
 /**
- * Class MongoQuerySerializer
+ * Class MongoQuerySerializer.
+ *
  * @internal
  */
 final class MongoQuerySerializer
@@ -69,5 +72,4 @@ final class MongoQuerySerializer
 
         return $item;
     }
-
 }

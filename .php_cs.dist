@@ -12,8 +12,7 @@ $rules = new Facile\CodingStandards\DefaultRules($additionalRules);
 $config = PhpCsFixer\Config::create();
 $config->setRules($rules->getRules());
 
-
-$config->setUsingCache(false);
+$config->setUsingCache(true);
 $config->setRiskyAllowed(false);
 
 $finder = PhpCsFixer\Finder::create();

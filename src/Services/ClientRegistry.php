@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
@@ -10,6 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class ClientRegistry.
+ *
  * @internal
  */
 final class ClientRegistry
@@ -74,7 +77,7 @@ final class ClientRegistry
                 'replicaSet' => $conf['replicaSet'],
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
-                'readPreference' => $conf['readPreference']
+                'readPreference' => $conf['readPreference'],
             ]
         );
     }
@@ -89,8 +92,8 @@ final class ClientRegistry
         return implode(
             ',',
             array_map(
-                function(array $host) {
-                    return sprintf("%s:%d", $host['host'], $host['port']);
+                function (array $host) {
+                    return sprintf('%s:%d', $host['host'], $host['port']);
                 },
                 $hosts
             )
@@ -124,15 +127,15 @@ final class ClientRegistry
      */
     public function getClient(string $name, string $databaseName = null): Client
     {
-        $clientKey = !is_null($databaseName) ? $name.'.'.$databaseName : $name;
+        $clientKey = ! is_null($databaseName) ? $name.'.'.$databaseName : $name;
 
-        if (!isset($this->clients[$clientKey])) {
+        if (! isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s', $conf->getHosts());
             $options = array_merge(
                 [
                     'database' => $databaseName,
-                    'authSource' => $conf->getAuthSource() ?? $databaseName ?? 'admin'
+                    'authSource' => $conf->getAuthSource() ?? $databaseName ?? 'admin',
                 ],
                 $conf->getOptions()
             );

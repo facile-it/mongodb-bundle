@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Controller;
 
@@ -39,11 +41,11 @@ class ProfilerController implements ContainerAwareInterface
 
         $service = $this->container->get('mongo.explain_query_service');
 
-        try{
+        try {
             $result = $service->execute($query);
         } catch (\InvalidArgumentException $e) {
             return new JsonResponse([
-                "err" => $e->getMessage()
+                'err' => $e->getMessage(),
             ]);
         }
 
@@ -57,14 +59,13 @@ class ProfilerController implements ContainerAwareInterface
      */
     private function walkAndConvertToUTCDatetime($data)
     {
-        if (!is_array($data)) {
+        if (! is_array($data)) {
             return $data;
         }
 
         foreach ($data as $key => $item) {
-
             if (is_string($item) && preg_match('/^ISODate/', $item)) {
-                $time = str_replace(['ISODate("','")'], '', $item);
+                $time = str_replace(['ISODate("', '")'], '', $item);
                 $dateTime = new \DateTime($time);
                 $item = new UTCDatetime($dateTime->getTimestamp() * 1000);
             }

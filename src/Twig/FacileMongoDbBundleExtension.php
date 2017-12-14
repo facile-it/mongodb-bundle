@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Twig;
 
@@ -6,7 +8,7 @@ use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
 
 class FacileMongoDbBundleExtension extends \Twig_Extension
 {
-    private $methodDataTranslationMap  = [
+    private $methodDataTranslationMap = [
         'aggregate' => 'Pipeline',
         'insertOne' => 'Document',
         'updateOne' => 'Update',
@@ -20,9 +22,9 @@ class FacileMongoDbBundleExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_Simplefunction('filterLabelTranslate', array($this, 'queryFilterTranslate')),
-            new \Twig_Simplefunction('dataLabelTranslate', array($this, 'queryDataTranslate')),
-            new \Twig_Simplefunction('isQueryExplainable', array($this, 'isQueryExplainable')),
+            new \Twig_Simplefunction('filterLabelTranslate', [$this, 'queryFilterTranslate']),
+            new \Twig_Simplefunction('dataLabelTranslate', [$this, 'queryDataTranslate']),
+            new \Twig_Simplefunction('isQueryExplainable', [$this, 'isQueryExplainable']),
         ];
     }
 

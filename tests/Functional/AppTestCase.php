@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class AppTestCase extends TestCase
 {
-    /** @var  Application */
+    /** @var Application */
     private $application;
 
     private $env = 'test';

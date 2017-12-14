@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Twig;
 
 use Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension;
 use PHPUnit\Framework\TestCase;
-use Twig_Function;
 
 class FacileMongoDbBundleExtensionTest extends TestCase
 {
@@ -38,7 +39,7 @@ class FacileMongoDbBundleExtensionTest extends TestCase
     public function test_isQueryExplainable(string $methodname, bool $expected)
     {
         $ext = new FacileMongoDbBundleExtension();
-        $this->assertEquals($expected, $ext->isQueryExplainable( $methodname));
+        $this->assertEquals($expected, $ext->isQueryExplainable($methodname));
     }
 
     public function test_get_name()

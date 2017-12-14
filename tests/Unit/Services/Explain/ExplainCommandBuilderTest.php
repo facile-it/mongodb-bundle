@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Services\Explain;
 
@@ -22,7 +24,7 @@ class ExplainCommandBuilderTest extends TestCase
             [
                 'explain' => [
                     'count' => 'test_collection',
-                    'query' => ['id' => 1]
+                    'query' => ['id' => 1],
                 ],
                 'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
             ],
@@ -36,7 +38,7 @@ class ExplainCommandBuilderTest extends TestCase
         $query->setCollection('test_collection');
         $query->setMethod('distinct');
         $query->setFilters(['id' => 1]);
-        $query->setData(['fieldName'=>'test']);
+        $query->setData(['fieldName' => 'test']);
 
         $args = ExplainCommandBuilder::createCommandArgs($query);
 
@@ -84,24 +86,23 @@ class ExplainCommandBuilderTest extends TestCase
         $query->setCollection('test_collection');
         $query->setMethod($method);
         $query->setFilters(['id' => 1]);
-        if($projection) {
+        if ($projection) {
             $query->setOptions([
                 'projection' => '_id',
             ]);
         }
-
 
         $args = ExplainCommandBuilder::createCommandArgs($query);
 
         $expected = [
             'explain' => [
                 'find' => 'test_collection',
-                'filter' => ['id' => 1]
+                'filter' => ['id' => 1],
             ],
             'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
         ];
 
-        if($projection) {
+        if ($projection) {
             $expected['explain']['projection'] = '_id';
         }
 
@@ -130,7 +131,7 @@ class ExplainCommandBuilderTest extends TestCase
         $query->setCollection('test_collection');
         $query->setMethod($method);
         $query->setFilters(['id' => 1]);
-        if($limit) {
+        if ($limit) {
             $query->setOptions([
                 'limit' => $limit,
             ]);
@@ -142,8 +143,8 @@ class ExplainCommandBuilderTest extends TestCase
             'explain' => [
                 'delete' => $query->getCollection(),
                 'deletes' => [
-                    ['q' => $query->getFilters(), 'limit' => $limit,]
-                ]
+                    ['q' => $query->getFilters(), 'limit' => $limit],
+                ],
             ],
             'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
         ];

@@ -29,5 +29,4 @@ class DropCollectionAppTest extends AppTestCase
 
         self:self::assertContains('Collection dropped', $commandTester->getDisplay());
     }
-
 }

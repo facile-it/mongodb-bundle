@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
@@ -22,6 +24,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Class MongoDbBundleExtension.
+ *
  * @internal
  */
 final class MongoDbBundleExtension extends Extension
@@ -39,7 +42,7 @@ final class MongoDbBundleExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $this->defineEventManager();
-        $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
+        $this->defineClientRegistry($config['clients'], $container->getParameter('kernel.environment'));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
@@ -52,7 +55,6 @@ final class MongoDbBundleExtension extends Extension
             $this->defineExplainQueryService();
         }
 
-
         return $config;
     }
 
@@ -63,9 +65,9 @@ final class MongoDbBundleExtension extends Extension
      */
     private function mustCollectData(array $config): bool
     {
-        return in_array($this->containerBuilder->getParameter("kernel.environment"), ["dev"])
+        return in_array($this->containerBuilder->getParameter('kernel.environment'), ['dev'])
             && class_exists(WebProfilerBundle::class)
-            && $config['data_collection'] === true;
+            && true === $config['data_collection'];
     }
 
     private function defineLoggers()
@@ -153,7 +155,7 @@ final class MongoDbBundleExtension extends Extension
         $dataCollectorListenerDefinition = new Definition(
             DataCollectorListener::class,
             [
-                new Reference('facile_mongo_db.logger')
+                new Reference('facile_mongo_db.logger'),
             ]
         );
         $dataCollectorListenerDefinition->setPublic(false);
@@ -168,14 +170,14 @@ final class MongoDbBundleExtension extends Extension
             'addListener',
             [
                 ConnectionEvent::CLIENT_CREATED,
-                [new Reference('facile_mongo_db.data_collector.listener'), 'onConnectionClientCreated']
+                [new Reference('facile_mongo_db.data_collector.listener'), 'onConnectionClientCreated'],
             ]
         );
         $eventManagerDefinition->addMethodCall(
             'addListener',
             [
                 QueryEvent::QUERY_EXECUTED,
-                [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted']
+                [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted'],
             ]
         );
     }

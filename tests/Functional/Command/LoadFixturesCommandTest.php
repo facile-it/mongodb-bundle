@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Functional\Command;
 
@@ -28,7 +28,7 @@ class LoadFixturesAppTest extends AppTestCase
         $commandTester->execute(
                 [
                     'command' => $command->getName(),
-                    'addFixturesPath' => __DIR__ . "/../../fixtures/DataFixtures"
+                    'addFixturesPath' => __DIR__.'/../../fixtures/DataFixtures',
                 ]
             );
 
@@ -41,7 +41,7 @@ class LoadFixturesAppTest extends AppTestCase
         self::assertEquals('fixture', $fixtures[0]['type']);
         self::assertEquals('test', $fixtures[0]['data']);
 
-        self::assertContains("Done, loaded 1 fixtures files", $commandTester->getDisplay());
+        self::assertContains('Done, loaded 1 fixtures files', $commandTester->getDisplay());
 
         $conn->dropCollection('testFixturesCollection');
     }

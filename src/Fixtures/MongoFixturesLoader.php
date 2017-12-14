@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Fixtures;
 
@@ -9,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 final class MongoFixturesLoader
 {
-    /** @var  array|MongoFixtureInterface[] */
+    /** @var array|MongoFixtureInterface[] */
     private $loadedClasses;
     /** @var ContainerInterface */
     private $container;
@@ -31,7 +33,7 @@ final class MongoFixturesLoader
      */
     public function loadFromDirectory(string $dir)
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             throw new \InvalidArgumentException(sprintf('"%s" does not exist', $dir));
         }
 
@@ -50,7 +52,7 @@ final class MongoFixturesLoader
      */
     private function loadFromIterator(\Iterator $iterator)
     {
-        $includedFiles = array();
+        $includedFiles = [];
         foreach ($iterator as $file) {
             if ($file->getBasename('.php') == $file->getBasename()) {
                 continue;
@@ -64,7 +66,7 @@ final class MongoFixturesLoader
 
         return array_reduce(
             $declared,
-            function($classList, string $className) use ($includedFiles) {
+            function ($classList, string $className) use ($includedFiles) {
                 $reflClass = new \ReflectionClass($className);
                 $sourceFile = $reflClass->getFileName();
 
@@ -72,7 +74,7 @@ final class MongoFixturesLoader
                     in_array($sourceFile, $includedFiles) &&
                     in_array(MongoFixtureInterface::class, array_keys($reflClass->getInterfaces()))
                 ) {
-                    $instance = $this->buildFixture(new $className);
+                    $instance = $this->buildFixture(new $className());
                     $this->addInstance($instance);
                     $classList[] = $instance;
                 }
@@ -104,7 +106,7 @@ final class MongoFixturesLoader
     {
         $listClass = get_class($list);
 
-        if (!isset($this->loadedClasses[$listClass])) {
+        if (! isset($this->loadedClasses[$listClass])) {
             $this->loadedClasses[$listClass] = $list;
         }
     }
@@ -116,11 +118,11 @@ final class MongoFixturesLoader
      */
     public function loadFromFile(string $fileName)
     {
-        if (!is_readable($fileName)) {
+        if (! is_readable($fileName)) {
             throw new \InvalidArgumentException(sprintf('"%s" does not exist or is not readable', $fileName));
         }
 
-        $iterator = new \ArrayIterator(array(new \SplFileInfo($fileName)));
+        $iterator = new \ArrayIterator([new \SplFileInfo($fileName)]);
 
         return $this->loadFromIterator($iterator);
     }

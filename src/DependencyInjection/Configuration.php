@@ -7,6 +7,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Class Configuration.
+ *
  * @internal
  */
 final class Configuration implements ConfigurationInterface
@@ -43,7 +44,7 @@ final class Configuration implements ConfigurationInterface
                         ->defaultValue('primaryPreferred')
                         ->validate()
                             ->ifNotInArray($readPreferenceValidOptions)
-                            ->thenInvalid('Invalid readPreference option %s, must be one of ['.implode(", ", $readPreferenceValidOptions).']')
+                            ->thenInvalid('Invalid readPreference option %s, must be one of ['.implode(', ', $readPreferenceValidOptions).']')
                         ->end()
                     ->end()
                     ->scalarNode('replicaSet')->defaultValue(null)->end()

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services\Explain;
 
@@ -11,13 +13,13 @@ class ExplainCommandBuilder
      * @param string $verbosity
      *
      * @return array
+     *
      * @throws \Exception
      */
     public static function createCommandArgs(
         Query $query,
         string $verbosity = ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION
-    ): array
-    {
+    ): array {
         if ('aggregate' === $query->getMethod()) {
             return [
                 'aggregate' => $query->getCollection(),
@@ -114,8 +116,8 @@ class ExplainCommandBuilder
             return [
                 'delete' => $query->getCollection(),
                 'deletes' => [
-                    ['q' => $query->getFilters(), 'limit' => $query->getOptions()['limit'] ?? 0,]
-                ]
+                    ['q' => $query->getFilters(), 'limit' => $query->getOptions()['limit'] ?? 0],
+                ],
             ];
         }
 
