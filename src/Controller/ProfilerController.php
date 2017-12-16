@@ -24,6 +24,14 @@ class ProfilerController implements ContainerAwareInterface
         $this->container = $container;
     }
 
+    /**
+     * @param $token
+     * @param $queryNumber
+     *
+     * @return JsonResponse
+     *
+     * @throws \Exception
+     */
     public function explainAction($token, $queryNumber)
     {
         /** @var $profiler \Symfony\Component\HttpKernel\Profiler\Profiler */
