@@ -122,14 +122,14 @@ If you like docker, this repository is provided with a dev environment with some
 All you need is docker and docker-compose installed on your system.
 
 ```
- ./setup.sh  # will build the needed containers and setup the project
+ make setup  # will build the needed containers and setup the project
 ```
 
 ```
- ./start.sh  # will start the needed containers and put you inside the php-cli container
+ make start  # will start the needed containers and put you inside the php-cli container
 ```
 
 ```
- ./test.sh  # will launch the test suite
+ make test  # will launch the test suite
 ```
 Note: All these scripts are meant to be used outside the containers.
