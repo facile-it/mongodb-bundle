@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- config/services.xml -->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="facile_mongo_db.logger"
+                 class="Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger"
+                 public="false"/>
+
+        <service id="facile_mongo_db.data_collector.listener"
+                 class="Facile\MongoDbBundle\Event\Listener\DataCollectorListener"
+                 public="false">
+            <argument key="$logger" type="service" id="facile_mongo_db.logger"/>
+        </service>
+
+        <service id="facile_mongo_db.data_collector" class="Facile\MongoDbBundle\DataCollector\MongoDbDataCollector"
+                 public="false">
+            <call method="setLogger">
+                <argument type="service" id="facile_mongo_db.logger"/>
+            </call>
+            <tag name="data_collector" id="mongodb" priority="250"
+                 template="FacileMongoDbBundle:Collector:mongo.html.twig"/>
+        </service>
+
+        <service id="mongo.explain_query_service"
+                 class="Facile\MongoDbBundle\Services\Explain\ExplainQueryService"
+                 public="true"
+                 >
+            <argument type="service" id="mongo.client_registry"/>
+        </service>
+
+        <!-- twig extension -->
+
+        <service id="facile_mongo_db.twig_extension" class="Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension"
+                 public="false">
+            <tag name="twig.extension" />
+        </service>
+
+    </services>
+</container>

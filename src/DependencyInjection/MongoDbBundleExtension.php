@@ -2,25 +2,18 @@
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
-use Facile\MongoDbBundle\Command\DropCollectionCommand;
-use Facile\MongoDbBundle\Command\DropDatabaseCommand;
-use Facile\MongoDbBundle\Command\LoadFixturesCommand;
-use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
-use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\ConnectionFactory;
-use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
-use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
-use Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -38,24 +31,19 @@ final class MongoDbBundleExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $this->containerBuilder = $container;
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $this->defineEventManager();
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
+
         $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
-        $this->defineCommands();
 
         if ($this->mustCollectData($config)) {
-            $this->defineLoggers();
-            $this->defineDataCollectorListeners();
+            $loader->load('profiler.xml');
             $this->attachDataCollectionListenerToEventManager();
-            $this->defineDataCollector();
-            $this->attachTwigExtesion();
-            $this->defineExplainQueryService();
         }
-
 
         return $config;
     }
@@ -70,31 +58,6 @@ final class MongoDbBundleExtension extends Extension
         return in_array($this->containerBuilder->getParameter("kernel.environment"), ["dev"])
             && class_exists(WebProfilerBundle::class)
             && $config['data_collection'] === true;
-    }
-
-    private function defineLoggers()
-    {
-        $loggerDefinition = new Definition(MongoQueryLogger::class);
-        $loggerDefinition->setPublic(false);
-
-        $this->containerBuilder->setDefinition('facile_mongo_db.logger', $loggerDefinition);
-    }
-
-    private function defineDataCollector()
-    {
-        $dataCollectorDefinition = new Definition(MongoDbDataCollector::class);
-        $dataCollectorDefinition->addMethodCall('setLogger', [new Reference('facile_mongo_db.logger')]);
-        $dataCollectorDefinition->addTag(
-            'data_collector',
-            [
-                'template' => 'FacileMongoDbBundle:Collector:mongo.html.twig',
-                'id' => 'mongodb',
-                'priority' => 250,
-            ]
-        );
-        $dataCollectorDefinition->setPublic(false);
-
-        $this->containerBuilder->setDefinition('facile_mongo_db.data_collector', $dataCollectorDefinition);
     }
 
     /**
@@ -144,27 +107,6 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setAlias('mongo.connection', new Alias('mongo.connection.'.array_keys($connections)[0], true));
     }
 
-    private function defineEventManager()
-    {
-        $eventManagerDefinition = new Definition(EventDispatcher::class);
-        $eventManagerDefinition->setPublic(false);
-
-        $this->containerBuilder->setDefinition('facile_mongo_db.event_dispatcher', $eventManagerDefinition);
-    }
-
-    private function defineDataCollectorListeners()
-    {
-        $dataCollectorListenerDefinition = new Definition(
-            DataCollectorListener::class,
-            [
-                new Reference('facile_mongo_db.logger')
-            ]
-        );
-        $dataCollectorListenerDefinition->setPublic(false);
-
-        $this->containerBuilder->setDefinition('facile_mongo_db.data_collector.listener', $dataCollectorListenerDefinition);
-    }
-
     private function attachDataCollectionListenerToEventManager()
     {
         $eventManagerDefinition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
@@ -182,39 +124,5 @@ final class MongoDbBundleExtension extends Extension
                 [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted']
             ]
         );
-    }
-
-    private function attachTwigExtesion()
-    {
-        $extension = new Definition(FacileMongoDbBundleExtension::class);
-        $extension->setPublic(false);
-        $extension->addTag('twig.extension');
-
-        $this->containerBuilder->setDefinition('facile_mongo_db.twig_extesion', $extension);
-    }
-
-    private function defineExplainQueryService()
-    {
-        $explainServiceDefinition = new Definition(
-            ExplainQueryService::class,
-            [new Reference('mongo.client_registry')]
-        );
-        $explainServiceDefinition->setPublic(true);
-
-        $this->containerBuilder->setDefinition('mongo.explain_query_service', $explainServiceDefinition);
-    }
-
-    private function defineCommands()
-    {
-        $commandClasses = [
-            DropCollectionCommand::class,
-            DropDatabaseCommand::class,
-            LoadFixturesCommand::class,
-        ];
-
-        foreach ($commandClasses as $command) {
-            $this->containerBuilder->setDefinition($command, new Definition($command))
-                ->addTag('console.command');
-        }
     }
 }

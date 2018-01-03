@@ -12,6 +12,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
@@ -69,7 +70,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 
         /** @var EventDispatcherInterface $ed */
         $ed = $this->container->get('facile_mongo_db.event_dispatcher');
-        self::assertCount(2, $ed->getListeners());
+        $this->assertInstanceOf(EventDispatcher::class, $ed);
         self::assertCount(1, $ed->getListeners(QueryEvent::QUERY_EXECUTED));
         self::assertCount(1, $ed->getListeners(ConnectionEvent::CLIENT_CREATED));
 
