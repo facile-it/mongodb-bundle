@@ -2,6 +2,9 @@
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
+use Facile\MongoDbBundle\Command\DropCollectionCommand;
+use Facile\MongoDbBundle\Command\DropDatabaseCommand;
+use Facile\MongoDbBundle\Command\LoadFixturesCommand;
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;
@@ -42,6 +45,7 @@ final class MongoDbBundleExtension extends Extension
         $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
+        $this->defineCommands();
 
         if ($this->mustCollectData($config)) {
             $this->defineLoggers();
@@ -198,5 +202,19 @@ final class MongoDbBundleExtension extends Extension
         $explainServiceDefinition->setPublic(true);
 
         $this->containerBuilder->setDefinition('mongo.explain_query_service', $explainServiceDefinition);
+    }
+
+    private function defineCommands()
+    {
+        $commandClasses = [
+            DropCollectionCommand::class,
+            DropDatabaseCommand::class,
+            LoadFixturesCommand::class,
+        ];
+
+        foreach ($commandClasses as $command) {
+            $this->containerBuilder->setDefinition($command, new Definition($command))
+                ->addTag('console.command');
+        }
     }
 }

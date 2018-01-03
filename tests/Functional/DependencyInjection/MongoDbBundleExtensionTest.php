@@ -1,6 +1,6 @@
 <?php
 
-namespace Facile\MongoDbBundle\Tests\functional\DependencyInjection;
+namespace Facile\MongoDbBundle\Tests\Functional\DependencyInjection;
 
 use Facile\MongoDbBundle\Capsule\Database as LoggerDatabase;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
