@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -11,6 +13,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class Collection.
+ *
  * @internal
  */
 final class Collection extends MongoCollection
@@ -193,10 +196,10 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * @param string        $method
-     * @param array|object  $filters
-     * @param array|object  $data
-     * @param array         $options
+     * @param string       $method
+     * @param array|object $filters
+     * @param array|object $data
+     * @param array        $options
      *
      * @return Query
      */
@@ -226,7 +229,7 @@ final class Collection extends MongoCollection
      */
     private function translateReadPreference(ReadPreference $readPreference): string
     {
-        switch($readPreference->getMode()){
+        switch ($readPreference->getMode()) {
             case ReadPreference::RP_PRIMARY:
                 return 'primary';
             case ReadPreference::RP_PRIMARY_PREFERRED:
@@ -270,4 +273,3 @@ final class Collection extends MongoCollection
         return $this->databaseName;
     }
 }
-

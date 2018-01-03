@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
 
@@ -20,11 +20,11 @@ class DataCollectorListenerTest extends TestCase
         $logger = new MongoQueryLogger();
         $listener = new DataCollectorListener($logger);
 
-        self::assertCount(0,$logger->getConnections());
+        self::assertCount(0, $logger->getConnections());
 
         $listener->onConnectionClientCreated($event);
 
-        self::assertCount(1,$logger->getConnections());
+        self::assertCount(1, $logger->getConnections());
         self::assertContains('test_client', $logger->getConnections());
         self::assertFalse($logger->hasLoggedEvents());
     }
@@ -38,12 +38,12 @@ class DataCollectorListenerTest extends TestCase
         $logger = new MongoQueryLogger();
         $listener = new DataCollectorListener($logger);
 
-        self::assertCount(0,$logger->getConnections());
+        self::assertCount(0, $logger->getConnections());
         self::assertFalse($logger->hasLoggedEvents());
 
         $listener->onQueryExecuted($event);
 
-        self::assertCount(0,$logger->getConnections());
+        self::assertCount(0, $logger->getConnections());
         self::assertTrue($logger->hasLoggedEvents());
 
         self::assertSame($query, $logger->getLoggedEvent());

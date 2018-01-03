@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
@@ -10,6 +12,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
  * Class MongoDbDataCollector.
+ *
  * @internal
  */
 class MongoDbDataCollector extends DataCollector
@@ -94,6 +97,7 @@ class MongoDbDataCollector extends DataCollector
     {
         return count($this->data[self::CONNECTION_KEYWORD]);
     }
+
     /**
      * @return array|string[]
      */

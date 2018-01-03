@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\unit\DataCollector;
 
@@ -15,14 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MongoDbDataCollectorTest extends TestCase
 {
-
     public function test_construction_logger()
     {
         $logEvent = new Query();
         $logEvent->setData(
             [
-                "data" => new BSONDocument(["test"]),
-                "date" => $this->getUtcDateTime(),
+                'data' => new BSONDocument(['test']),
+                'date' => $this->getUtcDateTime(),
             ]
         );
 
@@ -48,7 +47,7 @@ class MongoDbDataCollectorTest extends TestCase
 
     public function getUtcDateTime()
     {
-        if (phpversion('mongodb') === '1.2.0-dev') {
+        if ('1.2.0-dev' === phpversion('mongodb')) {
             return new UTCDateTime('1000');
         }
 

@@ -1,0 +1,26 @@
+<?php
+
+/*
+ * Additional rules or rules to override.
+ * These rules will be added to default rules or will override them if the same key already exists.
+ */
+$additionalRules = [
+    '@Symfony' => true,
+];
+$rules = new Facile\CodingStandards\DefaultRules($additionalRules);
+
+$config = PhpCsFixer\Config::create();
+$config->setRules($rules->getRules());
+
+$config->setUsingCache(true);
+$config->setRiskyAllowed(false);
+
+$finder = PhpCsFixer\Finder::create();
+$finder->in([
+  'src/',
+  'tests/',
+]);
+
+$config->setFinder($finder);
+
+return $config;

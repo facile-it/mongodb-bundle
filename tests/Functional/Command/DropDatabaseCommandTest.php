@@ -24,7 +24,7 @@ class DropDatabaseAppTest extends AppTestCase
         $command = $this->getApplication()->find('mongo:database:drop');
 
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
+        $commandTester->execute(['command' => $command->getName()]);
 
         self:self::assertContains('Database dropped', $commandTester->getDisplay());
     }
