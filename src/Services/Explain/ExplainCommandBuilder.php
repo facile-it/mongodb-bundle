@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Services\Explain;
 
@@ -114,7 +114,7 @@ class ExplainCommandBuilder
             return [
                 'delete' => $query->getCollection(),
                 'deletes' => [
-                    ['q' => $query->getFilters(), 'limit' => $query->getOptions()['limit'] ?? 0,]
+                    ['q' => $query->getFilters(), 'limit' => $query->getOptions()['limit'] ?? 0]
                 ]
             ];
         }
