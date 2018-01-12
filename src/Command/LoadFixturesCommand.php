@@ -7,7 +7,6 @@ use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -62,7 +61,7 @@ class LoadFixturesCommand extends AbstractCommand
             $this->loadFixture($fixture);
         }
 
-        $this->io->writeln(sprintf('Done, loaded %d fixtures files', count($fixtures)));
+        $this->io->writeln(sprintf('Done, loaded %d fixtures files', \count($fixtures)));
     }
 
     /**
@@ -72,7 +71,7 @@ class LoadFixturesCommand extends AbstractCommand
     {
         $indexList->loadData();
         $indexList->loadIndexes();
-        $this->io->writeln('Loaded fixture: '.get_class($indexList));
+        $this->io->writeln('Loaded fixture: '. \get_class($indexList));
     }
 
     /**

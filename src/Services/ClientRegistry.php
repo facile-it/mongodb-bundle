@@ -124,7 +124,7 @@ final class ClientRegistry
      */
     public function getClient(string $name, string $databaseName = null): Client
     {
-        $clientKey = !is_null($databaseName) ? $name.'.'.$databaseName : $name;
+        $clientKey = null !== $databaseName ? $name.'.'.$databaseName : $name;
 
         if (!isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];

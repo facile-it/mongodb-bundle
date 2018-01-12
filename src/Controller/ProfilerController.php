@@ -65,14 +65,14 @@ class ProfilerController implements ContainerAwareInterface
      */
     private function walkAndConvertToUTCDatetime($data)
     {
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             return $data;
         }
 
         foreach ($data as $key => $item) {
 
-            if (is_string($item) && preg_match('/^ISODate/', $item)) {
-                $time = str_replace(['ISODate("', '")'], '', $item);
+            if (\is_string($item) && 0 === strpos($item, 'ISODate')) {
+                $time = str_replace(['ISODate("','")'], '', $item);
                 $dateTime = new \DateTime($time);
                 $item = new UTCDatetime($dateTime->getTimestamp() * 1000);
             }

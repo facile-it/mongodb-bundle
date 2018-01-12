@@ -68,7 +68,7 @@ class MongoDbDataCollector extends DataCollector
      */
     public function getQueryCount(): int
     {
-        return count($this->data[self::QUERY_KEYWORD]);
+        return \count($this->data[self::QUERY_KEYWORD]);
     }
 
     /**
@@ -92,7 +92,7 @@ class MongoDbDataCollector extends DataCollector
      */
     public function getConnectionsCount(): int
     {
-        return count($this->data[self::CONNECTION_KEYWORD]);
+        return \count($this->data[self::CONNECTION_KEYWORD]);
     }
     /**
      * @return array|string[]

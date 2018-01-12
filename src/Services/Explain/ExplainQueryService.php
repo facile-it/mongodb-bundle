@@ -50,10 +50,12 @@ class ExplainQueryService
      * @param string $verbosity
      *
      * @return Cursor
+     *
+     * @throws \Exception
      */
     public function execute(Query $query, string $verbosity = self::VERBOSITY_ALL_PLAN_EXECUTION): Cursor
     {
-        if (!in_array($query->getMethod(), self::$acceptedMethods)) {
+        if (!\in_array($query->getMethod(), self::$acceptedMethods)) {
             throw new \InvalidArgumentException(
                 'Cannot explain the method \''.$query->getMethod().'\'. Allowed methods: '.implode(', ', self::$acceptedMethods)
             );

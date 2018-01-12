@@ -50,7 +50,7 @@ class FacileMongoDbBundleExtension extends \Twig_Extension
 
     public function isQueryExplainable(string $methodName): bool
     {
-        return in_array($methodName, ExplainQueryService::$acceptedMethods);
+        return \in_array($methodName, ExplainQueryService::$acceptedMethods);
     }
 
     /**

@@ -244,8 +244,6 @@ final class Collection extends MongoCollection
 
     /**
      * @param Query $queryLog
-     *
-     * @return Query
      */
     private function notifyQueryExecution(Query $queryLog)
     {

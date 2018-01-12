@@ -69,8 +69,8 @@ final class MongoFixturesLoader
                 $sourceFile = $reflClass->getFileName();
 
                 if (
-                    in_array($sourceFile, $includedFiles) &&
-                    in_array(MongoFixtureInterface::class, array_keys($reflClass->getInterfaces()))
+                    \in_array($sourceFile, $includedFiles) &&
+                    \array_key_exists(MongoFixtureInterface::class, $reflClass->getInterfaces())
                 ) {
                     $instance = $this->buildFixture(new $className);
                     $this->addInstance($instance);
@@ -102,7 +102,7 @@ final class MongoFixturesLoader
      */
     public function addInstance(MongoFixtureInterface $list)
     {
-        $listClass = get_class($list);
+        $listClass = \get_class($list);
 
         if (!isset($this->loadedClasses[$listClass])) {
             $this->loadedClasses[$listClass] = $list;

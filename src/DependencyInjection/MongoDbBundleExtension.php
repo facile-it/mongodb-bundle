@@ -55,7 +55,7 @@ final class MongoDbBundleExtension extends Extension
      */
     private function mustCollectData(array $config): bool
     {
-        return in_array($this->containerBuilder->getParameter("kernel.environment"), ["dev"])
+        return 'dev' === $this->containerBuilder->getParameter("kernel.environment")
             && class_exists(WebProfilerBundle::class)
             && $config['data_collection'] === true;
     }

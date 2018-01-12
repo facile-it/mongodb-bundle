@@ -88,7 +88,7 @@ class ExplainCommandBuilder
      */
     private static function manageFind(Query $query, array $args): array
     {
-        if (in_array($query->getMethod(), ['find', 'findOne', 'findOneAndUpdate', 'findOneAndDelete'])) {
+        if (\in_array($query->getMethod(), ['find', 'findOne', 'findOneAndUpdate', 'findOneAndDelete'])) {
             $args = [
                 'find' => $query->getCollection(),
                 'filter' => $query->getFilters(),
@@ -110,7 +110,7 @@ class ExplainCommandBuilder
      */
     private static function manageDelete(Query $query, array $args): array
     {
-        if (in_array($query->getMethod(), ['deleteOne', 'deleteMany'])) {
+        if (\in_array($query->getMethod(), ['deleteOne', 'deleteMany'])) {
             return [
                 'delete' => $query->getCollection(),
                 'deletes' => [
