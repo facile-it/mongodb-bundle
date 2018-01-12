@@ -201,9 +201,13 @@
                             <li>{{ q.method }}</li>
                             <li> <span class="bold-font">Read preference:</span></li>
                             <li>{{ q.readPreference }}</li>
+                            <li> <span class="bold-font">Database:</span></li>
+                            <li>
+                                {{ q.database|length > 16 ? q.database|slice(0,16)~'...' : q.database }}
+                            </li>
                             <li><span class="bold-font">Collection:</span></li>
                             <li title="{{ q.collection }}">
-                                {{ q.collection|length > 12 ? q.collection|slice(0,12)~'...' : q.collection }}
+                                {{ q.collection|length > 16 ? q.collection|slice(0,16)~'...' : q.collection }}
                             </li>
                             <li><span class="bold-font">Exceution time:</span></li>
                             <li  class="{{ q.executionTime * 1000 > 100.0 ? 'time-warning' : '' }}">
