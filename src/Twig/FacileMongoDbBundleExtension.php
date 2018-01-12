@@ -6,7 +6,7 @@ use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
 
 class FacileMongoDbBundleExtension extends \Twig_Extension
 {
-    private $methodDataTranslationMap  = [
+    private $methodDataTranslationMap = [
         'aggregate' => 'Pipeline',
         'insertOne' => 'Document',
         'updateOne' => 'Update',
@@ -15,7 +15,7 @@ class FacileMongoDbBundleExtension extends \Twig_Extension
     ];
 
     /**
-     * @return array
+     * @return \Twig_SimpleFunction[]
      */
     public function getFunctions()
     {

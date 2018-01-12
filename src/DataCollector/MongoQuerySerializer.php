@@ -47,6 +47,10 @@ final class MongoQuerySerializer
      */
     public static function prepareItemData($item)
     {
+        if (\is_string($item)) {
+            return $item;
+        }
+
         if (method_exists($item, 'getArrayCopy')) {
             return self::prepareUnserializableData($item->getArrayCopy());
         }
@@ -69,5 +73,4 @@ final class MongoQuerySerializer
 
         return $item;
     }
-
 }

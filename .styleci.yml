@@ -1,8 +1,8 @@
 preset: symfony
 
-enabled:
-  - newline_after_open_tag
-  - short_array_syntax
+disabled:
+  - blank_line_before_declare
+  - declare_equal_normalize
 
 finder:
   exclude:

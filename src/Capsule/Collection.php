@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -226,7 +226,7 @@ final class Collection extends MongoCollection
      */
     private function translateReadPreference(ReadPreference $readPreference): string
     {
-        switch($readPreference->getMode()){
+        switch ($readPreference->getMode()) {
             case ReadPreference::RP_PRIMARY:
                 return 'primary';
             case ReadPreference::RP_PRIMARY_PREFERRED:

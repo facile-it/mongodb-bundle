@@ -72,7 +72,7 @@ class MongoDbDataCollector extends DataCollector
     }
 
     /**
-     * @return array
+     * @return Query[]|array
      */
     public function getQueries(): array
     {

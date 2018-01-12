@@ -39,10 +39,15 @@ class MongoQuerySerializerTest extends TestCase
         $dateTime = $date->toDateTime();
         $isoDate = sprintf('ISODate("%sT%s+00:00")', $dateTime->format('Y-m-d'), $dateTime->format('H:i:s'));
 
+        // regression: string which is a FQCN of a class that has __toString
+        $documentWithFQCN = new BSONDocument();
+        $documentWithFQCN->fqcn = \Exception::class;
+
         return [
             [['test' => $date], $isoDate],
             [['test' => new BSONDocument()], []],
             [['test' => new \stdClass()], []],
+            [['test' => $documentWithFQCN], ['fqcn' => \Exception::class]],
         ];
     }
 
