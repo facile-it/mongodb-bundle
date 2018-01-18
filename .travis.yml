@@ -44,7 +44,6 @@ matrix:
 before_install:
   - phpenv config-rm xdebug.ini
   - composer self-update
-  - composer config --quiet --global github-oauth.github.com ${GITHUB_OAUTH_TOKEN}
   - if [ "$SYMFONY" != "" ]; then composer require "symfony/symfony:${SYMFONY}" --no-update; fi;
 
 install:
