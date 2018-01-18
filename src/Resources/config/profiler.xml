@@ -25,7 +25,7 @@
                 <argument type="service" id="facile_mongo_db.logger"/>
             </call>
             <tag name="data_collector" id="mongodb" priority="250"
-                 template="FacileMongoDbBundle:Collector:mongo.html.twig"/>
+                 template="@FacileMongoDb/Collector/mongo.html.twig"/>
         </service>
 
         <service id="mongo.explain_query_service"
