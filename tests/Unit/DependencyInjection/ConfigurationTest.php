@@ -15,8 +15,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
     public function test_empty_configuration_process()
     {
-        $this->expectException(InvalidConfigurationException::class);
-        $this->expectExceptionMessage('The child node "clients" at path "mongo_db_bundle" must be configured.');
+        $this->expectException(\Exception::class);
         $this->assertProcessedConfigurationEquals([
             'clients' => [],
             'connections' => [],
