@@ -14,11 +14,11 @@ matrix:
         - MONGO_EXT_VERSION="1.2.0"
     - php: '7.0'
       env:
-        - MONGO_EXT_VERSION="1.2.3"
-    - php: '7.0'
-      env:
         - MONGO_EXT_VERSION="1.3.0"
         - TEST_COVERAGE=true
+    - php: '7.0'
+      env:
+        - MONGO_EXT_VERSION="1.4.2"
     - php: '7.0'
       env:
         - SYMFONY=2.8.*
