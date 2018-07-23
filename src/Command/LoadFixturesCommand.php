@@ -56,6 +56,10 @@ class LoadFixturesCommand extends AbstractCommand
                 sprintf('Could not find any class to load in: %s', "\n\n- ".implode("\n- ", $paths))
             );
         }
+        
+        usort($fixtures, function ($a, $b) {
+            return strcmp(get_class($a), get_class($b));
+        });
 
         foreach ($fixtures as $fixture) {
             $this->loadFixture($fixture);
