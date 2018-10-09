@@ -26,22 +26,24 @@ class LoadFixturesAppTest extends AppTestCase
 
         $commandTester = new CommandTester($command);
         $commandTester->execute(
-                [
-                    'command' => $command->getName(),
-                    'addFixturesPath' => __DIR__ . "/../../fixtures/DataFixtures"
-                ]
-            );
+            [
+                'command' => $command->getName(),
+                'addFixturesPath' => __DIR__ . "/../../fixtures/DataFixtures"
+            ]
+        );
+
 
         /** @var Collection $collection */
         $collection = $conn->selectCollection('testFixturesCollection');
+
         $fixtures = $collection->find(['type' => 'fixture']);
         $fixtures = $fixtures->toArray();
 
-        self::assertCount(1, $fixtures);
+
         self::assertEquals('fixture', $fixtures[0]['type']);
         self::assertEquals('test', $fixtures[0]['data']);
 
-        self::assertContains("Done, loaded 1 fixtures files", $commandTester->getDisplay());
+        self::assertContains("Done, loaded 4 fixtures files", $commandTester->getDisplay());
 
         $conn->dropCollection('testFixturesCollection');
     }
@@ -63,4 +65,53 @@ class LoadFixturesAppTest extends AppTestCase
 
         $conn->dropCollection('testFixturesCollection');
     }
+
+
+    public function test_command_order_fixtures()
+    {
+
+
+        /** @var Database $conn */
+        $conn = $this->getContainer()->get('mongo.connection');
+
+        $conn->dropCollection('testFixturesOrderedCollection');
+
+        self::assertEquals('testFunctionaldb', $conn->getDatabaseName());
+
+        $conn->createCollection('testFixturesOrderedCollection');
+
+        $this->getApplication()->add(new LoadFixturesCommand());
+
+        $command = $this->getApplication()->find('mongodb:fixtures:load');
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'addFixturesPath' => __DIR__ . "/../../fixtures/DataFixtures"
+            ]
+        );
+
+        /** @var Collection $collection */
+        $collection = $conn->selectCollection('testFixturesOrderedCollection');
+        $fixtures = $collection->find(['type' => 'fixture']);
+        $fixtures = $fixtures->toArray();
+
+        $fixture = current($fixtures);
+
+        self::assertEquals(3, count($fixtures));
+
+        self::assertEquals('fixture', $fixture['type']);
+        self::assertEquals('Edward Scissorhands - 1990', $fixture['data']);
+        self::assertEquals(1, $fixture['expectedPosition']);
+
+        $fixture = next($fixtures);
+
+        self::assertEquals('fixture', $fixture['type']);
+        self::assertEquals('Alice in Wonderland - 2010', $fixture['data']);
+        self::assertEquals(2, $fixture['expectedPosition']);
+
+        $conn->dropCollection('testFixturesOrderedCollection');
+    }
+
 }
