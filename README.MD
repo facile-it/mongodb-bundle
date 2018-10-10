@@ -134,3 +134,8 @@ All you need is docker and docker-compose installed on your system.
  make test  # will launch the test suite
 ```
 Note: All these scripts are meant to be used outside the containers.
+
+#### Port binding setup
+
+During the setup a `docker-compose.override.yml` file is created from the `docker-compose.override.yml.dist` template.
+Change the port binding configuration inside it to fit you needs.

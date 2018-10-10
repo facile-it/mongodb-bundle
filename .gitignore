@@ -4,3 +4,4 @@
 /vendor/
 /bin/
 /.php_cs.cache
+docker-compose.override.yml
