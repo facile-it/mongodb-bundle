@@ -32,7 +32,7 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
     }
 
     /**
-     * @return array|\string[]
+     * @return array|string[]
      */
     public function getConnections(): array
     {

@@ -43,7 +43,7 @@ class ExplainCommandBuilder
 
     /**
      * @param Query $query
-     * @param       $args
+     * @param array $args
      *
      * @return array
      */
@@ -64,7 +64,7 @@ class ExplainCommandBuilder
 
     /**
      * @param Query $query
-     * @param       $args
+     * @param array $args
      *
      * @return array
      */
