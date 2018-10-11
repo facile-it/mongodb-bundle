@@ -31,6 +31,10 @@ matrix:
     - php: '7.1'
       env:
         - SYMFONY=dev-master
+    - php: '7.1'
+      env:
+        - SYMFONY=dev-master
+        - TEST_PHPSTAN=true
     - php: '7.0'
       env:
         -COMPOSER_FLAGS="--prefer-lowest"
@@ -63,6 +67,7 @@ before_script:
 script:
   - composer validate
   - bin/phpunit -c ./phpunit.xml.dist --coverage-clover=./build/coverage/coverage.clover
+  - if [[ $TEST_PHPSTAN ]]; then vendor/bin/phpstan analyse -l1 src; fi;
 
 after_success:
   - if [[ $TEST_COVERAGE ]]; then wget https://scrutinizer-ci.com/ocular.phar --output-document="${HOME}/bin/ocular" && chmod +x "${HOME}/bin/ocular"; fi
