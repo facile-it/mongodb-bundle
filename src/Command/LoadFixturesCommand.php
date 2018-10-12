@@ -4,6 +4,8 @@ namespace Facile\MongoDbBundle\Command;
 
 use Facile\MongoDbBundle\Fixtures\MongoFixturesLoader;
 use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
+use Facile\MongoDbBundle\Fixtures\OrderedFixtureInterface;
+
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -57,6 +59,8 @@ class LoadFixturesCommand extends AbstractCommand
             );
         }
 
+        $this->sortFixtures($fixtures);
+
         foreach ($fixtures as $fixture) {
             $this->loadFixture($fixture);
         }
@@ -109,4 +113,37 @@ class LoadFixturesCommand extends AbstractCommand
             }
         }
     }
+
+    /**
+     * Sorts fixtures by getOrder in case of implementing OrderedFixtureInterface
+     * Fixtures with interface will be after the rest
+     *
+     * @param array $fixtures
+     * @return self
+     */
+    protected function sortFixtures(&$fixtures): self
+    {
+        usort($fixtures, function ($fixture1, $fixture2) {
+            $isFixture1Instance = ($fixture1 instanceof OrderedFixtureInterface);
+            $isFixture2Instance = ($fixture2 instanceof OrderedFixtureInterface);
+
+            if ($isFixture1Instance && $isFixture2Instance) {
+                return $fixture1->getOrder() - $fixture2->getOrder();
+            }
+
+            if (!$isFixture1Instance && !$isFixture2Instance) {
+                return 1;
+            }
+
+
+            return ($isFixture2Instance) ? -1 : 1;
+
+
+        });
+
+        return $this;
+
+    }
+
+
 }
