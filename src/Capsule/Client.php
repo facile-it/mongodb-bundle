@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -19,10 +19,10 @@ final class Client extends MongoClient
     /**
      * Client constructor.
      *
-     * @param string                   $uri
-     * @param array                    $uriOptions
-     * @param array                    $driverOptions
-     * @param string                   $clientName
+     * @param string $uri
+     * @param array $uriOptions
+     * @param array $driverOptions
+     * @param string $clientName
      * @param EventDispatcherInterface $eventDispatcher
      *
      * @internal param DataCollectorLoggerInterface $logger

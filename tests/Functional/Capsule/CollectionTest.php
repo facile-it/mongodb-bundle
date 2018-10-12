@@ -48,7 +48,7 @@ class CollectionTest extends AppTestCase
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
-        $coll->updateOne(['filter' => 1],['$set' => ['testField' => 1]]);
+        $coll->updateOne(['filter' => 1], ['$set' => ['testField' => 1]]);
     }
 
     public function test_count()
@@ -144,7 +144,7 @@ class CollectionTest extends AppTestCase
 
         $result = $coll->aggregate([
             ['$match' => ['group' => 'a']],
-            ['$group' => ['_id' => '$group', 'value' => ['$sum'=>'$testValue']]]
+            ['$group' => ['_id' => '$group', 'value' => ['$sum' => '$testValue']]]
         ]);
 
         $results = [];

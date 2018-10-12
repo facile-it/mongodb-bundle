@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Fixtures;
 
@@ -31,7 +31,7 @@ final class MongoFixturesLoader
      */
     public function loadFromDirectory(string $dir)
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             throw new \InvalidArgumentException(sprintf('"%s" does not exist', $dir));
         }
 
@@ -64,7 +64,7 @@ final class MongoFixturesLoader
 
         return array_reduce(
             $declared,
-            function($classList, string $className) use ($includedFiles) {
+            function ($classList, string $className) use ($includedFiles) {
                 $reflClass = new \ReflectionClass($className);
                 $sourceFile = $reflClass->getFileName();
 
@@ -104,7 +104,7 @@ final class MongoFixturesLoader
     {
         $listClass = \get_class($list);
 
-        if (!isset($this->loadedClasses[$listClass])) {
+        if (! isset($this->loadedClasses[$listClass])) {
             $this->loadedClasses[$listClass] = $list;
         }
     }
@@ -116,7 +116,7 @@ final class MongoFixturesLoader
      */
     public function loadFromFile(string $fileName)
     {
-        if (!is_readable($fileName)) {
+        if (! is_readable($fileName)) {
             throw new \InvalidArgumentException(sprintf('"%s" does not exist or is not readable', $fileName));
         }
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Facile\MongoDbBundle\Capsule\Client;
 use MongoDB\Client as MongoClient;
-use MongoDB\Database as MongoDatabase;
 use MongoDB\Collection as MongoCollection;
+use MongoDB\Database as MongoDatabase;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

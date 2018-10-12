@@ -31,7 +31,7 @@
         <service id="mongo.explain_query_service"
                  class="Facile\MongoDbBundle\Services\Explain\ExplainQueryService"
                  public="true"
-                 >
+        >
             <argument type="service" id="mongo.client_registry"/>
         </service>
 
@@ -39,7 +39,7 @@
 
         <service id="facile_mongo_db.twig_extension" class="Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension"
                  public="false">
-            <tag name="twig.extension" />
+            <tag name="twig.extension"/>
         </service>
 
     </services>

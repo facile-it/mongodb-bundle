@@ -1,24 +1,24 @@
 mongo_db_bundle:
-    clients:
-      test_client:
-        hosts:
-          - { host: localhost, port: 8080 }
-        username: foo
-        password: bar
-      other_client:
-        hosts:
-          - { host: localhost.dev, port: 8081 }
-          - { host: localhost.dev2 }
-        username: mee
-        password: zod
+  clients:
+    test_client:
+      hosts:
+      - { host: localhost, port: 8080 }
+      username: foo
+      password: bar
+    other_client:
+      hosts:
+      - { host: localhost.dev, port: 8081 }
+      - { host: localhost.dev2 }
+      username: mee
+      password: zod
 
-    connections:
-      test_db:
-        client_name: test_client
-        database_name: testdb
-      other_db:
-        client_name: other_client
-        database_name: otherdb
-      test_db_2:
-        client_name: test_client
-        database_name: testdb_2
+  connections:
+    test_db:
+      client_name: test_client
+      database_name: testdb
+    other_db:
+      client_name: other_client
+      database_name: otherdb
+    test_db_2:
+      client_name: test_client
+      database_name: testdb_2

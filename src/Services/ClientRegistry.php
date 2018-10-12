@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
@@ -27,7 +27,7 @@ final class ClientRegistry
      * ClientRegistry constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
-     * @param string                   $environment
+     * @param string $environment
      *
      * @internal param DataCollectorLoggerInterface $logger
      */
@@ -51,7 +51,7 @@ final class ClientRegistry
 
     /**
      * @param string $name
-     * @param array  $conf
+     * @param array $conf
      */
     private function addClientConfiguration(string $name, array $conf)
     {
@@ -89,7 +89,7 @@ final class ClientRegistry
         return implode(
             ',',
             array_map(
-                function(array $host) {
+                function (array $host) {
                     return sprintf("%s:%d", $host['host'], $host['port']);
                 },
                 $hosts
@@ -124,9 +124,9 @@ final class ClientRegistry
      */
     public function getClient(string $name, string $databaseName = null): Client
     {
-        $clientKey = null !== $databaseName ? $name.'.'.$databaseName : $name;
+        $clientKey = null !== $databaseName ? $name . '.' . $databaseName : $name;
 
-        if (!isset($this->clients[$clientKey])) {
+        if (! isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s', $conf->getHosts());
             $options = array_merge(
@@ -150,8 +150,8 @@ final class ClientRegistry
     /**
      * @param string $clientName
      * @param string $uri
-     * @param array  $options
-     * @param array  $driverOptions
+     * @param array $options
+     * @param array $driverOptions
      *
      * @return Client
      */

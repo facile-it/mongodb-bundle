@@ -11,7 +11,7 @@
 
         <service id="facile_mongo_db.event_dispatcher"
                  class="Symfony\Component\EventDispatcher\EventDispatcher"
-                 public="false" />
+                 public="false"/>
 
         <!-- commands -->
 
@@ -19,7 +19,8 @@
             <tag name="console.command"/>
         </service>
 
-        <service id="facile_mongo_db.command.drop_collection" class="Facile\MongoDbBundle\Command\DropCollectionCommand">
+        <service id="facile_mongo_db.command.drop_collection"
+                 class="Facile\MongoDbBundle\Command\DropCollectionCommand">
             <tag name="console.command"/>
         </service>
 

@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
@@ -33,7 +33,7 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder = $container;
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
         $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
@@ -61,7 +61,7 @@ final class MongoDbBundleExtension extends Extension
     }
 
     /**
-     * @param array  $clientsConfig
+     * @param array $clientsConfig
      * @param string $environment
      */
     private function defineClientRegistry(array $clientsConfig, string $environment)
@@ -102,9 +102,9 @@ final class MongoDbBundleExtension extends Extension
             );
             $connectionDefinition->setFactory([new Reference('mongo.connection_factory'), 'createConnection']);
             $connectionDefinition->setPublic(true);
-            $this->containerBuilder->setDefinition('mongo.connection.'.$name, $connectionDefinition);
+            $this->containerBuilder->setDefinition('mongo.connection.' . $name, $connectionDefinition);
         }
-        $this->containerBuilder->setAlias('mongo.connection', new Alias('mongo.connection.'.array_keys($connections)[0], true));
+        $this->containerBuilder->setAlias('mongo.connection', new Alias('mongo.connection.' . array_keys($connections)[0], true));
     }
 
     private function attachDataCollectionListenerToEventManager()

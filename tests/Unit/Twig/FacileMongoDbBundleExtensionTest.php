@@ -4,7 +4,6 @@ namespace Facile\MongoDbBundle\Tests\Unit\Twig;
 
 use Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension;
 use PHPUnit\Framework\TestCase;
-use Twig_Function;
 
 class FacileMongoDbBundleExtensionTest extends TestCase
 {
@@ -33,12 +32,12 @@ class FacileMongoDbBundleExtensionTest extends TestCase
      * @dataProvider explainMethodsProvider
      *
      * @param string $methodname
-     * @param bool   $expected
+     * @param bool $expected
      */
     public function test_isQueryExplainable(string $methodname, bool $expected)
     {
         $ext = new FacileMongoDbBundleExtension();
-        $this->assertEquals($expected, $ext->isQueryExplainable( $methodname));
+        $this->assertEquals($expected, $ext->isQueryExplainable($methodname));
     }
 
     public function test_get_name()

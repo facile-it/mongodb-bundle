@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\fixtures\DataFixtures;
 
 use Facile\MongoDbBundle\Capsule\Database;
 use Facile\MongoDbBundle\Fixtures\AbstractContainerAwareFixture;
 use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
-use Facile\MongoDbBundle\Fixtures\OrderedFixtureInterface;
 
 class TestOrderedMongoFixtures2 extends AbstractContainerAwareFixture implements MongoFixtureInterface
 {
@@ -21,7 +20,6 @@ class TestOrderedMongoFixtures2 extends AbstractContainerAwareFixture implements
             'data' => 'Batman Begins - 2005',
             'expectedPosition' => 0,
         ];
-
 
         /** @var Database $connection */
         $connection = $this->getContainer()->get('mongo.connection.test_db');

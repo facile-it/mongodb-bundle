@@ -1,17 +1,17 @@
 mongo_db_bundle:
-    data_collection: false
+  data_collection: false
 
-    clients:
-      test_client:
-        hosts:
-          - { host: localhost, port: 8080 }
-        username: foo
-        password: bar
-        replicaSet: 'testReplica'
-        ssl: true
-        connectTimeoutMS: 3000
+  clients:
+    test_client:
+      hosts:
+      - { host: localhost, port: 8080 }
+      username: foo
+      password: bar
+      replicaSet: 'testReplica'
+      ssl: true
+      connectTimeoutMS: 3000
 
-    connections:
-      test_db:
-        client_name: test_client
-        database_name: testdb
+  connections:
+    test_db:
+      client_name: test_client
+      database_name: testdb

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\tests\fixtures\DataFixtures;
 
@@ -35,7 +35,6 @@ class TestOrderedMongoFixtures1 extends AbstractContainerAwareFixture implements
     {
         return 200;
     }
-
 
     /**
      * @return array

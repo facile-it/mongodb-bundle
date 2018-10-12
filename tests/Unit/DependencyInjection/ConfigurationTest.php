@@ -4,7 +4,6 @@ namespace Facile\MongoDbBundle\Tests\unit\DependencyInjection;
 
 use Facile\MongoDbBundle\DependencyInjection\Configuration;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
-use Matthias\SymfonyConfigTest\PhpUnit\ProcessedConfigurationEqualsConstraint;
 use Matthias\SymfonyDependencyInjectionTest\Loader\ExtensionConfigurationBuilder;
 use Matthias\SymfonyDependencyInjectionTest\Loader\LoaderFactory;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
@@ -21,7 +20,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'connections' => [],
             'data_collection' => true,
         ], [
-            __DIR__.'/../../fixtures/config/config_empty.yml',
+            __DIR__ . '/../../fixtures/config/config_empty.yml',
         ]);
     }
 
@@ -51,7 +50,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__.'/../../fixtures/config/config_full.yml',
+            __DIR__ . '/../../fixtures/config/config_full.yml',
         ]);
     }
 
@@ -81,7 +80,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__.'/../../fixtures/config/config_options.yml',
+            __DIR__ . '/../../fixtures/config/config_options.yml',
         ]);
     }
 
@@ -111,7 +110,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => false,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__.'/../../fixtures/config/config_datacollection_disabled.yml',
+            __DIR__ . '/../../fixtures/config/config_datacollection_disabled.yml',
         ]);
     }
 
@@ -162,7 +161,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__.'/../../fixtures/config/config_multiple.yml',
+            __DIR__ . '/../../fixtures/config/config_multiple.yml',
         ]);
     }
 
@@ -171,7 +170,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $extensionConfigurationBuilder = new ExtensionConfigurationBuilder(new LoaderFactory());
         $extensionConfiguration = $extensionConfigurationBuilder
             ->setExtension($this->getContainerExtension())
-            ->setSources([__DIR__.'/../../fixtures/config/config_wrong_readPreference.yml',]);
+            ->setSources([__DIR__ . '/../../fixtures/config/config_wrong_readPreference.yml',]);
 
         $processor = new Processor();
         $configuration = new Configuration();

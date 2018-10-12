@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Event;
 
@@ -16,7 +16,7 @@ final class ConnectionEvent extends GenericEvent
      * ConnectionEvent constructor.
      *
      * @param string $clientName
-     * @param array  $arguments
+     * @param array $arguments
      */
     public function __construct(string $clientName, array $arguments = [])
     {

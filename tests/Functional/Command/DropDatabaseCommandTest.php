@@ -26,6 +26,7 @@ class DropDatabaseAppTest extends AppTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(array('command' => $command->getName()));
 
-        self:self::assertContains('Database dropped', $commandTester->getDisplay());
+        self:
+        self::assertContains('Database dropped', $commandTester->getDisplay());
     }
 }

@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services\Loggers;
 
@@ -52,7 +52,7 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
      */
     public function getLoggedEvent(): Query
     {
-        if (!$this->hasLoggedEvents()) {
+        if (! $this->hasLoggedEvents()) {
             throw new \LogicException('No more events logged!');
         }
 
@@ -64,6 +64,6 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
      */
     public function hasLoggedEvents(): bool
     {
-        return !$this->logs->isEmpty();
+        return ! $this->logs->isEmpty();
     }
 }

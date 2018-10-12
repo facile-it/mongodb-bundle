@@ -25,7 +25,8 @@ class AbstractAppTest extends AppTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(array_merge(['command' => $command->getName()], $arguments));
 
-        self:self::assertContains('Executed', $commandTester->getDisplay());
+        self:
+        self::assertContains('Executed', $commandTester->getDisplay());
     }
 
     public function test_AbstractCommand_connection_exception()
@@ -44,7 +45,6 @@ class AbstractAppTest extends AppTestCase
         $commandTester->execute(['command' => $command->getName(), '--connection' => $unexistantConnectionName]);
     }
 
-
     public function commandOptionsProvider()
     {
 
@@ -54,7 +54,6 @@ class AbstractAppTest extends AppTestCase
         ];
     }
 }
-
 
 class FakeCommand extends AbstractCommand
 {
@@ -67,8 +66,7 @@ class FakeCommand extends AbstractCommand
         parent::configure();
         $this
             ->setName('mongodb:fake:command')
-            ->setDescription('fake test command');
-        ;
+            ->setDescription('fake test command');;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

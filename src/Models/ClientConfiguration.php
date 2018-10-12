@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Models;
 
@@ -22,11 +22,11 @@ final class ClientConfiguration
     /**
      * ClientConfiguration constructor.
      *
-     * @param string      $hosts
-     * @param string      $username
-     * @param string      $password
+     * @param string $hosts
+     * @param string $username
+     * @param string $password
      * @param string|null $authSource
-     * @param array       $options
+     * @param array $options
      */
     public function __construct(
         string $hosts,
@@ -99,8 +99,8 @@ final class ClientConfiguration
     {
         return array_filter(
             $options,
-            function($value) {
-                return !empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
+            function ($value) {
+                return ! empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
             }
         );
     }

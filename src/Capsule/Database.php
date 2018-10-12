@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -22,10 +22,10 @@ final class Database extends MongoDatabase
     /**
      * Database constructor.
      *
-     * @param Manager                  $manager
-     * @param string                   $clientName
-     * @param string                   $databaseName
-     * @param array                    $options
+     * @param Manager $manager
+     * @param string $clientName
+     * @param string $databaseName
+     * @param array $options
      * @param EventDispatcherInterface $eventDispatcher
      *
      * @internal param DataCollectorLoggerInterface $logger

@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -25,11 +25,11 @@ final class Collection extends MongoCollection
     /**
      * Collection constructor.
      *
-     * @param Manager                  $manager
-     * @param string                   $clientName
-     * @param string                   $databaseName
-     * @param string                   $collectionName
-     * @param array                    $options
+     * @param Manager $manager
+     * @param string $clientName
+     * @param string $databaseName
+     * @param string $collectionName
+     * @param array $options
      * @param EventDispatcherInterface $eventDispatcher
      *
      * @internal param DataCollectorLoggerInterface $logger
@@ -193,10 +193,10 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * @param string        $method
-     * @param array|object  $filters
-     * @param array|object  $data
-     * @param array         $options
+     * @param string $method
+     * @param array|object $filters
+     * @param array|object $data
+     * @param array $options
      *
      * @return Query
      */

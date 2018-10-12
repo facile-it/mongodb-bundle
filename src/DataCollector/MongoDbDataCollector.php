@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
@@ -84,7 +84,7 @@ class MongoDbDataCollector extends DataCollector
      */
     public function getTime(): float
     {
-        return (float) ($this->data[self::TIME_KEYWORD] * 1000);
+        return (float)($this->data[self::TIME_KEYWORD] * 1000);
     }
 
     /**
@@ -94,6 +94,7 @@ class MongoDbDataCollector extends DataCollector
     {
         return \count($this->data[self::CONNECTION_KEYWORD]);
     }
+
     /**
      * @return array|string[]
      */

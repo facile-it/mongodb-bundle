@@ -20,7 +20,8 @@
         </div>
         <div class="sf-toolbar-info-piece">
             <b>Query time</b>
-            <span class="sf-toolbar-status {{ collector.time > 30 ? 'sf-toolbar-status-yellow' : '' }}">{{ "%.2f"|format(collector.time) }} ms</span>
+            <span class="sf-toolbar-status {{ collector.time > 30 ? 'sf-toolbar-status-yellow' : '' }}">{{ "%.2f"|format(collector.time) }}
+                ms</span>
         </div>
     {% endset %}
     {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': true }) }}
@@ -29,89 +30,89 @@
 {% block head %}
     {{ parent() }}
     <style type="text/css">
-        table.query-profiler tr td
-        {
-            word-break:keep-all;
-            font-family:monospace;
-            font-size:13px;
-            font-size-adjust:0.5;
+        table.query-profiler tr td {
+            word-break: keep-all;
+            font-family: monospace;
+            font-size: 13px;
+            font-size-adjust: 0.5;
         }
-        table.query-profiler ul
-        {
-            list-style-type:none;
-            padding:0;
-            margin:0;
+
+        table.query-profiler ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
-        table.query-profiler ul li
-        {
-            margin:0;
+
+        table.query-profiler ul li {
+            margin: 0;
         }
-        table.query-profiler ul li:nth-child(even)
-        {
-            margin-bottom:5px;
+
+        table.query-profiler ul li:nth-child(even) {
+            margin-bottom: 5px;
         }
-        table.query-profiler #query-number
-        {
-            width:20px;
+
+        table.query-profiler #query-number {
+            width: 20px;
         }
-        table.query-profiler #query-info
-        {
-            width:150px;
+
+        table.query-profiler #query-info {
+            width: 150px;
         }
-        table.query-profiler #query-time
-        {
-            width:60px;
+
+        table.query-profiler #query-time {
+            width: 60px;
         }
-        .query-data > span
-        {
-            display:inline-block;
-            width:745px;
-            white-space:nowrap;
-            overflow:hidden !important;
-            text-overflow:ellipsis;
+
+        .query-data > span {
+            display: inline-block;
+            width: 745px;
+            white-space: nowrap;
+            overflow: hidden !important;
+            text-overflow: ellipsis;
         }
+
         pre {
-            outline:1px solid #ccc;
+            outline: 1px solid #ccc;
             background: #f5f5f5 none repeat scroll 0 0;
             margin: 0.5em 0;
             padding: 1em;
         }
-        .hidden
-        {
-            display:none;
+
+        .hidden {
+            display: none;
         }
-        .string
-        {
-            color:darkorange;
+
+        .string {
+            color: darkorange;
         }
-        .number
-        {
-            color:blue;
+
+        .number {
+            color: blue;
         }
-        .boolean
-        {
-            color:red;
+
+        .boolean {
+            color: red;
         }
-        .null
-        {
-            color:mediumvioletred;
+
+        .null {
+            color: mediumvioletred;
         }
-        .key
-        {
-            color:darkolivegreen;
+
+        .key {
+            color: darkolivegreen;
         }
-        .small-font
-        {
+
+        .small-font {
             font-size: 10px;
         }
-        .bold-font
-        {
-            font-weight:bold;
+
+        .bold-font {
+            font-weight: bold;
         }
-        .time-warning
-        {
-            color:orangered;
-            font-weight:bold;
+
+        .time-warning {
+            color: orangered;
+            font-weight: bold;
         }
     </style>
 {% endblock %}
@@ -177,7 +178,7 @@
             <tr>
                 <td colspan="2">No connections</td>
             </tr>
-        {% endfor  %}
+        {% endfor %}
         </tbody>
     </table>
     <h2>Queries Details</h2>
@@ -197,11 +198,11 @@
                 <td>
                     <div>
                         <ul>
-                            <li> <span class="bold-font">Method:</span></li>
+                            <li><span class="bold-font">Method:</span></li>
                             <li>{{ q.method }}</li>
-                            <li> <span class="bold-font">Read preference:</span></li>
+                            <li><span class="bold-font">Read preference:</span></li>
                             <li>{{ q.readPreference }}</li>
-                            <li> <span class="bold-font">Database:</span></li>
+                            <li><span class="bold-font">Database:</span></li>
                             <li>
                                 {{ q.database|length > 16 ? q.database|slice(0,16)~'...' : q.database }}
                             </li>
@@ -210,7 +211,7 @@
                                 {{ q.collection|length > 16 ? q.collection|slice(0,16)~'...' : q.collection }}
                             </li>
                             <li><span class="bold-font">Exceution time:</span></li>
-                            <li  class="{{ q.executionTime * 1000 > 100.0 ? 'time-warning' : '' }}">
+                            <li class="{{ q.executionTime * 1000 > 100.0 ? 'time-warning' : '' }}">
                                 {{ "%.2f"|format(q.executionTime * 1000) }} ms
                             </li>
                         </ul>
@@ -220,7 +221,8 @@
                     {% if q.filters | length > 0 %}
                         <div class="query-data">
                             <span class="bold-font">{{ filterLabelTranslate('Filters', q.method) }}: </span>
-                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-filters{{ loop.index }}');">Expand</a>
+                            <a href="#!" class="link-inverse"
+                               onclick="facileMongoDbBundleClick(this, 'facile-mongodb-filters{{ loop.index }}');">Expand</a>
                             <br/>
                             <span id="facile-mongodb-filters{{ loop.index }}">{{ q.filters|json_encode(128) }}</span>
                         </div>
@@ -229,8 +231,9 @@
                     {% if q.data | length > 0 %}
                         <div class="query-data">
                             <span class="bold-font">{{ dataLabelTranslate('Data', q.method) }}: </span>
-                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-data{{ loop.index }}');">Expand</a>
-                            <br />
+                            <a href="#!" class="link-inverse"
+                               onclick="facileMongoDbBundleClick(this, 'facile-mongodb-data{{ loop.index }}');">Expand</a>
+                            <br/>
                             <span id="facile-mongodb-data{{ loop.index }}">{{ q.data|json_encode(128) }}</span>
                         </div>
                         <div id="facile-mongodb-data{{ loop.index }}-expand"></div>
@@ -238,8 +241,9 @@
                     {% if q.options | length > 0 %}
                         <div class="query-data">
                             <span class="bold-font">Options: </span>
-                            <a href="#!" class="link-inverse" onclick="facileMongoDbBundleClick(this, 'facile-mongodb-options{{ loop.index }}');">Expand</a>
-                            <br />
+                            <a href="#!" class="link-inverse"
+                               onclick="facileMongoDbBundleClick(this, 'facile-mongodb-options{{ loop.index }}');">Expand</a>
+                            <br/>
                             <span id="facile-mongodb-options{{ loop.index }}">{{ q.options|json_encode(128) }}</span>
                         </div>
                         <div id="facile-mongodb-options{{ loop.index }}-expand"></div>
@@ -259,27 +263,25 @@
             <tr>
                 <td colspan="4">No queries</td>
             </tr>
-        {% endfor  %}
+        {% endfor %}
         </tbody>
     </table>
 
     <script type="text/javascript">
 
-        var facileMongoDbBundleClick = function(caller, elementId)
-        {
+        var facileMongoDbBundleClick = function (caller, elementId) {
             var query = document.getElementById(elementId).innerHTML;
             query = JSON.stringify(JSON.parse(query), undefined, 4);
             var expand = '';
-            if('Expand' == caller.innerHTML) {
+            if ('Expand' == caller.innerHTML) {
                 expand = '<pre>' + facileMongoDbBundlePrettify(query) + '</pre>';
             }
             document.getElementById(elementId + '-expand').innerHTML = expand;
             caller.innerHTML = 'Expand' == caller.innerHTML ? 'Collapse' : 'Expand';
         };
 
-        var facileMongoDbBundlePrettify = function (query)
-        {
-            query = query.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"ISODate\(\\"(.*)\\"\)"/g,  'ISODate("$1")');
+        var facileMongoDbBundlePrettify = function (query) {
+            query = query.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"ISODate\(\\"(.*)\\"\)"/g, 'ISODate("$1")');
             return query.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
                 var cssClass = 'number';
                 if (/^"/.test(match)) {
@@ -298,7 +300,7 @@
         }
 
         var doExplainQuery = function (el) {
-            var elId = 'facile-mongodb-explain-'+el.getAttribute('data-index')+'-expand';
+            var elId = 'facile-mongodb-explain-' + el.getAttribute('data-index') + '-expand';
             var target = document.getElementById(elId);
 
             Sfjs.load(
@@ -308,7 +310,7 @@
                     var explain = JSON.stringify(JSON.parse(response.responseText), undefined, 4);
                     target.innerHTML = '<pre>' + facileMongoDbBundlePrettify(explain) + '</pre>';
                 },
-                function(xhr, el) {
+                function (xhr, el) {
                     document.getElementById(elId).innerHTML = 'An error occurred while loading the query explanation.';
                 }
             );

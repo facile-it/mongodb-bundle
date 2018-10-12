@@ -36,7 +36,7 @@ class ExplainCommandBuilderTest extends TestCase
         $query->setCollection('test_collection');
         $query->setMethod('distinct');
         $query->setFilters(['id' => 1]);
-        $query->setData(['fieldName'=>'test']);
+        $query->setData(['fieldName' => 'test']);
 
         $args = ExplainCommandBuilder::createCommandArgs($query);
 
@@ -76,7 +76,7 @@ class ExplainCommandBuilderTest extends TestCase
      * @dataProvider findsProvider
      *
      * @param string $method
-     * @param bool   $projection
+     * @param bool $projection
      */
     public function test_finds(string $method, bool $projection = false)
     {
@@ -84,12 +84,11 @@ class ExplainCommandBuilderTest extends TestCase
         $query->setCollection('test_collection');
         $query->setMethod($method);
         $query->setFilters(['id' => 1]);
-        if($projection) {
+        if ($projection) {
             $query->setOptions([
                 'projection' => '_id',
             ]);
         }
-
 
         $args = ExplainCommandBuilder::createCommandArgs($query);
 
@@ -101,7 +100,7 @@ class ExplainCommandBuilderTest extends TestCase
             'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
         ];
 
-        if($projection) {
+        if ($projection) {
             $expected['explain']['projection'] = '_id';
         }
 
@@ -122,7 +121,7 @@ class ExplainCommandBuilderTest extends TestCase
      * @dataProvider deletedsProvider
      *
      * @param string $method
-     * @param int    $limit
+     * @param int $limit
      */
     public function test_deletes(string $method, int $limit = 0)
     {
@@ -130,7 +129,7 @@ class ExplainCommandBuilderTest extends TestCase
         $query->setCollection('test_collection');
         $query->setMethod($method);
         $query->setFilters(['id' => 1]);
-        if($limit) {
+        if ($limit) {
             $query->setOptions([
                 'limit' => $limit,
             ]);

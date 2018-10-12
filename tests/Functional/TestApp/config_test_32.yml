@@ -1,15 +1,15 @@
 framework:
-    secret: "Four can keep a secret, if three of them are dead."
-    annotations:
-      enabled: false
+  secret: "Four can keep a secret, if three of them are dead."
+  annotations:
+    enabled: false
 
 mongo_db_bundle:
-    clients:
-      test_client:
-        hosts:
-          - { host: localhost, port: 27017 }
+  clients:
+    test_client:
+      hosts:
+      - { host: localhost, port: 27017 }
 
-    connections:
-      test_db:
-        client_name: test_client
-        database_name: testFunctionaldb
+  connections:
+    test_db:
+      client_name: test_client
+      database_name: testFunctionaldb

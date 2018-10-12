@@ -1,13 +1,13 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
+use MongoDB\Database as Connection;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use MongoDB\Database as Connection;
 
 /**
  * Class AbstractCommand.
@@ -26,9 +26,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
     {
         parent::configure();
         $this
-            ->addOption('connection', null, InputOption::VALUE_OPTIONAL, 'The connection to use for this command')
-        ;
+            ->addOption('connection', null, InputOption::VALUE_OPTIONAL, 'The connection to use for this command');
     }
+
     /**
      * {@inheritdoc}
      */
@@ -40,10 +40,10 @@ abstract class AbstractCommand extends ContainerAwareCommand
         $connectionName = 'mongo.connection';
 
         if ($input->getOption('connection')) {
-            $connectionName .= '.'.$input->getOption('connection');
+            $connectionName .= '.' . $input->getOption('connection');
         }
 
-        if (!$this->getContainer()->has($connectionName)) {
+        if (! $this->getContainer()->has($connectionName)) {
             throw new \LogicException(sprintf('No connection named \'%s\' found', $input->getOption('connection')));
         }
 

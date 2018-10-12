@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
 
@@ -16,12 +16,12 @@ class DatabaseTest extends TestCase
         $manager = new Manager('mongodb://localhost');
         $logger = self::prophesize(EventDispatcherInterface::class);
 
-        $db = new Database($manager,'client_name', 'testdb', [], $logger->reveal());
+        $db = new Database($manager, 'client_name', 'testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);
 
         $coll = $db->selectCollection('test_collection');
 
-        self::assertInstanceOf(Collection::class,$coll);
+        self::assertInstanceOf(Collection::class, $coll);
 
         $debugInfo = $coll->__debugInfo();
         self::assertSame($manager, $debugInfo['manager']);
@@ -33,12 +33,12 @@ class DatabaseTest extends TestCase
         $manager = new Manager('mongodb://localhost');
         $logger = self::prophesize(EventDispatcherInterface::class);
 
-        $db = new Database($manager, 'client_name','testdb', [], $logger->reveal());
+        $db = new Database($manager, 'client_name', 'testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);
 
         $newDb = $db->withOptions(['readPreference' => new ReadPreference(ReadPreference::RP_NEAREST)]);
 
-        self::assertInstanceOf(Database::class,$newDb);
+        self::assertInstanceOf(Database::class, $newDb);
 
         $debugInfo = $newDb->__debugInfo();
         self::assertSame($manager, $debugInfo['manager']);

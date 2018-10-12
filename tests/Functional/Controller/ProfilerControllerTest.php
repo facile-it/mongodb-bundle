@@ -48,7 +48,7 @@ class ProfilerControllerTest extends AppTestCase
         $controller = new ProfilerController();
         $controller->setContainer($container->reveal());
 
-        $response  = $controller->explainAction('fooToken', 0);
+        $response = $controller->explainAction('fooToken', 0);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
@@ -84,7 +84,7 @@ class ProfilerControllerTest extends AppTestCase
         $controller = new ProfilerController();
         $controller->setContainer($container->reveal());
 
-        $response  = $controller->explainAction('fooToken', 0);
+        $response = $controller->explainAction('fooToken', 0);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(200, $response->getStatusCode());

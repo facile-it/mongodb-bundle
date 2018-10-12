@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Functional\Command;
 
@@ -32,13 +32,11 @@ class LoadFixturesAppTest extends AppTestCase
             ]
         );
 
-
         /** @var Collection $collection */
         $collection = $conn->selectCollection('testFixturesCollection');
 
         $fixtures = $collection->find(['type' => 'fixture']);
         $fixtures = $fixtures->toArray();
-
 
         self::assertEquals('fixture', $fixtures[0]['type']);
         self::assertEquals('test', $fixtures[0]['data']);
@@ -66,10 +64,8 @@ class LoadFixturesAppTest extends AppTestCase
         $conn->dropCollection('testFixturesCollection');
     }
 
-
     public function test_command_order_fixtures()
     {
-
 
         /** @var Database $conn */
         $conn = $this->getContainer()->get('mongo.connection');

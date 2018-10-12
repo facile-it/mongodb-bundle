@@ -1,11 +1,10 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
-use Facile\MongoDbBundle\Fixtures\MongoFixturesLoader;
 use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
+use Facile\MongoDbBundle\Fixtures\MongoFixturesLoader;
 use Facile\MongoDbBundle\Fixtures\OrderedFixtureInterface;
-
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,8 +28,7 @@ class LoadFixturesCommand extends AbstractCommand
         $this
             ->setName('mongodb:fixtures:load')
             ->addArgument('addFixturesPath', InputArgument::OPTIONAL, 'Add a path to search in for fixtures files')
-            ->setDescription('Load fixtures and applies them');
-        ;
+            ->setDescription('Load fixtures and applies them');;
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -55,7 +53,7 @@ class LoadFixturesCommand extends AbstractCommand
         $fixtures = $this->loader->getLoadedClasses();
         if (empty($fixtures)) {
             throw new \InvalidArgumentException(
-                sprintf('Could not find any class to load in: %s', "\n\n- ".implode("\n- ", $paths))
+                sprintf('Could not find any class to load in: %s', "\n\n- " . implode("\n- ", $paths))
             );
         }
 
@@ -75,12 +73,12 @@ class LoadFixturesCommand extends AbstractCommand
     {
         $indexList->loadData();
         $indexList->loadIndexes();
-        $this->io->writeln('Loaded fixture: '. \get_class($indexList));
+        $this->io->writeln('Loaded fixture: ' . \get_class($indexList));
     }
 
     /**
-     * @param InputInterface    $input
-     * @param KernelInterface   $kernel
+     * @param InputInterface $input
+     * @param KernelInterface $kernel
      *
      * @return array
      */
@@ -93,7 +91,7 @@ class LoadFixturesCommand extends AbstractCommand
         }
 
         foreach ($kernel->getBundles() as $bundle) {
-            $paths[] = $bundle->getPath().'/DataFixtures/Mongo';
+            $paths[] = $bundle->getPath() . '/DataFixtures/Mongo';
         }
 
         return $paths;
@@ -131,19 +129,16 @@ class LoadFixturesCommand extends AbstractCommand
                 return $fixture1->getOrder() - $fixture2->getOrder();
             }
 
-            if (!$isFixture1Instance && !$isFixture2Instance) {
+            if (! $isFixture1Instance && ! $isFixture2Instance) {
                 return 1;
             }
 
-
             return ($isFixture2Instance) ? -1 : 1;
-
 
         });
 
         return $this;
 
     }
-
 
 }
