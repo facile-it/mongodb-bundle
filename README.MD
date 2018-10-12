@@ -96,9 +96,18 @@ $this->get('mongo.connection.{connectionName}'); // [test_db, other_db, test_db_
 To manipulate the database, please read the official [documentation](http://mongodb.github.io/mongo-php-library/classes/database/)
 
 ### Fixtures
-This bundle supports doctrine style fixtures, to create one you will need to create a php class in your bundle '/DataFixtures/Mongo' directory for Example 'src/AppBundle/DataFixtures/Mongo/LoadTaskDataFixture.php'
+This bundle supports doctrine style fixtures.
+To create one you will need to add a php class in your bundle's `/DataFixtures/Mongo` directory. 
+For Example `src/AppBundle/DataFixtures/Mongo/LoadTaskDataFixture.php`.
 
-Note: This class must implement at least the MongoFixtureInterface, if you need container support you can extend AbstractContainerAwareFixture to use the getContainer method.
+Note: This class must implement at least the `MongoFixtureInterface`, if you need container support you can 
+extend `AbstractContainerAwareFixture` to use the `getContainer` method.
+
+#### Ordering
+Since [0.6.6](https://github.com/facile-it/mongodb-bundle/releases/tag/0.6.6) it's possibile to specify the order by 
+which the fixtures are loaded.
+Make sure it implements `OrderedFixtureInterface`.
+Fixtures with lower values of `getOrder` will be loaded first.
 
 ### Commands
 

@@ -11,9 +11,6 @@ use Facile\MongoDbBundle\Fixtures\OrderedFixtureInterface;
 
 class TestOrderedMongoFixtures1 extends AbstractContainerAwareFixture implements MongoFixtureInterface, OrderedFixtureInterface
 {
-    /**
-     * @return array
-     */
     public function loadData()
     {
         $doc = [
@@ -28,24 +25,15 @@ class TestOrderedMongoFixtures1 extends AbstractContainerAwareFixture implements
         $collection->insertOne($doc);
     }
 
-    /**
-     * Gets priority to sort fixtures order
-     */
-    public function getOrder()
+    public function getOrder(): int
     {
         return 200;
     }
 
-    /**
-     * @return array
-     */
     public function loadIndexes()
     {
     }
 
-    /**
-     * @return string
-     */
     public function collection(): string
     {
         return 'testFixturesOrderedCollection';

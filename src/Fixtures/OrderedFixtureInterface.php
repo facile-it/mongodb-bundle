@@ -12,11 +12,5 @@ namespace Facile\MongoDbBundle\Fixtures;
  */
 interface OrderedFixtureInterface
 {
-    /**
-     * Get the order of this fixture
-     *
-     * @return integer
-     */
-    public function getOrder();
-
+    public function getOrder(): int;
 }
