@@ -116,7 +116,7 @@ class LoadFixturesCommand extends AbstractCommand
 
     /**
      * Sorts fixtures by getOrder in case of implementing OrderedFixtureInterface
-     * Prioritizes fixtures with interface
+     * Fixtures with interface will be after the rest
      *
      * @param array $fixtures
      * @return self
@@ -135,7 +135,8 @@ class LoadFixturesCommand extends AbstractCommand
                 return 1;
             }
 
-            return ($isFixture1Instance) ? -1 : 1;
+
+            return ($isFixture2Instance) ? -1 : 1;
 
 
         });

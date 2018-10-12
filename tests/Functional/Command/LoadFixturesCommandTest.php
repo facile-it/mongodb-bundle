@@ -97,9 +97,15 @@ class LoadFixturesAppTest extends AppTestCase
         $fixtures = $collection->find(['type' => 'fixture']);
         $fixtures = $fixtures->toArray();
 
+        self::assertEquals(3, count($fixtures));
+
         $fixture = current($fixtures);
 
-        self::assertEquals(3, count($fixtures));
+        self::assertEquals('fixture', $fixture['type']);
+        self::assertEquals('Batman Begins - 2005', $fixture['data']);
+        self::assertEquals(0, $fixture['expectedPosition']);
+
+        $fixture = next($fixtures);
 
         self::assertEquals('fixture', $fixture['type']);
         self::assertEquals('Edward Scissorhands - 1990', $fixture['data']);

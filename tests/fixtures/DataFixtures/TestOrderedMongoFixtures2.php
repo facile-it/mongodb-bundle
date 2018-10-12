@@ -19,6 +19,7 @@ class TestOrderedMongoFixtures2 extends AbstractContainerAwareFixture implements
         $doc = [
             'type' => 'fixture',
             'data' => 'Batman Begins - 2005',
+            'expectedPosition' => 0,
         ];
 
 
