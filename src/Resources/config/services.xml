@@ -19,7 +19,7 @@
             <tag name="console.command"/>
         </service>
 
-        <service id="MongoDB\Database" alias="mongo.connection"/>
+        <service id="MongoDB\Database" alias="mongo.connection" public="true"/>
 
         <service id="facile_mongo_db.command.drop_collection"
                  class="Facile\MongoDbBundle\Command\DropCollectionCommand">
