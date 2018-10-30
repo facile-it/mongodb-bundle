@@ -54,6 +54,9 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertInstanceOf(LoggerDatabase::class, $defaultConnection);
         $this->assertSame('testdb', $defaultConnection->getDatabaseName());
 
+        $aliasConnection = $this->container->get(Database::class);
+        $this->assertSame($defaultConnection, $aliasConnection);
+
         // 'test_db' connection
         $this->assertContainerBuilderHasService('mongo.connection.test_db', Database::class);
         $defaultConnection = $this->container->get('mongo.connection.test_db');
