@@ -65,35 +65,13 @@ final class ClientRegistry
      */
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
-        return new ClientConfiguration(
-            $this->buildConnectionUri($conf['hosts']),
-            $conf['username'],
-            $conf['password'],
-            $conf['authSource'],
-            [
-                'replicaSet' => $conf['replicaSet'],
-                'ssl' => $conf['ssl'],
-                'connectTimeoutMS' => $conf['connectTimeoutMS'],
-                'readPreference' => $conf['readPreference']
-            ]
-        );
-    }
+        if  (!array_key_exists('options', $conf)) {
+            $conf['options'] = [];
+        }
 
-    /**
-     * @param array $hosts
-     *
-     * @return string
-     */
-    private function buildConnectionUri(array $hosts): string
-    {
-        return implode(
-            ',',
-            array_map(
-                function (array $host) {
-                    return sprintf("%s:%d", $host['host'], $host['port']);
-                },
-                $hosts
-            )
+        return new ClientConfiguration(
+            $conf['uri'],
+            $conf['options']
         );
     }
 
@@ -128,15 +106,13 @@ final class ClientRegistry
 
         if (! isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
-            $uri = sprintf('mongodb://%s', $conf->getHosts());
             $options = array_merge(
                 [
                     'database' => $databaseName,
-                    'authSource' => $conf->getAuthSource() ?? $databaseName ?? 'admin'
                 ],
                 $conf->getOptions()
             );
-            $this->clients[$clientKey] = $this->buildClient($name, $uri, $options, []);
+            $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, []);
 
             $this->eventDispatcher->dispatch(
                 ConnectionEvent::CLIENT_CREATED,

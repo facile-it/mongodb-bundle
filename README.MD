@@ -53,19 +53,15 @@ mongo_db_bundle:
     # clients section, here you can define connection to different servers or with different credentials
     clients:
     
-      foo_client_name:    #choose your client name
-        hosts:            # Required - will compose your mongo connection url (mongodb://host1:3062,host2:27017)
-            - { host: host1, port: 3062 } # this 
-            - { host: host2 }
-        username:         ''
-        password:         ''
-        authSource:       '' # the database name associated with the user’s credentials, defaults to connection
-                                database_name if not specified
-        replicaSet:       '' # default null (no replica) (experimental)
-        ssl:              false
-        connectTimeoutMS: 3000 # default null (no timeout)
-        readPreference:   primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
-        
+      foo_client_name:      # choose your client name
+        uri:                'mongodb://user:password@host1:27017'
+        options:
+          authSource:       '' # the database name associated with the user’s credentials
+          replicaSet:       '' # default null (no replica) (experimental)
+          ssl:              false
+          connectTimeoutMS: 3000 # default null (no timeout)
+          readPreference:   primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
+
       other_client:   ~ # same as upper configuration
       
     # connections section, theese represents your Database object reference

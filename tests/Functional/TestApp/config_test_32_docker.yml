@@ -6,11 +6,9 @@ framework:
 mongo_db_bundle:
   clients:
     test_client:
-      username: root
-      password: rootPass
-      authSource: admin
-      hosts:
-      - { host: mongo, port: 27017 }
+      uri: mongodb://root:rootPass@mongo
+      options:
+        authSource: admin
 
   connections:
     test_db:

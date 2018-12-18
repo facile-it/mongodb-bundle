@@ -31,11 +31,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080]
-                        ],
-                        'username' => 'foo',
-                        'password' => 'bar',
+                        'uri' => 'mongodb://foo:bar@localhost:8080',
                     ],
                 ],
                 'connections' => [
@@ -83,11 +79,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080]
-                        ],
-                        'username' => 'foo',
-                        'password' => 'bar',
+                        'uri' => 'mongodb://foo:bar@localhost:8080',
                     ],
                 ],
                 'connections' => [
@@ -130,11 +122,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080]
-                        ],
-                        'username' => 'foo',
-                        'password' => 'bar',
+                        'uri' => 'mongodb://foo:bar@localhost:8080',
                     ],
                 ],
                 'connections' => [
@@ -168,18 +156,10 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
             [
                 'clients' => [
                     'test_client' => [
-                        'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080]
-                        ],
-                        'username' => 'foo',
-                        'password' => 'bar',
+                        'uri' => 'mongodb://foo:bar@localhost:8080',
                     ],
                     'other_client' => [
-                        'hosts' => [
-                            ['host' => 'localhost.dev', 'port' => 8081]
-                        ],
-                        'username' => 'mee',
-                        'password' => 'zod',
+                        'uri' => 'mongodb://mee:zod@localhost.dev:8081',
                     ],
                 ],
                 'connections' => [

@@ -3,14 +3,12 @@ mongo_db_bundle:
 
   clients:
     test_client:
-      hosts:
-      - { host: localhost, port: 8080 }
-      username: foo
-      password: bar
-      replicaSet: 'testReplica'
-      ssl: true
-      connectTimeoutMS: 3000
-      readPreference: 'fakeOption'
+      uri: mongodb://foo:bar@localhost:8080
+      options:
+        replicaSet: 'testReplica'
+        ssl: true
+        connectTimeoutMS: 3000
+        readPreference: 'fakeOption'
 
   connections:
     test_db:

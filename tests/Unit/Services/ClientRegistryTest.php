@@ -16,23 +16,21 @@ class ClientRegistryTest extends TestCase
 
         $testConf = [
             'test_client' => [
-                'hosts' => [
-                    ['host' => 'host1', 'port' => 8080],
+                'uri' => 'mongodb://foo:bar@host1:8080',
+                'options' => [
+                    'authSource' => null,
+                    'replicaSet' => 'testReplica',
+                    'ssl' => true,
+                    'connectTimeoutMS' => 3000,
+                    'readPreference' => 'primary',
                 ],
-                'username' => 'foo',
-                'password' => 'bar',
-                'authSource' => null,
-                'replicaSet' => 'testReplica',
-                'ssl' => true,
-                'connectTimeoutMS' => 3000,
-                'readPreference' => 'primary',
             ],
         ];
 
         $registry->addClientsConfigurations($testConf);
         $client = $registry->getClient('test_client', 'testdb');
 
-        $this->assertEquals('mongodb://host1:8080', $client->__debugInfo()['uri']);
+        $this->assertEquals('mongodb://foo:bar@host1:8080', $client->__debugInfo()['uri']);
 
         $this->assertEquals(['test_client.testdb'], $registry->getClientNames());
     }
@@ -45,23 +43,20 @@ class ClientRegistryTest extends TestCase
 
         $testConf = [
             'test_client' => [
-                'hosts' => [
-                    ['host' => 'host1', 'port' => 8080],
-                    ['host' => 'host2', 'port' => 8081],
+                'uri' => 'mongodb://foo:bar@host1:8080,host2:8081',
+                'options' => [
+                    'authSource' => null,
+                    'replicaSet' => 'testReplica',
+                    'ssl' => true,
+                    'connectTimeoutMS' => 3000,
+                    'readPreference' => 'primary',
                 ],
-                'username' => 'foo',
-                'password' => 'bar',
-                'authSource' => null,
-                'replicaSet' => 'testReplica',
-                'ssl' => true,
-                'connectTimeoutMS' => 3000,
-                'readPreference' => 'primary',
             ],
         ];
 
         $registry->addClientsConfigurations($testConf);
         $client = $registry->getClient('test_client', 'testdb');
 
-        $this->assertEquals('mongodb://host1:8080,host2:8081', $client->__debugInfo()['uri']);
+        $this->assertEquals('mongodb://foo:bar@host1:8080,host2:8081', $client->__debugInfo()['uri']);
     }
 }

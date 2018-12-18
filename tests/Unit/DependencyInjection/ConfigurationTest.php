@@ -29,16 +29,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
-                    ],
-                    'username' => 'foo',
-                    'password' => 'bar',
-                    'authSource' => null,
-                    'replicaSet' => null,
-                    'ssl' => false,
-                    'connectTimeoutMS' => null,
-                    'readPreference' => 'primaryPreferred',
+                    'uri' => 'mongodb://foo:bar@localhost:8080',
                 ],
             ],
             'connections' => [
@@ -59,16 +50,14 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                    'uri' => 'mongodb://foo:bar@localhost:8080',
+                    'options' => [
+                        'authSource' => null,
+                        'replicaSet' => 'testReplica',
+                        'ssl' => true,
+                        'connectTimeoutMS' => 3000,
+                        'readPreference' => null,
                     ],
-                    'username' => 'foo',
-                    'password' => 'bar',
-                    'authSource' => null,
-                    'replicaSet' => 'testReplica',
-                    'ssl' => true,
-                    'connectTimeoutMS' => 3000,
-                    'readPreference' => 'primaryPreferred',
                 ],
             ],
             'connections' => [
@@ -89,16 +78,14 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                    'uri' => 'mongodb://foo:bar@localhost:8080',
+                    'options' => [
+                        'authSource' => null,
+                        'replicaSet' => 'testReplica',
+                        'ssl' => true,
+                        'connectTimeoutMS' => 3000,
+                        'readPreference' => null,
                     ],
-                    'username' => 'foo',
-                    'password' => 'bar',
-                    'authSource' => null,
-                    'replicaSet' => 'testReplica',
-                    'ssl' => true,
-                    'connectTimeoutMS' => 3000,
-                    'readPreference' => 'primaryPreferred',
                 ],
             ],
             'connections' => [
@@ -119,29 +106,10 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
-                    'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080],
-                    ],
-                    'username' => 'foo',
-                    'password' => 'bar',
-                    'authSource' => null,
-                    'replicaSet' => null,
-                    'ssl' => false,
-                    'connectTimeoutMS' => null,
-                    'readPreference' => 'primaryPreferred',
+                    'uri' => 'mongodb://foo:bar@localhost:8080',
                 ],
                 'other_client' => [
-                    'hosts' => [
-                        ['host' => 'localhost.dev', 'port' => 8081],
-                        ['host' => 'localhost.dev2', 'port' => 27017]
-                    ],
-                    'username' => 'mee',
-                    'password' => 'zod',
-                    'authSource' => null,
-                    'replicaSet' => null,
-                    'ssl' => false,
-                    'connectTimeoutMS' => null,
-                    'readPreference' => 'primaryPreferred',
+                    'uri' => 'mongodb://mee:zod@localhost.dev:8081,localhost.dev2',
                 ],
             ],
             'connections' => [
@@ -176,7 +144,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $configuration = new Configuration();
 
         $this->expectException(InvalidConfigurationException::class);
-        $this->expectExceptionMessage('Invalid configuration for path "mongo_db_bundle.clients.test_client.readPreference": Invalid readPreference option "fakeOption", must be one of [primary, primaryPreferred, secondary, secondaryPreferred, nearest]');
+        $this->expectExceptionMessage('Invalid configuration for path "mongo_db_bundle.clients.test_client.options.readPreference": Invalid readPreference option "fakeOption", must be one of [primary, primaryPreferred, secondary, secondaryPreferred, nearest]');
         $processor->processConfiguration(
             $configuration,
             $extensionConfiguration->getConfiguration()
