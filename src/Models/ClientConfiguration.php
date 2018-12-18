@@ -9,6 +9,8 @@ namespace Facile\MongoDbBundle\Models;
 final class ClientConfiguration
 {
     /** @var string */
+    private $proto;
+    /** @var string */
     private $hosts;
     /** @var string */
     private $username;
@@ -22,6 +24,7 @@ final class ClientConfiguration
     /**
      * ClientConfiguration constructor.
      *
+     * @param string $proto
      * @param string $hosts
      * @param string $username
      * @param string $password
@@ -29,17 +32,27 @@ final class ClientConfiguration
      * @param array $options
      */
     public function __construct(
+        string $proto,
         string $hosts,
         string $username = '',
         string $password = '',
         string $authSource = null,
         array $options = []
     ) {
+        $this->proto = $proto;
         $this->hosts = $hosts;
         $this->username = $username;
         $this->password = $password;
         $this->options = $options;
         $this->authSource = $authSource;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProto(): string
+    {
+        return $this->proto;
     }
 
     /**

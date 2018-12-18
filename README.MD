@@ -53,7 +53,8 @@ mongo_db_bundle:
     # clients section, here you can define connection to different servers or with different credentials
     clients:
     
-      foo_client_name:    #choose your client name
+      foo_client_name:    # choose your client name
+        proto:            'mongodb' # optional, see https://docs.mongodb.com/manual/reference/connection-string/
         hosts:            # Required - will compose your mongo connection url (mongodb://host1:3062,host2:27017)
             - { host: host1, port: 3062 } # this 
             - { host: host2 }
@@ -68,7 +69,7 @@ mongo_db_bundle:
         
       other_client:   ~ # same as upper configuration
       
-    # connections section, theese represents your Database object reference
+    # connections section, these represents your Database object reference
     connections:
     
       foo_db:

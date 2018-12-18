@@ -29,6 +29,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
+                    'proto' => 'mongodb',
                     'hosts' => [
                         ['host' => 'localhost', 'port' => 8080]
                     ],
@@ -59,6 +60,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
+                    'proto' => 'mongodb',
                     'hosts' => [
                         ['host' => 'localhost', 'port' => 8080]
                     ],
@@ -89,6 +91,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
+                    'proto' => 'mongodb',
                     'hosts' => [
                         ['host' => 'localhost', 'port' => 8080]
                     ],
@@ -119,6 +122,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $expectedConfiguration = [
             'clients' => [
                 'test_client' => [
+                    'proto' => 'mongodb',
                     'hosts' => [
                         ['host' => 'localhost', 'port' => 8080],
                     ],
@@ -131,6 +135,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'readPreference' => 'primaryPreferred',
                 ],
                 'other_client' => [
+                    'proto' => 'mongodb',
                     'hosts' => [
                         ['host' => 'localhost.dev', 'port' => 8081],
                         ['host' => 'localhost.dev2', 'port' => 27017]

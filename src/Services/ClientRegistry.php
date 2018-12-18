@@ -66,6 +66,7 @@ final class ClientRegistry
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
         return new ClientConfiguration(
+            $conf['proto'],
             $this->buildConnectionUri($conf['hosts']),
             $conf['username'],
             $conf['password'],
@@ -90,6 +91,10 @@ final class ClientRegistry
             ',',
             array_map(
                 function (array $host) {
+                    if (!$host['port']) {
+                        return $host['host'];
+                    }
+
                     return sprintf("%s:%d", $host['host'], $host['port']);
                 },
                 $hosts
@@ -128,7 +133,7 @@ final class ClientRegistry
 
         if (! isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
-            $uri = sprintf('mongodb://%s', $conf->getHosts());
+            $uri = sprintf('%s://%s', $conf->getProto(), $conf->getHosts());
             $options = array_merge(
                 [
                     'database' => $databaseName,

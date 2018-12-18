@@ -28,6 +28,7 @@ final class Configuration implements ConfigurationInterface
             ->useAttributeAsKey('name')
             ->prototype('array')
             ->children()
+            ->scalarNode('proto')->defaultValue('mongodb')->end()
             ->arrayNode('hosts')->info('Hosts addresses and ports')
             ->prototype('array')
             ->children()

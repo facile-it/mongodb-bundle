@@ -15,11 +15,13 @@ class ClientConfigurationTest extends TestCase
     public function test_construction()
     {
         $conf = new ClientConfiguration(
+            'mongodb',
             'localhost:27017',
             'admin',
             'admin_password'
         );
 
+        self::assertEquals('mongodb', $conf->getProto());
         self::assertEquals('localhost:27017', $conf->getHosts());
         self::assertEquals('admin', $conf->getUsername());
         self::assertEquals('admin_password', $conf->getPassword());
@@ -35,11 +37,13 @@ class ClientConfigurationTest extends TestCase
     public function test_construction_empty_credentials()
     {
         $conf = new ClientConfiguration(
+            'mongodb',
             'localhost:27017',
             '',
             ''
         );
 
+        self::assertEquals('mongodb', $conf->getProto());
         self::assertEquals('localhost:27017', $conf->getHosts());
         self::assertEquals('', $conf->getUsername());
         self::assertEquals('', $conf->getPassword());
@@ -58,6 +62,7 @@ class ClientConfigurationTest extends TestCase
     public function test_construction_with_options(array $options, array $expectedOptions)
     {
         $conf = new ClientConfiguration(
+            'mongodb',
             'localhost:27017',
             '',
             '',
@@ -65,6 +70,7 @@ class ClientConfigurationTest extends TestCase
             $options
         );
 
+        self::assertEquals('mongodb', $conf->getProto());
         self::assertEquals('localhost:27017', $conf->getHosts());
         self::assertEquals('', $conf->getUsername());
         self::assertEquals('', $conf->getPassword());

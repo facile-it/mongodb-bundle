@@ -16,6 +16,7 @@ class ClientRegistryTest extends TestCase
 
         $testConf = [
             'test_client' => [
+                'proto' => 'mongodb',
                 'hosts' => [
                     ['host' => 'host1', 'port' => 8080],
                 ],
@@ -45,6 +46,7 @@ class ClientRegistryTest extends TestCase
 
         $testConf = [
             'test_client' => [
+                'proto' => 'mongodb',
                 'hosts' => [
                     ['host' => 'host1', 'port' => 8080],
                     ['host' => 'host2', 'port' => 8081],
