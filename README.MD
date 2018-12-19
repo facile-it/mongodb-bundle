@@ -54,18 +54,18 @@ mongo_db_bundle:
     clients:
     
       foo_client_name:    # choose your client name
-        # uri: 'mongodb://host1:3062,host2' # default null (will use hosts to build connection URI)
+        uri: 'mongodb://host1:3062,host2' # default null (will use hosts to build connection URI)
         hosts:            # required if uri is not set - will compose your connection URI (mongodb://host1:3062,host2:27017)
             - { host: host1, port: 3062 } # this 
             - { host: host2 }
-        username:         ''
-        password:         ''
-        authSource:       '' # the database name associated with the user’s credentials, defaults to connection
-                                database_name if not specified
-        replicaSet:       '' # default null (no replica) (experimental)
-        ssl:              false
+        username: ''
+        password: ''
+        authSource: '' # the database name associated with the user’s credentials, defaults to connection
+                       # 'database_name' if not specified
+        replicaSet: '' # default null (no replica) (experimental)
+        ssl: false
         connectTimeoutMS: 3000 # default null (no timeout)
-        readPreference:   primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
+        readPreference: primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
         
       other_client:   ~ # same as upper configuration
       
@@ -128,22 +128,30 @@ On dev environment all queries executed by the library MongoDB\Collection class 
 
 ### Contributing
 
-Feel free to contribute by opening a pull request, if you find a bug or to suggest a new feature.
-If you like docker, this repository is provided with a dev environment with some scripts to prepare and use it.
-All you need is docker and docker-compose installed on your system.
+Feel free to contribute by opening a pull request.
+Bug fixes or feature suggestions are always welcome.
 
-```
- make setup  # will build the needed containers and setup the project
+#### Development environment
+
+If you like docker there are some scripts to setup an insulated development environment.
+Please be sure to have `docker` and `docker-compose` installed on your system.
+
+To setup the project:
+```bash
+make setup
 ```
 
-```
- make start  # will start the needed containers and put you inside the php-cli container
+To start the container and log into the php-cli:
+```bash
+make start
 ```
 
+To execute the test suite:
+```bash
+make test
 ```
- make test  # will launch the test suite
-```
-Note: All these scripts are meant to be used outside the containers.
+
+Note: All the above are meant to be used outside the containers.
 
 #### Port binding setup
 

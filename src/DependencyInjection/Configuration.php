@@ -2,6 +2,7 @@
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -12,63 +13,116 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 final class Configuration implements ConfigurationInterface
 {
+    const READ_PREFERENCE_VALID_OPTIONS = ['primary', 'primaryPreferred', 'secondary', 'secondaryPreferred', 'nearest'];
+
     /**
      * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
-        $readPreferenceValidOptions = ['primary', 'primaryPreferred', 'secondary', 'secondaryPreferred', 'nearest'];
-
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('mongo_db_bundle');
-        $rootNode
-            ->children()
-                ->booleanNode('data_collection')->defaultTrue()->info('Disables Data Collection if needed')->end()
-                ->arrayNode('clients')
-                    ->isRequired()
-                    ->requiresAtLeastOneElement()
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
-                        ->children()
-                            ->arrayNode('hosts')->info('Hosts addresses and ports')
-                                ->prototype('array')
-                                    ->children()
-                                        ->scalarNode('host')->isRequired()->end()
-                                        ->integerNode('port')->defaultValue(27017)->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                            ->scalarNode('uri')->defaultNull()->info('Overrides hosts configuration')->end()
-                            ->scalarNode('username')->defaultValue('')->end()
-                            ->scalarNode('password')->defaultValue('')->end()
-                            ->scalarNode('authSource')->defaultNull()->info('Database name associated with the user’s credentials')->end()
-                            ->scalarNode('readPreference')
-                                ->defaultValue('primaryPreferred')
-                                ->validate()
-                                    ->ifNotInArray($readPreferenceValidOptions)
-                                    ->thenInvalid('Invalid readPreference option %s, must be one of ['.implode(', ', $readPreferenceValidOptions).']')
-                                ->end()
-                            ->end()
-                            ->scalarNode('replicaSet')->defaultNull()->end()
-                            ->booleanNode('ssl')->defaultFalse()->end()
-                            ->integerNode('connectTimeoutMS')->defaultNull()->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
-        $rootNode
-            ->children()
-                ->arrayNode('connections')->isRequired()->requiresAtLeastOneElement()
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
-                        ->children()
-                            ->scalarNode('client_name')->isRequired()->info('Desired client name')->end()
-                            ->scalarNode('database_name')->isRequired()->info('Database name')->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
+        $rootBuilder = $treeBuilder->root('mongo_db_bundle')->children();
+
+        $this->addDataCollection($rootBuilder);
+        $this->addClients($rootBuilder);
+        $this->addConnections($rootBuilder);
 
         return $treeBuilder;
+    }
+
+    private function addDataCollection(NodeBuilder $builder)
+    {
+        $builder
+            ->booleanNode('data_collection')
+            ->defaultTrue()
+            ->info('Disables Data Collection if needed');
+    }
+
+    private function addClients(NodeBuilder $builder)
+    {
+        $clientsBuilder = $builder
+            ->arrayNode('clients')
+            ->isRequired()
+            ->requiresAtLeastOneElement()
+            ->useAttributeAsKey('name')
+            ->prototype('array')
+            ->children();
+
+        $this->addClientsHosts($clientsBuilder);
+
+        $clientsBuilder
+            ->scalarNode('uri')
+            ->defaultNull()
+            ->info('Overrides hosts configuration');
+
+        $clientsBuilder
+            ->scalarNode('username')
+            ->defaultValue('');
+
+        $clientsBuilder
+            ->scalarNode('password')
+            ->defaultValue('');
+
+        $clientsBuilder
+            ->scalarNode('authSource')
+            ->defaultNull()
+            ->info('Database name associated with the user’s credentials');
+
+        $clientsBuilder
+            ->scalarNode('readPreference')
+            ->defaultValue('primaryPreferred')
+            ->validate()
+            ->ifNotInArray(self::READ_PREFERENCE_VALID_OPTIONS)
+            ->thenInvalid('Invalid readPreference option %s, must be one of [' . implode(', ', self::READ_PREFERENCE_VALID_OPTIONS) . ']');
+
+        $clientsBuilder
+            ->scalarNode('replicaSet')
+            ->defaultNull();
+
+        $clientsBuilder
+            ->booleanNode('ssl')
+            ->defaultFalse();
+
+        $clientsBuilder
+            ->integerNode('connectTimeoutMS')
+            ->defaultNull();
+    }
+
+    private function addClientsHosts(NodeBuilder $builder)
+    {
+        $hostsBuilder = $builder
+            ->arrayNode('hosts')
+            ->info('Hosts addresses and ports')
+            ->prototype('array')
+            ->children();
+
+        $hostsBuilder
+            ->scalarNode('host')
+            ->isRequired();
+
+        $hostsBuilder
+            ->integerNode('port')
+            ->defaultValue(27017);
+    }
+
+    private function addConnections(NodeBuilder $builder)
+    {
+        $connectionBuilder = $builder
+            ->arrayNode('connections')
+            ->isRequired()
+            ->requiresAtLeastOneElement()
+            ->useAttributeAsKey('name')
+            ->prototype('array')
+            ->children();
+
+        $connectionBuilder
+            ->scalarNode('client_name')
+            ->isRequired()
+            ->info('Desired client name');
+
+        $connectionBuilder
+            ->scalarNode('database_name')
+            ->isRequired()
+            ->info('Database name');
     }
 }
