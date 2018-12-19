@@ -54,6 +54,7 @@ mongo_db_bundle:
     clients:
     
       foo_client_name:    #choose your client name
+        # uri: 'mongodb://host1:3062,host2' # default null (will use hosts to build connection URI)
         hosts:            # Required - will compose your mongo connection url (mongodb://host1:3062,host2:27017)
             - { host: host1, port: 3062 } # this 
             - { host: host2 }

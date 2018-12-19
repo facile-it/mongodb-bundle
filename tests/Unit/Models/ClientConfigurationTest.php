@@ -20,7 +20,7 @@ class ClientConfigurationTest extends TestCase
             'admin_password'
         );
 
-        self::assertEquals('localhost:27017', $conf->getHosts());
+        self::assertEquals('localhost:27017', $conf->getUri());
         self::assertEquals('admin', $conf->getUsername());
         self::assertEquals('admin_password', $conf->getPassword());
         self::assertEquals(
@@ -40,7 +40,7 @@ class ClientConfigurationTest extends TestCase
             ''
         );
 
-        self::assertEquals('localhost:27017', $conf->getHosts());
+        self::assertEquals('localhost:27017', $conf->getUri());
         self::assertEquals('', $conf->getUsername());
         self::assertEquals('', $conf->getPassword());
         self::assertEquals(
@@ -65,7 +65,7 @@ class ClientConfigurationTest extends TestCase
             $options
         );
 
-        self::assertEquals('localhost:27017', $conf->getHosts());
+        self::assertEquals('localhost:27017', $conf->getUri());
         self::assertEquals('', $conf->getUsername());
         self::assertEquals('', $conf->getPassword());
         self::assertEquals(

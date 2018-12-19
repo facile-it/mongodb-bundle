@@ -10,16 +10,20 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class ClientRegistry.
+ *
  * @internal
  */
 final class ClientRegistry
 {
     /** @var Client[] */
     private $clients;
+
     /** @var ClientConfiguration[] */
     private $configurations;
+
     /** @var string */
     private $environment;
+
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
@@ -27,7 +31,7 @@ final class ClientRegistry
      * ClientRegistry constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
-     * @param string $environment
+     * @param string                   $environment
      *
      * @internal param DataCollectorLoggerInterface $logger
      */
@@ -51,7 +55,7 @@ final class ClientRegistry
 
     /**
      * @param string $name
-     * @param array $conf
+     * @param array  $conf
      */
     private function addClientConfiguration(string $name, array $conf)
     {
@@ -65,8 +69,12 @@ final class ClientRegistry
      */
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
+        if (!$conf['uri']) {
+            $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
+        }
+
         return new ClientConfiguration(
-            $this->buildConnectionUri($conf['hosts']),
+            $conf['uri'],
             $conf['username'],
             $conf['password'],
             $conf['authSource'],
@@ -74,7 +82,7 @@ final class ClientRegistry
                 'replicaSet' => $conf['replicaSet'],
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
-                'readPreference' => $conf['readPreference']
+                'readPreference' => $conf['readPreference'],
             ]
         );
     }
@@ -86,11 +94,11 @@ final class ClientRegistry
      */
     private function buildConnectionUri(array $hosts): string
     {
-        return implode(
+        return 'mongodb://'.implode(
             ',',
             array_map(
                 function (array $host) {
-                    return sprintf("%s:%d", $host['host'], $host['port']);
+                    return sprintf('%s:%d', $host['host'], $host['port']);
                 },
                 $hosts
             )
@@ -124,19 +132,18 @@ final class ClientRegistry
      */
     public function getClient(string $name, string $databaseName = null): Client
     {
-        $clientKey = null !== $databaseName ? $name . '.' . $databaseName : $name;
+        $clientKey = null !== $databaseName ? $name.'.'.$databaseName : $name;
 
-        if (! isset($this->clients[$clientKey])) {
+        if (!isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
-            $uri = sprintf('mongodb://%s', $conf->getHosts());
             $options = array_merge(
                 [
                     'database' => $databaseName,
-                    'authSource' => $conf->getAuthSource() ?? $databaseName ?? 'admin'
+                    'authSource' => $conf->getAuthSource() ?? $databaseName ?? 'admin',
                 ],
                 $conf->getOptions()
             );
-            $this->clients[$clientKey] = $this->buildClient($name, $uri, $options, []);
+            $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, []);
 
             $this->eventDispatcher->dispatch(
                 ConnectionEvent::CLIENT_CREATED,
@@ -150,8 +157,8 @@ final class ClientRegistry
     /**
      * @param string $clientName
      * @param string $uri
-     * @param array $options
-     * @param array $driverOptions
+     * @param array  $options
+     * @param array  $driverOptions
      *
      * @return Client
      */

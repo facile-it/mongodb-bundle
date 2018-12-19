@@ -8,6 +8,34 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ClientRegistryTest extends TestCase
 {
+    public function test_client_connection_url_provided_manually()
+    {
+        $ed = $this->prophesize(EventDispatcherInterface::class);
+
+        $registry = new ClientRegistry($ed->reveal(), 'prod');
+
+        $testConf = [
+            'test_client' => [
+                'hosts' => [],
+                'uri' => 'mongodb://user:password@host1:27017',
+                'username' => '',
+                'password' => '',
+                'authSource' => null,
+                'replicaSet' => 'testReplica',
+                'ssl' => true,
+                'connectTimeoutMS' => 3000,
+                'readPreference' => 'primary',
+            ],
+        ];
+
+        $registry->addClientsConfigurations($testConf);
+        $client = $registry->getClient('test_client', 'testdb');
+
+        $this->assertEquals('mongodb://user:password@host1:27017', $client->__debugInfo()['uri']);
+
+        $this->assertEquals(['test_client.testdb'], $registry->getClientNames());
+    }
+
     public function test_client_connection_url_generation_singlehost()
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
@@ -19,6 +47,7 @@ class ClientRegistryTest extends TestCase
                 'hosts' => [
                     ['host' => 'host1', 'port' => 8080],
                 ],
+                'uri' => null,
                 'username' => 'foo',
                 'password' => 'bar',
                 'authSource' => null,
@@ -37,7 +66,7 @@ class ClientRegistryTest extends TestCase
         $this->assertEquals(['test_client.testdb'], $registry->getClientNames());
     }
 
-    public function test_client_connection_url_generation_multyhost()
+    public function test_client_connection_url_generation_multihost()
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
@@ -49,6 +78,7 @@ class ClientRegistryTest extends TestCase
                     ['host' => 'host1', 'port' => 8080],
                     ['host' => 'host2', 'port' => 8081],
                 ],
+                'uri' => null,
                 'username' => 'foo',
                 'password' => 'bar',
                 'authSource' => null,
