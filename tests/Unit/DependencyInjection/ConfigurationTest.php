@@ -24,6 +24,35 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
+    public function test_uri_configuration_process()
+    {
+        $expectedConfiguration = [
+            'clients' => [
+                'test_client' => [
+                    'hosts' => [],
+                    'uri' => 'mongodb://user:password@host1:27017',
+                    'username' => '',
+                    'password' => '',
+                    'authSource' => null,
+                    'replicaSet' => null,
+                    'ssl' => false,
+                    'connectTimeoutMS' => null,
+                    'readPreference' => 'primaryPreferred',
+                ],
+            ],
+            'connections' => [
+                'test_db' => [
+                    'client_name' => 'test_client',
+                    'database_name' => 'testdb',
+                ],
+            ],
+            'data_collection' => true,
+        ];
+        $this->assertProcessedConfigurationEquals($expectedConfiguration, [
+            __DIR__ . '/../../fixtures/config/config_uri.yml',
+        ]);
+    }
+
     public function test_full_configuration_process()
     {
         $expectedConfiguration = [
@@ -32,6 +61,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'hosts' => [
                         ['host' => 'localhost', 'port' => 8080]
                     ],
+                    'uri' => null,
                     'username' => 'foo',
                     'password' => 'bar',
                     'authSource' => null,
@@ -62,6 +92,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'hosts' => [
                         ['host' => 'localhost', 'port' => 8080]
                     ],
+                    'uri' => null,
                     'username' => 'foo',
                     'password' => 'bar',
                     'authSource' => null,
@@ -92,6 +123,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'hosts' => [
                         ['host' => 'localhost', 'port' => 8080]
                     ],
+                    'uri' => null,
                     'username' => 'foo',
                     'password' => 'bar',
                     'authSource' => null,
@@ -122,6 +154,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'hosts' => [
                         ['host' => 'localhost', 'port' => 8080],
                     ],
+                    'uri' => null,
                     'username' => 'foo',
                     'password' => 'bar',
                     'authSource' => null,
@@ -135,6 +168,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                         ['host' => 'localhost.dev', 'port' => 8081],
                         ['host' => 'localhost.dev2', 'port' => 27017]
                     ],
+                    'uri' => null,
                     'username' => 'mee',
                     'password' => 'zod',
                     'authSource' => null,

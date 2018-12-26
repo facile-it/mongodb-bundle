@@ -4,38 +4,43 @@ namespace Facile\MongoDbBundle\Models;
 
 /**
  * Class ClientConfiguration.
+ *
  * @internal
  */
 final class ClientConfiguration
 {
     /** @var string */
-    private $hosts;
+    private $uri;
+
     /** @var string */
     private $username;
+
     /** @var string */
     private $password;
+
     /** @var array */
     private $options;
+
     /** @var null|string */
     private $authSource;
 
     /**
      * ClientConfiguration constructor.
      *
-     * @param string $hosts
-     * @param string $username
-     * @param string $password
+     * @param string      $uri
+     * @param string      $username
+     * @param string      $password
      * @param string|null $authSource
-     * @param array $options
+     * @param array       $options
      */
     public function __construct(
-        string $hosts,
+        string $uri,
         string $username = '',
         string $password = '',
         string $authSource = null,
         array $options = []
     ) {
-        $this->hosts = $hosts;
+        $this->uri = $uri;
         $this->username = $username;
         $this->password = $password;
         $this->options = $options;
@@ -45,9 +50,9 @@ final class ClientConfiguration
     /**
      * @return string
      */
-    public function getHosts(): string
+    public function getUri(): string
     {
-        return $this->hosts;
+        return $this->uri;
     }
 
     /**
@@ -100,7 +105,7 @@ final class ClientConfiguration
         return array_filter(
             $options,
             function ($value) {
-                return ! empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
+                return !empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
             }
         );
     }

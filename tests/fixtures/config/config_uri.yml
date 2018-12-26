@@ -1,0 +1,9 @@
+mongo_db_bundle:
+  clients:
+    test_client:
+      uri: mongodb://user:password@host1:27017
+
+  connections:
+    test_db:
+      client_name: test_client
+      database_name: testdb
