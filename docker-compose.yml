@@ -1,6 +1,7 @@
 version: "3.1"
 
 services:
+
   php-cli:
     image: algatux/php-cli-mongodb:1.1
     volumes:
@@ -9,6 +10,7 @@ services:
     depends_on:
       - mongo
     container_name: mb_php
+
   mongo:
     image: mongo:3.4.2
     environment:

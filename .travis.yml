@@ -5,7 +5,7 @@ cache:
     - $HOME/.composer/cache/files
 
 git:
-  depth: 3
+  depth: 1
 
 matrix:
   fast_finish: true
@@ -43,7 +43,7 @@ matrix:
 
   allow_failures:
     - env:
-        - SYMFONY=dev-master
+      - SYMFONY=dev-master
 
 before_install:
   - phpenv config-rm xdebug.ini

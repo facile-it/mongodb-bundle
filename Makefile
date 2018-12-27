@@ -11,8 +11,10 @@ up: docker-compose.yml
 setup: docker-compose.yml composer.json
 	docker-compose run --rm php-cli composer install
 
-start: up
+login:
 	docker exec -ti mb_php bash
+
+start: up login
 
 stop: docker-compose.yml
 	docker-compose stop
