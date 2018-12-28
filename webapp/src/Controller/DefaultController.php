@@ -17,6 +17,11 @@ class DefaultController extends Controller
 
     public function index()
     {
+        $postsCollection = $this->database->selectCollection('posts');
+        $postsCollection->find([
+            'author.name' => 'ilario'
+        ]);
+
         return $this->render('default/index.html.twig');
     }
 }
