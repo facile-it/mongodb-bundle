@@ -18,8 +18,27 @@ class DefaultController extends Controller
     public function index()
     {
         $postsCollection = $this->database->selectCollection('posts');
+
+        $postsCollection->insertOne([
+            'title' => 'fixtureTitle',
+            'body' => 'fixtureBody',
+            'authors' => [
+                'name' => 'Donald',
+                'lastName' => 'Duck',
+                'email' => 'donald.duck@facile.it'
+            ]
+        ]);
+
         $postsCollection->find([
-            'author.name' => 'ilario'
+            'authors.email' => [
+                '$regex' => '/^donald.+\.it$/'
+            ]
+        ]);
+
+        $postsCollection->find([
+            'authors' => [
+                '$size' => 2
+            ]
         ]);
 
         return $this->render('default/index.html.twig');
