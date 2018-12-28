@@ -6,6 +6,8 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-mongodb": "^1.1.5",
+        "fzaninotto/faker": "^1.8",
+        "mongodb/mongodb": "^1.0",
         "symfony/console": "3.4.*",
         "symfony/dotenv": "3.4.*",
         "symfony/flex": "^1.1",
@@ -13,8 +15,7 @@
         "symfony/profiler-pack": "^1.0",
         "symfony/templating": "3.4.*",
         "symfony/twig-bundle": "3.4.*",
-        "symfony/yaml": "3.4.*",
-        "mongodb/mongodb": "^1.0"
+        "symfony/yaml": "3.4.*"
     },
     "config": {
         "preferred-install": {
@@ -46,12 +47,13 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@db-load"
         ],
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "start-server": "bin/console server:run 0.0.0.0:80"
+        "db-load": "bin/console sampledb:load"
     },
     "conflict": {
         "symfony/symfony": "*"

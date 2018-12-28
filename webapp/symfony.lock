@@ -1,4 +1,7 @@
 {
+    "fzaninotto/faker": {
+        "version": "v1.8.0"
+    },
     "mongodb/mongodb": {
         "version": "1.2.0"
     },

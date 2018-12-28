@@ -2,9 +2,10 @@ mongo_db_bundle:
   clients:
     sample_client:
       hosts:
-        - { host: localhost, port: 8080 }
-      username: foo
-      password: bar
+        - { host: mongo, port: 27017 }
+      username: root
+      password: rootPass
+      authSource: admin
 
   connections:
     default:

@@ -24,6 +24,8 @@ services:
       context: docker/webapp
     depends_on:
       - mongo
+    links:
+      - mongo
     volumes:
       - ./webapp:/home/user-dev/webapp
       - ./src:/home/user-dev/webapp/mongodbbundle
