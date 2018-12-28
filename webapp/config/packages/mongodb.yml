@@ -1,12 +1,12 @@
 mongo_db_bundle:
   clients:
-    test_client:
+    sample_client:
       hosts:
-      - { host: localhost, port: 8080 }
+        - { host: localhost, port: 8080 }
       username: foo
       password: bar
 
   connections:
-    test_db:
-      client_name: test_client
-      database_name: testdb
+    default:
+      client_name: sample_client
+      database_name: sampledb
