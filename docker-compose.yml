@@ -17,3 +17,15 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=rootPass
     container_name: mb_mongo
+
+  webapp:
+    image: ilariopierbattista/samplewebapp:1.0
+    build:
+      context: docker/webapp
+    depends_on:
+      - mongo
+    volumes:
+      - ./webapp:/home/user-dev/webapp
+      - ./src:/home/user-dev/webapp/mongodbbundle
+    container_name: mb_webapp
+    command: 'bin/console server:run 0.0.0.0:8000'

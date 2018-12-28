@@ -10,11 +10,13 @@ up: docker-compose.yml
 
 setup: docker-compose.yml composer.json
 	docker-compose run --rm php-cli composer install
+	docker-compose run --rm webapp composer install
 
 login:
 	docker exec -ti mb_php bash
 
-start: up login
+start: up
+	docker-compose port webapp 8000
 
 stop: docker-compose.yml
 	docker-compose stop
