@@ -2,17 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController
+class DefaultController extends Controller
 {
-    public function __construct()
-    {
-
-    }
-
     public function index()
     {
-        return new Response('<html><body>Ok</body></html>', 200);
+        return $this->render('default/index.html.twig');
     }
 }

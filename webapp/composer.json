@@ -10,6 +10,7 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "3.4.*",
         "symfony/profiler-pack": "^1.0",
+        "symfony/templating": "3.4.*",
         "symfony/twig-bundle": "3.4.*",
         "symfony/yaml": "3.4.*"
     },
