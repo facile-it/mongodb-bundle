@@ -2,7 +2,7 @@ version: "3.1"
 
 services:
   php-cli:
-    image: ilariopierbattista/mongodb-bundle-php:base-${PHP}-mongoext-${MONGO_EXT}
+    image: ilariopierbattista/mongodb-bundle-php:${PHP_IMG}
     volumes:
         - ./:/home/user-dev/project
     tty: true

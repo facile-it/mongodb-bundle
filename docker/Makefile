@@ -1,15 +1,28 @@
 BASE_DIR := php-cli/base
 DEV_DIR := php-cli/dev
 
-PHP_VERSIONS := 7.0 7.1 7.2 7.3
-MONGO_EXT_VERSIONS := 1.3.0 1.3.4 1.4.2 1.5.3
-
-__BASE_PHP_TARGETS := $(foreach phpver,$(PHP_VERSIONS),$(subst PHPVER,$(phpver),base-PHPVER-mongoext-MONGOVER))
-__BASE_TAGS := $(foreach mongover,$(MONGO_EXT_VERSIONS),$(subst MONGOVER,$(mongover),$(__BASE_PHP_TARGETS)))
+# See
+# https://docs.mongodb.com/ecosystem/drivers/driver-compatibility-reference/#reference-compatibility-language-php
+TARGETS := 	base-7.0-mongoext-1.1.5 \
+			base-7.1-mongoext-1.1.5 \
+			base-7.0-mongoext-1.2.0 \
+			base-7.1-mongoext-1.2.0 \
+			base-7.0-mongoext-1.3.0 \
+			base-7.1-mongoext-1.3.0 \
+			base-7.2-mongoext-1.3.0 \
+			base-7.0-mongoext-1.3.4 \
+			base-7.1-mongoext-1.3.4 \
+			base-7.2-mongoext-1.3.4 \
+			base-7.0-mongoext-1.4.2 \
+			base-7.1-mongoext-1.4.2 \
+			base-7.2-mongoext-1.4.2 \
+			base-7.0-mongoext-1.5.3 \
+			base-7.1-mongoext-1.5.3 \
+			base-7.2-mongoext-1.5.3 \
+			base-7.3-mongoext-1.5.3
 
 usage:
 	@echo "Select one target"
-
 
 base-%: PHP_VERSION = $(word 1,$(subst -, ,$*))
 base-%: MONGO_EXT_VERSION = $(word 3,$(subst -, ,$*))
@@ -25,5 +38,5 @@ base-%:
 		$(BASE_DIR)
 	docker push $(IMAGE_URI)
 
-base.target: $(__BASE_TAGS)
+base.target: $(TARGETS)
 	@echo "Done building"
