@@ -129,7 +129,7 @@ install:
   - |
     if [ "$SYMFONY" != "" ]; then
       if [[ "$SYMFONY" = "dev-master" ]]; then
-        docker-compose run --no-deps --rm php-cli composer config minimum-stability stable
+        docker-compose run --no-deps --rm php-cli composer config minimum-stability dev
       fi;
       docker-compose run --no-deps --rm php-cli composer require "symfony/symfony:${SYMFONY}" --no-update;
     fi;
