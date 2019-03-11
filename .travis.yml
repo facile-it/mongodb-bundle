@@ -128,7 +128,10 @@ install:
   - sudo chmod -R 777 . # ugly! Travis is 2000:2000
   - |
     if [ "$SYMFONY" != "" ]; then
-    docker-compose run --no-deps --rm php-cli composer require "symfony/symfony:${SYMFONY}" --no-update;
+      if [[ "$SYMFONY" = "dev-master" ]]; then
+        sed 's/minimum-stability\": \"stable/minimum-stability\": \"dev/' -i composer.json
+      fi;
+      docker-compose run --no-deps --rm php-cli composer require "symfony/symfony:${SYMFONY}" --no-update;
     fi;
   - docker-compose run --no-deps --rm php-cli composer install --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
