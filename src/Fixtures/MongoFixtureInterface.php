@@ -8,17 +8,17 @@ namespace Facile\MongoDbBundle\Fixtures;
 interface MongoFixtureInterface
 {
     /**
-     * @return array
+     * @return void
      */
     public function loadData();
 
     /**
-     * @return array
+     * @return void
      */
     public function loadIndexes();
 
     /**
-     * @return string
+     * @return void
      */
     public function collection(): string;
 }
