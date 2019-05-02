@@ -2,9 +2,9 @@
 
 namespace Facile\MongoDbBundle\Command;
 
+use Facile\MongoDbBundle\Fixtures\FixtureSorter;
 use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
 use Facile\MongoDbBundle\Fixtures\MongoFixturesLoader;
-use Facile\MongoDbBundle\Fixtures\OrderedFixtureInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -57,9 +57,7 @@ class LoadFixturesCommand extends AbstractCommand
             );
         }
 
-        $this->sortFixtures($fixtures);
-
-        foreach ($fixtures as $fixture) {
+        foreach (FixtureSorter::sort($fixtures) as $fixture) {
             $this->loadFixture($fixture);
         }
 
@@ -76,13 +74,7 @@ class LoadFixturesCommand extends AbstractCommand
         $this->io->writeln('Loaded fixture: ' . \get_class($indexList));
     }
 
-    /**
-     * @param InputInterface $input
-     * @param KernelInterface $kernel
-     *
-     * @return array
-     */
-    protected function prepareSearchPaths(InputInterface $input, KernelInterface $kernel): array
+    private function prepareSearchPaths(InputInterface $input, KernelInterface $kernel): array
     {
         $paths = [];
 
@@ -97,10 +89,7 @@ class LoadFixturesCommand extends AbstractCommand
         return $paths;
     }
 
-    /**
-     * @param array $paths
-     */
-    protected function loadPaths($paths)
+    private function loadPaths(array $paths)
     {
         foreach ($paths as $path) {
             if (is_dir($path)) {
@@ -111,34 +100,4 @@ class LoadFixturesCommand extends AbstractCommand
             }
         }
     }
-
-    /**
-     * Sorts fixtures by getOrder in case of implementing OrderedFixtureInterface
-     * Fixtures with interface will be after the rest
-     *
-     * @param array $fixtures
-     * @return self
-     */
-    protected function sortFixtures(&$fixtures): self
-    {
-        usort($fixtures, function ($fixture1, $fixture2) {
-            $isFixture1Instance = ($fixture1 instanceof OrderedFixtureInterface);
-            $isFixture2Instance = ($fixture2 instanceof OrderedFixtureInterface);
-
-            if ($isFixture1Instance && $isFixture2Instance) {
-                return $fixture1->getOrder() - $fixture2->getOrder();
-            }
-
-            if (! $isFixture1Instance && ! $isFixture2Instance) {
-                return 1;
-            }
-
-            return ($isFixture2Instance) ? -1 : 1;
-
-        });
-
-        return $this;
-
-    }
-
 }

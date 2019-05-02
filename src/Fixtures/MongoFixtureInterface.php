@@ -2,9 +2,6 @@
 
 namespace Facile\MongoDbBundle\Fixtures;
 
-/**
- * Interface MongoFixtureInterface
- */
 interface MongoFixtureInterface
 {
     /**
@@ -17,8 +14,5 @@ interface MongoFixtureInterface
      */
     public function loadIndexes();
 
-    /**
-     * @return void
-     */
     public function collection(): string;
 }

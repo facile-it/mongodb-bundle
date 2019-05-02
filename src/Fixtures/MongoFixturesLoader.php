@@ -4,21 +4,13 @@ namespace Facile\MongoDbBundle\Fixtures;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class MongoFixturesLoader.
- */
 final class MongoFixturesLoader
 {
-    /** @var  array|MongoFixtureInterface[] */
+    /** @var array|MongoFixtureInterface[] */
     private $loadedClasses;
     /** @var ContainerInterface */
     private $container;
 
-    /**
-     * MongoFixturesLoader constructor.
-     *
-     * @param ContainerInterface $container
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
