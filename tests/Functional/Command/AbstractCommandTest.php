@@ -10,29 +10,26 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class AbstractAppTest extends AppTestCase
+class AbstractCommandTest extends AppTestCase
 {
     /**
      * @dataProvider commandOptionsProvider
      */
     public function test_AbstractCommand_execution(array $arguments)
     {
-
-        $this->getApplication()->add(new FakeCommand());
+        $this->addCommandToApplication();
 
         $command = $this->getApplication()->find('mongodb:fake:command');
 
         $commandTester = new CommandTester($command);
         $commandTester->execute(array_merge(['command' => $command->getName()], $arguments));
 
-        self:
         self::assertContains('Executed', $commandTester->getDisplay());
     }
 
     public function test_AbstractCommand_connection_exception()
     {
-
-        $this->getApplication()->add(new FakeCommand());
+        $this->addCommandToApplication();
 
         $command = $this->getApplication()->find('mongodb:fake:command');
 
@@ -53,11 +50,19 @@ class AbstractAppTest extends AppTestCase
             [['--connection' => 'test_db']],
         ];
     }
+
+    private function addCommandToApplication()
+    {
+        $container = $this->getApplication()
+            ->getKernel()
+            ->getContainer();
+
+        $this->getApplication()->add(new FakeCommand($container));
+    }
 }
 
 class FakeCommand extends AbstractCommand
 {
-
     /**
      * {@inheritdoc}
      */
