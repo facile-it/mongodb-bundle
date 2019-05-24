@@ -2,6 +2,7 @@
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -20,12 +21,14 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootBuilder = $treeBuilder->root('mongo_db_bundle')->children();
+        $treeBuilder = new TreeBuilder('mongo_db_bundle');
+        $rootBuilder = \method_exists(TreeBuilder::class, 'getRootNode')
+            ? $treeBuilder->getRootNode()
+            : $treeBuilder->root('mongo_db_bundle');
 
-        $this->addDataCollection($rootBuilder);
-        $this->addClients($rootBuilder);
-        $this->addConnections($rootBuilder);
+        $this->addDataCollection($rootBuilder->children());
+        $this->addClients($rootBuilder->children());
+        $this->addConnections($rootBuilder->children());
 
         return $treeBuilder;
     }
