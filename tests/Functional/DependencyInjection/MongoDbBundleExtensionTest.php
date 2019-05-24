@@ -3,6 +3,7 @@
 namespace Facile\MongoDbBundle\Tests\Functional\DependencyInjection;
 
 use Facile\MongoDbBundle\Capsule\Database as LoggerDatabase;
+use Facile\MongoDbBundle\Command\AbstractCommand;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\QueryEvent;
@@ -229,6 +230,44 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $testConnection = $this->container->get('mongo.connection.test_db_2');
         $this->assertInstanceOf(Database::class, $testConnection);
         $this->assertSame('testdb_2', $testConnection->getDatabaseName());
+    }
+
+    /**
+     * @dataProvider commandNamesProvider
+     */
+    public function testCommands()
+    {
+        $command = 'facile_mongo_db.command.drop_database';
+        $publicAlias = $command . '.public';
+        $this->container->setAlias($publicAlias, new Alias($command, true));
+
+        $this->load(
+            [
+                'clients' => [
+                    'test_client' => [],
+                ],
+                'connections' => [
+                    'test_db' => [
+                        'client_name' => 'test_client',
+                        'database_name' => 'testdb',
+                    ],
+                ],
+            ]
+        );
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag($command, 'console.command');
+        $this->assertInstanceOf(AbstractCommand::class, $this->container->get($publicAlias));
+    }
+
+    public function commandNamesProvider(): array 
+    {
+        return [
+            ['facile_mongo_db.command.drop_database'],
+            ['facile_mongo_db.command.drop_collection'],
+            ['facile_mongo_db.command.load_fixtures'],
+        ];
     }
 
     /**
