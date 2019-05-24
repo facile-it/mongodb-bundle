@@ -10,6 +10,7 @@ use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use MongoDB\Database;
+use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -18,11 +19,16 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 {
+    const LOGGER_PUBLIC_ALIAS = 'facile_mongo_db.logger.public';
+    const DISPATCHER_PUBLIC_ALIAS = 'facile_mongo_db.event_dispatcher.public';
+
     protected function setUp()
     {
         parent::setUp();
         $this->setParameter('kernel.environment', 'dev');
         $this->container->setDefinition('debug.stopwatch', new Definition(Stopwatch::class));
+        $this->container->setAlias(self::LOGGER_PUBLIC_ALIAS, new Alias('facile_mongo_db.logger', true));
+        $this->container->setAlias(self::DISPATCHER_PUBLIC_ALIAS, new Alias('facile_mongo_db.event_dispatcher', true));
     }
 
     public function test_load()
@@ -63,13 +69,13 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertSame('testdb', $defaultConnection->getDatabaseName());
 
         $this->assertContainerBuilderHasService('facile_mongo_db.logger', MongoQueryLogger::class);
-        $logger = $this->container->get('facile_mongo_db.logger');
+        $logger = $this->container->get(self::LOGGER_PUBLIC_ALIAS);
         $this->assertInstanceOf(MongoQueryLogger::class, $logger);
 
         $this->assertContainerBuilderHasService('facile_mongo_db.data_collector.listener');
 
         /** @var EventDispatcherInterface $ed */
-        $ed = $this->container->get('facile_mongo_db.event_dispatcher');
+        $ed = $this->container->get(self::DISPATCHER_PUBLIC_ALIAS);
         $this->assertInstanceOf(EventDispatcher::class, $ed);
         self::assertCount(1, $ed->getListeners(QueryEvent::QUERY_EXECUTED));
         self::assertCount(1, $ed->getListeners(ConnectionEvent::CLIENT_CREATED));
@@ -119,7 +125,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('facile_mongo_db.data_collector.listener');
 
         /** @var EventDispatcherInterface $ed */
-        $ed = $this->container->get('facile_mongo_db.event_dispatcher');
+        $ed = $this->container->get(self::DISPATCHER_PUBLIC_ALIAS);
         self::assertCount(0, $ed->getListeners());
     }
 
@@ -154,7 +160,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('facile_mongo_db.data_collector.listener');
 
         /** @var EventDispatcherInterface $ed */
-        $ed = $this->container->get('facile_mongo_db.event_dispatcher');
+        $ed = $this->container->get(self::DISPATCHER_PUBLIC_ALIAS);
         self::assertEmpty($ed->getListeners());
 
         $this->assertInstanceOf(Database::class, $defaultConnection);
