@@ -3,8 +3,18 @@
 namespace Facile\MongoDbBundle\Twig;
 
 use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class FacileMongoDbBundleExtension extends \Twig_Extension
+if (! class_exists('\Twig\Extension\AbstractExtension')) {
+    class_alias(\Twig_Extension::class, '\Twig\Extension\AbstractExtension');
+}
+
+if (! class_exists('\Twig\TwigFunction')) {
+    class_alias(\Twig_Function::class, '\Twig\TwigFunction');
+}
+
+class FacileMongoDbBundleExtension extends AbstractExtension
 {
     private $methodDataTranslationMap = [
         'aggregate' => 'Pipeline',
@@ -20,9 +30,9 @@ class FacileMongoDbBundleExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_Simplefunction('filterLabelTranslate', array($this, 'queryFilterTranslate')),
-            new \Twig_Simplefunction('dataLabelTranslate', array($this, 'queryDataTranslate')),
-            new \Twig_Simplefunction('isQueryExplainable', array($this, 'isQueryExplainable')),
+            new TwigFunction('filterLabelTranslate', array($this, 'queryFilterTranslate')),
+            new TwigFunction('dataLabelTranslate', array($this, 'queryDataTranslate')),
+            new TwigFunction('isQueryExplainable', array($this, 'isQueryExplainable')),
         ];
     }
 
