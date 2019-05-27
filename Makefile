@@ -18,7 +18,4 @@ stop: docker-compose.yml
 	docker-compose stop
 
 test: docker-compose.yml phpunit.xml.dist
-	docker-compose run --rm php-cli bash -c "SYMFONY_DEPRECATIONS_HELPER=\"disabled\" bin/phpunit -c phpunit.xml.dist"
-
-test-with-deprecations: docker-compose.yml phpunit.xml.dist
 	docker-compose run --rm php-cli bash -c "bin/phpunit -c phpunit.xml.dist"

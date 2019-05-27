@@ -16,15 +16,17 @@
         <!-- commands -->
 
         <service id="facile_mongo_db.command.drop_database" class="Facile\MongoDbBundle\Command\DropDatabaseCommand">
+            <argument type="service" id="service_container" />
             <tag name="console.command"/>
         </service>
 
-        <service id="facile_mongo_db.command.drop_collection"
-                 class="Facile\MongoDbBundle\Command\DropCollectionCommand">
+        <service id="facile_mongo_db.command.drop_collection" class="Facile\MongoDbBundle\Command\DropCollectionCommand">
+            <argument type="service" id="service_container" />
             <tag name="console.command"/>
         </service>
 
         <service id="facile_mongo_db.command.load_fixtures" class="Facile\MongoDbBundle\Command\LoadFixturesCommand">
+            <argument type="service" id="service_container" />
             <tag name="console.command"/>
         </service>
 

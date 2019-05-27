@@ -9,7 +9,7 @@ use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Database;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class DropCollectionAppTest extends AppTestCase
+class DropCollectionCommandTest extends AppTestCase
 {
     public function test_command()
     {
@@ -20,15 +20,22 @@ class DropCollectionAppTest extends AppTestCase
         $conn->dropCollection('testFunctionalCollection');
         $conn->createCollection('testFunctionalCollection');
 
-        $this->getApplication()->add(new DropCollectionCommand());
+        $this->addCommandToApplication();
 
         $command = $this->getApplication()->find('mongo:collection:drop');
 
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => $command->getName(), 'collection' => 'testFunctionalCollection']);
 
-        self:
         self::assertContains('Collection dropped', $commandTester->getDisplay());
     }
 
+    private function addCommandToApplication()
+    {
+        $container = $this->getApplication()
+            ->getKernel()
+            ->getContainer();
+
+        $this->getApplication()->add(new DropCollectionCommand($container));
+    }
 }

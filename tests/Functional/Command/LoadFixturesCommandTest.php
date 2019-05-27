@@ -32,7 +32,7 @@ class LoadFixturesCommandTest extends AppTestCase
     {
         $this->conn->createCollection('testFixturesCollection');
 
-        $this->getApplication()->add(new LoadFixturesCommand());
+        $this->addCommandToApplication();
         $command = $this->getApplication()->find('mongodb:fixtures:load');
         $commandTester = new CommandTester($command);
         $commandTester->execute(
@@ -55,7 +55,7 @@ class LoadFixturesCommandTest extends AppTestCase
 
     public function test_command_not_fixtures_found()
     {
-        $this->getApplication()->add(new LoadFixturesCommand());
+        $this->addCommandToApplication();
         $command = $this->getApplication()->find('mongodb:fixtures:load');
         $commandTester = new CommandTester($command);
 
@@ -67,7 +67,7 @@ class LoadFixturesCommandTest extends AppTestCase
     {
         $this->conn->createCollection('testFixturesOrderedCollection');
 
-        $this->getApplication()->add(new LoadFixturesCommand());
+        $this->addCommandToApplication();
         $command = $this->getApplication()->find('mongodb:fixtures:load');
         $commandTester = new CommandTester($command);
         $commandTester->execute(
@@ -105,4 +105,13 @@ class LoadFixturesCommandTest extends AppTestCase
         $this->conn->dropCollection('testFixturesOrderedCollection');
     }
 
+
+    private function addCommandToApplication()
+    {
+        $container = $this->getApplication()
+            ->getKernel()
+            ->getContainer();
+
+        $this->getApplication()->add(new LoadFixturesCommand($container));
+    }
 }
