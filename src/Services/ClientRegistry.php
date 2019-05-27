@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
@@ -70,7 +72,7 @@ final class ClientRegistry
      */
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
-        if (!$conf['uri']) {
+        if (! $conf['uri']) {
             $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
         }
 
@@ -95,7 +97,7 @@ final class ClientRegistry
      */
     private function buildConnectionUri(array $hosts): string
     {
-        return 'mongodb://'.implode(
+        return 'mongodb://' . implode(
             ',',
             array_map(
                 function (array $host) {
@@ -133,9 +135,9 @@ final class ClientRegistry
      */
     public function getClient(string $name, string $databaseName = null): Client
     {
-        $clientKey = null !== $databaseName ? $name.'.'.$databaseName : $name;
+        $clientKey = null !== $databaseName ? $name . '.' . $databaseName : $name;
 
-        if (!isset($this->clients[$clientKey])) {
+        if (! isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
             $options = array_merge(
                 [

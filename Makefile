@@ -19,3 +19,6 @@ stop: docker-compose.yml
 
 test: docker-compose.yml phpunit.xml.dist
 	docker-compose run --rm php-cli bash -c "bin/phpunit -c phpunit.xml.dist"
+
+phpstan: docker-compose.yml
+	docker-compose run --rm php-cli bash -c "bin/phpstan analyze -l7 src/ tests/"

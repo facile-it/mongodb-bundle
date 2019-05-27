@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Services\Explain;
 
@@ -22,7 +24,7 @@ class ExplainCommandBuilderTest extends TestCase
             [
                 'explain' => [
                     'count' => 'test_collection',
-                    'query' => ['id' => 1]
+                    'query' => ['id' => 1],
                 ],
                 'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
             ],
@@ -95,7 +97,7 @@ class ExplainCommandBuilderTest extends TestCase
         $expected = [
             'explain' => [
                 'find' => 'test_collection',
-                'filter' => ['id' => 1]
+                'filter' => ['id' => 1],
             ],
             'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
         ];
@@ -141,8 +143,8 @@ class ExplainCommandBuilderTest extends TestCase
             'explain' => [
                 'delete' => $query->getCollection(),
                 'deletes' => [
-                    ['q' => $query->getFilters(), 'limit' => $limit,]
-                ]
+                    ['q' => $query->getFilters(), 'limit' => $limit],
+                ],
             ],
             'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
         ];

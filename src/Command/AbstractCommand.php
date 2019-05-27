@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
@@ -26,6 +28,7 @@ abstract class AbstractCommand extends Command
 
     /**
      * AbstractCommand constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container, string $name = null)

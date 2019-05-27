@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Event\QueryEvent;
@@ -145,12 +147,12 @@ class CollectionTest extends AppTestCase
 
         $result = $coll->aggregate([
             ['$match' => ['group' => 'a']],
-            ['$group' => ['_id' => '$group', 'value' => ['$sum' => '$testValue']]]
+            ['$group' => ['_id' => '$group', 'value' => ['$sum' => '$testValue']]],
         ]);
 
         $results = [];
         foreach ($result as $res) {
-            $res = (array)$res;
+            $res = (array) $res;
             $results[] = ['group' => $res['_id'], 'value' => $res['value']];
         }
 

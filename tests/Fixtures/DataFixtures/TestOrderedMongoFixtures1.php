@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\tests\fixtures\DataFixtures;
+namespace Facile\MongoDbBundle\Tests\Fixtures\DataFixtures;
 
 use Facile\MongoDbBundle\Capsule\Database;
 use Facile\MongoDbBundle\Fixtures\AbstractContainerAwareFixture;
@@ -16,7 +16,7 @@ class TestOrderedMongoFixtures1 extends AbstractContainerAwareFixture implements
         $doc = [
             'type' => 'fixture',
             'data' => 'Alice in Wonderland - 2010',
-            'expectedPosition' => 2
+            'expectedPosition' => 2,
         ];
 
         /** @var Database $connection */

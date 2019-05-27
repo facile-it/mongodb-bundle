@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\Tests\fixtures\DataFixtures;
+namespace Facile\MongoDbBundle\Tests\Fixtures\DataFixtures;
 
 use Facile\MongoDbBundle\Capsule\Database;
 use Facile\MongoDbBundle\Fixtures\AbstractContainerAwareFixture;
 use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
 
-class TestFixtures extends AbstractContainerAwareFixture implements MongoFixtureInterface
+class TestOrderedMongoFixtures2 extends AbstractContainerAwareFixture implements MongoFixtureInterface
 {
     /**
      * @return array
@@ -17,7 +17,8 @@ class TestFixtures extends AbstractContainerAwareFixture implements MongoFixture
     {
         $doc = [
             'type' => 'fixture',
-            'data' => 'test',
+            'data' => 'Batman Begins - 2005',
+            'expectedPosition' => 0,
         ];
 
         /** @var Database $connection */
@@ -38,6 +39,6 @@ class TestFixtures extends AbstractContainerAwareFixture implements MongoFixture
      */
     public function collection(): string
     {
-        return 'testFixturesCollection';
+        return 'testFixturesOrderedCollection';
     }
 }

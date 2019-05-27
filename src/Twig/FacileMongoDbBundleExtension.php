@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Twig;
 
@@ -30,9 +32,9 @@ class FacileMongoDbBundleExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('filterLabelTranslate', array($this, 'queryFilterTranslate')),
-            new TwigFunction('dataLabelTranslate', array($this, 'queryDataTranslate')),
-            new TwigFunction('isQueryExplainable', array($this, 'isQueryExplainable')),
+            new TwigFunction('filterLabelTranslate', [$this, 'queryFilterTranslate']),
+            new TwigFunction('dataLabelTranslate', [$this, 'queryDataTranslate']),
+            new TwigFunction('isQueryExplainable', [$this, 'isQueryExplainable']),
         ];
     }
 

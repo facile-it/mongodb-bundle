@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\Tests\fixtures\DataFixtures;
+namespace Facile\MongoDbBundle\Tests\Fixtures\DataFixtures;
 
 use Facile\MongoDbBundle\Capsule\Database;
 use Facile\MongoDbBundle\Fixtures\AbstractContainerAwareFixture;
@@ -16,7 +16,7 @@ class TestOrderedMongoFixtures extends AbstractContainerAwareFixture implements 
         $doc = [
             'type' => 'fixture',
             'data' => 'Edward Scissorhands - 1990',
-            'expectedPosition' => 1
+            'expectedPosition' => 1,
         ];
 
         /** @var Database $connection */

@@ -28,6 +28,5 @@ class LogEventTest extends TestCase
         $this->assertEquals('test_client', $query->getClient());
         $this->assertEquals('test_db', $query->getDatabase());
         $this->assertEquals('secondaryPreferred', $query->getReadPreference());
-
     }
 }

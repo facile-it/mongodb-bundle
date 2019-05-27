@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
@@ -10,16 +12,20 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
  * Class MongoDbDataCollector.
+ *
  * @internal
  */
 class MongoDbDataCollector extends DataCollector
 {
     const QUERY_KEYWORD = 'queries';
+
     const CONNECTION_KEYWORD = 'connections';
+
     const TIME_KEYWORD = 'totalTime';
 
     /** @var DataCollectorLoggerInterface */
     private $logger;
+
     /** @var array */
     protected $data;
 
@@ -84,7 +90,7 @@ class MongoDbDataCollector extends DataCollector
      */
     public function getTime(): float
     {
-        return (float)($this->data[self::TIME_KEYWORD] * 1000);
+        return (float) ($this->data[self::TIME_KEYWORD] * 1000);
     }
 
     /**

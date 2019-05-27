@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
@@ -18,7 +20,7 @@ class DropDatabaseCommand extends AbstractCommand
         parent::configure();
         $this
             ->setName('mongodb:database:drop')
-            ->setDescription('Drops a database');;
+            ->setDescription('Drops a database');
     }
 
     /**

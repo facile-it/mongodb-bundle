@@ -44,7 +44,6 @@ class AbstractCommandTest extends AppTestCase
 
     public function commandOptionsProvider()
     {
-
         return [
             [[]],
             [['--connection' => 'test_db']],
@@ -71,7 +70,7 @@ class FakeCommand extends AbstractCommand
         parent::configure();
         $this
             ->setName('mongodb:fake:command')
-            ->setDescription('fake test command');;
+            ->setDescription('fake test command');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
