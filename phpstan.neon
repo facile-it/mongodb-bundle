@@ -3,3 +3,5 @@ parameters:
     paths:
         - src
         - tests
+includes:
+	- vendor/jangregor/phpstan-prophecy/src/extension.neon
