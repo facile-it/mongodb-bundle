@@ -23,5 +23,8 @@ cs-check: .php_cs.dist
 cs-fix: .php_cs.dist
 	docker-compose run --rm --no-deps php-cli bash -c "bin/php-cs-fixer fix --ansi --verbose"
 
+phpstan: docker-compose.yml phpstan.neon
+	docker-compose run --rm --no-deps php-cli bash -c "bin/phpstan analyze"
+
 test: docker-compose.yml phpunit.xml.dist
 	docker-compose run --rm php-cli bash -c "bin/phpunit -c phpunit.xml.dist"
