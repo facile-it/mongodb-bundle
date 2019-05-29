@@ -73,6 +73,12 @@ script:
       docker-compose run --rm php-cli bash -c "sleep 3; bin/phpunit -c phpunit.xml.dist"
     fi
 
+jobs:
+  include:
+    - stage: Code style
+      name: Code style
+        - make cs-check
+
 after_success:
   - |
     if [[ "$TEST_COVERAGE" = "1" ]]; then
