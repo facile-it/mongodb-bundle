@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
+namespace Facile\MongoDbBundle\Tests\Unit\Event\Listener;
 
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\Listener\DataCollectorListener;

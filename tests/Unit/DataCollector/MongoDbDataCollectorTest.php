@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\Tests\unit\DataCollector;
+namespace Facile\MongoDbBundle\Tests\Unit\DataCollector;
 
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Models\Query;

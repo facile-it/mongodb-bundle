@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
+
 use Facile\MongoDbBundle\Capsule\Client;
 use MongoDB\Client as MongoClient;
 use MongoDB\Collection as MongoCollection;

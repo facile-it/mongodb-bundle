@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\Tests\unit\DependencyInjection;
+namespace Facile\MongoDbBundle\Tests\Unit\DependencyInjection;
 
 use Facile\MongoDbBundle\DependencyInjection\Configuration;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;

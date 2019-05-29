@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\Tests\unit\Services\Loggers;
+namespace Facile\MongoDbBundle\Tests\Unit\Services\Loggers;
 
 use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;

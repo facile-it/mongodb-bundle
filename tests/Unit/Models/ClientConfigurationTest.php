@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MongoBundle\Tests\unit\Models;
+namespace Facile\MongoDbBundle\Tests\Unit\Models;
 
 use Facile\MongoDbBundle\Models\ClientConfiguration;
 use PHPUnit\Framework\TestCase;
