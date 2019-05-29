@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Functional\Command;
 
@@ -38,7 +40,7 @@ class LoadFixturesCommandTest extends AppTestCase
         $commandTester->execute(
             [
                 'command' => $command->getName(),
-                'addFixturesPath' => __DIR__ . '/../../fixtures/DataFixtures'
+                'addFixturesPath' => __DIR__ . '/../../fixtures/DataFixtures',
             ]
         );
 
@@ -73,7 +75,7 @@ class LoadFixturesCommandTest extends AppTestCase
         $commandTester->execute(
             [
                 'command' => $command->getName(),
-                'addFixturesPath' => __DIR__ . '/../../fixtures/DataFixtures'
+                'addFixturesPath' => __DIR__ . '/../../fixtures/DataFixtures',
             ]
         );
 
@@ -104,7 +106,6 @@ class LoadFixturesCommandTest extends AppTestCase
 
         $this->conn->dropCollection('testFixturesOrderedCollection');
     }
-
 
     private function addCommandToApplication()
     {

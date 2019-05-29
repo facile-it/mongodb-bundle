@@ -7,9 +7,6 @@ namespace MongoBundle\Tests\unit\Models;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ClientConfigurationTest.
- */
 class ClientConfigurationTest extends TestCase
 {
     public function test_construction()
@@ -25,8 +22,8 @@ class ClientConfigurationTest extends TestCase
         self::assertEquals('admin_password', $conf->getPassword());
         self::assertEquals(
             [
-                'username' => "admin",
-                'password' => "admin_password",
+                'username' => 'admin',
+                'password' => 'admin_password',
             ],
             $conf->getOptions()
         );
@@ -50,9 +47,6 @@ class ClientConfigurationTest extends TestCase
     }
 
     /**
-     * @param array $options
-     * @param array $expectedOptions
-     *
      * @dataProvider optionsDataProvider
      */
     public function test_construction_with_options(array $options, array $expectedOptions)
@@ -84,8 +78,8 @@ class ClientConfigurationTest extends TestCase
                     'connectTimeoutMS' => '',
                 ],
                 [   // expected
-                    'ssl' => false
-                ]
+                    'ssl' => false,
+                ],
             ],
             [   // set 2
                 [   // provided
@@ -94,22 +88,22 @@ class ClientConfigurationTest extends TestCase
                     'connectTimeoutMS' => 100,
                 ],
                 [   // expected
-                    'replicaSet' => "testReplica",
+                    'replicaSet' => 'testReplica',
                     'ssl' => true,
                     'connectTimeoutMS' => 100,
-                ]
+                ],
             ],
             [   // set 3
                 [   // provided
                     'replicaSet' => null,
                     'ssl' => true,
                     'connectTimeoutMS' => null,
-                    'readPreference' => 'primary'
+                    'readPreference' => 'primary',
                 ],
                 [   // expected
                     'ssl' => true,
-                    'readPreference' => 'primary'
-                ]
+                    'readPreference' => 'primary',
+                ],
             ],
         ];
     }

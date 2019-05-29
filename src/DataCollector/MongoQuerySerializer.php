@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
@@ -6,14 +8,10 @@ use Facile\MongoDbBundle\Models\Query;
 use MongoDB\BSON\Serializable;
 
 /**
- * Class MongoQuerySerializer
  * @internal
  */
 final class MongoQuerySerializer
 {
-    /**
-     * @param Query $query
-     */
     public static function serialize(Query $query)
     {
         $query->setFilters(self::prepareUnserializableData($query->getFilters()));
@@ -40,11 +38,6 @@ final class MongoQuerySerializer
         return $newData;
     }
 
-    /**
-     * @param mixed $item
-     *
-     * @return mixed
-     */
     public static function prepareItemData($item)
     {
         if (\is_string($item)) {
@@ -68,7 +61,7 @@ final class MongoQuerySerializer
         }
 
         if (\is_array($item) || \is_object($item)) {
-            return self::prepareUnserializableData((array)$item);
+            return self::prepareUnserializableData((array) $item);
         }
 
         return $item;

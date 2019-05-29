@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
@@ -28,7 +30,7 @@ class LoadFixturesCommand extends AbstractCommand
         $this
             ->setName('mongodb:fixtures:load')
             ->addArgument('addFixturesPath', InputArgument::OPTIONAL, 'Add a path to search in for fixtures files')
-            ->setDescription('Load fixtures and applies them');;
+            ->setDescription('Load fixtures and applies them');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -64,9 +66,6 @@ class LoadFixturesCommand extends AbstractCommand
         $this->io->writeln(sprintf('Done, loaded %d fixtures files', \count($fixtures)));
     }
 
-    /**
-     * @param MongoFixtureInterface $indexList
-     */
     private function loadFixture(MongoFixtureInterface $indexList)
     {
         $indexList->loadData();

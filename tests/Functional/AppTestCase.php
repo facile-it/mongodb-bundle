@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class AppTestCase extends TestCase
 {
-    /** @var  Application */
+    /** @var Application */
     private $application;
 
     private $env = 'test';
@@ -40,17 +40,11 @@ class AppTestCase extends TestCase
         $this->application = null;
     }
 
-    /**
-     * @return Application
-     */
     protected function getApplication(): Application
     {
         return $this->application;
     }
 
-    /**
-     * @return ContainerInterface
-     */
     protected function getContainer(): ContainerInterface
     {
         return $this->application->getKernel()->getContainer();

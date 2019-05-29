@@ -1,11 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
 use MongoDB\Database;
 
 /**
- * Class ConnectionFactory.
  * @internal
  */
 final class ConnectionFactory
@@ -13,22 +14,11 @@ final class ConnectionFactory
     /** @var ClientRegistry */
     private $clientRegistry;
 
-    /**
-     * ConnectionFactory constructor.
-     *
-     * @param ClientRegistry $clientRegistry
-     */
     public function __construct(ClientRegistry $clientRegistry)
     {
         $this->clientRegistry = $clientRegistry;
     }
 
-    /**
-     * @param string $clientName
-     * @param string $databaseName
-     *
-     * @return Database
-     */
     public function createConnection(string $clientName, string $databaseName): Database
     {
         return $this->clientRegistry

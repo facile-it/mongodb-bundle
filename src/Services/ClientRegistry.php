@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services;
 
@@ -9,8 +11,6 @@ use MongoDB\Client;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class ClientRegistry.
- *
  * @internal
  */
 final class ClientRegistry
@@ -27,14 +27,6 @@ final class ClientRegistry
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * ClientRegistry constructor.
-     *
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param string                   $environment
-     *
-     * @internal param DataCollectorLoggerInterface $logger
-     */
     public function __construct(EventDispatcherInterface $eventDispatcher, string $environment)
     {
         $this->clients = [];
@@ -43,9 +35,6 @@ final class ClientRegistry
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * @param array $configurations
-     */
     public function addClientsConfigurations(array $configurations)
     {
         foreach ($configurations as $name => $conf) {
@@ -53,23 +42,14 @@ final class ClientRegistry
         }
     }
 
-    /**
-     * @param string $name
-     * @param array  $conf
-     */
     private function addClientConfiguration(string $name, array $conf)
     {
         $this->configurations[$name] = $this->buildClientConfiguration($conf);
     }
 
-    /**
-     * @param array $conf
-     *
-     * @return ClientConfiguration
-     */
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
-        if (!$conf['uri']) {
+        if (! $conf['uri']) {
             $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
         }
 
@@ -87,14 +67,9 @@ final class ClientRegistry
         );
     }
 
-    /**
-     * @param array $hosts
-     *
-     * @return string
-     */
     private function buildConnectionUri(array $hosts): string
     {
-        return 'mongodb://'.implode(
+        return 'mongodb://' . implode(
             ',',
             array_map(
                 function (array $host) {
@@ -105,36 +80,24 @@ final class ClientRegistry
         );
     }
 
-    /**
-     * @param string $name
-     * @param string $databaseName
-     *
-     * @return Client
-     */
     public function getClientForDatabase(string $name, string $databaseName): Client
     {
         return $this->getClient($name, $databaseName);
     }
 
-    /**
-     * @return array
-     */
     public function getClientNames(): array
     {
         return array_keys($this->clients);
     }
 
     /**
-     * @param string $name
      * @param string $databaseName
-     *
-     * @return Client
      */
     public function getClient(string $name, string $databaseName = null): Client
     {
-        $clientKey = null !== $databaseName ? $name.'.'.$databaseName : $name;
+        $clientKey = null !== $databaseName ? $name . '.' . $databaseName : $name;
 
-        if (!isset($this->clients[$clientKey])) {
+        if (! isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
             $options = array_merge(
                 [
@@ -154,14 +117,6 @@ final class ClientRegistry
         return $this->clients[$clientKey];
     }
 
-    /**
-     * @param string $clientName
-     * @param string $uri
-     * @param array  $options
-     * @param array  $driverOptions
-     *
-     * @return Client
-     */
     private function buildClient(string $clientName, string $uri, array $options, array $driverOptions): Client
     {
         if ('dev' === $this->environment) {

@@ -1,10 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Models;
 
 /**
- * Class ClientConfiguration.
- *
  * @internal
  */
 final class ClientConfiguration
@@ -24,15 +24,6 @@ final class ClientConfiguration
     /** @var null|string */
     private $authSource;
 
-    /**
-     * ClientConfiguration constructor.
-     *
-     * @param string      $uri
-     * @param string      $username
-     * @param string      $password
-     * @param string|null $authSource
-     * @param array       $options
-     */
     public function __construct(
         string $uri,
         string $username = '',
@@ -47,25 +38,16 @@ final class ClientConfiguration
         $this->authSource = $authSource;
     }
 
-    /**
-     * @return string
-     */
     public function getUri(): string
     {
         return $this->uri;
     }
 
-    /**
-     * @return string
-     */
     public function getUsername(): string
     {
         return $this->username;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
@@ -79,9 +61,6 @@ final class ClientConfiguration
         return $this->authSource;
     }
 
-    /**
-     * @return array
-     */
     public function getOptions(): array
     {
         return $this->cleanOptions(
@@ -95,17 +74,12 @@ final class ClientConfiguration
         );
     }
 
-    /**
-     * @param array $options
-     *
-     * @return array
-     */
     private function cleanOptions(array $options): array
     {
         return array_filter(
             $options,
             function ($value) {
-                return !empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
+                return ! empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
             }
         );
     }

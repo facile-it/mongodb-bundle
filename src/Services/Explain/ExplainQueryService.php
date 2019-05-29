@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Facile\MongoDbBundle\Services\Explain;
 
 use Facile\MongoDbBundle\Models\Query;
@@ -10,7 +12,9 @@ use MongoDB\Driver\Cursor;
 class ExplainQueryService
 {
     const VERBOSITY_QUERY_PLANNER = 'queryPlanner';
+
     const VERBOSITY_EXECUTION_STATS = 'executionStats';
+
     const VERBOSITY_ALL_PLAN_EXECUTION = 'allPlansExecution';
 
     public static $acceptedMethods = [
@@ -35,8 +39,6 @@ class ExplainQueryService
      * verbosity : queryPlanner | executionStats Mode | allPlansExecution (default)
      * The explain command provides information on the execution of the following commands:
      * count, distinct, group, find, findAndModify, delete, and update.
-     *
-     * @param ClientRegistry $clientRegistry
      */
     public function __construct(ClientRegistry $clientRegistry)
     {
@@ -44,13 +46,6 @@ class ExplainQueryService
     }
 
     /**
-     * Execute the operation.
-     *
-     * @param Query $query
-     * @param string $verbosity
-     *
-     * @return Cursor
-     *
      * @throws \Exception
      */
     public function execute(Query $query, string $verbosity = self::VERBOSITY_ALL_PLAN_EXECUTION): Cursor
@@ -59,7 +54,7 @@ class ExplainQueryService
             throw new \InvalidArgumentException(
                 'Cannot explain the method \'' . $query->getMethod() . '\'. Allowed methods: ' . implode(', ', self::$acceptedMethods)
             );
-        };
+        }
 
         $manager = $this->clientRegistry->getClient($query->getClient(), $query->getDatabase())->__debugInfo()['manager'];
 
@@ -70,4 +65,3 @@ class ExplainQueryService
             );
     }
 }
-

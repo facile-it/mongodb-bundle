@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -6,26 +8,18 @@ use MongoDB\Client as MongoClient;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class Client.
  * @internal
  */
 final class Client extends MongoClient
 {
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+
     /** @var string */
     private $clientName;
 
     /**
-     * Client constructor.
-     *
      * @param string $uri
-     * @param array $uriOptions
-     * @param array $driverOptions
-     * @param string $clientName
-     * @param EventDispatcherInterface $eventDispatcher
-     *
-     * @internal param DataCollectorLoggerInterface $logger
      */
     public function __construct(
         $uri = 'mongodb://localhost:27017',

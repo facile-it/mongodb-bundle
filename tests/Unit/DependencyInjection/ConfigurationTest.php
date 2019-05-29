@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Facile\MongoDbBundle\Tests\unit\DependencyInjection;
 
 use Facile\MongoDbBundle\DependencyInjection\Configuration;
@@ -59,7 +61,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -90,7 +92,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -121,7 +123,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -166,7 +168,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'other_client' => [
                     'hosts' => [
                         ['host' => 'localhost.dev', 'port' => 8081],
-                        ['host' => 'localhost.dev2', 'port' => 27017]
+                        ['host' => 'localhost.dev2', 'port' => 27017],
                     ],
                     'uri' => null,
                     'username' => 'mee',
@@ -204,7 +206,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $extensionConfigurationBuilder = new ExtensionConfigurationBuilder(new LoaderFactory());
         $extensionConfiguration = $extensionConfigurationBuilder
             ->setExtension($this->getContainerExtension())
-            ->setSources([__DIR__ . '/../../fixtures/config/config_wrong_readPreference.yml',]);
+            ->setSources([__DIR__ . '/../../fixtures/config/config_wrong_readPreference.yml']);
 
         $processor = new Processor();
         $configuration = new Configuration();

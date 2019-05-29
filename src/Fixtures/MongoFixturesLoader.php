@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Fixtures;
 
@@ -8,6 +10,7 @@ final class MongoFixturesLoader
 {
     /** @var array|MongoFixtureInterface[] */
     private $loadedClasses;
+
     /** @var ContainerInterface */
     private $container;
 
@@ -17,8 +20,6 @@ final class MongoFixturesLoader
     }
 
     /**
-     * @param string $dir
-     *
      * @return array
      */
     public function loadFromDirectory(string $dir)
@@ -36,13 +37,11 @@ final class MongoFixturesLoader
     }
 
     /**
-     * @param \Iterator $iterator
-     *
      * @return array
      */
     private function loadFromIterator(\Iterator $iterator)
     {
-        $includedFiles = array();
+        $includedFiles = [];
         foreach ($iterator as $file) {
             if ($file->getBasename('.php') == $file->getBasename()) {
                 continue;
@@ -64,7 +63,7 @@ final class MongoFixturesLoader
                     \in_array($sourceFile, $includedFiles) &&
                     \array_key_exists(MongoFixtureInterface::class, $reflClass->getInterfaces())
                 ) {
-                    $instance = $this->buildFixture(new $className);
+                    $instance = $this->buildFixture(new $className());
                     $this->addInstance($instance);
                     $classList[] = $instance;
                 }
@@ -75,11 +74,6 @@ final class MongoFixturesLoader
         );
     }
 
-    /**
-     * @param mixed $instance
-     *
-     * @return MongoFixtureInterface
-     */
     private function buildFixture($instance): MongoFixtureInterface
     {
         if ($instance instanceof AbstractContainerAwareFixture) {
@@ -89,9 +83,6 @@ final class MongoFixturesLoader
         return $instance;
     }
 
-    /**
-     * @param MongoFixtureInterface $list
-     */
     public function addInstance(MongoFixtureInterface $list)
     {
         $listClass = \get_class($list);
@@ -102,8 +93,6 @@ final class MongoFixturesLoader
     }
 
     /**
-     * @param string $fileName
-     *
      * @return array
      */
     public function loadFromFile(string $fileName)
@@ -112,7 +101,7 @@ final class MongoFixturesLoader
             throw new \InvalidArgumentException(sprintf('"%s" does not exist or is not readable', $fileName));
         }
 
-        $iterator = new \ArrayIterator(array(new \SplFileInfo($fileName)));
+        $iterator = new \ArrayIterator([new \SplFileInfo($fileName)]);
 
         return $this->loadFromIterator($iterator);
     }

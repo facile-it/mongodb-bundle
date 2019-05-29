@@ -8,9 +8,6 @@ use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class MongoLoggerTest.
- */
 class MongoLoggerTest extends TestCase
 {
     public function test_logger_connections()
@@ -21,7 +18,6 @@ class MongoLoggerTest extends TestCase
         $logger->addConnection('test_connection2');
 
         self::assertEquals(['test_connection', 'test_connection2'], $logger->getConnections());
-
     }
 
     public function test_logger_queries()

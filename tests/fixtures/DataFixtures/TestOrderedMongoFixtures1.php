@@ -16,7 +16,7 @@ class TestOrderedMongoFixtures1 extends AbstractContainerAwareFixture implements
         $doc = [
             'type' => 'fixture',
             'data' => 'Alice in Wonderland - 2010',
-            'expectedPosition' => 2
+            'expectedPosition' => 2,
         ];
 
         /** @var Database $connection */

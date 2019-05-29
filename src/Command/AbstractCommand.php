@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
@@ -10,9 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class AbstractCommand.
- */
 abstract class AbstractCommand extends Command
 {
     /** @var SymfonyStyle */
@@ -24,10 +23,6 @@ abstract class AbstractCommand extends Command
     /** @var ContainerInterface */
     private $container;
 
-    /**
-     * AbstractCommand constructor.
-     * @param ContainerInterface $container
-     */
     public function __construct(ContainerInterface $container, string $name = null)
     {
         parent::__construct($name);

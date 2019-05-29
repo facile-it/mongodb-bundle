@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\DataCollector;
 
@@ -11,8 +13,6 @@ use PHPUnit\Framework\TestCase;
 class MongoQuerySerializerTest extends TestCase
 {
     /**
-     * @param $unserializedData
-     *
      * @dataProvider unserializedDataProvider
      */
     public function test_serializer($unserializedData, $expectedSerialization)

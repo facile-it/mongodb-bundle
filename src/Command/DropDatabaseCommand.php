@@ -1,13 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class DropDatabaseCommand.
- */
 class DropDatabaseCommand extends AbstractCommand
 {
     /**
@@ -18,7 +17,7 @@ class DropDatabaseCommand extends AbstractCommand
         parent::configure();
         $this
             ->setName('mongodb:database:drop')
-            ->setDescription('Drops a database');;
+            ->setDescription('Drops a database');
     }
 
     /**

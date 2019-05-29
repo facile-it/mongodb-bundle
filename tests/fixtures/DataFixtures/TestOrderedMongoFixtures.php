@@ -16,7 +16,7 @@ class TestOrderedMongoFixtures extends AbstractContainerAwareFixture implements 
         $doc = [
             'type' => 'fixture',
             'data' => 'Edward Scissorhands - 1990',
-            'expectedPosition' => 1
+            'expectedPosition' => 1,
         ];
 
         /** @var Database $connection */

@@ -33,9 +33,6 @@ class TestFixtures extends AbstractContainerAwareFixture implements MongoFixture
     {
     }
 
-    /**
-     * @return string
-     */
     public function collection(): string
     {
         return 'testFixturesCollection';

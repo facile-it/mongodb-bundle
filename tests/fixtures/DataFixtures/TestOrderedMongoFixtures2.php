@@ -34,9 +34,6 @@ class TestOrderedMongoFixtures2 extends AbstractContainerAwareFixture implements
     {
     }
 
-    /**
-     * @return string
-     */
     public function collection(): string
     {
         return 'testFixturesOrderedCollection';

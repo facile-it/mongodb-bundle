@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
@@ -9,17 +11,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
- * Class MongoDbDataCollector.
  * @internal
  */
 class MongoDbDataCollector extends DataCollector
 {
     const QUERY_KEYWORD = 'queries';
+
     const CONNECTION_KEYWORD = 'connections';
+
     const TIME_KEYWORD = 'totalTime';
 
     /** @var DataCollectorLoggerInterface */
     private $logger;
+
     /** @var array */
     protected $data;
 
@@ -37,9 +41,6 @@ class MongoDbDataCollector extends DataCollector
         ];
     }
 
-    /**
-     * @param DataCollectorLoggerInterface $logger
-     */
     public function setLogger(DataCollectorLoggerInterface $logger)
     {
         $this->logger = $logger;
@@ -63,9 +64,6 @@ class MongoDbDataCollector extends DataCollector
         $this->data[self::CONNECTION_KEYWORD] = $this->logger->getConnections();
     }
 
-    /**
-     * @return int
-     */
     public function getQueryCount(): int
     {
         return \count($this->data[self::QUERY_KEYWORD]);
@@ -79,17 +77,11 @@ class MongoDbDataCollector extends DataCollector
         return $this->data[self::QUERY_KEYWORD];
     }
 
-    /**
-     * @return float
-     */
     public function getTime(): float
     {
-        return (float)($this->data[self::TIME_KEYWORD] * 1000);
+        return (float) ($this->data[self::TIME_KEYWORD] * 1000);
     }
 
-    /**
-     * @return int
-     */
     public function getConnectionsCount(): int
     {
         return \count($this->data[self::CONNECTION_KEYWORD]);

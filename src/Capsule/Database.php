@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -7,29 +9,19 @@ use MongoDB\Driver\Manager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class Database.
  * @internal
  */
 final class Database extends MongoDatabase
 {
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+
     /** @var string */
     private $clientName;
+
     /** @var string */
     private $databaseName;
 
-    /**
-     * Database constructor.
-     *
-     * @param Manager $manager
-     * @param string $clientName
-     * @param string $databaseName
-     * @param array $options
-     * @param EventDispatcherInterface $eventDispatcher
-     *
-     * @internal param DataCollectorLoggerInterface $logger
-     */
     public function __construct(
         Manager $manager,
         string $clientName,

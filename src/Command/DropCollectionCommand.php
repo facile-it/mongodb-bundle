@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
@@ -6,9 +8,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class DropCollectionCommand.
- */
 class DropCollectionCommand extends AbstractCommand
 {
     /**
@@ -20,7 +19,7 @@ class DropCollectionCommand extends AbstractCommand
         $this
             ->setName('mongodb:collection:drop')
             ->addArgument('collection', InputArgument::REQUIRED, 'collection to drop')
-            ->setDescription('Drops a database');;
+            ->setDescription('Drops a database');
     }
 
     /**

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DependencyInjection;
 
@@ -17,7 +19,6 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class MongoDbBundleExtension.
  * @internal
  */
 final class MongoDbBundleExtension extends Extension
@@ -36,7 +37,7 @@ final class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
+        $this->defineClientRegistry($config['clients'], $container->getParameter('kernel.environment'));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
@@ -48,22 +49,13 @@ final class MongoDbBundleExtension extends Extension
         return $config;
     }
 
-    /**
-     * @param array $config
-     *
-     * @return bool
-     */
     private function mustCollectData(array $config): bool
     {
-        return 'dev' === $this->containerBuilder->getParameter("kernel.environment")
+        return 'dev' === $this->containerBuilder->getParameter('kernel.environment')
             && class_exists(WebProfilerBundle::class)
             && $config['data_collection'] === true;
     }
 
-    /**
-     * @param array $clientsConfig
-     * @param string $environment
-     */
     private function defineClientRegistry(array $clientsConfig, string $environment)
     {
         $clientRegistryDefinition = new Definition(
@@ -87,9 +79,6 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('mongo.connection_factory', $factoryDefinition);
     }
 
-    /**
-     * @param array $connections
-     */
     private function defineConnections(array $connections)
     {
         foreach ($connections as $name => $conf) {
@@ -114,14 +103,14 @@ final class MongoDbBundleExtension extends Extension
             'addListener',
             [
                 ConnectionEvent::CLIENT_CREATED,
-                [new Reference('facile_mongo_db.data_collector.listener'), 'onConnectionClientCreated']
+                [new Reference('facile_mongo_db.data_collector.listener'), 'onConnectionClientCreated'],
             ]
         );
         $eventManagerDefinition->addMethodCall(
             'addListener',
             [
                 QueryEvent::QUERY_EXECUTED,
-                [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted']
+                [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted'],
             ]
         );
     }
