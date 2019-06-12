@@ -7,6 +7,7 @@ use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
 use MongoDB\Client;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 
 /**
  * Class ClientRegistry.
@@ -37,6 +38,10 @@ final class ClientRegistry
      */
     public function __construct(EventDispatcherInterface $eventDispatcher, string $environment)
     {
+        if (class_exists(LegacyEventDispatcherProxy::class)) {
+            $eventDispatcher = LegacyEventDispatcherProxy::decorate($eventDispatcher);
+        }
+
         $this->clients = [];
         $this->configurations = [];
         $this->environment = $environment;
@@ -146,8 +151,8 @@ final class ClientRegistry
             $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, []);
 
             $this->eventDispatcher->dispatch(
-                ConnectionEvent::CLIENT_CREATED,
-                new ConnectionEvent($clientKey)
+                new ConnectionEvent($clientKey),
+                ConnectionEvent::CLIENT_CREATED
             );
         }
 
