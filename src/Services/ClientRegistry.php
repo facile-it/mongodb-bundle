@@ -38,10 +38,6 @@ final class ClientRegistry
      */
     public function __construct(EventDispatcherInterface $eventDispatcher, string $environment)
     {
-        if (class_exists(LegacyEventDispatcherProxy::class)) {
-            $eventDispatcher = LegacyEventDispatcherProxy::decorate($eventDispatcher);
-        }
-
         $this->clients = [];
         $this->configurations = [];
         $this->environment = $environment;
@@ -150,10 +146,12 @@ final class ClientRegistry
             );
             $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, []);
 
-            $this->eventDispatcher->dispatch(
-                new ConnectionEvent($clientKey),
-                ConnectionEvent::CLIENT_CREATED
-            );
+            $event = new ConnectionEvent($clientKey);
+            if (class_exists(LegacyEventDispatcherProxy::class)) {
+                $this->eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED);
+            } else {
+                $this->eventDispatcher->dispatch(ConnectionEvent::CLIENT_CREATED, $event);
+            }
         }
 
         return $this->clients[$clientKey];

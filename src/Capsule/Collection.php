@@ -44,11 +44,6 @@ final class Collection extends MongoCollection
         EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct($manager, $databaseName, $collectionName, $options);
-
-        if (class_exists(LegacyEventDispatcherProxy::class)) {
-            $eventDispatcher = LegacyEventDispatcherProxy::decorate($eventDispatcher);
-        }
-
         $this->eventDispatcher = $eventDispatcher;
         $this->clientName = $clientName;
         $this->databaseName = $databaseName;
@@ -220,7 +215,12 @@ final class Collection extends MongoCollection
             $this->translateReadPreference($options['readPreference'] ?? $this->__debugInfo()['readPreference'])
         );
 
-        $this->eventDispatcher->dispatch(new QueryEvent($query), QueryEvent::QUERY_PREPARED);
+        $event = new QueryEvent($query);
+        if (class_exists(LegacyEventDispatcherProxy::class)) {
+            $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_PREPARED);
+        } else {
+            $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, $event);
+        }
 
         return $query;
     }
@@ -255,7 +255,12 @@ final class Collection extends MongoCollection
     {
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 
-        $this->eventDispatcher->dispatch(new QueryEvent($queryLog), QueryEvent::QUERY_EXECUTED);
+        $event = new QueryEvent($queryLog);
+        if (class_exists(LegacyEventDispatcherProxy::class)) {
+            $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
+        } else {
+            $this->eventDispatcher->dispatch(QueryEvent::QUERY_EXECUTED, $event);
+        }
     }
 
     /**
