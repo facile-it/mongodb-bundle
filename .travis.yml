@@ -49,7 +49,7 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
-    - env: PHP_IMG="base-7.1-mongoext-1.3.0" MONGO_IMG="mongo:3.4" SYMFONY="dev-master"
+    - env: PHP_IMG="base-7.2-mongoext-1.3.0" MONGO_IMG="mongo:3.4" SYMFONY="dev-master"
 
 install:
   - rm docker-compose.yml
