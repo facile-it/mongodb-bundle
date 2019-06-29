@@ -8,6 +8,7 @@ use MongoDB\Collection as MongoCollection;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\ReadPreference;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 
 /**
  * Class Collection.
@@ -214,7 +215,12 @@ final class Collection extends MongoCollection
             $this->translateReadPreference($options['readPreference'] ?? $this->__debugInfo()['readPreference'])
         );
 
-        $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, new QueryEvent($query));
+        $event = new QueryEvent($query);
+        if (class_exists(LegacyEventDispatcherProxy::class)) {
+            $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_PREPARED);
+        } else {
+            $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, $event);
+        }
 
         return $query;
     }
@@ -249,7 +255,12 @@ final class Collection extends MongoCollection
     {
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 
-        $this->eventDispatcher->dispatch(QueryEvent::QUERY_EXECUTED, new QueryEvent($queryLog));
+        $event = new QueryEvent($queryLog);
+        if (class_exists(LegacyEventDispatcherProxy::class)) {
+            $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
+        } else {
+            $this->eventDispatcher->dispatch(QueryEvent::QUERY_EXECUTED, $event);
+        }
     }
 
     /**
