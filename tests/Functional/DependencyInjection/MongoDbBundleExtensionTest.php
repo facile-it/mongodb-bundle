@@ -21,6 +21,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 {
     const LOGGER_PUBLIC_ALIAS = 'facile_mongo_db.logger.public';
+
     const DISPATCHER_PUBLIC_ALIAS = 'facile_mongo_db.event_dispatcher.public';
 
     protected function setUp()
@@ -39,7 +40,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                 'clients' => [
                     'test_client' => [
                         'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080]
+                            ['host' => 'localhost', 'port' => 8080],
                         ],
                         'username' => 'foo',
                         'password' => 'bar',
@@ -91,7 +92,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                 'clients' => [
                     'test_client' => [
                         'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080]
+                            ['host' => 'localhost', 'port' => 8080],
                         ],
                         'username' => 'foo',
                         'password' => 'bar',
@@ -138,7 +139,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                 'clients' => [
                     'test_client' => [
                         'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080]
+                            ['host' => 'localhost', 'port' => 8080],
                         ],
                         'username' => 'foo',
                         'password' => 'bar',
@@ -176,14 +177,14 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                 'clients' => [
                     'test_client' => [
                         'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080]
+                            ['host' => 'localhost', 'port' => 8080],
                         ],
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
                     'other_client' => [
                         'hosts' => [
-                            ['host' => 'localhost.dev', 'port' => 8081]
+                            ['host' => 'localhost.dev', 'port' => 8081],
                         ],
                         'username' => 'mee',
                         'password' => 'zod',
@@ -261,7 +262,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertInstanceOf(AbstractCommand::class, $this->container->get($publicAlias));
     }
 
-    public function commandNamesProvider(): array 
+    public function commandNamesProvider(): array
     {
         return [
             ['facile_mongo_db.command.drop_database'],

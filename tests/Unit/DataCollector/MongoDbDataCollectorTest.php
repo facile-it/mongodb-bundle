@@ -15,14 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MongoDbDataCollectorTest extends TestCase
 {
-
     public function test_construction_logger()
     {
         $logEvent = new Query();
         $logEvent->setData(
             [
-                "data" => new BSONDocument(["test"]),
-                "date" => $this->getUtcDateTime(),
+                'data' => new BSONDocument(['test']),
+                'date' => $this->getUtcDateTime(),
             ]
         );
 

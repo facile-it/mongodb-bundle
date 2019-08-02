@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Event\Listener;
 
@@ -8,6 +10,7 @@ use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
 
 /**
  * Class DataCollectorListener.
+ *
  * @internal
  */
 final class DataCollectorListener

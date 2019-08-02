@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\DataCollector;
 
@@ -7,6 +9,7 @@ use MongoDB\BSON\Serializable;
 
 /**
  * Class MongoQuerySerializer
+ *
  * @internal
  */
 final class MongoQuerySerializer
@@ -68,7 +71,7 @@ final class MongoQuerySerializer
         }
 
         if (\is_array($item) || \is_object($item)) {
-            return self::prepareUnserializableData((array)$item);
+            return self::prepareUnserializableData((array) $item);
         }
 
         return $item;

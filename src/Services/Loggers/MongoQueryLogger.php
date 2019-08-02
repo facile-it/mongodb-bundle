@@ -1,16 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services\Loggers;
 
 use Facile\MongoDbBundle\Models\Query;
 
-/**
- * Class MongoQueryLogger
- */
 class MongoQueryLogger implements DataCollectorLoggerInterface
 {
     /** @var \SplQueue|Query[] */
     private $logs;
+
     /** @var array|string[] */
     private $connections;
 

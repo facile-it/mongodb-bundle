@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Controller;
 
@@ -28,9 +30,9 @@ class ProfilerController implements ContainerAwareInterface
      * @param $token
      * @param $queryNumber
      *
-     * @return JsonResponse
-     *
      * @throws \Exception
+     *
+     * @return JsonResponse
      */
     public function explainAction($token, $queryNumber)
     {
@@ -51,7 +53,7 @@ class ProfilerController implements ContainerAwareInterface
             $result = $service->execute($query);
         } catch (\InvalidArgumentException $e) {
             return new JsonResponse([
-                "err" => $e->getMessage()
+                'err' => $e->getMessage(),
             ]);
         }
 
@@ -70,7 +72,6 @@ class ProfilerController implements ContainerAwareInterface
         }
 
         foreach ($data as $key => $item) {
-
             if (\is_string($item) && 0 === strpos($item, 'ISODate')) {
                 $time = str_replace(['ISODate("', '")'], '', $item);
                 $dateTime = new \DateTime($time);

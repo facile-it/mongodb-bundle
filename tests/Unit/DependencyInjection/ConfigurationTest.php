@@ -20,7 +20,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'connections' => [],
             'data_collection' => true,
         ], [
-            __DIR__ . '/../../fixtures/config/config_empty.yml',
+            __DIR__ . '/../../Fixtures/config/config_empty.yml',
         ]);
     }
 
@@ -49,7 +49,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__ . '/../../fixtures/config/config_uri.yml',
+            __DIR__ . '/../../Fixtures/config/config_uri.yml',
         ]);
     }
 
@@ -59,7 +59,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -80,7 +80,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__ . '/../../fixtures/config/config_full.yml',
+            __DIR__ . '/../../Fixtures/config/config_full.yml',
         ]);
     }
 
@@ -90,7 +90,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -111,7 +111,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__ . '/../../fixtures/config/config_options.yml',
+            __DIR__ . '/../../Fixtures/config/config_options.yml',
         ]);
     }
 
@@ -121,7 +121,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080]
+                        ['host' => 'localhost', 'port' => 8080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -142,7 +142,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => false,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__ . '/../../fixtures/config/config_datacollection_disabled.yml',
+            __DIR__ . '/../../Fixtures/config/config_datacollection_disabled.yml',
         ]);
     }
 
@@ -166,7 +166,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 'other_client' => [
                     'hosts' => [
                         ['host' => 'localhost.dev', 'port' => 8081],
-                        ['host' => 'localhost.dev2', 'port' => 27017]
+                        ['host' => 'localhost.dev2', 'port' => 27017],
                     ],
                     'uri' => null,
                     'username' => 'mee',
@@ -195,7 +195,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'data_collection' => true,
         ];
         $this->assertProcessedConfigurationEquals($expectedConfiguration, [
-            __DIR__ . '/../../fixtures/config/config_multiple.yml',
+            __DIR__ . '/../../Fixtures/config/config_multiple.yml',
         ]);
     }
 
@@ -204,7 +204,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $extensionConfigurationBuilder = new ExtensionConfigurationBuilder(new LoaderFactory());
         $extensionConfiguration = $extensionConfigurationBuilder
             ->setExtension($this->getContainerExtension())
-            ->setSources([__DIR__ . '/../../fixtures/config/config_wrong_readPreference.yml',]);
+            ->setSources([__DIR__ . '/../../Fixtures/config/config_wrong_readPreference.yml']);
 
         $processor = new Processor();
         $configuration = new Configuration();

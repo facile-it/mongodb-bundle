@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Fixtures;
 
@@ -7,6 +9,7 @@ final class FixtureSorter
     public static function sort(array $fixtures): array
     {
         usort($fixtures, self::orderedFixtureSorter());
+
         return $fixtures;
     }
 

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -7,12 +9,14 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class Client.
+ *
  * @internal
  */
 final class Client extends MongoClient
 {
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+
     /** @var string */
     private $clientName;
 

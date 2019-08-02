@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Services\Explain;
 
@@ -10,8 +12,9 @@ class ExplainCommandBuilder
      * @param Query $query
      * @param string $verbosity
      *
-     * @return array
      * @throws \Exception
+     *
+     * @return array
      */
     public static function createCommandArgs(
         Query $query,
@@ -113,8 +116,8 @@ class ExplainCommandBuilder
             return [
                 'delete' => $query->getCollection(),
                 'deletes' => [
-                    ['q' => $query->getFilters(), 'limit' => $query->getOptions()['limit'] ?? 0]
-                ]
+                    ['q' => $query->getFilters(), 'limit' => $query->getOptions()['limit'] ?? 0],
+                ],
             ];
         }
 

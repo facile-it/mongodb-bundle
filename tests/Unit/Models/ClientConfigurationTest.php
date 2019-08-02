@@ -25,8 +25,8 @@ class ClientConfigurationTest extends TestCase
         self::assertEquals('admin_password', $conf->getPassword());
         self::assertEquals(
             [
-                'username' => "admin",
-                'password' => "admin_password",
+                'username' => 'admin',
+                'password' => 'admin_password',
             ],
             $conf->getOptions()
         );
@@ -84,8 +84,8 @@ class ClientConfigurationTest extends TestCase
                     'connectTimeoutMS' => '',
                 ],
                 [   // expected
-                    'ssl' => false
-                ]
+                    'ssl' => false,
+                ],
             ],
             [   // set 2
                 [   // provided
@@ -94,22 +94,22 @@ class ClientConfigurationTest extends TestCase
                     'connectTimeoutMS' => 100,
                 ],
                 [   // expected
-                    'replicaSet' => "testReplica",
+                    'replicaSet' => 'testReplica',
                     'ssl' => true,
                     'connectTimeoutMS' => 100,
-                ]
+                ],
             ],
             [   // set 3
                 [   // provided
                     'replicaSet' => null,
                     'ssl' => true,
                     'connectTimeoutMS' => null,
-                    'readPreference' => 'primary'
+                    'readPreference' => 'primary',
                 ],
                 [   // expected
                     'ssl' => true,
-                    'readPreference' => 'primary'
-                ]
+                    'readPreference' => 'primary',
+                ],
             ],
         ];
     }

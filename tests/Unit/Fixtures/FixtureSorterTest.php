@@ -52,8 +52,7 @@ class FixtureSorterTest extends TestCase
 
     private function mockUnordered(string $collectionName): MongoFixtureInterface
     {
-        return new class ($collectionName) implements MongoFixtureInterface
-        {
+        return new class($collectionName) implements MongoFixtureInterface {
             /** @var string */
             private $collectionName;
 
@@ -79,10 +78,10 @@ class FixtureSorterTest extends TestCase
 
     private function mockOrdered(int $order, string $collectionName): OrderedFixtureInterface
     {
-        return new class ($order, $collectionName) implements MongoFixtureInterface, OrderedFixtureInterface
-        {
+        return new class($order, $collectionName) implements MongoFixtureInterface, OrderedFixtureInterface {
             /** @var int */
             private $order;
+
             /** @var string */
             private $collectionName;
 

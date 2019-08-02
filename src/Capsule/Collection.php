@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
@@ -12,14 +14,17 @@ use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 
 /**
  * Class Collection.
+ *
  * @internal
  */
 final class Collection extends MongoCollection
 {
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+
     /** @var string */
     private $clientName;
+
     /** @var string */
     private $databaseName;
 
@@ -204,8 +209,8 @@ final class Collection extends MongoCollection
     private function prepareQuery(string $method, $filters = null, $data = null, array $options): Query
     {
         $query = new Query();
-        $query->setFilters($filters);
-        $query->setData($data);
+        $query->setFilters($filters ?? []);
+        $query->setData($data ?? []);
         $query->setOptions($options);
         $query->setMethod($method);
         $query->setClient($this->getClientName());
@@ -279,4 +284,3 @@ final class Collection extends MongoCollection
         return $this->databaseName;
     }
 }
-

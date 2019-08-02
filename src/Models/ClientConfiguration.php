@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Models;
 
@@ -105,7 +107,7 @@ final class ClientConfiguration
         return array_filter(
             $options,
             function ($value) {
-                return !empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
+                return ! empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
             }
         );
     }

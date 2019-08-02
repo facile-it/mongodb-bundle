@@ -10,7 +10,9 @@ use MongoDB\Driver\Cursor;
 class ExplainQueryService
 {
     const VERBOSITY_QUERY_PLANNER = 'queryPlanner';
+
     const VERBOSITY_EXECUTION_STATS = 'executionStats';
+
     const VERBOSITY_ALL_PLAN_EXECUTION = 'allPlansExecution';
 
     public static $acceptedMethods = [
@@ -49,9 +51,9 @@ class ExplainQueryService
      * @param Query $query
      * @param string $verbosity
      *
-     * @return Cursor
-     *
      * @throws \Exception
+     *
+     * @return Cursor
      */
     public function execute(Query $query, string $verbosity = self::VERBOSITY_ALL_PLAN_EXECUTION): Cursor
     {
@@ -59,7 +61,7 @@ class ExplainQueryService
             throw new \InvalidArgumentException(
                 'Cannot explain the method \'' . $query->getMethod() . '\'. Allowed methods: ' . implode(', ', self::$acceptedMethods)
             );
-        };
+        }
 
         $manager = $this->clientRegistry->getClient($query->getClient(), $query->getDatabase())->__debugInfo()['manager'];
 
@@ -70,4 +72,3 @@ class ExplainQueryService
             );
     }
 }
-
