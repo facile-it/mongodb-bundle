@@ -36,7 +36,7 @@ final class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.environment"));
+	$this->defineClientRegistry($config['clients'], $container->getParameter("kernel.debug"));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
@@ -55,22 +55,22 @@ final class MongoDbBundleExtension extends Extension
      */
     private function mustCollectData(array $config): bool
     {
-        return 'dev' === $this->containerBuilder->getParameter("kernel.environment")
+        return true === $this->containerBuilder->getParameter("kernel.debug")
             && class_exists(WebProfilerBundle::class)
             && $config['data_collection'] === true;
     }
 
     /**
      * @param array $clientsConfig
-     * @param string $environment
+     * @param bool $debug
      */
-    private function defineClientRegistry(array $clientsConfig, string $environment)
+    private function defineClientRegistry(array $clientsConfig, bool $debug)
     {
         $clientRegistryDefinition = new Definition(
             ClientRegistry::class,
             [
                 new Reference('facile_mongo_db.event_dispatcher'),
-                $environment,
+                $debug,
             ]
         );
         $clientRegistryDefinition->addMethodCall('addClientsConfigurations', [$clientsConfig]);
