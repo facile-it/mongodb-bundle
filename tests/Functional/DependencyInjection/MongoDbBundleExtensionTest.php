@@ -27,7 +27,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->setParameter('kernel.environment', 'dev');
+        $this->setParameter('kernel.debug', true);
         $this->container->setDefinition('debug.stopwatch', new Definition(Stopwatch::class));
         $this->container->setAlias(self::LOGGER_PUBLIC_ALIAS, new Alias('facile_mongo_db.logger', true));
         $this->container->setAlias(self::DISPATCHER_PUBLIC_ALIAS, new Alias('facile_mongo_db.event_dispatcher', true));
@@ -133,7 +133,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 
     public function test_load_env_prod()
     {
-        $this->setParameter('kernel.environment', 'prod');
+        $this->setParameter('kernel.debug', false);
         $this->load(
             [
                 'clients' => [
