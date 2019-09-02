@@ -14,7 +14,7 @@ class ClientRegistryTest extends TestCase
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
-        $registry = new ClientRegistry($ed->reveal(), 'prod');
+        $registry = new ClientRegistry($ed->reveal(), false);
 
         $testConf = [
             'test_client' => [
@@ -42,7 +42,7 @@ class ClientRegistryTest extends TestCase
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
-        $registry = new ClientRegistry($ed->reveal(), 'prod');
+        $registry = new ClientRegistry($ed->reveal(), false);
 
         $testConf = [
             'test_client' => [
@@ -72,7 +72,7 @@ class ClientRegistryTest extends TestCase
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
-        $registry = new ClientRegistry($ed->reveal(), 'prod');
+        $registry = new ClientRegistry($ed->reveal(), false);
 
         $testConf = [
             'test_client' => [

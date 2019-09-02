@@ -24,8 +24,8 @@ final class ClientRegistry
     /** @var ClientConfiguration[] */
     private $configurations;
 
-    /** @var string */
-    private $environment;
+    /** @var bool */
+    private $debug;
 
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
@@ -34,15 +34,15 @@ final class ClientRegistry
      * ClientRegistry constructor.
      *
      * @param EventDispatcherInterface $eventDispatcher
-     * @param string                   $environment
+     * @param bool                   $debug
      *
      * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, string $environment)
+    public function __construct(EventDispatcherInterface $eventDispatcher, bool $debug)
     {
         $this->clients = [];
         $this->configurations = [];
-        $this->environment = $environment;
+        $this->debug = $debug;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -169,7 +169,7 @@ final class ClientRegistry
      */
     private function buildClient(string $clientName, string $uri, array $options, array $driverOptions): Client
     {
-        if ('dev' === $this->environment) {
+        if (true === $this->debug) {
             return new BundleClient($uri, $options, $driverOptions, $clientName, $this->eventDispatcher);
         }
 
