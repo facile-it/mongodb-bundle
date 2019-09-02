@@ -18,7 +18,7 @@ if (! class_exists('\Twig\TwigFunction')) {
 
 class FacileMongoDbBundleExtension extends AbstractExtension
 {
-    private $methodDataTranslationMap = [
+    private const METHOD_DATA_TRANSATION_MAP = [
         'aggregate' => 'Pipeline',
         'insertOne' => 'Document',
         'updateOne' => 'Update',
@@ -32,45 +32,22 @@ class FacileMongoDbBundleExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('filterLabelTranslate', [$this, 'queryFilterTranslate']),
             new TwigFunction('dataLabelTranslate', [$this, 'queryDataTranslate']),
             new TwigFunction('isQueryExplainable', [$this, 'isQueryExplainable']),
         ];
     }
 
-    /**
-     * @param string $label
-     * @param string $methodName
-     *
-     * @return string
-     */
-    public function queryFilterTranslate(string $label, string $methodName): string
-    {
-        return $label;
-    }
-
-    /**
-     * @param string $label
-     * @param string $methodName
-     *
-     * @return string
-     */
     public function queryDataTranslate(string $label, string $methodName): string
     {
-        return $this->methodDataTranslationMap[$methodName] ?? $label;
+        return self::METHOD_DATA_TRANSATION_MAP[$methodName] ?? $label;
     }
 
     public function isQueryExplainable(string $methodName): bool
     {
-        return \in_array($methodName, ExplainQueryService::$acceptedMethods);
+        return \in_array($methodName, ExplainQueryService::ACCEPTED_METHODS, true);
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'facile_mongo_db_extesion';
     }

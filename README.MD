@@ -13,7 +13,6 @@ Bundle service integration of official [mongodb/mongo-php-library](https://githu
 [![Build Status](https://travis-ci.org/facile-it/mongodb-bundle.svg?branch=master)](https://travis-ci.org/facile-it/mongodb-bundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/facile-it/mongodb-bundle/?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/57b5b728090d4d0039befc7c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57b5b728090d4d0039befc7c)
 
 ### Installation
 

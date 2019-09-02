@@ -19,8 +19,6 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class MongoDbBundleExtension.
- *
  * @internal
  */
 final class MongoDbBundleExtension extends Extension
@@ -28,9 +26,6 @@ final class MongoDbBundleExtension extends Extension
     /** @var ContainerBuilder */
     private $containerBuilder;
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $this->containerBuilder = $container;
@@ -39,7 +34,7 @@ final class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        $this->defineClientRegistry($config['clients'], $container->getParameter("kernel.debug"));
+        $this->defineClientRegistry($config['clients'], $container->getParameter('kernel.debug'));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
@@ -51,23 +46,14 @@ final class MongoDbBundleExtension extends Extension
         return $config;
     }
 
-    /**
-     * @param array $config
-     *
-     * @return bool
-     */
     private function mustCollectData(array $config): bool
     {
-        return true === $this->containerBuilder->getParameter("kernel.debug")
+        return true === $this->containerBuilder->getParameter('kernel.debug')
             && class_exists(WebProfilerBundle::class)
             && $config['data_collection'] === true;
     }
 
-    /**
-     * @param array $clientsConfig
-     * @param bool $debug
-     */
-    private function defineClientRegistry(array $clientsConfig, bool $debug)
+    private function defineClientRegistry(array $clientsConfig, bool $debug): void
     {
         $clientRegistryDefinition = new Definition(
             ClientRegistry::class,
@@ -82,7 +68,7 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('mongo.client_registry', $clientRegistryDefinition);
     }
 
-    private function defineConnectionFactory()
+    private function defineConnectionFactory(): void
     {
         $factoryDefinition = new Definition(ConnectionFactory::class, [new Reference('mongo.client_registry')]);
         $factoryDefinition->setPublic(false);
@@ -90,10 +76,7 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('mongo.connection_factory', $factoryDefinition);
     }
 
-    /**
-     * @param array $connections
-     */
-    private function defineConnections(array $connections)
+    private function defineConnections(array $connections): void
     {
         foreach ($connections as $name => $conf) {
             $connectionDefinition = new Definition(
@@ -110,7 +93,7 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setAlias('mongo.connection', new Alias('mongo.connection.' . array_keys($connections)[0], true));
     }
 
-    private function attachDataCollectionListenerToEventManager()
+    private function attachDataCollectionListenerToEventManager(): void
     {
         $eventManagerDefinition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
         $eventManagerDefinition->addMethodCall(

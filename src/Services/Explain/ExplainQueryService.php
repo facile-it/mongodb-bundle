@@ -15,7 +15,7 @@ class ExplainQueryService
 
     const VERBOSITY_ALL_PLAN_EXECUTION = 'allPlansExecution';
 
-    public static $acceptedMethods = [
+    public const ACCEPTED_METHODS = [
         'count',
         'distinct',
         'find',
@@ -57,9 +57,9 @@ class ExplainQueryService
      */
     public function execute(Query $query, string $verbosity = self::VERBOSITY_ALL_PLAN_EXECUTION): Cursor
     {
-        if (! \in_array($query->getMethod(), self::$acceptedMethods)) {
+        if (! \in_array($query->getMethod(), self::ACCEPTED_METHODS, true)) {
             throw new \InvalidArgumentException(
-                'Cannot explain the method \'' . $query->getMethod() . '\'. Allowed methods: ' . implode(', ', self::$acceptedMethods)
+                'Cannot explain the method \'' . $query->getMethod() . '\'. Allowed methods: ' . implode(', ', self::ACCEPTED_METHODS)
             );
         }
 

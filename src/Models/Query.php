@@ -23,7 +23,7 @@ final class Query
     /** @var array */
     private $filters;
 
-    /** @var array|object*/
+    /** @var array|object */
     private $data;
 
     /** @var array */

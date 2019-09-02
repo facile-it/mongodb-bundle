@@ -22,14 +22,6 @@ class FacileMongoDbBundleExtensionTest extends TestCase
         $this->assertEquals($expected, $ext->queryDataTranslate($label, $methodname));
     }
 
-    public function test_queryFilterTranslate()
-    {
-        $ext = new FacileMongoDbBundleExtension();
-        $this->assertEquals('label', $ext->queryFilterTranslate('label', ''));
-        $this->assertEquals('label1', $ext->queryFilterTranslate('label1', ''));
-        $this->assertEquals('label2', $ext->queryFilterTranslate('label2', ''));
-    }
-
     /**
      * @dataProvider explainMethodsProvider
      *
