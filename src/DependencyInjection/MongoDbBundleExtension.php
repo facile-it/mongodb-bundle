@@ -62,6 +62,14 @@ final class MongoDbBundleExtension extends Extension
                 $debug,
             ]
         );
+
+        // Normalize driver options
+        foreach ($clientsConfig as $key => $config) {
+            if (isset($config['driver_options'])) {
+                $clientsConfig[$key]['driver_options'] = $this->normalizeDriverOptions($config);
+            }
+        }
+
         $clientRegistryDefinition->addMethodCall('addClientsConfigurations', [$clientsConfig]);
         $clientRegistryDefinition->setPublic(true);
 
@@ -93,7 +101,24 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setAlias('mongo.connection', new Alias('mongo.connection.' . array_keys($connections)[0], true));
     }
 
-    private function attachDataCollectionListenerToEventManager(): void
+    /**
+     * Normalizes the driver options array
+     *
+     * @param array $clientsConfig
+     *
+     * @return array|null
+     */
+    private function normalizeDriverOptions(array $clientsConfig)
+    {
+        $driverOptions            = $clientsConfig['driver_options'] ?? [];
+        $driverOptions['typeMap'] = ['root' => 'array', 'document' => 'array'];
+        if (isset($driverOptions['context'])) {
+            $driverOptions['context'] = new Reference($driverOptions['context']);
+        }
+        return $driverOptions;
+    }
+
+    private function attachDataCollectionListenerToEventManager()
     {
         $eventManagerDefinition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
         $eventManagerDefinition->addMethodCall(

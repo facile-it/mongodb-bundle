@@ -86,6 +86,12 @@ final class Configuration implements ConfigurationInterface
             ->defaultFalse();
 
         $clientsBuilder
+            ->arrayNode('driver_options')
+            ->performNoDeepMerging()
+            ->children()
+            ->scalarNode('context')->defaultNull();
+
+        $clientsBuilder
             ->integerNode('connectTimeoutMS')
             ->defaultNull();
     }

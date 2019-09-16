@@ -65,6 +65,14 @@ mongo_db_bundle:
         ssl: false
         connectTimeoutMS: 3000 # default null (no timeout)
         readPreference: primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
+      
+      ssl_client_name:    # see https://www.php.net/manual/en/mongo.connecting.ssl.php 
+        uri: 'mongodb://host1:3062,host2'
+        password: ''
+        authSource: ''
+        ssl: true
+        driver_options:
+            context: "app.mongodb.context_service" # default null see https://symfony.com/doc/master/bundles/DoctrineMongoDBBundle/config.html#specifying-a-context-service
         
       other_client:   ~ # same as upper configuration
       

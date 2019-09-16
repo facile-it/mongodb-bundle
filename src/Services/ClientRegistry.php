@@ -76,6 +76,8 @@ final class ClientRegistry
             $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
         }
 
+        $driverOptions = ($conf['driver_options'] ? $conf['driver_options'] : []);
+
         return new ClientConfiguration(
             $conf['uri'],
             $conf['username'],
@@ -85,8 +87,9 @@ final class ClientRegistry
                 'replicaSet' => $conf['replicaSet'],
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
-                'readPreference' => $conf['readPreference'],
-            ]
+                'readPreference' => $conf['readPreference']
+            ],
+            $driverOptions
         );
     }
 
@@ -146,7 +149,7 @@ final class ClientRegistry
                 ],
                 $conf->getOptions()
             );
-            $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, []);
+            $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, $conf->getDriverOptions());
 
             $event = new ConnectionEvent($clientKey);
             if (class_exists(LegacyEventDispatcherProxy::class)) {
