@@ -105,8 +105,7 @@ final class MongoDbBundleExtension extends Extension
      * Normalizes the driver options array
      *
      * @param array $clientsConfig
-     *
-     * @return array|null
+     * @return array|mixed
      */
     private function normalizeDriverOptions(array $clientsConfig)
     {
