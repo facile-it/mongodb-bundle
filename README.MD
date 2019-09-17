@@ -92,7 +92,7 @@ mongo_db_bundle:
         database_name:  ~
 ```
 
-### SSL/TSL context service
+### SSL/TLS context service
 
 ```yaml
 # Service example:
