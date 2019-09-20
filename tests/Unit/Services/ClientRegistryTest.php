@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Tests\Unit\Services;
 
 use Facile\MongoDbBundle\Services\ClientRegistry;
+use Facile\MongoDbBundle\Services\DriverOptionsFactory;
+use Facile\MongoDbBundle\Services\DriverOptionsInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -13,8 +15,9 @@ class ClientRegistryTest extends TestCase
     public function test_client_connection_url_provided_manually()
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
+        $di = new DriverOptionsFactory();
 
-        $registry = new ClientRegistry($ed->reveal(), false);
+        $registry = new ClientRegistry($ed->reveal(), $di, false);
 
         $testConf = [
             'test_client' => [
@@ -41,8 +44,9 @@ class ClientRegistryTest extends TestCase
     public function test_client_connection_url_generation_singlehost()
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
+        $di = new DriverOptionsFactory();
 
-        $registry = new ClientRegistry($ed->reveal(), false);
+        $registry = new ClientRegistry($ed->reveal(), $di, false);
 
         $testConf = [
             'test_client' => [
@@ -71,8 +75,9 @@ class ClientRegistryTest extends TestCase
     public function test_client_connection_url_generation_multihost()
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
-
-        $registry = new ClientRegistry($ed->reveal(), false);
+        $di = new DriverOptionsFactory();
+        
+        $registry = new ClientRegistry($ed->reveal(), $di, false);
 
         $testConf = [
             'test_client' => [

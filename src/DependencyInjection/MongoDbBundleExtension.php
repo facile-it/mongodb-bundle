@@ -8,6 +8,7 @@ use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\ConnectionFactory;
+use Facile\MongoDbBundle\Services\DriverOptionsFactory;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\Config\FileLocator;

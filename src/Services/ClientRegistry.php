@@ -35,11 +35,9 @@ final class ClientRegistry
 
     /**
      * ClientRegistry constructor.
-     *
      * @param EventDispatcherInterface $eventDispatcher
-     * @param bool                   $debug
-     *
-     * @internal param DataCollectorLoggerInterface $logger
+     * @param DriverOptionsInterface $driverOptions
+     * @param bool $debug
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
