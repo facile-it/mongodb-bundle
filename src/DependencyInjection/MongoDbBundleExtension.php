@@ -34,6 +34,7 @@ final class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
+        $this->defineDriverOptionsFactory();
         $this->defineClientRegistry($config['clients'], $container->getParameter('kernel.debug'));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
@@ -59,6 +60,7 @@ final class MongoDbBundleExtension extends Extension
             ClientRegistry::class,
             [
                 new Reference('facile_mongo_db.event_dispatcher'),
+                new Reference('mongo.driver_options_factory'),
                 $debug,
             ]
         );
@@ -76,7 +78,18 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('mongo.connection_factory', $factoryDefinition);
     }
 
-    private function defineConnections(array $connections): void
+    private function defineDriverOptionsFactory()
+    {
+        $factoryDefinition = new Definition(DriverOptionsFactory::class, []);
+        $factoryDefinition->setPublic(false);
+
+        $this->containerBuilder->setDefinition('mongo.driver_options_factory', $factoryDefinition);
+    }
+
+    /**
+     * @param array $connections
+     */
+    private function defineConnections(array $connections)
     {
         foreach ($connections as $name => $conf) {
             $connectionDefinition = new Definition(

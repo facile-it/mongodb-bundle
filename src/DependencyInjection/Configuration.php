@@ -88,6 +88,8 @@ final class Configuration implements ConfigurationInterface
         $clientsBuilder
             ->integerNode('connectTimeoutMS')
             ->defaultNull();
+
+        $this->addDriverOptions($clientsBuilder);
     }
 
     private function addClientsHosts(NodeBuilder $builder)
@@ -105,6 +107,39 @@ final class Configuration implements ConfigurationInterface
         $hostsBuilder
             ->integerNode('port')
             ->defaultValue(27017);
+    }
+
+    private function addDriverOptions(NodeBuilder $builder)
+    {
+        $driverOptionsBuilder = $builder
+            ->arrayNode('driverOptions')
+            ->info('Available options for driver')
+            ->children();
+
+        $contextBuilder = $driverOptionsBuilder
+            ->arrayNode('context')
+            ->info('Available options for context')
+            ->children();
+
+        $contextBuilder
+            ->scalarNode('capath')
+            ->defaultNull();
+
+        $contextBuilder
+            ->scalarNode('cafile')
+            ->defaultNull();
+
+        $contextBuilder
+            ->scalarNode('local_cert')
+            ->defaultNull();
+
+        $contextBuilder
+            ->scalarNode('passphrase')
+            ->defaultNull();
+
+        $contextBuilder
+            ->booleanNode('allow_self_signed')
+            ->defaultFalse();
     }
 
     private function addConnections(NodeBuilder $builder)

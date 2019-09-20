@@ -30,6 +30,9 @@ final class ClientRegistry
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
+    /** @var DriverOptionsInterface  */
+    private $driverOptions;
+
     /**
      * ClientRegistry constructor.
      *
@@ -38,12 +41,16 @@ final class ClientRegistry
      *
      * @internal param DataCollectorLoggerInterface $logger
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, bool $debug)
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        DriverOptionsInterface $driverOptions,
+        bool $debug)
     {
         $this->clients = [];
         $this->configurations = [];
         $this->debug = $debug;
         $this->eventDispatcher = $eventDispatcher;
+        $this->driverOptions = $driverOptions;
     }
 
     /**
@@ -85,8 +92,9 @@ final class ClientRegistry
                 'replicaSet' => $conf['replicaSet'],
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
-                'readPreference' => $conf['readPreference'],
-            ]
+                'readPreference' => $conf['readPreference']
+            ],
+            $this->driverOptions->buildDriverOptions($conf)
         );
     }
 
@@ -146,7 +154,7 @@ final class ClientRegistry
                 ],
                 $conf->getOptions()
             );
-            $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, []);
+            $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, $conf->getDriverOptions());
 
             $event = new ConnectionEvent($clientKey);
             if (class_exists(LegacyEventDispatcherProxy::class)) {

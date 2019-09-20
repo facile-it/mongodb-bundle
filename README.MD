@@ -65,6 +65,8 @@ mongo_db_bundle:
         ssl: false
         connectTimeoutMS: 3000 # default null (no timeout)
         readPreference: primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
+        driverOptions:  
+            context:  ~ # see https://www.php.net/manual/en/mongodb-driver-manager.construct.php
         
       other_client:   ~ # same as upper configuration
       

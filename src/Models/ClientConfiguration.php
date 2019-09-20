@@ -26,27 +26,33 @@ final class ClientConfiguration
     /** @var null|string */
     private $authSource;
 
+    /** @var array */
+    private $driverOptions;
+
     /**
      * ClientConfiguration constructor.
      *
-     * @param string      $uri
-     * @param string      $username
-     * @param string      $password
-     * @param string|null $authSource
-     * @param array       $options
+     * @param string        $uri
+     * @param string        $username
+     * @param string        $password
+     * @param string|null   $authSource
+     * @param array         $options
+     * @param array         $driverOptions
      */
     public function __construct(
         string $uri,
         string $username = '',
         string $password = '',
         string $authSource = null,
-        array $options = []
+        array $options = [],
+        array $driverOptions = []
     ) {
         $this->uri = $uri;
         $this->username = $username;
         $this->password = $password;
         $this->options = $options;
         $this->authSource = $authSource;
+        $this->driverOptions = $driverOptions;
     }
 
     /**
@@ -95,6 +101,14 @@ final class ClientConfiguration
                 $this->options
             )
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function getDriverOptions(): array
+    {
+        return $this->driverOptions;
     }
 
     /**
