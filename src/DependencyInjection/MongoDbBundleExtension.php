@@ -8,7 +8,6 @@ use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\ConnectionFactory;
-use Facile\MongoDbBundle\Services\DriverOptionsFactory;
 use MongoDB\Database;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\Config\FileLocator;
@@ -35,8 +34,7 @@ final class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        $this->defineDriverOptionsFactory();
-        $this->defineClientRegistry($config['clients'], $container->getParameter('kernel.debug'));
+        $this->defineClientRegistry($config, $container->getParameter('kernel.debug'));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
@@ -55,14 +53,15 @@ final class MongoDbBundleExtension extends Extension
             && $config['data_collection'] === true;
     }
 
-    private function defineClientRegistry(array $clientsConfig, bool $debug): void
+    private function defineClientRegistry(array $config, bool $debug): void
     {
+        $clientsConfig = $config['clients'];
         $clientRegistryDefinition = new Definition(
             ClientRegistry::class,
             [
                 new Reference('facile_mongo_db.event_dispatcher'),
-                new Reference('mongo.driver_options_factory'),
                 $debug,
+                $this->defineDriverOptionsFactory($config),
             ]
         );
         $clientRegistryDefinition->addMethodCall('addClientsConfigurations', [$clientsConfig]);
@@ -77,14 +76,6 @@ final class MongoDbBundleExtension extends Extension
         $factoryDefinition->setPublic(false);
 
         $this->containerBuilder->setDefinition('mongo.connection_factory', $factoryDefinition);
-    }
-
-    private function defineDriverOptionsFactory()
-    {
-        $factoryDefinition = new Definition(DriverOptionsFactory::class, []);
-        $factoryDefinition->setPublic(false);
-
-        $this->containerBuilder->setDefinition('mongo.driver_options_factory', $factoryDefinition);
     }
 
     /**
@@ -124,5 +115,10 @@ final class MongoDbBundleExtension extends Extension
                 [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted'],
             ]
         );
+    }
+
+    private function defineDriverOptionsFactory(array $config)
+    {
+        return (isset($config['driverOptionsFactory']) ? new Reference($config['driverOptionsFactory']) : null);
     }
 }

@@ -7,6 +7,7 @@ namespace Facile\MongoDbBundle\Services;
 use Facile\MongoDbBundle\Capsule\Client as BundleClient;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
+use Facile\MongoDbBundle\Services\DriverOptions\DriverOptionsInterface;
 use MongoDB\Client;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
@@ -31,24 +32,24 @@ final class ClientRegistry
     private $eventDispatcher;
 
     /** @var DriverOptionsInterface  */
-    private $driverOptions;
+    private $driverOptionsService;
 
     /**
      * ClientRegistry constructor.
      * @param EventDispatcherInterface $eventDispatcher
-     * @param DriverOptionsInterface $driverOptions
+     * @param DriverOptionsInterface $driverOptionsService
      * @param bool $debug
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
-        DriverOptionsInterface $driverOptions,
-        bool $debug)
-    {
+        bool $debug,
+        DriverOptionsInterface $driverOptionsService = null
+    ) {
         $this->clients = [];
         $this->configurations = [];
         $this->debug = $debug;
         $this->eventDispatcher = $eventDispatcher;
-        $this->driverOptions = $driverOptions;
+        $this->driverOptionsService = $driverOptionsService;
     }
 
     /**
@@ -81,6 +82,12 @@ final class ClientRegistry
             $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
         }
 
+        if (isset($conf['driverOptions'])) {
+            $conf['driverOptions'] = $this->driverOptionsService->buildDriverOptions($conf['driverOptions']);
+        } else {
+            $conf['driverOptions'] = [];
+        }
+
         return new ClientConfiguration(
             $conf['uri'],
             $conf['username'],
@@ -92,7 +99,7 @@ final class ClientRegistry
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
                 'readPreference' => $conf['readPreference']
             ],
-            $this->driverOptions->buildDriverOptions($conf)
+            $conf['driverOptions']
         );
     }
 

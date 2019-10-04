@@ -28,6 +28,7 @@ final class Configuration implements ConfigurationInterface
         $this->addDataCollection($rootBuilder->children());
         $this->addClients($rootBuilder->children());
         $this->addConnections($rootBuilder->children());
+        $this->addDriversOptionFactory($rootBuilder->children());
 
         return $treeBuilder;
     }
@@ -116,30 +117,15 @@ final class Configuration implements ConfigurationInterface
             ->info('Available options for driver')
             ->children();
 
-        $contextBuilder = $driverOptionsBuilder
-            ->arrayNode('context')
-            ->info('Available options for context')
-            ->children();
+        $driverOptionsBuilder
+            ->variableNode('context')
+            ->defaultValue([])
+            ->info('Service id name');
+    }
 
-        $contextBuilder
-            ->scalarNode('capath')
-            ->defaultNull();
-
-        $contextBuilder
-            ->scalarNode('cafile')
-            ->defaultNull();
-
-        $contextBuilder
-            ->scalarNode('local_cert')
-            ->defaultNull();
-
-        $contextBuilder
-            ->scalarNode('passphrase')
-            ->defaultNull();
-
-        $contextBuilder
-            ->booleanNode('allow_self_signed')
-            ->defaultFalse();
+    private function addDriversOptionFactory(NodeBuilder $builder) {
+        $connectionBuilder = $builder
+            ->scalarNode('driverOptionsFactory');
     }
 
     private function addConnections(NodeBuilder $builder)
