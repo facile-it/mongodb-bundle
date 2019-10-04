@@ -84,6 +84,9 @@ mongo_db_bundle:
       foo_db_2:
         client_name:    ~
         database_name:  ~
+        
+    # Service reference to manage driver options context - see example below
+    driverOptionsFactory: "app.mongodb.context_service" # default null
 ```
 
 ### Services
@@ -126,6 +129,24 @@ On dev environment all queries executed by the library MongoDB\Collection class 
 [![Profiler Toolbar](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)
 
 [![Profiler Panel](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)
+
+### Driver options
+
+Example service to manage driver options. This class must implements Facile\MongoDbBundle\Services\DriverOptions\DriverOptionsInterface.
+
+```
+# config/packages/facile_it_mongodb.yaml
+mongo_db_bundle:
+    clients:
+        ...
+        driverOptions:  
+            context: { cafile: 'example/route/file.crt' }
+    driverOptionsFactory: "app.mongodb.context_service"
+
+# config/services.yaml
+app.mongodb.context_service:
+    class: 'App\Services\DriverOptionsService'
+```
 
 ### Contributing
 
