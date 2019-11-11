@@ -37,13 +37,13 @@ final class ClientRegistry
     /**
      * ClientRegistry constructor.
      * @param EventDispatcherInterface $eventDispatcher
-     * @param DriverOptionsInterface $driverOptionsService
      * @param bool $debug
+     * @param DriverOptionsInterface|null $driverOptionsService
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
         bool $debug,
-        DriverOptionsInterface $driverOptionsService = null
+        ?DriverOptionsInterface $driverOptionsService
     ) {
         $this->clients = [];
         $this->configurations = [];
@@ -82,10 +82,9 @@ final class ClientRegistry
             $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
         }
 
-        if (isset($conf['driverOptions'])) {
-            $conf['driverOptions'] = $this->driverOptionsService->buildDriverOptions($conf['driverOptions']);
-        } else {
-            $conf['driverOptions'] = [];
+        $conf['driverOptions'] = [];
+        if ($this->driverOptionsService instanceof DriverOptionsInterface) {
+            $conf['driverOptions'] = $this->driverOptionsService->buildDriverOptions($conf);
         }
 
         return new ClientConfiguration(

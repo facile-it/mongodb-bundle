@@ -78,9 +78,6 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('mongo.connection_factory', $factoryDefinition);
     }
 
-    /**
-     * @param array $connections
-     */
     private function defineConnections(array $connections)
     {
         foreach ($connections as $name => $conf) {
@@ -119,6 +116,6 @@ final class MongoDbBundleExtension extends Extension
 
     private function defineDriverOptionsFactory(array $config)
     {
-        return (isset($config['driverOptionsFactory']) ? new Reference($config['driverOptionsFactory']) : null);
+        return (isset($config['driverOptions']) ? new Reference($config['driverOptions']) : null);
     }
 }

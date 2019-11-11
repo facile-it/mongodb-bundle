@@ -89,8 +89,6 @@ final class Configuration implements ConfigurationInterface
         $clientsBuilder
             ->integerNode('connectTimeoutMS')
             ->defaultNull();
-
-        $this->addDriverOptions($clientsBuilder);
     }
 
     private function addClientsHosts(NodeBuilder $builder)
@@ -125,7 +123,7 @@ final class Configuration implements ConfigurationInterface
 
     private function addDriversOptionFactory(NodeBuilder $builder) {
         $connectionBuilder = $builder
-            ->scalarNode('driverOptionsFactory');
+            ->scalarNode('driverOptions');
     }
 
     private function addConnections(NodeBuilder $builder)
