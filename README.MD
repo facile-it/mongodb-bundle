@@ -65,9 +65,7 @@ mongo_db_bundle:
         ssl: false
         connectTimeoutMS: 3000 # default null (no timeout)
         readPreference: primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
-        driverOptions:  
-            context:  ~ # see https://www.php.net/manual/en/mongodb-driver-manager.construct.php
-        
+
       other_client:   ~ # same as upper configuration
       
     # connections section, theese represents your Database object reference
@@ -137,15 +135,14 @@ Example service to manage driver options. This class must implements Facile\Mong
 ```
 # config/packages/facile_it_mongodb.yaml
 mongo_db_bundle:
-    clients:
-        ...
-        driverOptions:  
-            context: { cafile: 'example/route/file.crt' }
+    ...
     driverOptionsFactory: "app.mongodb.context_service"
 
 # config/services.yaml
 app.mongodb.context_service:
     class: 'App\Services\DriverOptionsService'
+    arguments:
+        - context: { cafile: 'example/route/file.crt' }
 ```
 
 ### Contributing
