@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 class ProfilerControllerTest extends AppTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setEnvDev();
         parent::setUp();

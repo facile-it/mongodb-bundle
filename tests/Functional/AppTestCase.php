@@ -19,10 +19,7 @@ class AppTestCase extends TestCase
 
     private $env = 'test';
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -31,10 +28,7 @@ class AppTestCase extends TestCase
         $this->application = new Application($kernel);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         $this->application = null;

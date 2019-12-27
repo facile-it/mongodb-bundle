@@ -71,7 +71,7 @@ class ClientRegistryTest extends TestCase
     public function test_client_connection_url_generation_multihost()
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
-        
+
         $registry = new ClientRegistry($ed->reveal(), false, null);
 
         $testConf = [

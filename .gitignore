@@ -6,3 +6,4 @@
 /bin/
 /.php_cs.cache
 docker-compose.override.yml
+.phpunit.result.cache

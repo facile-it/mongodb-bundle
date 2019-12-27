@@ -64,6 +64,8 @@ class LoadFixturesCommand extends AbstractCommand
         }
 
         $this->io->writeln(sprintf('Done, loaded %d fixtures files', \count($fixtures)));
+
+        return 0;
     }
 
     /**

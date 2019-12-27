@@ -121,7 +121,8 @@ final class Configuration implements ConfigurationInterface
             ->info('Service id name');
     }
 
-    private function addDriversOptionFactory(NodeBuilder $builder) {
+    private function addDriversOptionFactory(NodeBuilder $builder)
+    {
         $connectionBuilder = $builder
             ->scalarNode('driverOptions');
     }

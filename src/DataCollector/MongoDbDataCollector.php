@@ -51,9 +51,6 @@ class MongoDbDataCollector extends DataCollector
         $this->logger = $logger;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         while ($this->logger->hasLoggedEvents()) {

@@ -31,5 +31,7 @@ class DropDatabaseCommand extends AbstractCommand
         $this->io->writeln(sprintf('Dropping database %s', $this->connection->getDatabaseName()));
         $this->connection->drop();
         $this->io->writeln('Database dropped');
+
+        return 0;
     }
 }

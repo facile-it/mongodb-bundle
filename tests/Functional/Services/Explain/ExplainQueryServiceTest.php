@@ -9,7 +9,7 @@ use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 
 class ExplainQueryServiceTest extends AppTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setEnvDev();
         parent::setUp();

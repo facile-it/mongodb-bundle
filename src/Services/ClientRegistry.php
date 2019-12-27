@@ -31,11 +31,12 @@ final class ClientRegistry
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /** @var DriverOptionsInterface  */
+    /** @var DriverOptionsInterface */
     private $driverOptionsService;
 
     /**
      * ClientRegistry constructor.
+     *
      * @param EventDispatcherInterface $eventDispatcher
      * @param bool $debug
      * @param DriverOptionsInterface|null $driverOptionsService
@@ -96,7 +97,7 @@ final class ClientRegistry
                 'replicaSet' => $conf['replicaSet'],
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
-                'readPreference' => $conf['readPreference']
+                'readPreference' => $conf['readPreference'],
             ],
             $conf['driverOptions']
         );

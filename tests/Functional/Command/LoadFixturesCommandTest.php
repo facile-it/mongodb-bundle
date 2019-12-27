@@ -14,7 +14,7 @@ class LoadFixturesCommandTest extends AppTestCase
     /** @var Database $conn */
     private $conn;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -22,7 +22,7 @@ class LoadFixturesCommandTest extends AppTestCase
         self::assertEquals('testFunctionaldb', $this->conn->getDatabaseName());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

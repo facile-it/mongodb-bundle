@@ -35,5 +35,7 @@ class DropCollectionCommand extends AbstractCommand
         $this->io->writeln(sprintf('Dropping collection %s', $collection));
         $this->connection->dropCollection($collection);
         $this->io->writeln('Collection dropped');
+
+        return 0;
     }
 }

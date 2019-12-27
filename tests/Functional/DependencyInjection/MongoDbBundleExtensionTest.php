@@ -24,7 +24,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 
     const DISPATCHER_PUBLIC_ALIAS = 'facile_mongo_db.event_dispatcher.public';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->setParameter('kernel.debug', true);
@@ -277,7 +277,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
      *
      * @return ExtensionInterface[]
      */
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [
             new MongoDbBundleExtension(),

@@ -62,9 +62,6 @@ class AbstractCommandTest extends AppTestCase
 
 class FakeCommand extends AbstractCommand
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure()
     {
         parent::configure();
@@ -76,5 +73,7 @@ class FakeCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->io->writeln('Executed');
+
+        return 0;
     }
 }
