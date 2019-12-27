@@ -28,6 +28,7 @@ final class Configuration implements ConfigurationInterface
         $this->addDataCollection($rootBuilder->children());
         $this->addClients($rootBuilder->children());
         $this->addConnections($rootBuilder->children());
+        $this->addDriversOptionFactory($rootBuilder->children());
 
         return $treeBuilder;
     }
@@ -105,6 +106,24 @@ final class Configuration implements ConfigurationInterface
         $hostsBuilder
             ->integerNode('port')
             ->defaultValue(27017);
+    }
+
+    private function addDriverOptions(NodeBuilder $builder)
+    {
+        $driverOptionsBuilder = $builder
+            ->arrayNode('driverOptions')
+            ->info('Available options for driver')
+            ->children();
+
+        $driverOptionsBuilder
+            ->variableNode('context')
+            ->defaultValue([])
+            ->info('Service id name');
+    }
+
+    private function addDriversOptionFactory(NodeBuilder $builder) {
+        $connectionBuilder = $builder
+            ->scalarNode('driverOptions');
     }
 
     private function addConnections(NodeBuilder $builder)

@@ -7,6 +7,7 @@ namespace Facile\MongoDbBundle\Services;
 use Facile\MongoDbBundle\Capsule\Client as BundleClient;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
+use Facile\MongoDbBundle\Services\DriverOptions\DriverOptionsInterface;
 use MongoDB\Client;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
@@ -30,20 +31,25 @@ final class ClientRegistry
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
+    /** @var DriverOptionsInterface  */
+    private $driverOptionsService;
+
     /**
      * ClientRegistry constructor.
-     *
      * @param EventDispatcherInterface $eventDispatcher
-     * @param bool                   $debug
-     *
-     * @internal param DataCollectorLoggerInterface $logger
+     * @param bool $debug
+     * @param DriverOptionsInterface|null $driverOptionsService
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, bool $debug)
-    {
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        bool $debug,
+        ?DriverOptionsInterface $driverOptionsService
+    ) {
         $this->clients = [];
         $this->configurations = [];
         $this->debug = $debug;
         $this->eventDispatcher = $eventDispatcher;
+        $this->driverOptionsService = $driverOptionsService;
     }
 
     /**
@@ -76,6 +82,11 @@ final class ClientRegistry
             $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
         }
 
+        $conf['driverOptions'] = [];
+        if ($this->driverOptionsService instanceof DriverOptionsInterface) {
+            $conf['driverOptions'] = $this->driverOptionsService->buildDriverOptions($conf);
+        }
+
         return new ClientConfiguration(
             $conf['uri'],
             $conf['username'],
@@ -85,8 +96,9 @@ final class ClientRegistry
                 'replicaSet' => $conf['replicaSet'],
                 'ssl' => $conf['ssl'],
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
-                'readPreference' => $conf['readPreference'],
-            ]
+                'readPreference' => $conf['readPreference']
+            ],
+            $conf['driverOptions']
         );
     }
 
@@ -146,7 +158,7 @@ final class ClientRegistry
                 ],
                 $conf->getOptions()
             );
-            $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, []);
+            $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, $conf->getDriverOptions());
 
             $event = new ConnectionEvent($clientKey);
             if (class_exists(LegacyEventDispatcherProxy::class)) {

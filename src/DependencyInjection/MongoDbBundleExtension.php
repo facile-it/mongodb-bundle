@@ -34,7 +34,7 @@ final class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        $this->defineClientRegistry($config['clients'], $container->getParameter('kernel.debug'));
+        $this->defineClientRegistry($config, $container->getParameter('kernel.debug'));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
@@ -53,13 +53,15 @@ final class MongoDbBundleExtension extends Extension
             && $config['data_collection'] === true;
     }
 
-    private function defineClientRegistry(array $clientsConfig, bool $debug): void
+    private function defineClientRegistry(array $config, bool $debug): void
     {
+        $clientsConfig = $config['clients'];
         $clientRegistryDefinition = new Definition(
             ClientRegistry::class,
             [
                 new Reference('facile_mongo_db.event_dispatcher'),
                 $debug,
+                $this->defineDriverOptionsFactory($config),
             ]
         );
         $clientRegistryDefinition->addMethodCall('addClientsConfigurations', [$clientsConfig]);
@@ -76,7 +78,7 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('mongo.connection_factory', $factoryDefinition);
     }
 
-    private function defineConnections(array $connections): void
+    private function defineConnections(array $connections)
     {
         foreach ($connections as $name => $conf) {
             $connectionDefinition = new Definition(
@@ -110,5 +112,10 @@ final class MongoDbBundleExtension extends Extension
                 [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted'],
             ]
         );
+    }
+
+    private function defineDriverOptionsFactory(array $config)
+    {
+        return (isset($config['driverOptions']) ? new Reference($config['driverOptions']) : null);
     }
 }
