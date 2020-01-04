@@ -4,6 +4,6 @@
 /var/
 /vendor/
 /bin/
-/.php_cs.cache
+.php_cs.cache
 docker-compose.override.yml
 .phpunit.result.cache
