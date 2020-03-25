@@ -25,10 +25,10 @@
         "symfony/framework-bundle": "^3.4 || ^4.3"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^3",
+        "matthiasnoback/symfony-dependency-injection-test": "^4",
         "symfony/web-profiler-bundle": "^3.4 || ^4.3",
         "symfony/console": "^3.4 || ^4.3",
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "^8.5.2",
         "symfony/phpunit-bridge": "^4.2",
         "facile-it/facile-coding-standard": "^0.3.1",
         "phpstan/phpstan": "^0.12"
