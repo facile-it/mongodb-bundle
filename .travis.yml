@@ -23,6 +23,7 @@ before_install:
   - rm docker-compose.yml
   - mv docker-compose.travis.yml docker-compose.yml
   - sudo chmod -R 777 . # ugly! Travis is 2000:2000
+  - docker-composer run --no-deps --rm php composer config -g github-oauth.github.com ${GITHUB_OAUTH_TOKEN}
 
 install:
   - |
