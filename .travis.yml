@@ -25,7 +25,6 @@ before_install:
   - sudo chmod -R 777 . # ugly! Travis is 2000:2000
 
 install:
-  - docker-composer run --no-deps --rm php composer config -g github-oauth.github.com ${GITHUB_OAUTH_TOKEN}
   - |
     if [ "$SYMFONY" != "" ]; then
       docker-compose run --no-deps --rm php composer require "symfony/symfony:${SYMFONY}" --no-update;
