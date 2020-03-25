@@ -18,6 +18,8 @@ env:
     - PHP_IMG="php-7.2-mongoext-1.5.3-20200327" MONGO_IMG="percona/percona-server-mongodb:4.0"
     - PHP_IMG="php-7.3-mongoext-1.5.3-20200327" MONGO_IMG="mongo:4.0"
     - PHP_IMG="php-7.3-mongoext-1.5.3-20200327" MONGO_IMG="percona/percona-server-mongodb:4.0"
+    - PHP_IMG="php-7.4-mongoext-1.6.0-20200327" MONGO_IMG="mongo:4.0"
+    - PHP_IMG="php-7.4-mongoext-1.6.0-20200327" MONGO_IMG="percona/percona-server-mongodb:4.0"
 
 before_install:
   - rm docker-compose.yml
