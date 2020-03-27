@@ -20,6 +20,8 @@ env:
     - PHP_IMG="php-7.3-mongoext-1.5.3-20200327" MONGO_IMG="percona/percona-server-mongodb:4.0"
 
 before_install:
+  - apt update
+  - apt install git
   - rm docker-compose.yml
   - mv docker-compose.travis.yml docker-compose.yml
   - sudo chmod -R 777 . # ugly! Travis is 2000:2000
