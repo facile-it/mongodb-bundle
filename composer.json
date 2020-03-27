@@ -22,12 +22,12 @@
         "php": "^7.2",
         "ext-mongodb": "^1.1.5",
         "mongodb/mongodb": "^1.0",
-        "symfony/framework-bundle": "^3.4 || ^4.3"
+        "symfony/framework-bundle": "^3.4 || ^4.3",
+        "symfony/console": "^v4.4.6"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^3",
         "symfony/web-profiler-bundle": "^3.4 || ^4.3",
-        "symfony/console": "^3.4 || ^4.3",
         "phpunit/phpunit": "^7.0",
         "symfony/phpunit-bridge": "^4.2",
         "facile-it/facile-coding-standard": "^0.3.1",
