@@ -27,7 +27,7 @@ class DropCollectionCommandTest extends AppTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => $command->getName(), 'collection' => 'testFunctionalCollection']);
 
-        self::assertContains('Collection dropped', $commandTester->getDisplay());
+        self::assertStringContainsString('Collection dropped', $commandTester->getDisplay());
     }
 
     private function addCommandToApplication()
