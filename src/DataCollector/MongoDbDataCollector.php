@@ -15,102 +15,110 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  *
  * @internal
  */
-class MongoDbDataCollector extends DataCollector
-{
-    const QUERY_KEYWORD = 'queries';
-
-    const CONNECTION_KEYWORD = 'connections';
-
-    const TIME_KEYWORD = 'totalTime';
-
-    /** @var DataCollectorLoggerInterface */
-    private $logger;
-
-    /** @var array */
-    protected $data;
-
-    public function __construct()
+    class MongoDbDataCollector extends DataCollector
     {
-        $this->reset();
-    }
+        const QUERY_KEYWORD = 'queries';
 
-    public function reset()
-    {
-        $this->data = [
-            self::QUERY_KEYWORD => [],
-            self::TIME_KEYWORD => 0.0,
-            self::CONNECTION_KEYWORD => [],
-        ];
-    }
+        const CONNECTION_KEYWORD = 'connections';
 
-    /**
-     * @param DataCollectorLoggerInterface $logger
-     */
-    public function setLogger(DataCollectorLoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
+        const TIME_KEYWORD = 'totalTime';
 
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
-    {
-        while ($this->logger->hasLoggedEvents()) {
-            /** @var Query $event */
-            $event = $this->logger->getLoggedEvent();
+        /** @var DataCollectorLoggerInterface */
+        private $logger;
 
-            MongoQuerySerializer::serialize($event);
+        /** @var array */
+        protected $data;
 
-            $this->data[self::QUERY_KEYWORD][] = $event;
-            $this->data[self::TIME_KEYWORD] += $event->getExecutionTime();
+        public function __construct()
+        {
+            $this->reset();
         }
 
-        $this->data[self::CONNECTION_KEYWORD] = $this->logger->getConnections();
-    }
+        public function reset()
+        {
+            $this->data = [
+                self::QUERY_KEYWORD => [],
+                self::TIME_KEYWORD => 0.0,
+                self::CONNECTION_KEYWORD => [],
+            ];
+        }
 
-    /**
-     * @return int
-     */
-    public function getQueryCount(): int
-    {
-        return \count($this->data[self::QUERY_KEYWORD]);
-    }
+        /**
+         * @param DataCollectorLoggerInterface $logger
+         */
+        public function setLogger(DataCollectorLoggerInterface $logger)
+        {
+            $this->logger = $logger;
+        }
 
-    /**
-     * @return Query[]|array
-     */
-    public function getQueries(): array
-    {
-        return $this->data[self::QUERY_KEYWORD];
-    }
+        public function collect(Request $request, Response $response, $exception = null)
+        {
+            if ($exception && ! $exception instanceof \Throwable) {
+                throw new \InvalidArgumentException(sprintf(
+                'Argument 3 passed to %s must be an instance of \Throwable or null, %s given',
+                __METHOD__,
+                is_object($exception) ? 'instance of ' . get_class($exception) : gettype($exception)
+            ));
+            }
 
-    /**
-     * @return float
-     */
-    public function getTime(): float
-    {
-        return (float) ($this->data[self::TIME_KEYWORD] * 1000);
-    }
+            while ($this->logger->hasLoggedEvents()) {
+                /** @var Query $event */
+                $event = $this->logger->getLoggedEvent();
 
-    /**
-     * @return int
-     */
-    public function getConnectionsCount(): int
-    {
-        return \count($this->data[self::CONNECTION_KEYWORD]);
-    }
+                MongoQuerySerializer::serialize($event);
 
-    /**
-     * @return array|string[]
-     */
-    public function getConnections(): array
-    {
-        return $this->data[self::CONNECTION_KEYWORD];
-    }
+                $this->data[self::QUERY_KEYWORD][] = $event;
+                $this->data[self::TIME_KEYWORD] += $event->getExecutionTime();
+            }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'mongodb';
+            $this->data[self::CONNECTION_KEYWORD] = $this->logger->getConnections();
+        }
+
+        /**
+         * @return int
+         */
+        public function getQueryCount(): int
+        {
+            return \count($this->data[self::QUERY_KEYWORD]);
+        }
+
+        /**
+         * @return Query[]|array
+         */
+        public function getQueries(): array
+        {
+            return $this->data[self::QUERY_KEYWORD];
+        }
+
+        /**
+         * @return float
+         */
+        public function getTime(): float
+        {
+            return (float) ($this->data[self::TIME_KEYWORD] * 1000);
+        }
+
+        /**
+         * @return int
+         */
+        public function getConnectionsCount(): int
+        {
+            return \count($this->data[self::CONNECTION_KEYWORD]);
+        }
+
+        /**
+         * @return array|string[]
+         */
+        public function getConnections(): array
+        {
+            return $this->data[self::CONNECTION_KEYWORD];
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function getName()
+        {
+            return 'mongodb';
+        }
     }
-}
