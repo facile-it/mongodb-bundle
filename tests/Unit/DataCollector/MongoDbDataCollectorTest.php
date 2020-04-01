@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Facile\MongoDbBundle\Tests\unit\DataCollector;
+namespace Facile\MongoDbBundle\Tests\Unit\DataCollector;
 
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Models\Query;
@@ -37,12 +37,27 @@ class MongoDbDataCollectorTest extends TestCase
         self::assertEquals(1, $collector->getQueryCount());
         self::assertNotEmpty($collector->getQueries());
 
-        self::assertTrue(is_float($collector->getTime()));
+        self::assertIsFloat($collector->getTime());
 
         self::assertNotEmpty($collector->getConnections());
         self::assertEquals(1, $collector->getConnectionsCount());
 
         self::assertEquals('mongodb', $collector->getName());
+    }
+
+    public function testCollectWithWrongType(): void
+    {
+        $collector = new MongoDbDataCollector();
+        $collector->setLogger(new MongoQueryLogger());
+
+        self::expectException(\InvalidArgumentException::class);
+        self::expectExceptionMessage('must be an instance of \\Throwable');
+
+        $collector->collect(
+            $this->prophesize(Request::class)->reveal(),
+            $this->prophesize(Response::class)->reveal(),
+            new \DateTime()
+        );
     }
 
     public function getUtcDateTime()
