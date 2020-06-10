@@ -189,7 +189,7 @@ class CollectionTest extends AppTestCase
      */
     protected function assertEventsDispatching($ev)
     {
-        if (class_exists(LegacyEventDispatcherProxy::class)) {
+        if (! class_exists(Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
             $ev->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_PREPARED)->shouldBeCalled();
             $ev->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_EXECUTED)->shouldBeCalled();
         } else {

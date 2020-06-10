@@ -162,7 +162,7 @@ final class ClientRegistry
             $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, $conf->getDriverOptions());
 
             $event = new ConnectionEvent($clientKey);
-            if (class_exists(LegacyEventDispatcherProxy::class)) {
+            if (! class_exists(Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
                 $this->eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED);
             } else {
                 $this->eventDispatcher->dispatch(ConnectionEvent::CLIENT_CREATED, $event);
