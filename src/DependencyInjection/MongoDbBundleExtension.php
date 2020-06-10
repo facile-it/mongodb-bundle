@@ -127,7 +127,7 @@ final class MongoDbBundleExtension extends Extension
      */
     private function decorateEventDispatcher(): void
     {
-        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
+        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) && class_exists(LegacyEventDispatcherProxy::class)) {
             $definition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
             $definition->setClass(LegacyEventDispatcherProxy::class);
             $definition->setFactory([LegacyEventDispatcherProxy::class, 'decorate']);
