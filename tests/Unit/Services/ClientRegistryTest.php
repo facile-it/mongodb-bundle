@@ -98,13 +98,17 @@ class ClientRegistryTest extends TestCase
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
-        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
+        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class)) {
             $ed->dispatch(Argument::type(ConnectionEvent::class), ConnectionEvent::CLIENT_CREATED)
                 ->shouldBeCalledOnce()
                 ->willReturnArgument(0);
         } else {
             $ed->dispatch(ConnectionEvent::CLIENT_CREATED, Argument::type(ConnectionEvent::class))
                 ->shouldBeCalledOnce();
+        }
+
+        if (class_exists(\Symfony\Component\EventDispatcher\Event::class) && class_exists(LegacyEventDispatcherProxy::class)) {
+            return LegacyEventDispatcherProxy::decorate($ed->reveal());
         }
 
         return $ed->reveal();
