@@ -221,7 +221,7 @@ final class Collection extends MongoCollection
         );
 
         $event = new QueryEvent($query);
-        if (! class_exists(Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
+        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
             $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_PREPARED);
         } else {
             $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, $event);
@@ -261,7 +261,7 @@ final class Collection extends MongoCollection
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 
         $event = new QueryEvent($queryLog);
-        if (! class_exists(Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
+        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
             $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
         } else {
             $this->eventDispatcher->dispatch(QueryEvent::QUERY_EXECUTED, $event);
