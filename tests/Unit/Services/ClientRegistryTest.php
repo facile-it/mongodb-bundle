@@ -98,7 +98,7 @@ class ClientRegistryTest extends TestCase
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
-        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class)) {
+        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
             $ed->dispatch(Argument::type(ConnectionEvent::class), ConnectionEvent::CLIENT_CREATED)
                 ->shouldBeCalledOnce()
                 ->willReturnArgument(0);

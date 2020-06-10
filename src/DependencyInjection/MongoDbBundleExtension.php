@@ -16,6 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -34,6 +36,7 @@ final class MongoDbBundleExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
+        $this->decorateEventDispatcher($container);
         $this->defineClientRegistry($config, $container->getParameter('kernel.debug'));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
@@ -117,5 +120,18 @@ final class MongoDbBundleExtension extends Extension
     private function defineDriverOptionsFactory(array $config)
     {
         return isset($config['driverOptions']) ? new Reference($config['driverOptions']) : null;
+    }
+
+    /**
+     * This is needed to avoid the EventDispatcher deprecation from 4.3
+     */
+    private function decorateEventDispatcher(): void
+    {
+        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
+            $definition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
+            $definition->setClass(LegacyEventDispatcherProxy::class);
+            $definition->setFactory([LegacyEventDispatcherProxy::class, 'decorate']);
+            $definition->setArguments([new Definition(EventDispatcher::class)]);
+        }
     }
 }
