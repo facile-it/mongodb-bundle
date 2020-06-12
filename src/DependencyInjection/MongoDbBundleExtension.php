@@ -127,6 +127,7 @@ final class MongoDbBundleExtension extends Extension
      */
     private function decorateEventDispatcher(): void
     {
+        // This condition then is triggered only in Symfony 4.3 and 4.4
         if (class_exists(\Symfony\Component\EventDispatcher\Event::class) && class_exists(LegacyEventDispatcherProxy::class)) {
             $definition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
             $definition->setClass(LegacyEventDispatcherProxy::class);
