@@ -221,6 +221,7 @@ final class Collection extends MongoCollection
         );
 
         $event = new QueryEvent($query);
+        // The Event class has been removed in Symfony 5, so its absence is used as a trigger to stop using the LegacyEventDispatcherProxy.
         if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
             $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_PREPARED);
         } else {
