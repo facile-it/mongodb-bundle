@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Tests\Functional\Capsule;
 
 use Facile\MongoDbBundle\Capsule\Collection;
+use Facile\MongoDbBundle\Event\EventDispatcherCheck;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Driver\Manager;
@@ -178,7 +179,7 @@ class CollectionTest extends AppTestCase
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
-        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
+        if (EventDispatcherCheck::isPSR14Compliant()) {
             $ed->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_PREPARED)
                 ->shouldBeCalledTimes($times)
                 ->willReturnArgument(0);
@@ -192,7 +193,7 @@ class CollectionTest extends AppTestCase
                 ->shouldBeCalledTimes($times);
         }
 
-        if (class_exists(\Symfony\Component\EventDispatcher\Event::class) && class_exists(LegacyEventDispatcherProxy::class)) {
+        if (EventDispatcherCheck::shouldUseLegacyProxy()) {
             return LegacyEventDispatcherProxy::decorate($ed->reveal());
         }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\Tests\Unit\Services;
 
 use Facile\MongoDbBundle\Event\ConnectionEvent;
+use Facile\MongoDbBundle\Event\EventDispatcherCheck;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -98,7 +99,7 @@ class ClientRegistryTest extends TestCase
     {
         $ed = $this->prophesize(EventDispatcherInterface::class);
 
-        if (! class_exists(\Symfony\Component\EventDispatcher\Event::class) || class_exists(LegacyEventDispatcherProxy::class)) {
+        if (EventDispatcherCheck::isPSR14Compliant()) {
             $ed->dispatch(Argument::type(ConnectionEvent::class), ConnectionEvent::CLIENT_CREATED)
                 ->shouldBeCalledOnce()
                 ->willReturnArgument(0);
@@ -107,7 +108,7 @@ class ClientRegistryTest extends TestCase
                 ->shouldBeCalledOnce();
         }
 
-        if (class_exists(\Symfony\Component\EventDispatcher\Event::class) && class_exists(LegacyEventDispatcherProxy::class)) {
+        if (EventDispatcherCheck::shouldUseLegacyProxy()) {
             return LegacyEventDispatcherProxy::decorate($ed->reveal());
         }
 

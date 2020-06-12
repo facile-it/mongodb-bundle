@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Facile\MongoDbBundle\DependencyInjection;
 
 use Facile\MongoDbBundle\Event\ConnectionEvent;
+use Facile\MongoDbBundle\Event\EventDispatcherCheck;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use Facile\MongoDbBundle\Services\ConnectionFactory;
@@ -127,8 +128,7 @@ final class MongoDbBundleExtension extends Extension
      */
     private function decorateEventDispatcher(): void
     {
-        // This condition then is triggered only in Symfony 4.3 and 4.4
-        if (class_exists(\Symfony\Component\EventDispatcher\Event::class) && class_exists(LegacyEventDispatcherProxy::class)) {
+        if (EventDispatcherCheck::shouldUseLegacyProxy()) {
             $definition = $this->containerBuilder->getDefinition('facile_mongo_db.event_dispatcher');
             $definition->setClass(LegacyEventDispatcherProxy::class);
             $definition->setFactory([LegacyEventDispatcherProxy::class, 'decorate']);
