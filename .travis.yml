@@ -68,7 +68,7 @@ jobs:
     - stage: "Analysis"
       name: "phpstan"
       script:
-        - docker-compose run --no-deps --rm php bin/phpstan analyze -l7 src/ tests/
+        - docker-compose run --no-deps --rm php bin/phpstan analyze --memory-limit -l7 src/ tests/
 
     - stage: "Analysis"
       name: "cs-check"

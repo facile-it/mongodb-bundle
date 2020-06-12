@@ -6,11 +6,11 @@ namespace Facile\MongoDbBundle\Services;
 
 use Facile\MongoDbBundle\Capsule\Client as BundleClient;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
+use Facile\MongoDbBundle\Event\EventDispatcherCheck;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
 use Facile\MongoDbBundle\Services\DriverOptions\DriverOptionsInterface;
 use MongoDB\Client;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 
 /**
  * Class ClientRegistry.
@@ -162,7 +162,7 @@ final class ClientRegistry
             $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, $conf->getDriverOptions());
 
             $event = new ConnectionEvent($clientKey);
-            if (class_exists(LegacyEventDispatcherProxy::class)) {
+            if (EventDispatcherCheck::isPSR14Compliant()) {
                 $this->eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED);
             } else {
                 $this->eventDispatcher->dispatch(ConnectionEvent::CLIENT_CREATED, $event);
