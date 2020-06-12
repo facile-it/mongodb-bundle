@@ -18,6 +18,6 @@ class EventDispatcherCheck
 
     public static function shouldUseLegacyProxy(): bool
     {
-        return ! class_exists(Event::class) && class_exists(LegacyEventDispatcherProxy::class);
+        return class_exists(Event::class) && class_exists(LegacyEventDispatcherProxy::class);
     }
 }
