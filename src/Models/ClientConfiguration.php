@@ -120,7 +120,7 @@ final class ClientConfiguration
     {
         return array_filter(
             $options,
-            function ($value) {
+            function ($value): bool {
                 return ! empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
             }
         );

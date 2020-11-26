@@ -34,13 +34,6 @@ final class ClientRegistry
     /** @var DriverOptionsInterface */
     private $driverOptionsService;
 
-    /**
-     * ClientRegistry constructor.
-     *
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param bool $debug
-     * @param DriverOptionsInterface|null $driverOptionsService
-     */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
         bool $debug,
@@ -53,23 +46,11 @@ final class ClientRegistry
         $this->driverOptionsService = $driverOptionsService;
     }
 
-    /**
-     * @param array $configurations
-     */
-    public function addClientsConfigurations(array $configurations)
+    public function addClientsConfigurations(array $configurations): void
     {
         foreach ($configurations as $name => $conf) {
-            $this->addClientConfiguration($name, $conf);
+            $this->configurations[$name] = $this->buildClientConfiguration($conf);
         }
-    }
-
-    /**
-     * @param string $name
-     * @param array  $conf
-     */
-    private function addClientConfiguration(string $name, array $conf)
-    {
-        $this->configurations[$name] = $this->buildClientConfiguration($conf);
     }
 
     /**
@@ -80,7 +61,7 @@ final class ClientRegistry
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
         if (! $conf['uri']) {
-            $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
+            $conf['uri'] = self::buildConnectionUri($conf['hosts']);
         }
 
         $conf['driverOptions'] = [];
@@ -103,17 +84,12 @@ final class ClientRegistry
         );
     }
 
-    /**
-     * @param array $hosts
-     *
-     * @return string
-     */
-    private function buildConnectionUri(array $hosts): string
+    private static function buildConnectionUri(array $hosts): string
     {
         return 'mongodb://' . implode(
             ',',
             array_map(
-                function (array $host) {
+                static function (array $host): string {
                     return sprintf('%s:%d', $host['host'], $host['port']);
                 },
                 $hosts
@@ -121,32 +97,17 @@ final class ClientRegistry
         );
     }
 
-    /**
-     * @param string $name
-     * @param string $databaseName
-     *
-     * @return Client
-     */
     public function getClientForDatabase(string $name, string $databaseName): Client
     {
         return $this->getClient($name, $databaseName);
     }
 
-    /**
-     * @return array
-     */
     public function getClientNames(): array
     {
         return array_keys($this->clients);
     }
 
-    /**
-     * @param string $name
-     * @param string $databaseName
-     *
-     * @return Client
-     */
-    public function getClient(string $name, string $databaseName = null): Client
+    public function getClient(string $name, ?string $databaseName = null): Client
     {
         $clientKey = null !== $databaseName ? $name . '.' . $databaseName : $name;
 

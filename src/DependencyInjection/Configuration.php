@@ -13,27 +13,27 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 final class Configuration implements ConfigurationInterface
 {
-    const READ_PREFERENCE_VALID_OPTIONS = ['primary', 'primaryPreferred', 'secondary', 'secondaryPreferred', 'nearest'];
+    private const READ_PREFERENCE_VALID_OPTIONS = ['primary', 'primaryPreferred', 'secondary', 'secondaryPreferred', 'nearest'];
 
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('mongo_db_bundle');
         $rootBuilder = \method_exists(TreeBuilder::class, 'getRootNode')
             ? $treeBuilder->getRootNode()
             : $treeBuilder->root('mongo_db_bundle');
 
-        $this->addDataCollection($rootBuilder->children());
-        $this->addClients($rootBuilder->children());
-        $this->addConnections($rootBuilder->children());
-        $this->addDriversOptionFactory($rootBuilder->children());
+        self::addDataCollection($rootBuilder->children());
+        self::addClients($rootBuilder->children());
+        self::addConnections($rootBuilder->children());
+        self::addDriversOption($rootBuilder->children());
 
         return $treeBuilder;
     }
 
-    private function addDataCollection(NodeBuilder $builder)
+    private static function addDataCollection(NodeBuilder $builder): void
     {
         $builder
             ->booleanNode('data_collection')
@@ -41,7 +41,7 @@ final class Configuration implements ConfigurationInterface
             ->info('Disables Data Collection if needed');
     }
 
-    private function addClients(NodeBuilder $builder)
+    private static function addClients(NodeBuilder $builder): void
     {
         $clientsBuilder = $builder
             ->arrayNode('clients')
@@ -51,7 +51,7 @@ final class Configuration implements ConfigurationInterface
             ->prototype('array')
             ->children();
 
-        $this->addClientsHosts($clientsBuilder);
+        self::addClientsHosts($clientsBuilder);
 
         $clientsBuilder
             ->scalarNode('uri')
@@ -91,7 +91,7 @@ final class Configuration implements ConfigurationInterface
             ->defaultNull();
     }
 
-    private function addClientsHosts(NodeBuilder $builder)
+    private static function addClientsHosts(NodeBuilder $builder): void
     {
         $hostsBuilder = $builder
             ->arrayNode('hosts')
@@ -108,26 +108,13 @@ final class Configuration implements ConfigurationInterface
             ->defaultValue(27017);
     }
 
-    private function addDriverOptions(NodeBuilder $builder)
+    private static function addDriversOption(NodeBuilder $builder): void
     {
-        $driverOptionsBuilder = $builder
-            ->arrayNode('driverOptions')
-            ->info('Available options for driver')
-            ->children();
-
-        $driverOptionsBuilder
-            ->variableNode('context')
-            ->defaultValue([])
-            ->info('Service id name');
-    }
-
-    private function addDriversOptionFactory(NodeBuilder $builder)
-    {
-        $connectionBuilder = $builder
+        $builder
             ->scalarNode('driverOptions');
     }
 
-    private function addConnections(NodeBuilder $builder)
+    private static function addConnections(NodeBuilder $builder): void
     {
         $connectionBuilder = $builder
             ->arrayNode('connections')
