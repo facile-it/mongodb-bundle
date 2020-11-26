@@ -30,7 +30,10 @@ before_install:
   - sudo chmod -R 777 . # ugly! Travis is 2000:2000
 
 install:
-  - docker-compose run --no-deps --rm php composer config github-oauth.github.com ${GITHUB_OAUTH_TOKEN}
+  - |
+    if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+      docker-compose run --no-deps --rm php composer config github-oauth.github.com ${GITHUB_OAUTH_TOKEN};
+    fi
   - |
     if [ "$SYMFONY" != "" ]; then
       docker-compose run --no-deps --rm php composer require "symfony/symfony:${SYMFONY}" --no-update;
@@ -41,7 +44,7 @@ before_script:
   - docker-compose run --no-deps --rm php composer validate
 
 script:
-  - docker-compose run --rm php bash -c "sleep 3; bin/phpunit -c phpunit.xml.dist"
+  - docker-compose run --rm php bash -c "sleep 6; bin/phpunit -c phpunit.xml.dist"
 
 jobs:
   allow_failures:
