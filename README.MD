@@ -79,7 +79,7 @@ mongo_db_bundle:
         database_name:  ~
         
     # Service reference to manage driver options context - see example below
-    driverOptionsFactory: "app.mongodb.context_service" # default null
+    driverOptions: "app.mongodb.context_service" # default null
 ```
 
 ### Services
@@ -131,7 +131,7 @@ Example service to manage driver options. This class must implements Facile\Mong
 # config/packages/facile_it_mongodb.yaml
 mongo_db_bundle:
     ...
-    driverOptionsFactory: "app.mongodb.context_service"
+    driverOptions: "app.mongodb.context_service"
 
 # config/services.yaml
 app.mongodb.context_service:
