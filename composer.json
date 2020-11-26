@@ -30,7 +30,7 @@
         "symfony/console": "^3.4 || ^4.3",
         "phpunit/phpunit": "^7.0",
         "symfony/phpunit-bridge": "^4.2",
-        "facile-it/facile-coding-standard": "^0.3.1",
+        "facile-it/facile-coding-standard": "^0.4.0",
         "phpstan/phpstan": "^0.12"
     },
     "minimum-stability": "stable",
