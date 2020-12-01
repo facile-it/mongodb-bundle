@@ -133,7 +133,7 @@
 
 {% block panel %}
     {% if 'explain' == page %}
-        {{ render(controller('FacileMongoDbBundle:Profiler:explain', {
+        {{ render(controller('Facile\\MongoDbBundle\\Controller\\ProfilerController::explainAction', {
             token: token,
             panel: 'mongodb',
             queryNumber: app.request.query.get('queryNumber')
