@@ -1,0 +1,11 @@
+framework:
+  secret: "Four can keep a secret, if three of them are dead."
+
+mongo_db_bundle:
+  clients:
+    default:
+      uri: 'mongodb://mongo:27017'
+  connections:
+    default:
+      client_name:    default
+      database_name:  'database_name'

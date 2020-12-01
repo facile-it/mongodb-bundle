@@ -42,6 +42,8 @@ class TestKernel extends Kernel
         }
 
         $configFile = sprintf('/config_test%s%s.yml', $version, $suffix);
+
+        var_dump($configFile);
         $loader->load(__DIR__ . $configFile);
     }
 }

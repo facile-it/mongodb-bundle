@@ -12,7 +12,14 @@ mongo_db_bundle:
       hosts:
       - { host: mongo, port: 27017 }
 
+    client_noauth:
+      hosts:
+      - { host: mongo-noauth, port: 27018 }
+
   connections:
     test_db:
       client_name: test_client
       database_name: testFunctionaldb
+    test_db_noauth:
+      client_name: test_client_noauth
+      database_name: testFunctionalDB

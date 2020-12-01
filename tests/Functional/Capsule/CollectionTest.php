@@ -18,6 +18,7 @@ class CollectionTest extends AppTestCase
         $reg = $this->getContainer()->get('mongo.client_registry');
         /** @var \MongoDB\Client $client */
         $client = $reg->getClient('test_client', 'testdb');
+        $client = $reg->getClient('client_noauth', 'testdb');
 
         return $client->__debugInfo()['manager'];
     }
