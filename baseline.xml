@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.3.1@2feba22a005a18bf31d4c7b9bdb9252c73897476">
+  <file src="src/Capsule/Client.php">
+    <MixedArgument occurrences="2">
+      <code>$debug['manager']</code>
+      <code>$debug['manager']</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Capsule/Collection.php">
+    <InvalidArgument occurrences="2">
+      <code>QueryEvent::QUERY_EXECUTED</code>
+      <code>QueryEvent::QUERY_PREPARED</code>
+    </InvalidArgument>
+    <MissingReturnType occurrences="1">
+      <code>notifyQueryExecution</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$options['readPreference'] ?? $this-&gt;__debugInfo()['readPreference']</code>
+    </MixedArgument>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$query-&gt;getData()</code>
+    </PossiblyInvalidArgument>
+    <TooManyArguments occurrences="4">
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+    </TooManyArguments>
+  </file>
+  <file src="src/Capsule/Database.php">
+    <MixedArgument occurrences="3">
+      <code>$debug['databaseName']</code>
+      <code>$debug['manager']</code>
+      <code>$debug['manager']</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Command/AbstractCommand.php">
+    <MissingReturnType occurrences="2">
+      <code>configure</code>
+      <code>initialize</code>
+    </MissingReturnType>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$input-&gt;getOption('connection')</code>
+    </PossiblyInvalidArgument>
+    <PossiblyNullOperand occurrences="1">
+      <code>$input-&gt;getOption('connection')</code>
+    </PossiblyNullOperand>
+    <PropertyNotSetInConstructor occurrences="2">
+      <code>$connection</code>
+      <code>$io</code>
+    </PropertyNotSetInConstructor>
+    <PropertyTypeCoercion occurrences="1">
+      <code>$this-&gt;container-&gt;get($connectionName)</code>
+    </PropertyTypeCoercion>
+  </file>
+  <file src="src/Command/DropCollectionCommand.php">
+    <MissingReturnType occurrences="1">
+      <code>configure</code>
+    </MissingReturnType>
+    <PossiblyInvalidArgument occurrences="2">
+      <code>$collection</code>
+      <code>$collection</code>
+    </PossiblyInvalidArgument>
+    <PropertyNotSetInConstructor occurrences="2">
+      <code>DropCollectionCommand</code>
+      <code>DropCollectionCommand</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Command/DropDatabaseCommand.php">
+    <MissingReturnType occurrences="1">
+      <code>configure</code>
+    </MissingReturnType>
+    <PropertyNotSetInConstructor occurrences="2">
+      <code>DropDatabaseCommand</code>
+      <code>DropDatabaseCommand</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Command/LoadFixturesCommand.php">
+    <MissingReturnType occurrences="4">
+      <code>configure</code>
+      <code>initialize</code>
+      <code>loadFixture</code>
+      <code>loadPaths</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="5">
+      <code>$fixture</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$fixture</code>
+      <code>$path</code>
+    </MixedAssignment>
+    <PropertyNotSetInConstructor occurrences="3">
+      <code>$loader</code>
+      <code>LoadFixturesCommand</code>
+      <code>LoadFixturesCommand</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Controller/ProfilerController.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>\is_array($data)</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="1">
+      <code>$container</code>
+    </MissingConstructor>
+    <MissingDocblockType occurrences="1">
+      <code>$profiler</code>
+    </MissingDocblockType>
+    <MissingParamType occurrences="2">
+      <code>$queryNumber</code>
+      <code>$token</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="1">
+      <code>setContainer</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$item</code>
+      <code>$query-&gt;getFilters()</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$queries[$queryNumber]</code>
+    </MixedArrayAccess>
+    <MixedArrayOffset occurrences="1">
+      <code>$queries[$queryNumber]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="5">
+      <code>$item</code>
+      <code>$profile</code>
+      <code>$queries</code>
+      <code>$query</code>
+      <code>$result</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="8">
+      <code>disable</code>
+      <code>execute</code>
+      <code>getCollector</code>
+      <code>getFilters</code>
+      <code>getQueries</code>
+      <code>loadProfile</code>
+      <code>setFilters</code>
+      <code>toArray</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="1">
+      <code>$data</code>
+    </MixedReturnStatement>
+    <PossiblyNullReference occurrences="3">
+      <code>disable</code>
+      <code>execute</code>
+      <code>loadProfile</code>
+    </PossiblyNullReference>
+    <PropertyTypeCoercion occurrences="1">
+      <code>$container</code>
+    </PropertyTypeCoercion>
+  </file>
+  <file src="src/DataCollector/MongoDbDataCollector.php">
+    <MissingReturnType occurrences="3">
+      <code>collect</code>
+      <code>reset</code>
+      <code>setLogger</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$this-&gt;data[self::CONNECTION_KEYWORD]</code>
+      <code>$this-&gt;data[self::QUERY_KEYWORD]</code>
+    </MixedArgument>
+    <MixedArrayAssignment occurrences="1">
+      <code>$this-&gt;data[self::QUERY_KEYWORD][]</code>
+    </MixedArrayAssignment>
+    <MixedInferredReturnType occurrences="2">
+      <code>Query[]|array</code>
+      <code>array|string[]</code>
+    </MixedInferredReturnType>
+    <MixedOperand occurrences="2">
+      <code>$this-&gt;data[self::TIME_KEYWORD]</code>
+      <code>$this-&gt;data[self::TIME_KEYWORD]</code>
+    </MixedOperand>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;data[self::CONNECTION_KEYWORD]</code>
+      <code>$this-&gt;data[self::QUERY_KEYWORD]</code>
+    </MixedReturnStatement>
+    <PropertyNotSetInConstructor occurrences="2">
+      <code>$data</code>
+      <code>$logger</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/DataCollector/MongoQuerySerializer.php">
+    <MissingReturnType occurrences="1">
+      <code>serialize</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="4">
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item-&gt;getArrayCopy()</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$item</code>
+      <code>$newData[$key]</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="1">
+      <code>format</code>
+    </MixedMethodCall>
+    <MixedOperand occurrences="1">
+      <code>$item-&gt;toDateTime()-&gt;format('c')</code>
+    </MixedOperand>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>self::prepareUnserializableData($query-&gt;getOptions())</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="src/DependencyInjection/Configuration.php">
+    <DeprecatedMethod occurrences="1">
+      <code>root</code>
+    </DeprecatedMethod>
+    <MixedArgument occurrences="5">
+      <code>$clientsBuilder</code>
+      <code>$rootBuilder-&gt;children()</code>
+      <code>$rootBuilder-&gt;children()</code>
+      <code>$rootBuilder-&gt;children()</code>
+      <code>$rootBuilder-&gt;children()</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="3">
+      <code>$clientsBuilder</code>
+      <code>$connectionBuilder</code>
+      <code>$hostsBuilder</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="10">
+      <code>defaultValue</code>
+      <code>info</code>
+      <code>info</code>
+      <code>integerNode</code>
+      <code>isRequired</code>
+      <code>isRequired</code>
+      <code>isRequired</code>
+      <code>scalarNode</code>
+      <code>scalarNode</code>
+      <code>scalarNode</code>
+    </MixedMethodCall>
+    <UndefinedMethod occurrences="3">
+      <code>children</code>
+      <code>children</code>
+      <code>children</code>
+    </UndefinedMethod>
+  </file>
+  <file src="src/DependencyInjection/MongoDbBundleExtension.php">
+    <MissingConstructor occurrences="1">
+      <code>$containerBuilder</code>
+    </MissingConstructor>
+    <MissingReturnType occurrences="3">
+      <code>defineConnections</code>
+      <code>defineDriverOptionsFactory</code>
+      <code>load</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="3">
+      <code>$config['connections']</code>
+      <code>$config['driverOptions']</code>
+      <code>$container-&gt;getParameter('kernel.debug')</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$conf['client_name']</code>
+      <code>$conf['database_name']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="2">
+      <code>$clientsConfig</code>
+      <code>$conf</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Event/ConnectionEvent.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;getSubject()</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Event/Listener/DataCollectorListener.php">
+    <MissingReturnType occurrences="2">
+      <code>onConnectionClientCreated</code>
+      <code>onQueryExecuted</code>
+    </MissingReturnType>
+  </file>
+  <file src="src/Event/QueryEvent.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>Query</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;getSubject()</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Fixtures/AbstractContainerAwareFixture.php">
+    <MissingReturnType occurrences="1">
+      <code>setContainer</code>
+    </MissingReturnType>
+  </file>
+  <file src="src/Fixtures/FixtureSorter.php">
+    <MissingClosureParamType occurrences="2">
+      <code>$a</code>
+      <code>$b</code>
+    </MissingClosureParamType>
+    <RedundantCondition occurrences="1">
+      <code>! $a instanceof OrderedFixtureInterface &amp;&amp; $b instanceof OrderedFixtureInterface</code>
+    </RedundantCondition>
+  </file>
+  <file src="src/Fixtures/MongoFixturesLoader.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$className</code>
+    </ArgumentTypeCoercion>
+    <InvalidStringClass occurrences="1">
+      <code>new $className()</code>
+    </InvalidStringClass>
+    <MissingClosureParamType occurrences="1">
+      <code>$classList</code>
+    </MissingClosureParamType>
+    <MissingReturnType occurrences="1">
+      <code>addInstance</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$file-&gt;getPathName()</code>
+    </MixedArgument>
+    <MixedArrayAssignment occurrences="1">
+      <code>$classList[]</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="1">
+      <code>$file</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="2">
+      <code>MongoFixtureInterface</code>
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="3">
+      <code>getBasename</code>
+      <code>getBasename</code>
+      <code>getPathName</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="2">
+      <code>$instance</code>
+    </MixedReturnStatement>
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>$loadedClasses</code>
+    </PropertyNotSetInConstructor>
+    <UnresolvableInclude occurrences="1">
+      <code>require_once $sourceFile</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="src/Models/Query.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>[]</code>
+      <code>[]</code>
+    </DocblockTypeContradiction>
+    <MissingReturnType occurrences="8">
+      <code>setClient</code>
+      <code>setCollection</code>
+      <code>setDatabase</code>
+      <code>setExecutionTime</code>
+      <code>setFilters</code>
+      <code>setMethod</code>
+      <code>setOptions</code>
+      <code>setReadPreference</code>
+    </MissingReturnType>
+    <RedundantConditionGivenDocblockType occurrences="2">
+      <code>$data</code>
+      <code>$filters</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Services/ClientRegistry.php">
+    <InvalidArgument occurrences="1">
+      <code>ConnectionEvent::CLIENT_CREATED</code>
+    </InvalidArgument>
+    <MixedArgument occurrences="8">
+      <code>$conf</code>
+      <code>$conf['authSource']</code>
+      <code>$conf['hosts']</code>
+      <code>$conf['password']</code>
+      <code>$conf['uri']</code>
+      <code>$conf['username']</code>
+      <code>$host['host']</code>
+      <code>$host['port']</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$conf</code>
+    </MixedAssignment>
+    <PossiblyNullPropertyAssignmentValue occurrences="1">
+      <code>$driverOptionsService</code>
+    </PossiblyNullPropertyAssignmentValue>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>$this-&gt;driverOptionsService instanceof DriverOptionsInterface</code>
+    </RedundantConditionGivenDocblockType>
+    <TooManyArguments occurrences="2">
+      <code>dispatch</code>
+      <code>dispatch</code>
+    </TooManyArguments>
+  </file>
+  <file src="src/Services/Explain/ExplainCommandBuilder.php">
+    <PossiblyInvalidArrayAccess occurrences="1">
+      <code>$query-&gt;getData()['fieldName']</code>
+    </PossiblyInvalidArrayAccess>
+  </file>
+  <file src="src/Services/Explain/ExplainQueryService.php">
+    <MixedAssignment occurrences="1">
+      <code>$manager</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>Cursor</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="1">
+      <code>executeCommand</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="1"/>
+  </file>
+  <file src="src/Services/Loggers/DataCollectorLoggerInterface.php">
+    <MissingReturnType occurrences="2">
+      <code>addConnection</code>
+      <code>logQuery</code>
+    </MissingReturnType>
+  </file>
+  <file src="src/Services/Loggers/MongoQueryLogger.php">
+    <MissingReturnType occurrences="2">
+      <code>addConnection</code>
+      <code>logQuery</code>
+    </MissingReturnType>
+    <MixedInferredReturnType occurrences="1">
+      <code>Query</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;logs-&gt;dequeue()</code>
+    </MixedReturnStatement>
+    <PossiblyInvalidMethodCall occurrences="3">
+      <code>dequeue</code>
+      <code>enqueue</code>
+      <code>isEmpty</code>
+    </PossiblyInvalidMethodCall>
+  </file>
+  <file src="src/Twig/FacileMongoDbBundleExtension.php">
+    <ImplementedReturnTypeMismatch occurrences="1">
+      <code>\Twig_SimpleFunction[]</code>
+    </ImplementedReturnTypeMismatch>
+    <InvalidReturnStatement occurrences="1"/>
+    <InvalidReturnType occurrences="1">
+      <code>\Twig_SimpleFunction[]</code>
+    </InvalidReturnType>
+    <MixedArgument occurrences="2">
+      <code>\Twig_Extension::class</code>
+      <code>\Twig_Function::class</code>
+    </MixedArgument>
+    <UndefinedClass occurrences="2">
+      <code>\Twig_Extension</code>
+      <code>\Twig_Function</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="1">
+      <code>\Twig_SimpleFunction[]</code>
+    </UndefinedDocblockClass>
+  </file>
+</files>

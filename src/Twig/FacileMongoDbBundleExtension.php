@@ -27,7 +27,7 @@ class FacileMongoDbBundleExtension extends AbstractExtension
     ];
 
     /**
-     * @return \Twig_SimpleFunction[]
+     * @return array<array-key, TwigFunction>
      */
     public function getFunctions()
     {

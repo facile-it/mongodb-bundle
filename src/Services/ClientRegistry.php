@@ -54,7 +54,17 @@ final class ClientRegistry
     }
 
     /**
-     * @param array $conf
+     * @psalm-type ConfType = array{
+     *   uri: string | null,
+     *   username: string,
+     *   password: string,
+     *   authSource: string | null,
+     *   replicaSet: string,
+     *   ssl: string,
+     *   connectTimeoutMS: string,
+     *   readPreference: string
+     * }
+     * @param ConfType $conf
      *
      * @return ClientConfiguration
      */
@@ -84,6 +94,11 @@ final class ClientRegistry
         );
     }
 
+    /**
+     * @psalm-type HostType = array{host: string, port: positive-int}
+     * @param list<HostType> $hosts
+     * @return string
+     */
     private static function buildConnectionUri(array $hosts): string
     {
         return 'mongodb://' . implode(
