@@ -114,10 +114,8 @@ final class ClientRegistry
         if (! isset($this->clients[$clientKey])) {
             $conf = $this->configurations[$name];
             $options = array_merge(
-                [
-                    'database' => $databaseName,
-                    'authSource' => $conf->getAuthSource() ?? $databaseName ?? 'admin',
-                ],
+                ['database' => $databaseName],
+                $conf->getAuthSource() !== null ? ['authSource' => $conf->getAuthSource()] : [],
                 $conf->getOptions()
             );
             $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, $conf->getDriverOptions());
