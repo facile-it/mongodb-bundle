@@ -24,12 +24,8 @@ class MongoQuerySerializerTest extends TestCase
         $query->setData($unserializedData);
         $query->setOptions($unserializedData);
 
-        $clone = clone $query;
         MongoQuerySerializer::serialize($query);
 
-        $this->assertNotEquals($clone->getFilters(), $query->getFilters());
-        $this->assertNotEquals($clone->getData(), $query->getData());
-        $this->assertNotEquals($clone->getOptions(), $query->getOptions());
         $this->assertEquals($expectedSerialization, $query->getFilters()['test']);
         $this->assertEquals($expectedSerialization, $query->getData()['test']);
         $this->assertEquals($expectedSerialization, $query->getOptions()['test']);
@@ -50,6 +46,8 @@ class MongoQuerySerializerTest extends TestCase
             [['test' => new BSONDocument()], []],
             [['test' => new \stdClass()], []],
             [['test' => $documentWithFQCN], ['fqcn' => \Exception::class]],
+            [['test' => 'stringValue'], 'stringValue'],
+            [['test' => 145], 145],
         ];
     }
 
