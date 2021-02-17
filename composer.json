@@ -25,12 +25,12 @@
         "symfony/framework-bundle": "^3.4 || ^4.3"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^3",
+        "matthiasnoback/symfony-dependency-injection-test": "^3 || ^4",
         "symfony/web-profiler-bundle": "^3.4 || ^4.3",
         "symfony/console": "^3.4 || ^4.3",
         "phpunit/phpunit": "^7.0",
         "symfony/phpunit-bridge": "^4.2",
-        "facile-it/facile-coding-standard": "^0.4.0",
+        "facile-it/facile-coding-standard": "^0.4.0 || dev-master",
         "phpstan/phpstan": "^0.12"
     },
     "minimum-stability": "stable",
