@@ -4,6 +4,9 @@ framework:
 mongo_db_bundle:
   clients:
     test_client:
+      username: root
+      password: rootPass
+      authSource: admin
       hosts:
       - { host: localhost, port: 27017 }
 
