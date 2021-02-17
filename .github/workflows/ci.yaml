@@ -8,7 +8,7 @@ on:
 
 jobs:
   tests:
-    name: Tests (PHP ${{ matrix.php }}, ext-mongo ${{mongo-ext}}, ${{ matrix.mongo-img }})
+    name: Tests (PHP ${{ matrix.php }}, ext-mongo ${{ matrix.mongo-ext }}, ${{ matrix.mongo-img }})
     runs-on: ubuntu-latest
     services:
       mongo:
