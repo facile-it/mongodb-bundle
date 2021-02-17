@@ -12,6 +12,7 @@ Bundle service integration of official [mongodb/mongo-php-library](https://githu
 
 [![Flex Support](https://img.shields.io/badge/Flex-supported-brightgreen.svg)]()
 [![Build Status](https://travis-ci.org/facile-it/mongodb-bundle.svg?branch=master)](https://travis-ci.org/facile-it/mongodb-bundle)
+[![codecov](https://codecov.io/gh/facile-it/mongodb-bundle/branch/master/graph/badge.svg?token=gEhvCteV7k)](https://codecov.io/gh/facile-it/mongodb-bundle)
 
 ### Installation
 
