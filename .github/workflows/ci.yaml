@@ -78,6 +78,8 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: mongodb-${{ matrix.mongo-ext }}
+          env:
+            fail-fast: true
       - name: Allow unstable dependencies
         run: composer config minimum-stability dev
         if: matrix.symfony == 'dev-master'
