@@ -13,14 +13,15 @@ jobs:
     services:
       mongo:
         image: ${{ matrix.mongo-img }}
+        
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: rootPass
-        options: >-
-          --health-cmd '/etc/init.d/mongodb status || exit 1'
-          --health-interval 5s
-          --health-timeout 3s
-          --health-retries 5
+#        options: >-
+#          --health-cmd '/etc/init.d/mongodb status || exit 1'
+#          --health-interval 5s
+#          --health-timeout 3s
+#          --health-retries 5
 
     continue-on-error: ${{ matrix.experimental }}
     strategy:
