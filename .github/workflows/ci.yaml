@@ -73,6 +73,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
       - name: Allow unstable dependencies
         run: composer config minimum-stability dev
         if: matrix.symfony == 'dev-master'
