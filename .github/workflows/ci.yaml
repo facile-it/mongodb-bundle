@@ -13,7 +13,8 @@ jobs:
     services:
       mongo:
         image: ${{ matrix.mongo-img }}
-
+        ports:
+          - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: rootPass
@@ -24,6 +25,8 @@ jobs:
 #          --health-retries 5
 
     continue-on-error: ${{ matrix.experimental }}
+    env:
+      TEST_ENV: docker
     strategy:
       matrix:
         experimental: [ false ]
