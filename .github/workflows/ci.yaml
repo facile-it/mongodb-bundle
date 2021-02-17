@@ -81,7 +81,7 @@ jobs:
         run: composer config minimum-stability dev
         if: matrix.symfony == 'dev-master'
       - name: Restrict Symfony version
-        run: composer require "symfony/symfony:${SYMFONY}" --no-update
+        run: composer require "symfony/symfony:${{ matrix.symfony }}" --no-update
         if: matrix.symfony
       - name: Install dependencies
         uses: "ramsey/composer-install@v1"
