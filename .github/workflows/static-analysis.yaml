@@ -29,3 +29,4 @@ jobs:
           php-version: 7.4
       - name: Install dependencies
         uses: "ramsey/composer-install@v1"
+      - run: ${{ matrix.script }}
