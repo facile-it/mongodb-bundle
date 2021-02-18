@@ -52,7 +52,7 @@ class LoadFixturesCommandTest extends AppTestCase
         self::assertEquals('fixture', $fixtures[0]['type']);
         self::assertEquals('test', $fixtures[0]['data']);
 
-        self::assertContains('Done, loaded 4 fixtures files', $commandTester->getDisplay());
+        self::assertStringContainsString('Done, loaded 4 fixtures files', $commandTester->getDisplay());
     }
 
     public function test_command_not_fixtures_found()
