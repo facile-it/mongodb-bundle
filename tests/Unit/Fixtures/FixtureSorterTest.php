@@ -29,11 +29,11 @@ class FixtureSorterTest extends TestCase
             )
         );
 
-        $this->assertContains('a', $collectionsSorted);
-        $this->assertContains('b', $collectionsSorted);
-        $this->assertContains('c', $collectionsSorted);
-        $this->assertContains('d', $collectionsSorted);
-        $this->assertContains('e', $collectionsSorted);
+        $this->assertStringContainsString('a', $collectionsSorted);
+        $this->assertStringContainsString('b', $collectionsSorted);
+        $this->assertStringContainsString('c', $collectionsSorted);
+        $this->assertStringContainsString('d', $collectionsSorted);
+        $this->assertStringContainsString('e', $collectionsSorted);
 
         $this->assertIsAfter($collectionsSorted, 'a', ['b', 'c', 'd', 'e']);
         $this->assertIsAfter($collectionsSorted, 'b', ['c', 'e']);

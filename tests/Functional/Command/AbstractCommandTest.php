@@ -24,7 +24,7 @@ class AbstractCommandTest extends AppTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(array_merge(['command' => $command->getName()], $arguments));
 
-        self::assertContains('Executed', $commandTester->getDisplay());
+        self::assertStringContainsString('Executed', $commandTester->getDisplay());
     }
 
     public function test_AbstractCommand_connection_exception()
