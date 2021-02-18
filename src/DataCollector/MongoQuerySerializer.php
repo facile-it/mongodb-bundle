@@ -50,7 +50,7 @@ final class MongoQuerySerializer
      */
     public static function prepareItemData($item)
     {
-        if (\is_scalar($item)) {
+        if (\is_scalar($item) || \is_null($item)) {
             return $item;
         }
 
