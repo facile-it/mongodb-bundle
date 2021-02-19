@@ -2,7 +2,7 @@ version: "3.1"
 
 services:
   php:
-    image: ilariopierbattista/mongodb-bundle-php:base-7.2-mongoext-1.3.0
+    image: ilariopierbattista/mongodb-bundle-php:php-7.2-mongoext-1.3.0-20201227
     volumes:
         - ./:/home/user-dev/project
     tty: true
