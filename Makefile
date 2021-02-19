@@ -21,7 +21,7 @@ test: docker-compose.yml phpunit.xml.dist
 	docker-compose run --rm php bash -c "bin/phpunit -c phpunit.xml.dist"
 
 phpstan: docker-compose.yml
-	docker-compose run --rm php bash -c "bin/phpstan analyze -l7 src/ tests/"
+	docker-compose run --rm php bash -c "bin/phpstan analyze --memory-limit=-1"
 
 setup-symfony-%: SYMFONY_VERSION = $*
 setup-symfony-%:
