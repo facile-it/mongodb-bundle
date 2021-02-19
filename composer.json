@@ -22,7 +22,7 @@
         "php": "^7.2",
         "ext-mongodb": "^1.1.5",
         "mongodb/mongodb": "^1.0",
-        "symfony/framework-bundle": "^3.4 || ^4.3"
+        "symfony/framework-bundle": "^3.4 || ^4.3 || ^5.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^3",
