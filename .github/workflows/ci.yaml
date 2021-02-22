@@ -66,6 +66,7 @@ jobs:
           - php: 8.0
             mongo-ext: 1.9.0
             mongo-img: percona/percona-server-mongodb:4.4
+            symfony: '5.0.*'
 
     steps:
       - name: Checkout
