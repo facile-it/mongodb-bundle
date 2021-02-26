@@ -16,7 +16,7 @@ jobs:
           - description: Code style
             script: composer cs-check
           - description: PHPStan
-            script: bin/phpstan analyze -l7 src/ tests/
+            script: bin/phpstan analyze
 
     name: ${{ matrix.description }}
     runs-on: ubuntu-latest
