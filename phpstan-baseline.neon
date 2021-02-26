@@ -1066,36 +1066,6 @@ parameters:
 			path: tests/Functional/Controller/ProfilerControllerTest.php
 
 		-
-			message: "#^Call to an undefined method Prophecy\\\\Prophecy\\\\ObjectProphecy\\:\\:getQueries\\(\\)\\.$#"
-			count: 2
-			path: tests/Functional/Controller/ProfilerControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Prophecy\\\\Prophecy\\\\ObjectProphecy\\:\\:getCollector\\(\\)\\.$#"
-			count: 2
-			path: tests/Functional/Controller/ProfilerControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Prophecy\\\\Prophecy\\\\ObjectProphecy\\:\\:loadProfile\\(\\)\\.$#"
-			count: 2
-			path: tests/Functional/Controller/ProfilerControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Prophecy\\\\Prophecy\\\\ObjectProphecy\\:\\:disable\\(\\)\\.$#"
-			count: 2
-			path: tests/Functional/Controller/ProfilerControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Prophecy\\\\Prophecy\\\\ObjectProphecy\\:\\:get\\(\\)\\.$#"
-			count: 4
-			path: tests/Functional/Controller/ProfilerControllerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$container of method Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:setContainer\\(\\) expects Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\|null, object given\\.$#"
-			count: 2
-			path: tests/Functional/Controller/ProfilerControllerTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
 			count: 2
 			path: tests/Functional/Controller/ProfilerControllerTest.php
@@ -1171,11 +1141,6 @@ parameters:
 			path: tests/Unit/Capsule/ClientTest.php
 
 		-
-			message: "#^Parameter \\#5 \\$eventDispatcher of class Facile\\\\MongoDbBundle\\\\Capsule\\\\Client constructor expects Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface, object given\\.$#"
-			count: 1
-			path: tests/Unit/Capsule/ClientTest.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Capsule\\\\DatabaseTest\\:\\:test_selectCollection\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/Capsule/DatabaseTest.php
@@ -1247,11 +1212,6 @@ parameters:
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\DataCollector\\\\MongoQuerySerializerTest\\:\\:test_serializer_regression_with_replaceOne\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
-
-		-
-			message: "#^Call to an undefined method Prophecy\\\\Prophecy\\\\ObjectProphecy\\:\\:bsonSerialize\\(\\)\\.$#"
 			count: 1
 			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
 
@@ -1353,11 +1313,6 @@ parameters:
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\ClientRegistryTest\\:\\:test_client_connection_url_provided_manually\\(\\) has no return typehint specified\\.$#"
 			count: 1
-			path: tests/Unit/Services/ClientRegistryTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$eventDispatcher of class Facile\\\\MongoDbBundle\\\\Services\\\\ClientRegistry constructor expects Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface, object given\\.$#"
-			count: 3
 			path: tests/Unit/Services/ClientRegistryTest.php
 
 		-
