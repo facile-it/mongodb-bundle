@@ -28,8 +28,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^3",
         "symfony/web-profiler-bundle": "^3.4 || ^4.3",
         "symfony/console": "^3.4 || ^4.3",
-        "phpunit/phpunit": "^7.0",
-        "symfony/phpunit-bridge": "^4.2",
+        "phpunit/phpunit": "^8.0",
+        "symfony/phpunit-bridge": "^5.2",
         "facile-it/facile-coding-standard": "^0.4.0",
         "phpstan/phpstan": "^0.12"
     },
