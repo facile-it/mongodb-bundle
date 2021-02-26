@@ -10,7 +10,6 @@ use MongoDB\Collection as MongoCollection;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\ReadPreference;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
