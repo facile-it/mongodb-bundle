@@ -201,12 +201,12 @@ parameters:
 			path: src/Capsule/Collection.php
 
 		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 4
+			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
+			count: 2
 			path: src/Capsule/Collection.php
 
 		-
-			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
+			message: "#^Parameter \\#2 \\$eventName of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects string\\|null, Facile\\\\MongoDbBundle\\\\Event\\\\QueryEvent given\\.$#"
 			count: 2
 			path: src/Capsule/Collection.php
 
@@ -382,6 +382,11 @@ parameters:
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoDbDataCollector\\:\\:collect\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/DataCollector/MongoDbDataCollector.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoDbDataCollector\\:\\:collect\\(\\) has parameter \\$exception with no typehint specified\\.$#"
 			count: 1
 			path: src/DataCollector/MongoDbDataCollector.php
 
@@ -691,12 +696,12 @@ parameters:
 			path: src/Services/ClientRegistry.php
 
 		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 2
+			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
+			count: 1
 			path: src/Services/ClientRegistry.php
 
 		-
-			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
+			message: "#^Parameter \\#2 \\$eventName of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects string\\|null, Facile\\\\MongoDbBundle\\\\Event\\\\ConnectionEvent given\\.$#"
 			count: 1
 			path: src/Services/ClientRegistry.php
 
