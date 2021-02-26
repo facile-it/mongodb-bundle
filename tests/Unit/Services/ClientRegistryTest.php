@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
+use Symfony\Component\HttpKernel\Kernel;
 
 class ClientRegistryTest extends TestCase
 {
@@ -105,7 +106,7 @@ class ClientRegistryTest extends TestCase
             return true;
         });
 
-        if (class_exists(LegacyEventDispatcherProxy::class)) {
+        if (Kernel::VERSION_ID >= 40300) {
             $eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED)
                 ->shouldBeCalledOnce()
                 ->willReturnArgument(0);
