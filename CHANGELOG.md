@@ -6,29 +6,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 ### Added
-* This changelog with (#109) by @Jean85.
+* This changelog with (#109) by [@Jean85](https://github.com/Jean85).
 ### Fixed
-* Fixed issue with MongoQuerySerializer (#112) by @starred-gijs.
-* Fixed Symfony 5 support and solved 5.1 deprecations (#111) by @Jean85.
+* Fixed issue with MongoQuerySerializer (#112) by [@starred-gijs](https://github.com/starred-gijs).
+* Fixed Symfony 5 support and solved 5.1 deprecations (#111) by [@Jean85](https://github.com/Jean85).
 
 ## 1.2.0 (2021-02-19)
 ### Added
-* Add support for `symfony/framework-bundle` 5
+* Add support for `symfony/framework-bundle` 5 by [@Jean85](https://github.com/Jean85).
 ### Changed
-* Replace Travis with GitHub Actions (#106)
+* Replace Travis with GitHub Actions (#106) by [@Jean85](https://github.com/Jean85).
 
 ## 1.1.0 (2021-01-14)
-* Use FQCN for the controller (#100, thanks @starred-gijs)
+* Use FQCN for the controller (#100, thanks [@starred-gijs](https://github.com/starred-gijs))
 
 ## 1.0.0 (2019-06-12)
 ### Changed
-* Driver options factory (to have SSL driver options) (#89, thanks @antoniojlm84)
+* Driver options factory (to have SSL driver options) (#89, thanks [@antoniojlm84](https://github.com/antoniojlm84))
 ### Removed
 * Removed support for PHP < 7.1
 ### Fixed
 * Fix deprecations for Symfony 5.1 (#95)
 * Fix event dispatcher deprecations in SF 4.3 (#80)
-* Fix debug issue using other environment than dev (#83, thanks @djgxp)
+* Fix debug issue using other environment than dev (#83, thanks [@djgxp](https://github.com/djgxp))
 
 ## 0.7.3 (2019-05-27)
 ### Fixed
@@ -44,7 +44,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 0.7.0 (2018-12-19)
 ### Added
-* Add uri configuration option to client (#64, thanks @duxet)
+* Add uri configuration option to client (#64, thanks [@duxet](https://github.com/duxet))
 
 ## 0.6.6 (2018-10-13)
 ### Changed
@@ -52,7 +52,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 0.6.6 (2018-10-12)
 ### Added
-* Add ability to specify order of loading fixtures (#54, thanks @mmskl)
+* Add ability to specify order of loading fixtures (#54, thanks [@mmskl](https://github.com/mmskl))
 
 ## 0.6.5 (2018-01-18)
 ### Added
@@ -60,7 +60,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 * Small CS fixes for performance improvements (#47)
 ### Fixed
-* Fix Profiler errors on Symfony4+ (#50, thanks @Dameon87)
+* Fix Profiler errors on Symfony4+ (#50, thanks [@Dameon87](https://github.com/Dameon87))
 
 ## 0.6.4 (2018-01-03)
 ### Changed
