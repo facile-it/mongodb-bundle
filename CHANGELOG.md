@@ -6,9 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 ### Added
-* This changelog with (#109). Thank you @Jean85.
+* This changelog with (#109) by @Jean85.
 ### Fixed
-* Fixed issue with MongoQuerySerializer (#112). Thank you @starred-gijs.
+* Fixed issue with MongoQuerySerializer (#112) by @starred-gijs.
 
 ## 1.2.0 (2021-02-19)
 ### Added
