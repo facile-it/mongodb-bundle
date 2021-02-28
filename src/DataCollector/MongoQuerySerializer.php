@@ -50,8 +50,12 @@ final class MongoQuerySerializer
      */
     public static function prepareItemData($item)
     {
-        if (\is_string($item)) {
+        if (\is_scalar($item)) {
             return $item;
+        }
+
+        if (\is_array($item)) {
+            return self::prepareUnserializableData((array) $item);
         }
 
         if (method_exists($item, 'getArrayCopy')) {
@@ -70,7 +74,7 @@ final class MongoQuerySerializer
             return $item->bsonSerialize();
         }
 
-        if (\is_array($item) || \is_object($item)) {
+        if (\is_object($item)) {
             return self::prepareUnserializableData((array) $item);
         }
 

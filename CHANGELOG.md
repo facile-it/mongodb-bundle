@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Added
+* This changelog with (#109) by @Jean85.
 ### Fixed
-* Fixed Symfony 5 support and solved 5.1 deprecations (#111)
+* Fixed issue with MongoQuerySerializer (#112) by @starred-gijs.
+* Fixed Symfony 5 support and solved 5.1 deprecations (#111) by @Jean85.
 
 ## 1.2.0 (2021-02-19)
 ### Added
