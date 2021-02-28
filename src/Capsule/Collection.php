@@ -10,7 +10,7 @@ use MongoDB\Collection as MongoCollection;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\ReadPreference;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Class Collection.
@@ -221,7 +221,7 @@ final class Collection extends MongoCollection
         );
 
         $event = new QueryEvent($query);
-        if (class_exists(LegacyEventDispatcherProxy::class)) {
+        if (Kernel::VERSION_ID >= 40300) {
             $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_PREPARED);
         } else {
             $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, $event);
@@ -261,7 +261,7 @@ final class Collection extends MongoCollection
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 
         $event = new QueryEvent($queryLog);
-        if (class_exists(LegacyEventDispatcherProxy::class)) {
+        if (Kernel::VERSION_ID >= 40300) {
             $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
         } else {
             $this->eventDispatcher->dispatch(QueryEvent::QUERY_EXECUTED, $event);

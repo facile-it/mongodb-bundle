@@ -3,5 +3,7 @@ parameters:
     paths:
         - src/
         - tests/
+    dynamicConstantNames:
+        - Symfony\Component\HttpKernel\Kernel::VERSION_ID
 includes:
 	- phpstan-baseline.neon

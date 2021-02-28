@@ -51,8 +51,12 @@ class MongoDbDataCollector extends DataCollector
         $this->logger = $logger;
     }
 
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, $exception = null)
     {
+        if ($exception && ! $exception instanceof \Throwable) {
+            throw new \InvalidArgumentException('Expecting \Throwable, got ' . get_debug_type($exception));
+        }
+
         while ($this->logger->hasLoggedEvents()) {
             /** @var Query $event */
             $event = $this->logger->getLoggedEvent();
