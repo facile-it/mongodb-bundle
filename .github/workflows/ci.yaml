@@ -8,11 +8,11 @@ on:
 
 jobs:
   tests:
-    name: Tests (PHP ${{ matrix.php }}, ext-mongo ${{ matrix.mongo-ext }}, ${{ matrix.mongo-img }})
+    name: Tests (PHP ${{ matrix.php }}, ext-mongodb ${{ matrix.mongo-ext }}, MongoDB ${{ matrix.mongo-img }})
     runs-on: ubuntu-latest
     services:
       mongo:
-        image: ${{ matrix.mongo-img }}
+        image: mongo:${{ matrix.mongo-img }}
         ports:
           - 27017:27017
         env:
@@ -29,40 +29,37 @@ jobs:
         include:
           - php: 7.2
             mongo-ext: 1.3.0
-            mongo-img: mongo:3.4
+            mongo-img: 3.4
             symfony: '3.4.*'
           - php: 7.2
             mongo-ext: 1.3.0
-            mongo-img: mongo:3.4
+            mongo-img: 3.4
             symfony: '4.3.*'
           - php: 7.2
             mongo-ext: 1.3.0
-            mongo-img: mongo:3.4
+            mongo-img: 3.4
             symfony: '4.4.*'
           - php: 7.2
             mongo-ext: 1.5.3
-            mongo-img: percona/percona-server-mongodb:4.0
+            mongo-img: 4.0
           - php: 7.2
             mongo-ext: 1.6.0
-            mongo-img: percona/percona-server-mongodb:4.2
+            mongo-img: 4.2
           - php: 7.2
             mongo-ext: 1.8.0
-            mongo-img: percona/percona-server-mongodb:4.4
+            mongo-img: 4.4
           - php: 7.2
             mongo-ext: 1.9.0
-            mongo-img: percona/percona-server-mongodb:4.4
+            mongo-img: 4.4
           - php: 7.3
             mongo-ext: 1.5.3
-            mongo-img: mongo:4.0
-          - php: 7.3
-            mongo-ext: 1.5.3
-            mongo-img: percona/percona-server-mongodb:4.0
+            mongo-img: 4.0
           - php: 7.4
             mongo-ext: 1.6.0
-            mongo-img: percona/percona-server-mongodb:4.2
+            mongo-img: 4.2
           - php: 7.4
             mongo-ext: 1.9.0
-            mongo-img: percona/percona-server-mongodb:4.4
+            mongo-img: 4.4
 
     steps:
       - name: Checkout
