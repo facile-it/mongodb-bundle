@@ -1156,22 +1156,7 @@ parameters:
 			path: tests/Unit/Capsule/DatabaseTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DataCollector\\\\MongoDbDataCollectorTest\\:\\:test_construction_logger\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/DataCollector/MongoDbDataCollectorTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DataCollector\\\\MongoDbDataCollectorTest\\:\\:getUtcDateTime\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/DataCollector/MongoDbDataCollectorTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$milliseconds of class MongoDB\\\\BSON\\\\UTCDateTime constructor expects DateTimeInterface\\|int, string given\\.$#"
-			count: 1
-			path: tests/Unit/DataCollector/MongoDbDataCollectorTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$version1 of function version_compare expects string, string\\|false given\\.$#"
 			count: 1
 			path: tests/Unit/DataCollector/MongoDbDataCollectorTest.php
 
