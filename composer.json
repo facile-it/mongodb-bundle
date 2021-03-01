@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2 || ^8.0",
         "ext-mongodb": "^1.1.5",
         "mongodb/mongodb": "^1.0",
         "symfony/framework-bundle": "^3.4 || ^4.3 || ^5.0"
