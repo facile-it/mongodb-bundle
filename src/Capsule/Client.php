@@ -8,8 +8,6 @@ use MongoDB\Client as MongoClient;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class Client.
- *
  * @internal
  */
 final class Client extends MongoClient
@@ -21,22 +19,18 @@ final class Client extends MongoClient
     private $clientName;
 
     /**
-     * Client constructor.
-     *
+     * @param string $clientName
+     * @param EventDispatcherInterface $eventDispatcher
      * @param string $uri
      * @param array $uriOptions
      * @param array $driverOptions
-     * @param string $clientName
-     * @param EventDispatcherInterface $eventDispatcher
-     *
-     * @internal param DataCollectorLoggerInterface $logger
      */
     public function __construct(
+        string $clientName,
+        EventDispatcherInterface $eventDispatcher,
         $uri = 'mongodb://localhost:27017',
         array $uriOptions = [],
-        array $driverOptions = [],
-        string $clientName,
-        EventDispatcherInterface $eventDispatcher
+        array $driverOptions = []
     ) {
         parent::__construct($uri, $uriOptions, $driverOptions);
         $this->eventDispatcher = $eventDispatcher;
