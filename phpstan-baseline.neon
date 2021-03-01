@@ -1136,21 +1136,6 @@ parameters:
 			path: tests/Unit/Capsule/ClientTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Capsule\\\\DatabaseTest\\:\\:test_selectCollection\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Capsule/DatabaseTest.php
-
-		-
-			message: "#^Parameter \\#5 \\$eventDispatcher of class Facile\\\\MongoDbBundle\\\\Capsule\\\\Database constructor expects Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface, object given\\.$#"
-			count: 2
-			path: tests/Unit/Capsule/DatabaseTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Capsule\\\\DatabaseTest\\:\\:test_withOptions\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Capsule/DatabaseTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$milliseconds of class MongoDB\\\\BSON\\\\UTCDateTime constructor expects DateTimeInterface\\|int, string given\\.$#"
 			count: 1
 			path: tests/Unit/DataCollector/MongoDbDataCollectorTest.php

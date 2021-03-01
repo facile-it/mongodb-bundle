@@ -47,7 +47,7 @@ final class Client extends MongoClient
             'typeMap' => $debug['typeMap'],
         ];
 
-        return new Database($debug['manager'], $this->clientName, $databaseName, $options, $this->eventDispatcher);
+        return new Database($debug['manager'], $this->eventDispatcher, $this->clientName, $databaseName, $options);
     }
 
     /**
