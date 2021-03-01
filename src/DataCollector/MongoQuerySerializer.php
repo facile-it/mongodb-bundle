@@ -55,27 +55,27 @@ final class MongoQuerySerializer
         }
 
         if (\is_array($item)) {
-            return self::prepareUnserializableData((array) $item);
-        }
-
-        if (method_exists($item, 'getArrayCopy')) {
-            return self::prepareUnserializableData($item->getArrayCopy());
-        }
-
-        if (method_exists($item, 'toDateTime')) {
-            return 'ISODate("' . $item->toDateTime()->format('c') . '")';
-        }
-
-        if (method_exists($item, '__toString')) {
-            return $item->__toString();
-        }
-
-        if ($item instanceof Serializable) {
-            return $item->bsonSerialize();
+            return self::prepareUnserializableData((array)$item);
         }
 
         if (\is_object($item)) {
-            return self::prepareUnserializableData((array) $item);
+            if (method_exists($item, 'getArrayCopy')) {
+                return self::prepareUnserializableData($item->getArrayCopy());
+            }
+
+            if (method_exists($item, 'toDateTime')) {
+                return 'ISODate("' . $item->toDateTime()->format('c') . '")';
+            }
+
+            if (method_exists($item, '__toString')) {
+                return $item->__toString();
+            }
+
+            if ($item instanceof Serializable) {
+                return $item->bsonSerialize();
+            }
+
+            return self::prepareUnserializableData((array)$item);
         }
 
         return $item;
