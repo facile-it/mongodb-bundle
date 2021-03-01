@@ -53,7 +53,7 @@ final class Collection extends MongoCollection
      */
     public function aggregate(array $pipeline, array $options = [])
     {
-        $query = $this->prepareQuery(__FUNCTION__, null, $pipeline, $options);
+        $query = $this->prepareQuery(__FUNCTION__, [], $pipeline, $options);
         $result = parent::aggregate($query->getData(), $query->getOptions());
         $this->notifyQueryExecution($query);
 
@@ -65,7 +65,7 @@ final class Collection extends MongoCollection
      */
     public function count($filter = [], array $options = [])
     {
-        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::count($query->getFilters(), $query->getOptions());
         $this->notifyQueryExecution($query);
 
@@ -77,7 +77,7 @@ final class Collection extends MongoCollection
      */
     public function find($filter = [], array $options = [])
     {
-        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::find($query->getFilters(), $query->getOptions());
         $this->notifyQueryExecution($query);
 
@@ -89,7 +89,7 @@ final class Collection extends MongoCollection
      */
     public function findOne($filter = [], array $options = [])
     {
-        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::findOne($query->getFilters(), $query->getOptions());
         $this->notifyQueryExecution($query);
 
@@ -113,7 +113,7 @@ final class Collection extends MongoCollection
      */
     public function findOneAndDelete($filter, array $options = [])
     {
-        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::findOneAndDelete($query->getFilters(), $query->getOptions());
         $this->notifyQueryExecution($query);
 
@@ -125,7 +125,7 @@ final class Collection extends MongoCollection
      */
     public function deleteMany($filter, array $options = [])
     {
-        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::deleteMany($query->getFilters(), $query->getOptions());
         $this->notifyQueryExecution($query);
 
@@ -137,7 +137,7 @@ final class Collection extends MongoCollection
      */
     public function deleteOne($filter, array $options = [])
     {
-        $query = $this->prepareQuery(__FUNCTION__, $filter, null, $options);
+        $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::deleteOne($query->getFilters(), $query->getOptions());
         $this->notifyQueryExecution($query);
 
@@ -200,7 +200,7 @@ final class Collection extends MongoCollection
      *
      * @return Query
      */
-    private function prepareQuery(string $method, $filters = null, $data = null, array $options): Query
+    private function prepareQuery(string $method, $filters, $data, array $options): Query
     {
         $query = new Query();
         $query->setFilters($filters ?? []);
