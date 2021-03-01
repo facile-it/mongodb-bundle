@@ -63,11 +63,11 @@ final class Database extends MongoDatabase
 
         return new Collection(
             $debug['manager'],
+            $this->eventDispatcher,
             $this->clientName,
             $this->databaseName,
             $collectionName,
-            $options,
-            $this->eventDispatcher
+            $options
         );
     }
 

@@ -13,8 +13,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
- * Class Collection.
- *
  * @internal
  */
 final class Collection extends MongoCollection
@@ -29,24 +27,20 @@ final class Collection extends MongoCollection
     private $databaseName;
 
     /**
-     * Collection constructor.
-     *
      * @param Manager $manager
+     * @param EventDispatcherInterface $eventDispatcher
      * @param string $clientName
      * @param string $databaseName
      * @param string $collectionName
      * @param array $options
-     * @param EventDispatcherInterface $eventDispatcher
-     *
-     * @internal param DataCollectorLoggerInterface $logger
      */
     public function __construct(
         Manager $manager,
+        EventDispatcherInterface $eventDispatcher,
         string $clientName,
         string $databaseName,
         string $collectionName,
-        array $options = [],
-        EventDispatcherInterface $eventDispatcher
+        array $options = []
     ) {
         parent::__construct($manager, $databaseName, $collectionName, $options);
         $this->eventDispatcher = $eventDispatcher;

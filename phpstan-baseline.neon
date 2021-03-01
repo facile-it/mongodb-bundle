@@ -901,11 +901,6 @@ parameters:
 			path: tests/Functional/Capsule/CollectionTest.php
 
 		-
-			message: "#^Parameter \\#6 \\$eventDispatcher of class Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection constructor expects Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface, object given\\.$#"
-			count: 13
-			path: tests/Functional/Capsule/CollectionTest.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_insertOne\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/Capsule/CollectionTest.php
