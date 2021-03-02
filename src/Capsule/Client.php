@@ -32,9 +32,9 @@ final class Client extends MongoClient
      * @internal param DataCollectorLoggerInterface $logger
      */
     public function __construct(
-        $uri = 'mongodb://localhost:27017',
-        array $uriOptions = [],
-        array $driverOptions = [],
+        $uri,
+        array $uriOptions,
+        array $driverOptions,
         string $clientName,
         EventDispatcherInterface $eventDispatcher
     ) {
