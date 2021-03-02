@@ -39,7 +39,7 @@ final class Database extends MongoDatabase
         Manager $manager,
         string $clientName,
         string $databaseName,
-        array $options = [],
+        array $options,
         EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct($manager, $databaseName, $options);
