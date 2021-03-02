@@ -45,7 +45,7 @@ final class Collection extends MongoCollection
         string $clientName,
         string $databaseName,
         string $collectionName,
-        array $options = [],
+        array $options,
         EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct($manager, $databaseName, $collectionName, $options);
