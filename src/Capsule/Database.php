@@ -9,6 +9,8 @@ use MongoDB\Driver\Manager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
+ * Class Database.
+ *
  * @internal
  */
 final class Database extends MongoDatabase
@@ -23,18 +25,22 @@ final class Database extends MongoDatabase
     private $databaseName;
 
     /**
+     * Database constructor.
+     *
      * @param Manager $manager
-     * @param EventDispatcherInterface $eventDispatcher
      * @param string $clientName
      * @param string $databaseName
      * @param array $options
+     * @param EventDispatcherInterface $eventDispatcher
+     *
+     * @internal param DataCollectorLoggerInterface $logger
      */
     public function __construct(
         Manager $manager,
-        EventDispatcherInterface $eventDispatcher,
         string $clientName,
         string $databaseName,
-        array $options = []
+        array $options,
+        EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct($manager, $databaseName, $options);
         $this->eventDispatcher = $eventDispatcher;
@@ -57,11 +63,11 @@ final class Database extends MongoDatabase
 
         return new Collection(
             $debug['manager'],
-            $this->eventDispatcher,
             $this->clientName,
             $this->databaseName,
             $collectionName,
-            $options
+            $options,
+            $this->eventDispatcher
         );
     }
 
@@ -78,6 +84,6 @@ final class Database extends MongoDatabase
             'writeConcern' => $debug['writeConcern'],
         ];
 
-        return new self($debug['manager'], $this->eventDispatcher, $this->clientName, $debug['databaseName'], $options);
+        return new self($debug['manager'], $this->clientName, $debug['databaseName'], $options, $this->eventDispatcher);
     }
 }

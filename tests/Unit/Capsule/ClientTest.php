@@ -13,13 +13,7 @@ class ClientTest extends TestCase
 {
     public function test_mongodb_client_encapsulation()
     {
-        $client = new Client(
-            'test_client',
-            $this->prophesize(EventDispatcherInterface::class)->reveal(),
-            'mongodb://localhost:27017',
-            [],
-            []
-        );
+        $client = new Client('mongodb://localhost:27017', [], [], 'test_client', $this->prophesize(EventDispatcherInterface::class)->reveal());
 
         self::assertInstanceOf(MongoClient::class, $client);
 

@@ -142,7 +142,7 @@ final class ClientRegistry
     private function buildClient(string $clientName, string $uri, array $options, array $driverOptions): Client
     {
         if (true === $this->debug) {
-            return new BundleClient($clientName, $this->eventDispatcher, $uri, $options, $driverOptions);
+            return new BundleClient($uri, $options, $driverOptions, $clientName, $this->eventDispatcher);
         }
 
         return new Client($uri, $options, $driverOptions);
