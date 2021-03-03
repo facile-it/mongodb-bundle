@@ -13,10 +13,10 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DatabaseTest extends TestCase
 {
-    public function test_selectCollection()
+    public function test_selectCollection(): void
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(EventDispatcherInterface::class);
+        $logger = $this->prophesize(EventDispatcherInterface::class);
 
         $db = new Database($manager, 'client_name', 'testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);
@@ -30,10 +30,10 @@ class DatabaseTest extends TestCase
         self::assertEquals('testdb', $debugInfo['databaseName']);
     }
 
-    public function test_withOptions()
+    public function test_withOptions(): void
     {
         $manager = new Manager('mongodb://localhost');
-        $logger = self::prophesize(EventDispatcherInterface::class);
+        $logger = $this->prophesize(EventDispatcherInterface::class);
 
         $db = new Database($manager, 'client_name', 'testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);

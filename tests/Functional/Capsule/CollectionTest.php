@@ -27,7 +27,7 @@ class CollectionTest extends AppTestCase
     public function test_construction()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
@@ -37,7 +37,7 @@ class CollectionTest extends AppTestCase
     public function test_insertOne()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -48,7 +48,7 @@ class CollectionTest extends AppTestCase
     public function test_updateOne()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -59,7 +59,7 @@ class CollectionTest extends AppTestCase
     public function test_count()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -70,7 +70,7 @@ class CollectionTest extends AppTestCase
     public function test_find()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -81,7 +81,7 @@ class CollectionTest extends AppTestCase
     public function test_findOne()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -92,7 +92,7 @@ class CollectionTest extends AppTestCase
     public function test_findOneAndUpdate()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -103,7 +103,7 @@ class CollectionTest extends AppTestCase
     public function test_findOneAndDelete()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -114,7 +114,7 @@ class CollectionTest extends AppTestCase
     public function test_deleteOne()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -125,7 +125,7 @@ class CollectionTest extends AppTestCase
     public function test_replaceOne()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -136,7 +136,7 @@ class CollectionTest extends AppTestCase
     public function test_aggregate()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -167,7 +167,7 @@ class CollectionTest extends AppTestCase
     public function test_deleteMany()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
@@ -178,7 +178,7 @@ class CollectionTest extends AppTestCase
     public function test_distinct()
     {
         $manager = $this->getManager();
-        $ev = self::prophesize(EventDispatcherInterface::class);
+        $ev = $this->prophesize(EventDispatcherInterface::class);
         $this->assertEventsDispatching($ev);
 
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
