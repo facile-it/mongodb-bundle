@@ -123,27 +123,6 @@ $this->get('mongo.connection.{connectionName}'); // [test_db, other_db, test_db_
 
 To manipulate the database, please read the official [documentation](http://mongodb.github.io/mongo-php-library/classes/database/)
 
-## Fixtures
-This bundle supports doctrine style fixtures.
-To create one you will need to add a php class in your bundle's `/DataFixtures/Mongo` directory. 
-For Example `src/AppBundle/DataFixtures/Mongo/LoadTaskDataFixture.php`.
-
-Note: This class must implement at least the `MongoFixtureInterface`, if you need container support you can 
-extend `AbstractContainerAwareFixture` to use the `getContainer` method.
-
-### Ordering
-Since [0.6.6](https://github.com/facile-it/mongodb-bundle/releases/tag/0.6.6) it's possibile to specify the order by 
-which the fixtures are loaded.
-Make sure it implements `OrderedFixtureInterface`.
-Fixtures with lower values of `getOrder` will be loaded first.
-
-### Commands
-Some commands are provided:
-
-* `mongodb:database:drop`: To drop a database.
-* `mongodb:collection:drop`: To drop a collection.
-* `mongodb:fixtures:load`: To load the fixtures.
-
 ## Query Profiling
 
 On dev environment all queries executed by the library MongoDB\Collection class are profiled and showed inside the symfony web profiler.
@@ -152,6 +131,27 @@ On dev environment all queries executed by the library MongoDB\Collection class 
 
 [![Profiler Panel](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)
 
+## Fixtures
+This bundle supports doctrine style fixtures.
+To create one you will need to add a php class in your bundle's `/DataFixtures/Mongo` directory.
+For Example `src/AppBundle/DataFixtures/Mongo/LoadTaskDataFixture.php`.
+
+Note: This class must implement at least the `MongoFixtureInterface`, if you need container support you can
+extend `AbstractContainerAwareFixture` to use the `getContainer` method.
+
+### Ordering
+Since [0.6.6](https://github.com/facile-it/mongodb-bundle/releases/tag/0.6.6) it's possibile to specify the order by
+which the fixtures are loaded.
+Make sure it implements `OrderedFixtureInterface`.
+Fixtures with lower values of `getOrder` will be loaded first.
+
+### Commands
+Some commands are provided:
+
+* `mongodb:database:drop` To drop a database.
+* `mongodb:collection:drop` To drop a collection.
+* `mongodb:fixtures:load` To load the fixtures.
+
 ## Contributing
 
 Feel free to contribute by opening a pull request.
@@ -159,7 +159,7 @@ Bug fixes or feature suggestions are always welcome.
 
 ### Development environment
 
-If you like docker there are some scripts to setup an insulated development environment.
+If you like docker then there are some scripts to set up an insulated development environment.
 Please be sure to have `docker` and `docker-compose` installed on your system.
 
 To set up the project:
@@ -181,5 +181,5 @@ Note: All the above are meant to be used outside the containers.
 
 ### Port binding setup
 
-During the setup a `docker-compose.override.yml` file is created from the `docker-compose.override.yml.dist` template.
+During the set up a `docker-compose.override.yml` file is created from the `docker-compose.override.yml.dist` template.
 Change the port binding configuration inside it to fit you needs.
