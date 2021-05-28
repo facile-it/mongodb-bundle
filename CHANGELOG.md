@@ -4,27 +4,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
+
+## [1.4.0] (2021-03-06)
 ### Added
 * PHP 8 support (#114) by [@Jean85](https://github.com/Jean85).
 
-## 1.3.0 (2021-02-28)
+## [1.3.0] (2021-02-28)
 ### Added
 * This changelog with (#109) by [@Jean85](https://github.com/Jean85).
 ### Fixed
 * Fixed issue with MongoQuerySerializer (#112) by [@starred-gijs](https://github.com/starred-gijs).
 * Fixed Symfony 5 support and solved 5.1 deprecations (#111) by [@Jean85](https://github.com/Jean85).
 
-## 1.2.0 (2021-02-19)
+## [1.2.0] (2021-02-19)
 ### Added
 * Add support for `symfony/framework-bundle` 5 by [@Jean85](https://github.com/Jean85).
 ### Changed
 * Replace Travis with GitHub Actions (#106) by [@Jean85](https://github.com/Jean85).
 
-## 1.1.0 (2021-01-14)
+## [1.1.0] (2021-01-14)
+### Changed
+* The `authSource` key in configuration doesn't fallback anymore on `<database name>` or `admin`
+### Fixed
 * Use FQCN for the controller (#100, thanks [@starred-gijs](https://github.com/starred-gijs))
 
-## 1.0.0 (2019-06-12)
+## [1.0.0] (2019-06-12)
 ### Changed
 * Driver options factory (to have SSL driver options) (#89, thanks [@antoniojlm84](https://github.com/antoniojlm84))
 ### Removed
@@ -191,3 +196,10 @@ First unstable release
 
 ## 0.1-alpha (2016-06-30)
 First release
+
+[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.4.0..master
+[1.4.0]: https://github.com/facile-it/mongodb-bundle/compare/1.3.0..1.4.0
+[1.3.0]: https://github.com/facile-it/mongodb-bundle/compare/1.2.0..1.3.0
+[1.2.0]: https://github.com/facile-it/mongodb-bundle/compare/1.1.0..1.2.0
+[1.1.0]: https://github.com/facile-it/mongodb-bundle/compare/1.0.0..1.1.0
+[1.0.0]: https://github.com/facile-it/mongodb-bundle/compare/0.7.3..1.0.0
