@@ -125,7 +125,7 @@ To manipulate the database, please read the official [documentation](http://mong
 
 ## Query Profiling
 
-On dev environment all queries executed by the library MongoDB\Collection class are profiled and showed inside the symfony web profiler.
+On dev environment all queries executed by the library MongoDB\Collection class are profiled and showed inside the Symfony web profiler.
 
 [![Profiler Toolbar](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)
 
