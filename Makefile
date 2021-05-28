@@ -20,8 +20,11 @@ stop: docker-compose.yml
 test: docker-compose.yml phpunit.xml.dist
 	docker-compose run --rm php bash -c "bin/phpunit -c phpunit.xml.dist"
 
-phpstan: docker-compose.yml
-	docker-compose run --rm php bash -c "bin/phpstan analyze --memory-limit=-1"
+phpstan:
+	bin/phpstan analyze --memory-limit=-1
+
+phpstan-baseline:
+	bin/phpstan analyze --memory-limit=-1 --generate-baseline
 
 setup-symfony-%: SYMFONY_VERSION = $*
 setup-symfony-%:
@@ -30,3 +33,9 @@ setup-symfony-%:
 	docker-compose run --no-deps --rm php composer install --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
 test-composer-install: setup-symfony-3.4 setup-symfony-4.3 setup-symfony-4.4
+
+cs-fix:
+	composer cs-fix
+
+cs-check:
+	composer cs-check

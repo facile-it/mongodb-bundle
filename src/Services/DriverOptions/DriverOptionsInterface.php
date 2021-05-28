@@ -11,7 +11,8 @@ interface DriverOptionsInterface
     /**
      * It creates an array of options for constructing a MongoDB\Client
      *
-     * @param array $clientConfiguration Client's bundle configuration for which the options are needed.
+     * @param array $clientConfiguration client's bundle configuration for which the options are needed
+     *
      * @return array Options for MongoDB\Client
      *
      * @see Client
