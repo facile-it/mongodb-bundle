@@ -125,40 +125,128 @@ To manipulate the database, please read the official [documentation](http://mong
 
 ## Query Profiling
 
-On dev environment all queries executed by the library MongoDB\Collection class are profiled and showed inside the Symfony web profiler.
+On dev environment all queries executed by the library MongoDB\Collection class are profiled and showed inside the
+Symfony web profiler.
 
 [![Profiler Toolbar](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)
 
 [![Profiler Panel](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_panel.png)
 
 ## Fixtures
-This bundle supports doctrine style fixtures.
-To create one you will need to add a php class in your bundle's `/DataFixtures/Mongo` directory.
-For Example `src/AppBundle/DataFixtures/Mongo/LoadTaskDataFixture.php`.
 
-Note: This class must implement at least the `MongoFixtureInterface`, if you need container support you can
-extend `AbstractContainerAwareFixture` to use the `getContainer` method.
+This bundle supports doctrine style fixtures.
+
+To create one, define a class implementing the `MongoFixtureInterface` interface. Probably you would like to access to
+the service container: make sure the class extends
+`AbstractContainerAwareFixture`.
+
+```php
+namespace Path\To\Fixtures;
+
+use Facile\MongoDbBundle\Fixtures\AbstractContainerAwareFixture;
+use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
+use MongoDB\Collection;
+
+final class Fixture extends AbstractContainerAwareFixture implements MongoFixtureInterface
+{
+    public function loadData(): void {
+         /** @var Collection $collection */
+        $collection = $this->getContainer()
+            ->get('mongo.connection.foo_db')
+            ->selectCollection($this->collection());
+
+        $collection->insertOne([
+            'title' => 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+            'directedBy' => 'Stanley Kubrick',
+            'releaseDate' => new \MongoDB\BSON\UTCDateTime(new \DateTime('1964-01-29 00:00:00')),
+        ]);
+    }
+
+    public function loadIndexes(): void {
+        /** @var Collection $collection */
+        $collection = $this->getContainer()
+            ->get('mongo.connection.foo_db')
+            ->selectCollection($this->collection());
+
+        $collection->createIndex(['releaseDate' => 1]);
+    }
+
+    public function collection(): string {
+        return 'movies';
+    }
+}
+```
+
+Then, load it with the following Symfony command.
+
+    mongodb:fixtures:load [--connection <connection-name>] <path/to/the/fixtures>
+
+### Other Commands
+
+To drop the database:
+
+    mongodb:database:drop [--connection <connection-name>]
+
+To drop a collection:
+
+    mongodb:collection:drop [--connection <connection-name>] <collection_name>
 
 ### Ordering
-Since [0.6.6](https://github.com/facile-it/mongodb-bundle/releases/tag/0.6.6) it's possibile to specify the order by
-which the fixtures are loaded.
-Make sure it implements `OrderedFixtureInterface`.
-Fixtures with lower values of `getOrder` will be loaded first.
 
-### Commands
-Some commands are provided:
+You might have a fixture that requires the data loaded by another one.
+In this case, the loading order is crucial.
 
-* `mongodb:database:drop` To drop a database.
-* `mongodb:collection:drop` To drop a collection.
-* `mongodb:fixtures:load` To load the fixtures.
+Since [0.6.6] it's possible to specify the order by which the fixtures are loaded.
+
+Make sure they implement `OrderedFixtureInterface`. The lower the value returned by `getOrder` the higher will be the
+loading priority.
+
+```php
+namespace Path\To\Fixtures;
+
+use Facile\MongoDbBundle\Fixtures\AbstractContainerAwareFixture;
+use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
+use Facile\MongoDbBundle\Fixtures\OrderedFixtureInterface;
+
+final class FixtureA extends AbstractContainerAwareFixture implements MongoFixtureInterface, OrderedFixtureInterface
+{
+    public function getOrder() : int {
+        return 0;
+    }
+
+    public function collection(): string {
+        return 'collection_a';
+    }
+    
+    public function loadData(): void { /* ... */ }
+    public function loadIndexes(): void { /* ... */ }
+}
+
+final class FixtureB extends AbstractContainerAwareFixture implements MongoFixtureInterface, OrderedFixtureInterface
+{
+    public function getOrder() : int {
+        return 1;
+    }
+
+    public function collection(): string {
+        return 'collection_b';
+    }
+
+    public function loadData(): void { /* ... */ }
+    public function loadIndexes(): void { /* ... */ }
+}
+```
+
+[0.6.6]: https://github.com/facile-it/mongodb-bundle/releases/tag/0.6.6
 
 ## Upgrade notes
 
 ### Upgrading to 1.1.0
+
 The release [1.1.0] introduced a BC change in the configuration semantic.
 
-Before 1.1.0, if not explicitly provided, the value of `authSource` was set to the database name specified
-in the connection section, or to `admin` if even the database name was empty.
+Before 1.1.0, if not explicitly provided, the value of `authSource` was set to the database name specified in the
+connection section, or to `admin` if even the database name was empty.
 
 With 1.1.0, if the `authSource` key is not set in the configuration, it won't be set in connection options either.
 
