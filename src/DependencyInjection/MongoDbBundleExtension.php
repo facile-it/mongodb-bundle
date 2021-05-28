@@ -114,7 +114,7 @@ final class MongoDbBundleExtension extends Extension
         );
     }
 
-    private function defineDriverOptionsFactory(array $config)
+    private function defineDriverOptionsFactory(array $config): ?Reference
     {
         return isset($config['driverOptions']) ? new Reference($config['driverOptions']) : null;
     }

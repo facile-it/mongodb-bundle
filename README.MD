@@ -27,13 +27,18 @@ with your Symfony app.
 
 ## Installation
 
-First, you need to require this library through composer:
+Make your project require this bundle with composer.
 
 ```bash
 composer require facile-it/mongodb-bundle
 ```
 
-Then, enable the bundle on the `AppKernel` class:
+If your project uses Symfony Flex, then it will also use the [recipe] for enabling the bundle and installing a default
+configuration.
+
+[recipe]: https://github.com/symfony/recipes-contrib/tree/master/facile-it/mongodb-bundle
+
+If you don't have Symfony Flex installed, then you need to manually register the bundle in the `AppKernel` class.
 
 ```php
 // app/AppKernel.php
@@ -49,23 +54,25 @@ class AppKernel extends Kernel {
 }
 ```
 
+Eventually, you will need to [configure](#configuration) it.
+
 ## Configuration
 
 Here is the configuration reference:
 
 ```yaml
 mongo_db_bundle:
-    
-    data_collection: true # set to false to disable data collection
-    
+
+  data_collection: true # set to false to disable data collection
+
     # clients section, here you can define connection to different servers or with different credentials
     clients:
-    
-      foo_client_name:    # choose your client name
+
+      foo_client_name: # choose your client name
         uri: 'mongodb://host1:3062,host2' # default null (will use hosts to build connection URI)
-        hosts:            # required if uri is not set - will compose your connection URI (mongodb://host1:3062,host2:27017)
-            - { host: host1, port: 3062 } # this 
-            - { host: host2 }
+        hosts: # required if uri is not set - will compose your connection URI (mongodb://host1:3062,host2:27017)
+          - { host: host1, port: 3062 } # this 
+          - { host: host2 }
         username: 'what-a-secret'
         password: 'what-a-secret'
         authSource: '' # the database name with the user’s credentials
@@ -74,58 +81,91 @@ mongo_db_bundle:
         connectTimeoutMS: 3000 # default null (no timeout)
         readPreference: primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
 
-      other_client:   ~ # same as upper configuration
-      
+      other_client: ~ # same as upper configuration
+
     # connections section, these represents your Database object reference
     connections:
-    
+
       foo_db:
-        client_name:    foo_client_name # Required - your client name in clients section
-        database_name:  'foo_db' # Required
-        
+        client_name: foo_client_name # Required - your client name in clients section
+        database_name: 'foo_db' # Required
+
       other_db:
-        client_name:    ~
-        database_name:  ~
-        
+        client_name: ~
+        database_name: ~
+
       foo_db_2:
-        client_name:    ~
-        database_name:  ~
-        
-    # Service reference to manage driver options context - see example below
-    driverOptions: "app.mongodb.context_service" # default null
+        client_name: ~
+        database_name: ~
+
+    # Service reference to provide driver options - see example below
+    driverOptions: "App\Services\DriverOptionsProvider" # default null
 ```
 
 ### Driver options
 
-Example service to manage driver options. This class must implement Facile\MongoDbBundle\Services\DriverOptions\DriverOptionsInterface.
+You might need to specify some driver options for constructing the `MongoDB\Client`. Read the [reference] for a complete
+explanation of all the available options.
+
+Implement `DriverOptionsInterface` and declare the class as a Symfony service.
+
+```php
+namespace App\Services;
+
+use Facile\MongoDbBundle\Services\DriverOptions\DriverOptionsInterface;
+
+final class MyCustomDriverOptionsProvider implements DriverOptionsInterface
+{
+    /** @var string */
+    private $cafile;
+    
+    public function __construct(string $cafile) {
+        $this->cafile = $cafile;
+    }
+
+    public function buildDriverOptions(array $clientConfiguration) : array {
+        return [
+            'allow_invalid_hostname' => false,
+            'context' => ['cafile' => $this->cafile] // This option is deprecated, but let me use that as an example.
+        ];
+    }
+}
+```
+
+```yaml
+# config/services.yaml
+App\Services\MyCustomDriverOptionsProvider:
+  arguments:
+    $cafile: 'example/route/file.crt'
+```
+
+Then use its service id as value of `driverOptions` in the bundle configuration.
 
 ```yml
 # config/packages/facile_it_mongodb.yaml
 mongo_db_bundle:
-    ...
-    driverOptions: "app.mongodb.context_service"
-
-# config/services.yaml
-app.mongodb.context_service:
-    class: 'App\Services\DriverOptionsService'
-    arguments:
-        - context: { cafile: 'example/route/file.crt' }
+  driverOptions: "App\Services\MyCustomDriverOptionsProvider"
+  # ...
 ```
+
+[reference]: https://www.php.net/manual/en/mongodb-driver-manager.construct.php
 
 ## Services
 
-You can directly access to the `MongoDB\Database` with those services:
+You can directly access to the `MongoDB\Database` with these services:
 
 ```php
 $this->get('mongo.connection'); // Default connection (first declared)
 $this->get('mongo.connection.{connectionName}'); // [test_db, other_db, test_db_2] for example
 ```
 
-To manipulate the database, please read the official [documentation](http://mongodb.github.io/mongo-php-library/classes/database/)
+To manipulate the database, please read the [official documentation].
+
+[official documentation]: http://mongodb.github.io/mongo-php-library/classes/database/
 
 ## Query Profiling
 
-On dev environment all queries executed by the library MongoDB\Collection class are profiled and showed inside the
+On dev environment all queries executed by the library `MongoDB\Collection` class are profiled and showed inside the
 Symfony web profiler.
 
 [![Profiler Toolbar](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)](https://github.com/facile-it/mongodb-bundle/blob/master/docs/img/profiler_toolbar.png)
@@ -239,7 +279,7 @@ final class FixtureB extends AbstractContainerAwareFixture implements MongoFixtu
 
 [0.6.6]: https://github.com/facile-it/mongodb-bundle/releases/tag/0.6.6
 
-## Upgrade notes
+## Upgrading notes
 
 ### Upgrading to 1.1.0
 
