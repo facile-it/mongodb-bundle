@@ -20,7 +20,7 @@ final class FixtureSorter
                 return $a->getOrder() - $b->getOrder();
             }
 
-            /** @phpstan-ignore-next-line phpstan, you're wrong */
+            /* @phpstan-ignore-next-line phpstan, you're wrong */
             if ($a instanceof OrderedFixtureInterface && ! $b instanceof OrderedFixtureInterface) {
                 return 1;
             }
