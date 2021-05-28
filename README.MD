@@ -243,7 +243,7 @@ final class FixtureB extends AbstractContainerAwareFixture implements MongoFixtu
 
 ### Upgrading to 1.1.0
 
-The release [1.1.0] introduced a BC change in the configuration semantic.
+The release [1.1.0] introduced a BC change in the configuration semantics.
 
 Before 1.1.0, if not explicitly provided, the value of `authSource` was set to the database name specified in the
 connection section, or to `admin` if even the database name was empty.
