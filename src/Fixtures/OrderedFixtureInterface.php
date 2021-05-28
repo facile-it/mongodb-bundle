@@ -8,7 +8,7 @@ namespace Facile\MongoDbBundle\Fixtures;
  * Ordered Fixture interface needs to be implemented by fixtures,
  * which needs to have a specific order
  *
- * The fixtures without this interfance will be loaded after those with it
+ * The fixtures without this interface will be loaded after those with it
  *
  * @author Marcin Moskal <moskalmarcin@yahoo.com>
  */
