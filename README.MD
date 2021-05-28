@@ -152,6 +152,20 @@ Some commands are provided:
 * `mongodb:collection:drop` To drop a collection.
 * `mongodb:fixtures:load` To load the fixtures.
 
+## Upgrade notes
+
+### Upgrading to 1.1.0
+The release [1.1.0] introduced a BC change in the configuration semantic.
+
+Before 1.1.0, if not explicitly provided, the value of `authSource` was set to the database name specified
+in the connection section, or to `admin` if even the database name was empty.
+
+With 1.1.0, if the `authSource` key is not set in the configuration, it won't be set in connection options either.
+
+Take a look to [CHANGELOG.md](CHANGELOG.md) for further details.
+
+[1.1.0]: https://github.com/facile-it/mongodb-bundle/releases/tag/1.1.0
+
 ## Contributing
 
 Feel free to contribute by opening a pull request.
