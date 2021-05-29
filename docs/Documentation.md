@@ -91,7 +91,7 @@ mongo_db_bundle:
       database_name: ~
 
   # Service reference to provide driver options - see example below
-  driverOptions: "App\Services\DriverOptionsProvider" # default null
+  driverOptions: 'App\Services\DriverOptionsProvider' # default null
 ```
 
 ### Driver options
@@ -136,7 +136,7 @@ Then use its service id as value of `driverOptions` in the bundle configuration.
 ```yml
 # config/packages/facile_it_mongodb.yaml
 mongo_db_bundle:
-  driverOptions: "App\Services\MyCustomDriverOptionsProvider"
+  driverOptions: 'App\Services\MyCustomDriverOptionsProvider'
   # ...
 ```
 
