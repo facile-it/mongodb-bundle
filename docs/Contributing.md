@@ -76,5 +76,5 @@ Also, it uses `phpstan` for static code analysis and `php-cs-fixer` for code sty
 It's common to run the following in sequence.
 
     make test
-    make phpstan
     make cs-fix
+    make phpstan
