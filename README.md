@@ -65,41 +65,41 @@ mongo_db_bundle:
 
   data_collection: true # set to false to disable data collection
 
-    # clients section, here you can define connection to different servers or with different credentials
-    clients:
+  # clients section, here you can define connection to different servers or with different credentials
+  clients:
 
-      foo_client_name: # choose your client name
-        uri: 'mongodb://host1:3062,host2' # default null (will use hosts to build connection URI)
-        hosts: # required if uri is not set - will compose your connection URI (mongodb://host1:3062,host2:27017)
-          - { host: host1, port: 3062 } # this 
-          - { host: host2 }
-        username: 'what-a-secret'
-        password: 'what-a-secret'
-        authSource: '' # the database name with the user’s credentials
-        replicaSet: '' # default null (no replica) (experimental)
-        ssl: false
-        connectTimeoutMS: 3000 # default null (no timeout)
-        readPreference: primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
+    foo_client_name: # choose your client name
+      uri: 'mongodb://host1:3062,host2' # default null (will use hosts to build connection URI)
+      hosts: # required if uri is not set - will compose your connection URI (mongodb://host1:3062,host2:27017)
+        - { host: host1, port: 3062 } # this 
+        - { host: host2 }
+      username: 'what-a-secret'
+      password: 'what-a-secret'
+      authSource: '' # the database name with the user’s credentials
+      replicaSet: '' # default null (no replica) (experimental)
+      ssl: false
+      connectTimeoutMS: 3000 # default null (no timeout)
+      readPreference: primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
 
-      other_client: ~ # same as upper configuration
+    other_client: ~ # same as upper configuration
 
-    # connections section, these represents your Database object reference
-    connections:
+  # connections section, these represents your Database object reference
+  connections:
 
-      foo_db:
-        client_name: foo_client_name # Required - your client name in clients section
-        database_name: 'foo_db' # Required
+    foo_db:
+      client_name: foo_client_name # Required - your client name in clients section
+      database_name: 'foo_db' # Required
 
-      other_db:
-        client_name: ~
-        database_name: ~
+    other_db:
+      client_name: ~
+      database_name: ~
 
-      foo_db_2:
-        client_name: ~
-        database_name: ~
+    foo_db_2:
+      client_name: ~
+      database_name: ~
 
-    # Service reference to provide driver options - see example below
-    driverOptions: "App\Services\DriverOptionsProvider" # default null
+  # Service reference to provide driver options - see example below
+  driverOptions: "App\Services\DriverOptionsProvider" # default null
 ```
 
 ### Driver options
