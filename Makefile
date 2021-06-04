@@ -1,32 +1,54 @@
-.PHONY: up setup start test
+.PHONY: up setup sh test phpstan phpstan-baseline cs-fix cs-check usage
+
+usage:
+	@echo ''
+	@echo 'Facile.it MongoDB Bundle'
+	@echo '========================'
+	@echo ''
+	@echo 'Docker targets'
+	@echo ''
+	@echo 'make setup: it installs dependencies, prepares docker-compose.override.yml, pulls images'
+	@echo 'make sh: it creates containers and logs into the php one'
+	@echo 'make stop: it stops the containers'
+	@echo ''
+	@echo 'Test targets'
+	@echo ''
+	@echo 'make test: run all tests with phpunit'
+	@echo 'make phpstan: run phpstan analysis'
+	@echo 'make cs-check: check code style'
+	@echo 'make cs-fix: fix code style'
+	@echo ''
+	@echo 'Other targets'
+	@echo ''
+	@echo 'make phpstan-baseline: update the phpstan baseline'
+	@echo ''
 
 docker-compose.override.yml:
 	cp docker-compose.override.yml.dist docker-compose.override.yml
 
 docker-compose.yml: docker-compose.override.yml
 
-up: docker-compose.yml
-	docker-compose up -d --force-recreate
-
 setup: docker-compose.yml composer.json
 	docker-compose run --rm php composer install
 
-start: up
+sh: docker-compose.yml
+	docker-compose up -d --force-recreate
 	docker exec -ti mb_php bash
 
 stop: docker-compose.yml
 	docker-compose stop
 
-test: docker-compose.yml phpunit.xml.dist
-	docker-compose run --rm php bash -c "bin/phpunit -c phpunit.xml.dist"
+test:
+	bin/phpunit tests
 
-phpstan: docker-compose.yml
-	docker-compose run --rm php bash -c "bin/phpstan analyze --memory-limit=-1"
+phpstan:
+	bin/phpstan analyze --memory-limit=-1
 
-setup-symfony-%: SYMFONY_VERSION = $*
-setup-symfony-%:
-	rm composer.lock || true
-	docker-compose run --no-deps --rm php composer require-dev "symfony/symfony:${SYMFONY_VERSION}" --no-update;
-	docker-compose run --no-deps --rm php composer install --prefer-dist --no-interaction ${COMPOSER_FLAGS}
+phpstan-baseline:
+	bin/phpstan analyze --memory-limit=-1 --generate-baseline
 
-test-composer-install: setup-symfony-3.4 setup-symfony-4.3 setup-symfony-4.4
+cs-fix:
+	composer cs-fix
+
+cs-check:
+	composer cs-check

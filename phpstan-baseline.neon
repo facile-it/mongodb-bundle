@@ -466,11 +466,6 @@ parameters:
 			path: src/DependencyInjection/MongoDbBundleExtension.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineDriverOptionsFactory\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/DependencyInjection/MongoDbBundleExtension.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineDriverOptionsFactory\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/DependencyInjection/MongoDbBundleExtension.php
@@ -716,7 +711,7 @@ parameters:
 			path: src/Services/ClientRegistry.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\DriverOptions\\\\DriverOptionsInterface\\:\\:buildDriverOptions\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\DriverOptions\\\\DriverOptionsInterface\\:\\:buildDriverOptions\\(\\) has parameter \\$clientConfiguration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Services/DriverOptions/DriverOptionsInterface.php
 
