@@ -11,12 +11,12 @@ parameters:
 			path: src/Capsule/Client.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Client\\:\\:selectDatabase\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Client\\:\\:selectCollection\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capsule/Client.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Client\\:\\:selectCollection\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Client\\:\\:selectDatabase\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capsule/Client.php
 
@@ -41,17 +41,42 @@ parameters:
 			path: src/Capsule/Collection.php
 
 		-
-			message: "#^Parameter \\#1 \\$pipeline of method MongoDB\\\\Collection\\:\\:aggregate\\(\\) expects array, array\\|object given\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:count\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capsule/Collection.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:count\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:deleteMany\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:deleteMany\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:deleteOne\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:deleteOne\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:distinct\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:distinct\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capsule/Collection.php
 
@@ -81,6 +106,21 @@ parameters:
 			path: src/Capsule/Collection.php
 
 		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:findOneAndDelete\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:findOneAndDelete\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:findOneAndDelete\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:findOneAndUpdate\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capsule/Collection.php
@@ -101,56 +141,6 @@ parameters:
 			path: src/Capsule/Collection.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:findOneAndDelete\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:findOneAndDelete\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:findOneAndDelete\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:deleteMany\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:deleteMany\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:deleteOne\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:deleteOne\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:replaceOne\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:replaceOne\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:replaceOne\\(\\) has parameter \\$replacement with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:insertOne\\(\\) has parameter \\$document with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capsule/Collection.php
@@ -161,27 +151,7 @@ parameters:
 			path: src/Capsule/Collection.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:updateOne\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:updateOne\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:updateOne\\(\\) has parameter \\$update with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:distinct\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:distinct\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:notifyQueryExecution\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Capsule/Collection.php
 
@@ -201,18 +171,48 @@ parameters:
 			path: src/Capsule/Collection.php
 
 		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:replaceOne\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:replaceOne\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:replaceOne\\(\\) has parameter \\$replacement with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:updateOne\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:updateOne\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:updateOne\\(\\) has parameter \\$update with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
 			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
 			count: 2
 			path: src/Capsule/Collection.php
 
 		-
-			message: "#^Parameter \\#2 \\$eventName of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects string\\|null, Facile\\\\MongoDbBundle\\\\Event\\\\QueryEvent given\\.$#"
-			count: 2
+			message: "#^Parameter \\#1 \\$pipeline of method MongoDB\\\\Collection\\:\\:aggregate\\(\\) expects array, array\\|object given\\.$#"
+			count: 1
 			path: src/Capsule/Collection.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:notifyQueryExecution\\(\\) has no return typehint specified\\.$#"
-			count: 1
+			message: "#^Parameter \\#2 \\$eventName of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects string\\|null, Facile\\\\MongoDbBundle\\\\Event\\\\QueryEvent given\\.$#"
+			count: 2
 			path: src/Capsule/Collection.php
 
 		-
@@ -241,32 +241,12 @@ parameters:
 			path: src/Command/AbstractCommand.php
 
 		-
-			message: "#^Binary operation \"\\.\" between '\\.' and array\\<string\\>\\|bool\\|string\\|null results in an error\\.$#"
-			count: 1
-			path: src/Command/AbstractCommand.php
-
-		-
-			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
-			count: 1
-			path: src/Command/AbstractCommand.php
-
-		-
 			message: "#^Property Facile\\\\MongoDbBundle\\\\Command\\\\AbstractCommand\\:\\:\\$connection \\(MongoDB\\\\Database\\) does not accept object\\|null\\.$#"
 			count: 1
 			path: src/Command/AbstractCommand.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Command\\\\DropCollectionCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Command/DropCollectionCommand.php
-
-		-
-			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array\\<string\\>\\|string\\|null given\\.$#"
-			count: 1
-			path: src/Command/DropCollectionCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$collectionName of method MongoDB\\\\Database\\:\\:dropCollection\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
 			count: 1
 			path: src/Command/DropCollectionCommand.php
 
@@ -291,11 +271,6 @@ parameters:
 			path: src/Command/LoadFixturesCommand.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Command\\\\LoadFixturesCommand\\:\\:prepareSearchPaths\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Command/LoadFixturesCommand.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Command\\\\LoadFixturesCommand\\:\\:loadPaths\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Command/LoadFixturesCommand.php
@@ -306,12 +281,22 @@ parameters:
 			path: src/Command/LoadFixturesCommand.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:setContainer\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Command\\\\LoadFixturesCommand\\:\\:prepareSearchPaths\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/LoadFixturesCommand.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:disable\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/ProfilerController.php
 
 		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:\\$container \\(Symfony\\\\Component\\\\DependencyInjection\\\\Container\\) does not accept Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\|null\\.$#"
+			message: "#^Call to an undefined method object\\:\\:execute\\(\\)\\.$#"
+			count: 1
+			path: src/Controller/ProfilerController.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:loadProfile\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/ProfilerController.php
 
@@ -322,6 +307,21 @@ parameters:
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:explainAction\\(\\) has parameter \\$token with no typehint specified\\.$#"
+			count: 1
+			path: src/Controller/ProfilerController.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:setContainer\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Controller/ProfilerController.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:walkAndConvertToUTCDatetime\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Controller/ProfilerController.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:walkAndConvertToUTCDatetime\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Controller/ProfilerController.php
 
@@ -341,32 +341,17 @@ parameters:
 			path: src/Controller/ProfilerController.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:disable\\(\\)\\.$#"
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:\\$container \\(Symfony\\\\Component\\\\DependencyInjection\\\\Container\\) does not accept Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\|null\\.$#"
 			count: 1
 			path: src/Controller/ProfilerController.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:loadProfile\\(\\)\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoDbDataCollector\\:\\:collect\\(\\) has no return typehint specified\\.$#"
 			count: 1
-			path: src/Controller/ProfilerController.php
+			path: src/DataCollector/MongoDbDataCollector.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:execute\\(\\)\\.$#"
-			count: 1
-			path: src/Controller/ProfilerController.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:walkAndConvertToUTCDatetime\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Controller/ProfilerController.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:walkAndConvertToUTCDatetime\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Controller/ProfilerController.php
-
-		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoDbDataCollector\\:\\:\\$data type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoDbDataCollector\\:\\:collect\\(\\) has parameter \\$exception with no typehint specified\\.$#"
 			count: 1
 			path: src/DataCollector/MongoDbDataCollector.php
 
@@ -381,22 +366,12 @@ parameters:
 			path: src/DataCollector/MongoDbDataCollector.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoDbDataCollector\\:\\:collect\\(\\) has no return typehint specified\\.$#"
+			message: "#^Property Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoDbDataCollector\\:\\:\\$data type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/DataCollector/MongoDbDataCollector.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoDbDataCollector\\:\\:collect\\(\\) has parameter \\$exception with no typehint specified\\.$#"
-			count: 1
-			path: src/DataCollector/MongoDbDataCollector.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoQuerySerializer\\:\\:serialize\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/DataCollector/MongoQuerySerializer.php
-
-		-
-			message: "#^Parameter \\#1 \\$options of method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setOptions\\(\\) expects array, array\\|object given\\.$#"
+			message: "#^Argument of an invalid type array\\|object supplied for foreach, only iterables are supported\\.$#"
 			count: 1
 			path: src/DataCollector/MongoQuerySerializer.php
 
@@ -416,14 +391,14 @@ parameters:
 			path: src/DataCollector/MongoQuerySerializer.php
 
 		-
-			message: "#^Argument of an invalid type array\\|object supplied for foreach, only iterables are supported\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoQuerySerializer\\:\\:serialize\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/DataCollector/MongoQuerySerializer.php
 
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\TreeBuilder\\:\\:root\\(\\)\\.$#"
+			message: "#^Parameter \\#1 \\$options of method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setOptions\\(\\) expects array, array\\|object given\\.$#"
 			count: 1
-			path: src/DependencyInjection/Configuration.php
+			path: src/DataCollector/MongoQuerySerializer.php
 
 		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
@@ -431,24 +406,9 @@ parameters:
 			path: src/DependencyInjection/Configuration.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:load\\(\\) has no return typehint specified\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\TreeBuilder\\:\\:root\\(\\)\\.$#"
 			count: 1
-			path: src/DependencyInjection/MongoDbBundleExtension.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:load\\(\\) has parameter \\$configs with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DependencyInjection/MongoDbBundleExtension.php
-
-		-
-			message: "#^Parameter \\#2 \\$debug of method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineClientRegistry\\(\\) expects bool, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
-			count: 1
-			path: src/DependencyInjection/MongoDbBundleExtension.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:mustCollectData\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DependencyInjection/MongoDbBundleExtension.php
+			path: src/DependencyInjection/Configuration.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineClientRegistry\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
@@ -467,6 +427,26 @@ parameters:
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineDriverOptionsFactory\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DependencyInjection/MongoDbBundleExtension.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:load\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/DependencyInjection/MongoDbBundleExtension.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:load\\(\\) has parameter \\$configs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DependencyInjection/MongoDbBundleExtension.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:mustCollectData\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DependencyInjection/MongoDbBundleExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$debug of method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineClientRegistry\\(\\) expects bool, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
 			count: 1
 			path: src/DependencyInjection/MongoDbBundleExtension.php
 
@@ -516,7 +496,17 @@ parameters:
 			path: src/Fixtures/FixtureSorter.php
 
 		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Fixtures\\\\MongoFixturesLoader\\:\\:addInstance\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Fixtures/MongoFixturesLoader.php
+
+		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Fixtures\\\\MongoFixturesLoader\\:\\:loadFromDirectory\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Fixtures/MongoFixturesLoader.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Fixtures\\\\MongoFixturesLoader\\:\\:loadFromFile\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Fixtures/MongoFixturesLoader.php
 
@@ -531,29 +521,9 @@ parameters:
 			path: src/Fixtures/MongoFixturesLoader.php
 
 		-
-			message: "#^Parameter \\#1 \\$argument of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
+			message: "#^Parameter \\#1 \\$objectOrClass of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
 			count: 1
 			path: src/Fixtures/MongoFixturesLoader.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Fixtures\\\\MongoFixturesLoader\\:\\:addInstance\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Fixtures/MongoFixturesLoader.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Fixtures\\\\MongoFixturesLoader\\:\\:loadFromFile\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Fixtures/MongoFixturesLoader.php
-
-		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:\\$options type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Models/ClientConfiguration.php
-
-		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:\\$driverOptions type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Models/ClientConfiguration.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:__construct\\(\\) has parameter \\$driverOptions with no value type specified in iterable type array\\.$#"
@@ -562,16 +532,6 @@ parameters:
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:__construct\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Models/ClientConfiguration.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Models/ClientConfiguration.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:getDriverOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/ClientConfiguration.php
 
@@ -586,17 +546,42 @@ parameters:
 			path: src/Models/ClientConfiguration.php
 
 		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:\\$filters type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:getDriverOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Models/ClientConfiguration.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Models/ClientConfiguration.php
+
+		-
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:\\$driverOptions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Models/ClientConfiguration.php
+
+		-
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\ClientConfiguration\\:\\:\\$options type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Models/ClientConfiguration.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:getData\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
 		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:\\$data type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:getFilters\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
 		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:\\$options type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Models/Query.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setClient\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
@@ -606,12 +591,17 @@ parameters:
 			path: src/Models/Query.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setMethod\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:getFilters\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setDatabase\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Models/Query.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setExecutionTime\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
@@ -626,17 +616,7 @@ parameters:
 			path: src/Models/Query.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:getData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Models/Query.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Models/Query.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setMethod\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
@@ -651,27 +631,37 @@ parameters:
 			path: src/Models/Query.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setExecutionTime\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Models/Query.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setReadPreference\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setClient\\(\\) has no return typehint specified\\.$#"
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:\\$data type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:setDatabase\\(\\) has no return typehint specified\\.$#"
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:\\$filters type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Models/Query.php
+
+		-
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Models\\\\Query\\:\\:\\$options type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Models/Query.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\ClientRegistry\\:\\:addClientsConfigurations\\(\\) has parameter \\$configurations with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/ClientRegistry.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\ClientRegistry\\:\\:buildClient\\(\\) has parameter \\$driverOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/ClientRegistry.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\ClientRegistry\\:\\:buildClient\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Services/ClientRegistry.php
 
@@ -701,16 +691,6 @@ parameters:
 			path: src/Services/ClientRegistry.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\ClientRegistry\\:\\:buildClient\\(\\) has parameter \\$driverOptions with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Services/ClientRegistry.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\ClientRegistry\\:\\:buildClient\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Services/ClientRegistry.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\DriverOptions\\\\DriverOptionsInterface\\:\\:buildDriverOptions\\(\\) has parameter \\$clientConfiguration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Services/DriverOptions/DriverOptionsInterface.php
@@ -719,6 +699,11 @@ parameters:
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\DriverOptions\\\\DriverOptionsInterface\\:\\:buildDriverOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Services/DriverOptions/DriverOptionsInterface.php
+
+		-
+			message: "#^Cannot access offset 'fieldName' on array\\|object\\.$#"
+			count: 1
+			path: src/Services/Explain/ExplainCommandBuilder.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Explain\\\\ExplainCommandBuilder\\:\\:createCommandArgs\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -736,8 +721,13 @@ parameters:
 			path: src/Services/Explain/ExplainCommandBuilder.php
 
 		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\$args\\)\\: Unexpected token \"\\$args\", expected type at offset 51$#"
-			count: 2
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Explain\\\\ExplainCommandBuilder\\:\\:manageDelete\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/Explain/ExplainCommandBuilder.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Explain\\\\ExplainCommandBuilder\\:\\:manageDelete\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
 			path: src/Services/Explain/ExplainCommandBuilder.php
 
 		-
@@ -747,11 +737,6 @@ parameters:
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Explain\\\\ExplainCommandBuilder\\:\\:manageDistinct\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Services/Explain/ExplainCommandBuilder.php
-
-		-
-			message: "#^Cannot access offset 'fieldName' on array\\|object\\.$#"
 			count: 1
 			path: src/Services/Explain/ExplainCommandBuilder.php
 
@@ -766,22 +751,17 @@ parameters:
 			path: src/Services/Explain/ExplainCommandBuilder.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Explain\\\\ExplainCommandBuilder\\:\\:manageDelete\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
-			count: 1
+			message: "#^PHPDoc tag @param has invalid value \\(\\$args\\)\\: Unexpected token \"\\$args\", expected type at offset 51$#"
+			count: 2
 			path: src/Services/Explain/ExplainCommandBuilder.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Explain\\\\ExplainCommandBuilder\\:\\:manageDelete\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Services/Explain/ExplainCommandBuilder.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\DataCollectorLoggerInterface\\:\\:logQuery\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\DataCollectorLoggerInterface\\:\\:addConnection\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Services/Loggers/DataCollectorLoggerInterface.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\DataCollectorLoggerInterface\\:\\:addConnection\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\DataCollectorLoggerInterface\\:\\:logQuery\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Services/Loggers/DataCollectorLoggerInterface.php
 
@@ -791,17 +771,7 @@ parameters:
 			path: src/Services/Loggers/DataCollectorLoggerInterface.php
 
 		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\MongoQueryLogger\\:\\:\\$logs with generic class SplQueue does not specify its types\\: TValue$#"
-			count: 1
-			path: src/Services/Loggers/MongoQueryLogger.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\MongoQueryLogger\\:\\:addConnection\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Services/Loggers/MongoQueryLogger.php
-
-		-
-			message: "#^Return typehint of method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\MongoQueryLogger\\:\\:getConnections\\(\\) has invalid type string\\.$#"
 			count: 1
 			path: src/Services/Loggers/MongoQueryLogger.php
 
@@ -816,6 +786,16 @@ parameters:
 			path: src/Services/Loggers/MongoQueryLogger.php
 
 		-
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\MongoQueryLogger\\:\\:\\$logs with generic class SplQueue does not specify its types\\: TValue$#"
+			count: 1
+			path: src/Services/Loggers/MongoQueryLogger.php
+
+		-
+			message: "#^Return typehint of method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\MongoQueryLogger\\:\\:getConnections\\(\\) has invalid type string\\.$#"
+			count: 1
+			path: src/Services/Loggers/MongoQueryLogger.php
+
+		-
 			message: "#^Class Twig_Extension not found\\.$#"
 			count: 1
 			path: src/Twig/FacileMongoDbBundleExtension.php
@@ -826,12 +806,12 @@ parameters:
 			path: src/Twig/FacileMongoDbBundleExtension.php
 
 		-
-			message: "#^Return typehint of method Facile\\\\MongoDbBundle\\\\Twig\\\\FacileMongoDbBundleExtension\\:\\:getFunctions\\(\\) has invalid type Twig_SimpleFunction\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Twig\\\\FacileMongoDbBundleExtension\\:\\:getFunctions\\(\\) should return array\\<Twig_SimpleFunction\\> but returns array\\<int, Twig\\\\TwigFunction\\>\\.$#"
 			count: 1
 			path: src/Twig/FacileMongoDbBundleExtension.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Twig\\\\FacileMongoDbBundleExtension\\:\\:getFunctions\\(\\) should return array\\<Twig_SimpleFunction\\> but returns array\\<int, Twig\\\\TwigFunction\\>\\.$#"
+			message: "#^Return typehint of method Facile\\\\MongoDbBundle\\\\Twig\\\\FacileMongoDbBundleExtension\\:\\:getFunctions\\(\\) has invalid type Twig_SimpleFunction\\.$#"
 			count: 1
 			path: src/Twig/FacileMongoDbBundleExtension.php
 
@@ -876,7 +856,7 @@ parameters:
 			path: tests/Fixtures/DataFixtures/TestOrderedMongoFixtures2.php
 
 		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\AppTestCase\\:\\:\\$env has no typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\AppTestCase\\:\\:setEnvDev\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/AppTestCase.php
 
@@ -886,9 +866,24 @@ parameters:
 			path: tests/Functional/AppTestCase.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\AppTestCase\\:\\:setEnvDev\\(\\) has no return typehint specified\\.$#"
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\AppTestCase\\:\\:\\$env has no typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/AppTestCase.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:assertEventsDispatching\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Capsule/CollectionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:assertEventsDispatching\\(\\) has parameter \\$ev with no typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Capsule/CollectionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_aggregate\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Capsule/CollectionTest.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_construction\\(\\) has no return typehint specified\\.$#"
@@ -896,17 +891,22 @@ parameters:
 			path: tests/Functional/Capsule/CollectionTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_insertOne\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Capsule/CollectionTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_updateOne\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Capsule/CollectionTest.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_count\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Capsule/CollectionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_deleteMany\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Capsule/CollectionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_deleteOne\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Capsule/CollectionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_distinct\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/Capsule/CollectionTest.php
 
@@ -921,17 +921,17 @@ parameters:
 			path: tests/Functional/Capsule/CollectionTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_findOneAndUpdate\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Capsule/CollectionTest.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_findOneAndDelete\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/Capsule/CollectionTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_deleteOne\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_findOneAndUpdate\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Capsule/CollectionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_insertOne\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/Capsule/CollectionTest.php
 
@@ -941,27 +941,7 @@ parameters:
 			path: tests/Functional/Capsule/CollectionTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_aggregate\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Capsule/CollectionTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_deleteMany\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Capsule/CollectionTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_distinct\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Capsule/CollectionTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:assertEventsDispatching\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Capsule/CollectionTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:assertEventsDispatching\\(\\) has parameter \\$ev with no typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Capsule\\\\CollectionTest\\:\\:test_updateOne\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/Capsule/CollectionTest.php
 
@@ -969,6 +949,21 @@ parameters:
 			message: "#^PHPDoc tag @param has invalid value \\(\\$ev\\)\\: Unexpected token \"\\$ev\", expected type at offset 18$#"
 			count: 1
 			path: tests/Functional/Capsule/CollectionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\AbstractCommandTest\\:\\:addCommandToApplication\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Command/AbstractCommandTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\AbstractCommandTest\\:\\:commandOptionsProvider\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Command/AbstractCommandTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\AbstractCommandTest\\:\\:test_AbstractCommand_connection_exception\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Command/AbstractCommandTest.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\AbstractCommandTest\\:\\:test_AbstractCommand_execution\\(\\) has no return typehint specified\\.$#"
@@ -981,29 +976,9 @@ parameters:
 			path: tests/Functional/Command/AbstractCommandTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\AbstractCommandTest\\:\\:test_AbstractCommand_connection_exception\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Command/AbstractCommandTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\AbstractCommandTest\\:\\:commandOptionsProvider\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Command/AbstractCommandTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\AbstractCommandTest\\:\\:addCommandToApplication\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Command/AbstractCommandTest.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\FakeCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/Command/AbstractCommandTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\DropCollectionCommandTest\\:\\:test_command\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/Command/DropCollectionCommandTest.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\DropCollectionCommandTest\\:\\:addCommandToApplication\\(\\) has no return typehint specified\\.$#"
@@ -1011,9 +986,9 @@ parameters:
 			path: tests/Functional/Command/DropCollectionCommandTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\DropDatabaseCommandTest\\:\\:test_command\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\DropCollectionCommandTest\\:\\:test_command\\(\\) has no return typehint specified\\.$#"
 			count: 1
-			path: tests/Functional/Command/DropDatabaseCommandTest.php
+			path: tests/Functional/Command/DropCollectionCommandTest.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\DropDatabaseCommandTest\\:\\:addCommandToApplication\\(\\) has no return typehint specified\\.$#"
@@ -1021,12 +996,17 @@ parameters:
 			path: tests/Functional/Command/DropDatabaseCommandTest.php
 
 		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\LoadFixturesCommandTest\\:\\:\\$conn \\(MongoDB\\\\Database\\) does not accept object\\|null\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\DropDatabaseCommandTest\\:\\:test_command\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/Command/DropDatabaseCommandTest.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getDatabaseName\\(\\)\\.$#"
 			count: 1
 			path: tests/Functional/Command/LoadFixturesCommandTest.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:getDatabaseName\\(\\)\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\LoadFixturesCommandTest\\:\\:addCommandToApplication\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/Command/LoadFixturesCommandTest.php
 
@@ -1046,7 +1026,7 @@ parameters:
 			path: tests/Functional/Command/LoadFixturesCommandTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\LoadFixturesCommandTest\\:\\:addCommandToApplication\\(\\) has no return typehint specified\\.$#"
+			message: "#^Property Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Command\\\\LoadFixturesCommandTest\\:\\:\\$conn \\(MongoDB\\\\Database\\) does not accept object\\|null\\.$#"
 			count: 1
 			path: tests/Functional/Command/LoadFixturesCommandTest.php
 
@@ -1056,23 +1036,33 @@ parameters:
 			path: tests/Functional/Controller/ProfilerControllerTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
-			count: 2
-			path: tests/Functional/Controller/ProfilerControllerTest.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Controller\\\\ProfilerControllerTest\\:\\:test_explainAction_error\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/Controller/ProfilerControllerTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\DependencyInjection\\\\MongoDbBundleExtensionTest\\:\\:test_load\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/DependencyInjection/MongoDbBundleExtensionTest.php
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 2
+			path: tests/Functional/Controller/ProfilerControllerTest.php
 
 		-
 			message: "#^Call to an undefined method object\\:\\:getDatabaseName\\(\\)\\.$#"
 			count: 9
+			path: tests/Functional/DependencyInjection/MongoDbBundleExtensionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\DependencyInjection\\\\MongoDbBundleExtensionTest\\:\\:commandNamesProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Functional/DependencyInjection/MongoDbBundleExtensionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\DependencyInjection\\\\MongoDbBundleExtensionTest\\:\\:testCommands\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Functional/DependencyInjection/MongoDbBundleExtensionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\DependencyInjection\\\\MongoDbBundleExtensionTest\\:\\:test_load\\(\\) has no return typehint specified\\.$#"
+			count: 1
 			path: tests/Functional/DependencyInjection/MongoDbBundleExtensionTest.php
 
 		-
@@ -1091,23 +1081,13 @@ parameters:
 			path: tests/Functional/DependencyInjection/MongoDbBundleExtensionTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\DependencyInjection\\\\MongoDbBundleExtensionTest\\:\\:testCommands\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Functional/DependencyInjection/MongoDbBundleExtensionTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\DependencyInjection\\\\MongoDbBundleExtensionTest\\:\\:commandNamesProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Functional/DependencyInjection/MongoDbBundleExtensionTest.php
+			message: "#^Call to an undefined method object\\:\\:execute\\(\\)\\.$#"
+			count: 2
+			path: tests/Functional/Services/Explain/ExplainQueryServiceTest.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\Services\\\\Explain\\\\ExplainQueryServiceTest\\:\\:test_execute\\(\\) has no return typehint specified\\.$#"
 			count: 1
-			path: tests/Functional/Services/Explain/ExplainQueryServiceTest.php
-
-		-
-			message: "#^Call to an undefined method object\\:\\:execute\\(\\)\\.$#"
-			count: 2
 			path: tests/Functional/Services/Explain/ExplainQueryServiceTest.php
 
 		-
@@ -1116,12 +1096,12 @@ parameters:
 			path: tests/Functional/Services/Explain/ExplainQueryServiceTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\TestApp\\\\TestKernel\\:\\:registerContainerConfiguration\\(\\) has no return typehint specified\\.$#"
+			message: "#^Comparison operation \"\\>\\=\" between 1 and 0 is always true\\.$#"
 			count: 1
 			path: tests/Functional/TestApp/TestKernel.php
 
 		-
-			message: "#^Comparison operation \"\\>\\=\" between 1 and 0 is always true\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\TestApp\\\\TestKernel\\:\\:registerContainerConfiguration\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Functional/TestApp/TestKernel.php
 
@@ -1134,6 +1114,16 @@ parameters:
 			message: "#^Parameter \\#1 \\$milliseconds of class MongoDB\\\\BSON\\\\UTCDateTime constructor expects DateTimeInterface\\|int, string given\\.$#"
 			count: 1
 			path: tests/Unit/DataCollector/MongoDbDataCollectorTest.php
+
+		-
+			message: "#^Access to an undefined property MongoDB\\\\Model\\\\BSONDocument\\:\\:\\$fqcn\\.$#"
+			count: 1
+			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
+
+		-
+			message: "#^Cannot access offset 'test' on array\\|object\\.$#"
+			count: 1
+			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\DataCollector\\\\MongoQuerySerializerTest\\:\\:test_serializer\\(\\) has no return typehint specified\\.$#"
@@ -1151,12 +1141,7 @@ parameters:
 			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
 
 		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\$unserializedData\\)\\: Unexpected token \"\\$unserializedData\", expected type at offset 18$#"
-			count: 1
-			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
-
-		-
-			message: "#^Cannot access offset 'test' on array\\|object\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\DataCollector\\\\MongoQuerySerializerTest\\:\\:test_serializer_regression_with_replaceOne\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
 
@@ -1166,32 +1151,12 @@ parameters:
 			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
 
 		-
-			message: "#^Access to an undefined property MongoDB\\\\Model\\\\BSONDocument\\:\\:\\$fqcn\\.$#"
+			message: "#^PHPDoc tag @param has invalid value \\(\\$unserializedData\\)\\: Unexpected token \"\\$unserializedData\", expected type at offset 18$#"
 			count: 1
 			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\DataCollector\\\\MongoQuerySerializerTest\\:\\:test_serializer_regression_with_replaceOne\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/DataCollector/MongoQuerySerializerTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_empty_configuration_process\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/DependencyInjection/ConfigurationTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_uri_configuration_process\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/DependencyInjection/ConfigurationTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_full_configuration_process\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/DependencyInjection/ConfigurationTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_options_configuration_process\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_configuration_blocks_invalid_read_preference_options\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/DependencyInjection/ConfigurationTest.php
 
@@ -1201,12 +1166,27 @@ parameters:
 			path: tests/Unit/DependencyInjection/ConfigurationTest.php
 
 		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_empty_configuration_process\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/DependencyInjection/ConfigurationTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_full_configuration_process\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/DependencyInjection/ConfigurationTest.php
+
+		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_multiple_connections_configuration_process\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/DependencyInjection/ConfigurationTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_configuration_blocks_invalid_read_preference_options\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_options_configuration_process\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/DependencyInjection/ConfigurationTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\unit\\\\DependencyInjection\\\\ConfigurationTest\\:\\:test_uri_configuration_process\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/DependencyInjection/ConfigurationTest.php
 
@@ -1221,11 +1201,6 @@ parameters:
 			path: tests/Unit/Event/Listener/DataCollectorListenerTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Fixtures\\\\FixtureSorterTest\\:\\:testSort\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Fixtures/FixtureSorterTest.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Fixtures\\\\FixtureSorterTest\\:\\:assertIsAfter\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/Fixtures/FixtureSorterTest.php
@@ -1234,6 +1209,16 @@ parameters:
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Fixtures\\\\FixtureSorterTest\\:\\:assertIsAfter\\(\\) has parameter \\$others with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/Fixtures/FixtureSorterTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Fixtures\\\\FixtureSorterTest\\:\\:testSort\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/Fixtures/FixtureSorterTest.php
+
+		-
+			message: "#^Method MongoBundle\\\\Tests\\\\unit\\\\Models\\\\ClientConfigurationTest\\:\\:optionsDataProvider\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/Models/ClientConfigurationTest.php
 
 		-
 			message: "#^Method MongoBundle\\\\Tests\\\\unit\\\\Models\\\\ClientConfigurationTest\\:\\:test_construction\\(\\) has no return typehint specified\\.$#"
@@ -1261,17 +1246,12 @@ parameters:
 			path: tests/Unit/Models/ClientConfigurationTest.php
 
 		-
-			message: "#^Method MongoBundle\\\\Tests\\\\unit\\\\Models\\\\ClientConfigurationTest\\:\\:optionsDataProvider\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Models/ClientConfigurationTest.php
-
-		-
 			message: "#^Method MongoBundle\\\\Tests\\\\unit\\\\MongoBundleTest\\:\\:test_bundle\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/MongoBundleTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\ClientRegistryTest\\:\\:test_client_connection_url_provided_manually\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\ClientRegistryTest\\:\\:test_client_connection_url_generation_multihost\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/Services/ClientRegistryTest.php
 
@@ -1281,27 +1261,12 @@ parameters:
 			path: tests/Unit/Services/ClientRegistryTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\ClientRegistryTest\\:\\:test_client_connection_url_generation_multihost\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\ClientRegistryTest\\:\\:test_client_connection_url_provided_manually\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/Services/ClientRegistryTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_count\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_distinct\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_aggregate\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_finds\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:deletedsProvider\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
 
@@ -1311,12 +1276,27 @@ parameters:
 			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
 
 		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_aggregate\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_count\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
+
+		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_deletes\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:deletedsProvider\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_distinct\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Services\\\\Explain\\\\ExplainCommandBuilderTest\\:\\:test_finds\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/Services/Explain/ExplainCommandBuilderTest.php
 
@@ -1336,17 +1316,7 @@ parameters:
 			path: tests/Unit/Services/Loggers/MongoLoggerTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Twig\\\\FacileMongoDbBundleExtensionTest\\:\\:test_queryDataTranslate\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Twig/FacileMongoDbBundleExtensionTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Twig\\\\FacileMongoDbBundleExtensionTest\\:\\:test_isQueryExplainable\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: tests/Unit/Twig/FacileMongoDbBundleExtensionTest.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Twig\\\\FacileMongoDbBundleExtensionTest\\:\\:test_get_name\\(\\) has no return typehint specified\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Twig\\\\FacileMongoDbBundleExtensionTest\\:\\:explainMethodsProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/Twig/FacileMongoDbBundleExtensionTest.php
 
@@ -1356,7 +1326,17 @@ parameters:
 			path: tests/Unit/Twig/FacileMongoDbBundleExtensionTest.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Twig\\\\FacileMongoDbBundleExtensionTest\\:\\:explainMethodsProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Twig\\\\FacileMongoDbBundleExtensionTest\\:\\:test_get_name\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/Twig/FacileMongoDbBundleExtensionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Twig\\\\FacileMongoDbBundleExtensionTest\\:\\:test_isQueryExplainable\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: tests/Unit/Twig/FacileMongoDbBundleExtensionTest.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Unit\\\\Twig\\\\FacileMongoDbBundleExtensionTest\\:\\:test_queryDataTranslate\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: tests/Unit/Twig/FacileMongoDbBundleExtensionTest.php
 

@@ -210,7 +210,7 @@
                             <li title="{{ q.collection }}">
                                 {{ q.collection|length > 16 ? q.collection|slice(0,16)~'...' : q.collection }}
                             </li>
-                            <li><span class="bold-font">Exceution time:</span></li>
+                            <li><span class="bold-font">Execution time:</span></li>
                             <li class="{{ q.executionTime * 1000 > 100.0 ? 'time-warning' : '' }}">
                                 {{ "%.2f"|format(q.executionTime * 1000) }} ms
                             </li>
