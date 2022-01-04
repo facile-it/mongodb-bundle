@@ -7,17 +7,17 @@ namespace Facile\MongoDbBundle\Tests\Functional\TestApp;
 use Facile\MongoDbBundle\FacileMongoDbBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
 
-/**
- * Class TestKernel.
- */
 class TestKernel extends Kernel
 {
     /**
      * {@inheritdoc}
+     *
+     * @return Bundle[]
      */
-    public function registerBundles()
+    public function registerBundles(): array
     {
         return [
             new FrameworkBundle(),

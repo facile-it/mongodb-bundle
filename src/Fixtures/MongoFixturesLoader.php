@@ -60,6 +60,7 @@ final class MongoFixturesLoader
         return array_reduce(
             $declared,
             function ($classList, string $className) use ($includedFiles) {
+                /** @var class-string $className */
                 $reflClass = new \ReflectionClass($className);
                 $sourceFile = $reflClass->getFileName();
 
