@@ -22,14 +22,14 @@
         "php": "^7.2 || ^8.0",
         "ext-mongodb": "^1.1.5",
         "mongodb/mongodb": "^1.0",
-        "symfony/framework-bundle": "^3.4 || ^4.3 || ^5.0"
+        "symfony/framework-bundle": "^3.4 || ^4.3 || ^5.0 || ^6.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4",
-        "symfony/web-profiler-bundle": "^3.4 || ^4.3 || ^5.0",
-        "symfony/console": "^3.4 || ^4.3 || ^5.0",
+        "symfony/web-profiler-bundle": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+        "symfony/console": "^3.4 || ^4.3 || ^5.0 || ^6.0",
         "phpunit/phpunit": "^8.5.14",
-        "symfony/phpunit-bridge": "^5.2",
+        "symfony/phpunit-bridge": "^6.0",
         "facile-it/facile-coding-standard": "^0.4.0",
         "phpstan/phpstan": "^0.12.88",
         "phpstan/extension-installer": "^1.1",
@@ -56,7 +56,11 @@
         }
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "allow-plugins": {
+            "facile-it/facile-coding-standard": true,
+            "phpstan/extension-installer": true
+        }
     },
     "scripts": {
         "cs-check": "php-cs-fixer fix --dry-run --diff --config=.php-cs.php",

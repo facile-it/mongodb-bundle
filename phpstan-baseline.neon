@@ -461,17 +461,7 @@ parameters:
 			path: src/Event/Listener/DataCollectorListener.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Event\\\\Listener\\\\DataCollectorListener\\:\\:onConnectionClientCreated\\(\\) has parameter \\$event with no value type specified in iterable type Facile\\\\MongoDbBundle\\\\Event\\\\ConnectionEvent\\.$#"
-			count: 1
-			path: src/Event/Listener/DataCollectorListener.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Event\\\\Listener\\\\DataCollectorListener\\:\\:onQueryExecuted\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Event/Listener/DataCollectorListener.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Event\\\\Listener\\\\DataCollectorListener\\:\\:onQueryExecuted\\(\\) has parameter \\$event with no value type specified in iterable type Facile\\\\MongoDbBundle\\\\Event\\\\QueryEvent\\.$#"
 			count: 1
 			path: src/Event/Listener/DataCollectorListener.php
 
@@ -517,11 +507,6 @@ parameters:
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Fixtures\\\\MongoFixturesLoader\\:\\:loadFromIterator\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Fixtures/MongoFixturesLoader.php
-
-		-
-			message: "#^Parameter \\#1 \\$objectOrClass of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
 			count: 1
 			path: src/Fixtures/MongoFixturesLoader.php
 
