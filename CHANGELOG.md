@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.0] (2022-01-06)
+### Added
+* Symfony 6 support (#121) by [@Jean85](https://github.com/Jean85).
+
 ## [1.4.0] (2021-03-06)
 ### Added
 * PHP 8 support (#114) by [@Jean85](https://github.com/Jean85).
@@ -197,7 +201,8 @@ First unstable release
 ## 0.1-alpha (2016-06-30)
 First release
 
-[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.4.0..master
+[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.5.0..master
+[1.5.0]: https://github.com/facile-it/mongodb-bundle/compare/1.4.0..1.5.0
 [1.4.0]: https://github.com/facile-it/mongodb-bundle/compare/1.3.0..1.4.0
 [1.3.0]: https://github.com/facile-it/mongodb-bundle/compare/1.2.0..1.3.0
 [1.2.0]: https://github.com/facile-it/mongodb-bundle/compare/1.1.0..1.2.0
