@@ -26,6 +26,7 @@ final class Configuration implements ConfigurationInterface
         $this->addDataCollection($rootBuilder->children());
         $this->addClients($rootBuilder->children());
         $this->addConnections($rootBuilder->children());
+        $this->addUriOptions($rootBuilder->children());
         $this->addDriversOption($rootBuilder->children());
 
         return $treeBuilder;
@@ -131,5 +132,18 @@ final class Configuration implements ConfigurationInterface
             ->scalarNode('database_name')
             ->isRequired()
             ->info('Database name');
+    }
+
+    private function addUriOptions(NodeBuilder $builder): void
+    {
+        $uriOptionsBuilder = $builder
+            ->arrayNode('uriOptions')
+            ->info('Additional connection string options')
+            ->children();
+
+        $uriOptionsBuilder
+            ->variableNode('context')
+            ->defaultValue([])
+            ->info('Overwrite any options with the same name in the uri parameter');
     }
 }
