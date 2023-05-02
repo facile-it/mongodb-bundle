@@ -33,7 +33,8 @@
         "facile-it/facile-coding-standard": "^0.4.0",
         "phpstan/phpstan": "^0.12.88",
         "phpstan/extension-installer": "^1.1",
-        "jangregor/phpstan-prophecy": "^0.8.1"
+        "jangregor/phpstan-prophecy": "^0.8.1",
+        "phpspec/prophecy": "~1.0"
     },
     "minimum-stability": "stable",
     "suggest": {
