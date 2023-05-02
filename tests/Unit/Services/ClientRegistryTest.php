@@ -17,7 +17,7 @@ class ClientRegistryTest extends TestCase
 
     public function test_client_connection_url_provided_manually(): void
     {
-        $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null);
+        $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null, null);
 
         $testConf = [
             'test_client' => [
@@ -43,7 +43,7 @@ class ClientRegistryTest extends TestCase
 
     public function test_client_connection_url_generation_singlehost(): void
     {
-        $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null);
+        $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null, null);
 
         $testConf = [
             'test_client' => [
@@ -71,7 +71,7 @@ class ClientRegistryTest extends TestCase
 
     public function test_client_connection_url_generation_multihost(): void
     {
-        $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null);
+        $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null, null);
 
         $testConf = [
             'test_client' => [
