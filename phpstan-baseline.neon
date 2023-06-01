@@ -81,6 +81,11 @@ parameters:
 			path: src/Capsule/Collection.php
 
 		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:distinct\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capsule/Collection.php
+
+		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Capsule\\\\Collection\\:\\:find\\(\\) has parameter \\$filter with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capsule/Collection.php
@@ -431,6 +436,11 @@ parameters:
 			path: src/DependencyInjection/MongoDbBundleExtension.php
 
 		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineUriOptionsFactory\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DependencyInjection/MongoDbBundleExtension.php
+
+		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:load\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/DependencyInjection/MongoDbBundleExtension.php
@@ -446,7 +456,7 @@ parameters:
 			path: src/DependencyInjection/MongoDbBundleExtension.php
 
 		-
-			message: "#^Parameter \\#2 \\$debug of method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineClientRegistry\\(\\) expects bool, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
+			message: "#^Parameter \\#2 \\$debug of method Facile\\\\MongoDbBundle\\\\DependencyInjection\\\\MongoDbBundleExtension\\:\\:defineClientRegistry\\(\\) expects bool, array\\|bool\\|float\\|int\\|string\\|UnitEnum\\|null given\\.$#"
 			count: 1
 			path: src/DependencyInjection/MongoDbBundleExtension.php
 
@@ -779,6 +789,16 @@ parameters:
 			message: "#^Return typehint of method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\MongoQueryLogger\\:\\:getConnections\\(\\) has invalid type string\\.$#"
 			count: 1
 			path: src/Services/Loggers/MongoQueryLogger.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\UriOptions\\\\UriOptionsInterface\\:\\:buildUriOptions\\(\\) has parameter \\$clientConfiguration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/UriOptions/UriOptionsInterface.php
+
+		-
+			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\UriOptions\\\\UriOptionsInterface\\:\\:buildUriOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Services/UriOptions/UriOptionsInterface.php
 
 		-
 			message: "#^Class Twig_Extension not found\\.$#"

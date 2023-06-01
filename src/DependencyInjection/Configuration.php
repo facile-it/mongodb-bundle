@@ -28,6 +28,7 @@ final class Configuration implements ConfigurationInterface
         self::addDataCollection($rootBuilder->children());
         self::addClients($rootBuilder->children());
         self::addConnections($rootBuilder->children());
+        self::addUriOptions($rootBuilder->children());
         self::addDriversOption($rootBuilder->children());
 
         return $treeBuilder;
@@ -133,5 +134,18 @@ final class Configuration implements ConfigurationInterface
             ->scalarNode('database_name')
             ->isRequired()
             ->info('Database name');
+    }
+
+    private static function addUriOptions(NodeBuilder $builder): void
+    {
+        $uriOptionsBuilder = $builder
+            ->arrayNode('uriOptions')
+            ->info('Additional connection string options')
+            ->children();
+
+        $uriOptionsBuilder
+            ->variableNode('context')
+            ->defaultValue([])
+            ->info('Overwrite any options with the same name in the uri parameter');
     }
 }
