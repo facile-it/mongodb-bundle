@@ -27,37 +27,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - php: 7.2
-            mongo-ext: 1.3.0
-            mongo-img: 3.4
-            symfony: '3.4.*'
-          - php: 7.2
-            mongo-ext: 1.3.0
-            mongo-img: 3.4
-            symfony: '4.3.*'
-          - php: 7.2
-            mongo-ext: 1.3.0
-            mongo-img: 3.4
-            symfony: '4.4.*'
-          - php: 7.2
-            mongo-ext: 1.3.0
-            mongo-img: 3.4
-            symfony: '5.*'
-          - php: 7.2
-            mongo-ext: 1.5.3
-            mongo-img: 4.0
-          - php: 7.2
-            mongo-ext: 1.6.0
-            mongo-img: 4.2
-          - php: 7.2
-            mongo-ext: 1.8.0
-            mongo-img: 4.4
-          - php: 7.2
-            mongo-ext: 1.9.0
-            mongo-img: 4.4
-          - php: 7.3
-            mongo-ext: 1.5.3
-            mongo-img: 4.0
           - php: 7.4
             mongo-ext: 1.6.0
             mongo-img: 4.2
@@ -83,7 +52,7 @@ jobs:
         run: composer require "symfony/symfony:${{ matrix.symfony }}" --no-update
         if: matrix.symfony
       - name: Install dependencies
-        uses: "ramsey/composer-install@v1"
+        uses: ramsey/composer-install@v1
       - name: Await a bit for Mongo to spin up...
         run: sleep 10
       - name: Run tests
