@@ -1,16 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Variable \\$data on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Variable \\$filters on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
 			message: "#^PHPDoc tag @var has invalid value \\(\\$profiler \\\\Symfony\\\\Component\\\\HttpKernel\\\\Profiler\\\\Profiler\\)\\: Unexpected token \"\\$profiler\", expected type at offset 9$#"
 			count: 1
 			path: src/Controller/ProfilerController.php
@@ -29,16 +19,6 @@ parameters:
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
 			count: 7
 			path: src/DependencyInjection/Configuration.php
-
-		-
-			message: "#^Variable \\$data on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 1
-			path: src/Models/Query.php
-
-		-
-			message: "#^Variable \\$filters on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 1
-			path: src/Models/Query.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\DataCollectorLoggerInterface\\:\\:getConnections\\(\\) has invalid return type string\\.$#"
@@ -99,11 +79,6 @@ parameters:
 			message: "#^Property Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\AppTestCase\\:\\:\\$application \\(Symfony\\\\Bundle\\\\FrameworkBundle\\\\Console\\\\Application\\) does not accept null\\.$#"
 			count: 1
 			path: tests/Functional/AppTestCase.php
-
-		-
-			message: "#^Comparison operation \"\\>\\=\" between 1 and 0 is always true\\.$#"
-			count: 1
-			path: tests/Functional/TestApp/TestKernel.php
 
 		-
 			message: "#^Access to an undefined property MongoDB\\\\Model\\\\BSONDocument\\:\\:\\$fqcn\\.$#"
