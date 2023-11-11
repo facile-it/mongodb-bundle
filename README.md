@@ -12,8 +12,9 @@ with your Symfony app.
 [![Latest Unstable Version](https://poser.pugx.org/facile-it/mongodb-bundle/v/unstable)](https://packagist.org/packages/facile-it/mongodb-bundle) [![Total Downloads](https://poser.pugx.org/facile-it/mongodb-bundle/downloads)](https://packagist.org/packages/facile-it/mongodb-bundle) 
 [![License](https://poser.pugx.org/facile-it/mongodb-bundle/license)](https://packagist.org/packages/facile-it/mongodb-bundle)
 
-![CI](https://github.com/facile-it/mongodb-bundle/workflows/CI/badge.svg)
-![Static analysis](https://github.com/facile-it/mongodb-bundle/workflows/Static%20analysis/badge.svg)
+
+[![CI](https://github.com/facile-it/mongodb-bundle/actions/workflows/ci.yaml/badge.svg)](https://github.com/facile-it/mongodb-bundle/actions/workflows/ci.yaml)
+[![Static analysis](https://github.com/facile-it/mongodb-bundle/actions/workflows/static-analysis.yaml/badge.svg)](https://github.com/facile-it/mongodb-bundle/actions/workflows/static-analysis.yaml)
 [![codecov](https://codecov.io/gh/facile-it/mongodb-bundle/branch/master/graph/badge.svg?token=gEhvCteV7k)](https://codecov.io/gh/facile-it/mongodb-bundle)
 
 [mongodb/mongo-php-library]: https://github.com/mongodb/mongo-php-library
