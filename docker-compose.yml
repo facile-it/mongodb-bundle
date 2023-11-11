@@ -1,8 +1,13 @@
-version: "3.1"
+version: "3.8"
 
 services:
   php:
-    image: ilariopierbattista/mongodb-bundle-php:php-7.4-mongoext-1.6.0-20231111
+    image: mongodb-bundle-php:${PHP_VERSION:-7.4}-${MONGODB_EXTENSION_VERSION:-1.6.0}
+    build:
+      context: docker
+      args:
+        PHP_VERSION: ${PHP_VERSION:-7.4}
+        MONGODB_EXTENSION_VERSION: ${MONGODB_EXTENSION_VERSION:-1.6.0}
     volumes:
         - ./:/home/user-dev/project
     tty: true
