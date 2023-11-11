@@ -13,6 +13,8 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class ClientRegistryTest extends TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
+
     public function test_client_connection_url_provided_manually()
     {
         $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null);

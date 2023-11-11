@@ -14,6 +14,8 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class CollectionTest extends AppTestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
+
     private function getManager(): Manager
     {
         /** @var \Facile\MongoDbBundle\Services\ClientRegistry $reg */

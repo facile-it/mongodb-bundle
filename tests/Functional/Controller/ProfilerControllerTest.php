@@ -16,6 +16,8 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 class ProfilerControllerTest extends AppTestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
+
     protected function setUp(): void
     {
         $this->setEnvDev();

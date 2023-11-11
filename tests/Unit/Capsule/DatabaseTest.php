@@ -13,6 +13,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DatabaseTest extends TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
+
     public function test_selectCollection(): void
     {
         $manager = new Manager('mongodb://localhost');
