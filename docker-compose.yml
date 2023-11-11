@@ -15,7 +15,7 @@ services:
       - mongo
     container_name: mb_php
   mongo:
-    image: mongo:3.4.2
+    image: mongo:${MONGODB_VERSION:-3.4.2}
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=rootPass

@@ -79,10 +79,17 @@ If you need a different environment, you should exec one of the following target
     make setup-81 # PHP 8.1, ext-mongodb 1.12
     make setup-82 # PHP 8.2, ext-mongodb 1.15
 
-Feel free to add other `setup-*` and `build-*` targets to meet your needs (take a look at the [Makefile](../Makefile) and just follow the same convention).
+Feel free to add other `setup-*` targets to meet your needs (take a look at the [Makefile](../Makefile) and just follow the same convention).
 
 Remember to edit the [ci.yaml](../.github/workflows/ci.yaml), if you need to test the bundle against
 a specific set of PHP and ext-mongodb versions.
+
+NB: Changing the `mongo` image version, used in [docker-compose.yaml](../docker-compose.yml) could lead to
+start-up errors such as:
+> This version of MongoDB is too recent to start up on the existing data files
+
+This is due to the `mongo` image declaring a `VOLUME` in its definition.
+Be sure to run `make stop` to effectively clean containers and volumes before trying again.
 
 ### Tests and Quality Tools
 

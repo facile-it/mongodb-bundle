@@ -22,6 +22,7 @@ usage:
 	@echo 'make phpstan-baseline: update the phpstan baseline'
 	@echo ''
 
+
 ##################################################################
 #
 # RUN OUTISDE THE CONTAINER
@@ -32,30 +33,59 @@ DOCKER_COMPOSE ?= $(shell (command -v docker-compose > /dev/null && echo "docker
 docker-compose.override.yml:
 	cp docker-compose.override.yml.dist docker-compose.override.yml
 
-.PHONY: build-74 build-81 build-82
-build-74:
-	PHP_VERSION=7.4 MONGODB_EXTENSION_VERSION=1.6.0 $(DOCKER_COMPOSE) build
-build-81:
-	PHP_VERSION=8.1 MONGODB_EXTENSION_VERSION=1.12.0 $(DOCKER_COMPOSE) build
-build-82:
-	PHP_VERSION=8.1 MONGODB_EXTENSION_VERSION=1.15.0 $(DOCKER_COMPOSE) build
+.PHONY: --build --setup-common
+--build:
+	PHP_VERSION=$(PHP_VERSION) MONGODB_EXTENSION_VERSION=$(MONGODB_EXTENSION_VERSION) MONGODB_VERSION=$(MONGODB_VERSION) $(DOCKER_COMPOSE) config
+	PHP_VERSION=$(PHP_VERSION) MONGODB_EXTENSION_VERSION=$(MONGODB_EXTENSION_VERSION) MONGODB_VERSION=$(MONGODB_VERSION) $(DOCKER_COMPOSE) build
 
-.PHONY: --setup-common setup setup-74 setup-81 setup-82
-setup: setup-74
-setup-74: | build-74 --setup-common
-setup-81: | build-81 --setup-common
-setup-82: | build-82 --setup-common
 --setup-common: docker-compose.override.yml
 	rm composer.lock || true
-	$(DOCKER_COMPOSE) run --rm php composer install
+	PHP_VERSION=$(PHP_VERSION) MONGODB_EXTENSION_VERSION=$(MONGODB_EXTENSION_VERSION) MONGODB_VERSION=$(MONGODB_VERSION) $(DOCKER_COMPOSE) up -d --force-recreate
+	PHP_VERSION=$(PHP_VERSION) MONGODB_EXTENSION_VERSION=$(MONGODB_EXTENSION_VERSION) MONGODB_VERSION=$(MONGODB_VERSION) $(DOCKER_COMPOSE) exec php composer install
+
+.PHONY: setup setup-74
+setup: setup-74
+setup-74: PHP_VERSION=7.4
+setup-74: MONGODB_EXTENSION_VERSION=1.6.0
+setup-74: MONGODB_VERSION=3.4.2
+setup-74: | --build --setup-common
+
+.PHONY: setup-81
+setup-81: PHP_VERSION=8.1
+setup-81: MONGODB_EXTENSION_VERSION=1.12.0
+setup-81: MONGODB_VERSION=5.0
+setup-81: | --build --setup-common
+
+.PHONY: setup-82
+setup-82: PHP_VERSION=8.2
+setup-82: MONGODB_EXTENSION_VERSION=1.15.0
+setup-82: MONGODB_VERSION=6.0
+setup-82: | --build --setup-common
 
 .PHONY: sh stop
 sh: docker-compose.yml
-	$(DOCKER_COMPOSE) up -d --force-recreate
 	$(DOCKER_COMPOSE) exec php bash
 
 stop: docker-compose.yml
-	$(DOCKER_COMPOSE) stop
+	$(DOCKER_COMPOSE) down --volumes
+
+.PHONY: test-docker-targets
+test-docker-targets:
+	$(MAKE) stop
+	$(MAKE) setup-74
+	$(DOCKER_COMPOSE) exec php bash -c "php -v | head -1 | cut -d ' ' -f 2 | grep -Eq '7\.4\.\d*'"
+	$(DOCKER_COMPOSE) exec php make test
+	$(MAKE) stop
+	$(MAKE) setup-81
+	$(DOCKER_COMPOSE) exec php bash -c "php -v | head -1 | cut -d ' ' -f 2 | grep -Eq '8\.1\.\d*'"
+	$(DOCKER_COMPOSE) exec php make test
+	$(MAKE) stop
+	$(MAKE) setup-82
+	$(DOCKER_COMPOSE) exec php bash -c "php -v | head -1 | cut -d ' ' -f 2 | grep -Eq '8\.2\.\d*'"
+	$(DOCKER_COMPOSE) exec php make test
+	$(MAKE) stop
+	@echo
+	@echo "Test passed"
 
 
 ##################################################################
