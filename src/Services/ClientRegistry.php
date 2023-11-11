@@ -10,7 +10,6 @@ use Facile\MongoDbBundle\Models\ClientConfiguration;
 use Facile\MongoDbBundle\Services\DriverOptions\DriverOptionsInterface;
 use MongoDB\Client;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Class ClientRegistry.
