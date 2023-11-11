@@ -1,3 +1,6 @@
+includes:
+	- phpstan-baseline.neon
+
 parameters:
     level: 7
     paths:
@@ -5,5 +8,3 @@ parameters:
         - tests/
     dynamicConstantNames:
         - Symfony\Component\HttpKernel\Kernel::VERSION_ID
-includes:
-	- phpstan-baseline.neon
