@@ -70,7 +70,7 @@ class FakeCommand extends AbstractCommand
             ->setDescription('fake test command');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io->writeln('Executed');
 

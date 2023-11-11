@@ -121,11 +121,7 @@ final class ClientRegistry
             $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, $conf->getDriverOptions());
 
             $event = new ConnectionEvent($clientKey);
-            if (Kernel::VERSION_ID >= 40300) {
-                $this->eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED);
-            } else {
-                $this->eventDispatcher->dispatch(ConnectionEvent::CLIENT_CREATED, $event);
-            }
+            $this->eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED);
         }
 
         return $this->clients[$clientKey];
