@@ -37,8 +37,8 @@ class TestKernel extends Kernel
             $suffix = '_docker';
         }
 
-        if (version_compare(Kernel::VERSION, '3.2.0') >= 0) {
-            $version = '_32';
+        if (version_compare(Kernel::VERSION, '6.1.0') >= 0) {
+            $version = '_61';
         }
 
         $configFile = sprintf('/config_test%s%s.yml', $version, $suffix);
