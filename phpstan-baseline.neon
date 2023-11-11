@@ -1,16 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
-			count: 2
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Parameter \\#2 \\$eventName of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects string\\|null, Facile\\\\MongoDbBundle\\\\Event\\\\QueryEvent given\\.$#"
-			count: 2
-			path: src/Capsule/Collection.php
-
-		-
 			message: "#^Variable \\$data on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: src/Capsule/Collection.php
@@ -37,12 +27,7 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
-			count: 3
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\TreeBuilder\\:\\:root\\(\\)\\.$#"
-			count: 1
+			count: 7
 			path: src/DependencyInjection/Configuration.php
 
 		-
@@ -54,16 +39,6 @@ parameters:
 			message: "#^Variable \\$filters on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: src/Models/Query.php
-
-		-
-			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
-			count: 1
-			path: src/Services/ClientRegistry.php
-
-		-
-			message: "#^Parameter \\#2 \\$eventName of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects string\\|null, Facile\\\\MongoDbBundle\\\\Event\\\\ConnectionEvent given\\.$#"
-			count: 1
-			path: src/Services/ClientRegistry.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\DataCollectorLoggerInterface\\:\\:getConnections\\(\\) has invalid return type string\\.$#"
