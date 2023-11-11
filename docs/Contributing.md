@@ -34,8 +34,9 @@ Since we defined our code stile, and configured a quality tool for enforce its u
 ## Development Environment
 
 We like a lot Docker and Make.
-We use the former and `docker-compose` to set up and insulated, reproducible development environment.
-The latter helps us to define a lot of shortcuts.
+
+We use`docker-compose` to set up and insulated, reproducible development environment.
+Make helps us to define easy-to-use build targets.
 
 Run `make usage` or just `make` inside the project folder to get a list of available targets.
 
@@ -67,6 +68,21 @@ another port for the binding.
 
 Change the port binding into the `docker-compose.override.yml` file.
 It is generated from the `docker-compose.override.yml.dist` template, and it's not tracked by git.
+
+### Run a different version of PHP and/or the ext-mongodb
+
+By default `make setup` will build a docker image with the lower supported version of PHP 
+and `ext-mongodb`.
+
+If you need a different environment, you should exec one of the following target **instead** of `make setup`.
+    
+    make setup-81 # PHP 8.1, ext-mongodb 1.12
+    make setup-82 # PHP 8.2, ext-mongodb 1.15
+
+Feel free to add other `setup-*` and `build-*` targets to meet your needs (take a look at the [Makefile](../Makefile) and just follow the same convention).
+
+Remember to edit the [ci.yaml](../.github/workflows/ci.yaml), if you need to test the bundle against
+a specific set of PHP and ext-mongodb versions.
 
 ### Tests and Quality Tools
 
