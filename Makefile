@@ -27,17 +27,18 @@ usage:
 # RUN OUTISDE THE CONTAINER
 #
 ##################################################################
+DOCKER_COMPOSE ?= $(shell (command -v docker-compose > /dev/null && echo "docker-compose") || (command -v docker > /dev/null && echo "docker compose"))
 
 docker-compose.override.yml:
 	cp docker-compose.override.yml.dist docker-compose.override.yml
 
 .PHONY: build-74 build-81 build-82
 build-74:
-	PHP_VERSION=7.4 MONGODB_EXTENSION_VERSION=1.6.0 docker-compose build
+	PHP_VERSION=7.4 MONGODB_EXTENSION_VERSION=1.6.0 $(DOCKER_COMPOSE) build
 build-81:
-	PHP_VERSION=8.1 MONGODB_EXTENSION_VERSION=1.12.0 docker-compose build
+	PHP_VERSION=8.1 MONGODB_EXTENSION_VERSION=1.12.0 $(DOCKER_COMPOSE) build
 build-82:
-	PHP_VERSION=8.1 MONGODB_EXTENSION_VERSION=1.15.0 docker-compose build
+	PHP_VERSION=8.1 MONGODB_EXTENSION_VERSION=1.15.0 $(DOCKER_COMPOSE) build
 
 .PHONY: --setup-common setup setup-74 setup-81 setup-82
 setup: setup-74
@@ -46,15 +47,15 @@ setup-81: | build-81 --setup-common
 setup-82: | build-82 --setup-common
 --setup-common: docker-compose.override.yml
 	rm composer.lock || true
-	docker-compose run --rm php composer install
+	$(DOCKER_COMPOSE) run --rm php composer install
 
 .PHONY: sh stop
 sh: docker-compose.yml
-	docker-compose up -d --force-recreate
-	docker exec -ti mb_php bash
+	$(DOCKER_COMPOSE) up -d --force-recreate
+	$(DOCKER_COMPOSE) exec -ti php bash
 
 stop: docker-compose.yml
-	docker-compose stop
+	$(DOCKER_COMPOSE) stop
 
 
 ##################################################################

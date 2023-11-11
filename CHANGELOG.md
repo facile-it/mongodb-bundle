@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * CI coverage for PHP 8.1 and 8.2
 ### Removed
 * Removed support for PHP < 7.4
-* Dev dependency from https://github.com/ilario-pierbattista/docker-php-mongodb-bundle
+* Docker images dev-dependency from https://github.com/ilario-pierbattista/docker-php-mongodb-bundle
 
 ## [1.5.0] (2022-01-06)
 ### Added
