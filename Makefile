@@ -52,7 +52,7 @@ setup-82: | build-82 --setup-common
 .PHONY: sh stop
 sh: docker-compose.yml
 	$(DOCKER_COMPOSE) up -d --force-recreate
-	$(DOCKER_COMPOSE) exec -ti php bash
+	$(DOCKER_COMPOSE) exec php bash
 
 stop: docker-compose.yml
 	$(DOCKER_COMPOSE) stop
@@ -82,3 +82,9 @@ cs-fix:
 	composer cs-fix
 cs-check:
 	composer cs-check
+
+.PHONY: rector rector-apply
+rector:
+	bin/rector process --dry-run
+rector-apply:
+	bin/rector process

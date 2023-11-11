@@ -11,6 +11,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ClientTest extends TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
+
     public function test_mongodb_client_encapsulation()
     {
         $client = new Client('mongodb://localhost:27017', [], [], 'test_client', $this->prophesize(EventDispatcherInterface::class)->reveal());

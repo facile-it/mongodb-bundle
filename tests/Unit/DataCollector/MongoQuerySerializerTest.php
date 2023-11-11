@@ -12,6 +12,8 @@ use PHPUnit\Framework\TestCase;
 
 class MongoQuerySerializerTest extends TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
+
     /**
      * @param $unserializedData
      *
