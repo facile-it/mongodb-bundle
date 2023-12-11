@@ -20,7 +20,7 @@ class MongoDbDataCollectorTest extends TestCase
         $logEvent = new Query();
         $logEvent->setData(
             [
-                'data' => new BSONDocument(['test']),
+                'data' => new BSONDocument(['test' => 'test']),
                 'date' => $this->getUtcDateTime(),
             ]
         );
