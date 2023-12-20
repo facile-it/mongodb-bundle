@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Controller;
 
+use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\DataCollector\MongoQuerySerializer;
 use MongoDB\BSON\UTCDateTime;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 class ProfilerController implements ContainerAwareInterface
 {
@@ -33,12 +35,14 @@ class ProfilerController implements ContainerAwareInterface
      */
     public function explainAction($token, $queryNumber)
     {
-        /** @var \Symfony\Component\HttpKernel\Profiler\Profiler $profiler */
+        /** @var Profiler $profiler */
         $profiler = $this->container->get('profiler');
         $profiler->disable();
 
         $profile = $profiler->loadProfile($token);
-        $queries = $profile->getCollector('mongodb')->getQueries();
+        /** @var MongoDbDataCollector $dataCollector */
+        $dataCollector = $profile->getCollector('mongodb');
+        $queries = $dataCollector->getQueries();
 
         $query = $queries[$queryNumber];
 

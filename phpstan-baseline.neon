@@ -21,11 +21,6 @@ parameters:
 			path: src/Capsule/Collection.php
 
 		-
-			message: "#^PHPDoc tag @var has invalid value \\(\\$profiler \\\\Symfony\\\\Component\\\\HttpKernel\\\\Profiler\\\\Profiler\\)\\: Unexpected token \"\\$profiler\", expected type at offset 9$#"
-			count: 1
-			path: src/Controller/ProfilerController.php
-
-		-
 			message: "#^Property Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:\\$container \\(Symfony\\\\Component\\\\DependencyInjection\\\\Container\\) does not accept Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\|null\\.$#"
 			count: 1
 			path: src/Controller/ProfilerController.php
