@@ -15,8 +15,6 @@ class MongoQuerySerializerTest extends TestCase
     use \Prophecy\PhpUnit\ProphecyTrait;
 
     /**
-     * @param $unserializedData
-     *
      * @dataProvider unserializedDataProvider
      */
     public function test_serializer($unserializedData, $expectedSerialization)

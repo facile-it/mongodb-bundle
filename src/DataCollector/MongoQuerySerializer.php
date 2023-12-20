@@ -8,15 +8,10 @@ use Facile\MongoDbBundle\Models\Query;
 use MongoDB\BSON\Serializable;
 
 /**
- * Class MongoQuerySerializer
- *
  * @internal
  */
 final class MongoQuerySerializer
 {
-    /**
-     * @param Query $query
-     */
     public static function serialize(Query $query)
     {
         $query->setFilters(self::prepareUnserializableData($query->getFilters()));

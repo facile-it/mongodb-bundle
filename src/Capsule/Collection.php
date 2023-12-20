@@ -26,14 +26,6 @@ final class Collection extends MongoCollection
     /** @var string */
     private $databaseName;
 
-    /**
-     * @param Manager $manager
-     * @param string $clientName
-     * @param string $databaseName
-     * @param string $collectionName
-     * @param array $options
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         Manager $manager,
         string $clientName,
@@ -49,7 +41,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function aggregate(array $pipeline, array $options = [])
     {
@@ -61,7 +53,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function count($filter = [], array $options = [])
     {
@@ -73,7 +65,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function find($filter = [], array $options = [])
     {
@@ -85,7 +77,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function findOne($filter = [], array $options = [])
     {
@@ -97,7 +89,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function findOneAndUpdate($filter, $update, array $options = [])
     {
@@ -109,7 +101,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function findOneAndDelete($filter, array $options = [])
     {
@@ -121,7 +113,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function deleteMany($filter, array $options = [])
     {
@@ -133,7 +125,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function deleteOne($filter, array $options = [])
     {
@@ -145,7 +137,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function replaceOne($filter, $replacement, array $options = [])
     {
@@ -157,7 +149,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function insertOne($document, array $options = [])
     {
@@ -169,7 +161,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function updateOne($filter, $update, array $options = [])
     {
@@ -181,7 +173,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function distinct($fieldName, $filter = [], array $options = [])
     {
@@ -193,12 +185,8 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * @param string $method
      * @param array|object $filters
      * @param array|object $data
-     * @param array $options
-     *
-     * @return Query
      */
     private function prepareQuery(string $method, $filters, $data, array $options): Query
     {
@@ -224,11 +212,6 @@ final class Collection extends MongoCollection
         return $query;
     }
 
-    /**
-     * @param ReadPreference $readPreference
-     *
-     * @return string
-     */
     private function translateReadPreference(ReadPreference $readPreference): string
     {
         switch ($readPreference->getMode()) {
@@ -247,9 +230,6 @@ final class Collection extends MongoCollection
         }
     }
 
-    /**
-     * @param Query $queryLog
-     */
     private function notifyQueryExecution(Query $queryLog)
     {
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
@@ -262,17 +242,11 @@ final class Collection extends MongoCollection
         }
     }
 
-    /**
-     * @return string
-     */
     public function getClientName(): string
     {
         return $this->clientName;
     }
 
-    /**
-     * @return string
-     */
     public function getDatabaseName(): string
     {
         return $this->databaseName;

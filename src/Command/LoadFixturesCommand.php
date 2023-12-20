@@ -22,7 +22,7 @@ class LoadFixturesCommand extends AbstractCommand
     private $loader;
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     protected function configure()
     {
@@ -40,7 +40,7 @@ class LoadFixturesCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -68,9 +68,6 @@ class LoadFixturesCommand extends AbstractCommand
         return 0;
     }
 
-    /**
-     * @param MongoFixtureInterface $indexList
-     */
     private function loadFixture(MongoFixtureInterface $indexList)
     {
         $indexList->loadData();

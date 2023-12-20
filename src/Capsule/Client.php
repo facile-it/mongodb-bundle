@@ -24,10 +24,6 @@ final class Client extends MongoClient
      * Client constructor.
      *
      * @param string $uri
-     * @param array $uriOptions
-     * @param array $driverOptions
-     * @param string $clientName
-     * @param EventDispatcherInterface $eventDispatcher
      *
      * @internal param DataCollectorLoggerInterface $logger
      */
@@ -44,7 +40,7 @@ final class Client extends MongoClient
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function selectDatabase($databaseName, array $options = [])
     {
@@ -57,7 +53,7 @@ final class Client extends MongoClient
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function selectCollection($databaseName, $collectionName, array $options = [])
     {

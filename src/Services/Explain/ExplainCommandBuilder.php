@@ -9,12 +9,7 @@ use Facile\MongoDbBundle\Models\Query;
 class ExplainCommandBuilder
 {
     /**
-     * @param Query $query
-     * @param string $verbosity
-     *
      * @throws \Exception
-     *
-     * @return array
      */
     public static function createCommandArgs(
         Query $query,
@@ -43,12 +38,6 @@ class ExplainCommandBuilder
         ];
     }
 
-    /**
-     * @param Query $query
-     * @param       $args
-     *
-     * @return array
-     */
     private static function manageCount(Query $query, array $args): array
     {
         if ('count' === $query->getMethod()) {
@@ -64,12 +53,6 @@ class ExplainCommandBuilder
         return $args;
     }
 
-    /**
-     * @param Query $query
-     * @param       $args
-     *
-     * @return array
-     */
     private static function manageDistinct(Query $query, array $args): array
     {
         if ('distinct' === $query->getMethod()) {
@@ -82,12 +65,6 @@ class ExplainCommandBuilder
         return $args;
     }
 
-    /**
-     * @param Query $query
-     * @param array $args
-     *
-     * @return array
-     */
     private static function manageFind(Query $query, array $args): array
     {
         if (\in_array($query->getMethod(), ['find', 'findOne', 'findOneAndUpdate', 'findOneAndDelete'])) {
@@ -104,12 +81,6 @@ class ExplainCommandBuilder
         return $args;
     }
 
-    /**
-     * @param Query $query
-     * @param array $args
-     *
-     * @return array
-     */
     private static function manageDelete(Query $query, array $args): array
     {
         if (\in_array($query->getMethod(), ['deleteOne', 'deleteMany'])) {

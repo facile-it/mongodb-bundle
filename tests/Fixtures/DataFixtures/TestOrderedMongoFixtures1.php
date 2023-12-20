@@ -30,9 +30,7 @@ class TestOrderedMongoFixtures1 extends AbstractContainerAwareFixture implements
         return 200;
     }
 
-    public function loadIndexes()
-    {
-    }
+    public function loadIndexes() {}
 
     public function collection(): string
     {

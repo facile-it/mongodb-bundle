@@ -50,9 +50,6 @@ class ClientConfigurationTest extends TestCase
     }
 
     /**
-     * @param array $options
-     * @param array $expectedOptions
-     *
      * @dataProvider optionsDataProvider
      */
     public function test_construction_with_options(array $options, array $expectedOptions)

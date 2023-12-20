@@ -53,11 +53,6 @@ final class ClientRegistry
         }
     }
 
-    /**
-     * @param array $conf
-     *
-     * @return ClientConfiguration
-     */
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
         if (! $conf['uri']) {
@@ -131,14 +126,6 @@ final class ClientRegistry
         return $this->clients[$clientKey];
     }
 
-    /**
-     * @param string $clientName
-     * @param string $uri
-     * @param array  $options
-     * @param array  $driverOptions
-     *
-     * @return Client
-     */
     private function buildClient(string $clientName, string $uri, array $options, array $driverOptions): Client
     {
         if (true === $this->debug) {
