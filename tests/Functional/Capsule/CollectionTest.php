@@ -188,9 +188,6 @@ class CollectionTest extends AppTestCase
         $coll->distinct('field');
     }
 
-    /**
-     * @param $ev
-     */
     protected function assertEventsDispatching($ev)
     {
         if (Kernel::VERSION_ID >= 40300) {

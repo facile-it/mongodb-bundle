@@ -16,7 +16,7 @@ final class Configuration implements ConfigurationInterface
     private const READ_PREFERENCE_VALID_OPTIONS = ['primary', 'primaryPreferred', 'secondary', 'secondaryPreferred', 'nearest'];
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {

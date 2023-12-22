@@ -76,9 +76,6 @@ class ExplainCommandBuilderTest extends TestCase
 
     /**
      * @dataProvider findsProvider
-     *
-     * @param string $method
-     * @param bool $projection
      */
     public function test_finds(string $method, bool $projection = false)
     {
@@ -121,9 +118,6 @@ class ExplainCommandBuilderTest extends TestCase
 
     /**
      * @dataProvider deletedsProvider
-     *
-     * @param string $method
-     * @param int $limit
      */
     public function test_deletes(string $method, int $limit = 0)
     {

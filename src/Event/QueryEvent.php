@@ -14,24 +14,15 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class QueryEvent extends GenericEvent
 {
-    const QUERY_PREPARED = 'facile_mongo_db.event.query_prepared';
+    public const QUERY_PREPARED = 'facile_mongo_db.event.query_prepared';
 
-    const QUERY_EXECUTED = 'facile_mongo_db.event.query_executed';
+    public const QUERY_EXECUTED = 'facile_mongo_db.event.query_executed';
 
-    /**
-     * QueryEvent constructor.
-     *
-     * @param Query $queryLog
-     * @param array $arguments
-     */
     public function __construct(Query $queryLog, array $arguments = [])
     {
         parent::__construct($queryLog, $arguments);
     }
 
-    /**
-     * @return Query
-     */
     public function getQueryLog(): Query
     {
         return $this->getSubject();

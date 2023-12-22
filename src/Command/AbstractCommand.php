@@ -28,8 +28,6 @@ abstract class AbstractCommand extends Command
 
     /**
      * AbstractCommand constructor.
-     *
-     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container, string $name = null)
     {
@@ -43,7 +41,7 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     protected function configure()
     {
@@ -53,7 +51,7 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {

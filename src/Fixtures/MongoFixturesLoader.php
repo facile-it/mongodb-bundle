@@ -20,8 +20,6 @@ final class MongoFixturesLoader
     }
 
     /**
-     * @param string $dir
-     *
      * @return array
      */
     public function loadFromDirectory(string $dir)
@@ -39,8 +37,6 @@ final class MongoFixturesLoader
     }
 
     /**
-     * @param \Iterator $iterator
-     *
      * @return array
      */
     private function loadFromIterator(\Iterator $iterator)
@@ -65,8 +61,8 @@ final class MongoFixturesLoader
                 $sourceFile = $reflClass->getFileName();
 
                 if (
-                    \in_array($sourceFile, $includedFiles) &&
-                    \array_key_exists(MongoFixtureInterface::class, $reflClass->getInterfaces())
+                    \in_array($sourceFile, $includedFiles)
+                    && \array_key_exists(MongoFixtureInterface::class, $reflClass->getInterfaces())
                 ) {
                     $instance = $this->buildFixture(new $className());
                     $this->addInstance($instance);
@@ -81,8 +77,6 @@ final class MongoFixturesLoader
 
     /**
      * @param mixed $instance
-     *
-     * @return MongoFixtureInterface
      */
     private function buildFixture($instance): MongoFixtureInterface
     {
@@ -93,9 +87,6 @@ final class MongoFixturesLoader
         return $instance;
     }
 
-    /**
-     * @param MongoFixtureInterface $list
-     */
     public function addInstance(MongoFixtureInterface $list)
     {
         $listClass = \get_class($list);
@@ -106,8 +97,6 @@ final class MongoFixturesLoader
     }
 
     /**
-     * @param string $fileName
-     *
      * @return array
      */
     public function loadFromFile(string $fileName)

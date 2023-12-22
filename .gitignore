@@ -5,6 +5,8 @@
 /vendor/
 /bin/
 .php_cs.cache
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
 docker-compose.override.yml
 .phpunit.result.cache
 auth.json

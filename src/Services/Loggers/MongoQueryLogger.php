@@ -23,9 +23,6 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
         $this->connections = [];
     }
 
-    /**
-     * @param string $connection
-     */
     public function addConnection(string $connection)
     {
         $this->connections[] = $connection;
@@ -39,17 +36,11 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
         return $this->connections;
     }
 
-    /**
-     * @param Query $event
-     */
     public function logQuery(Query $event)
     {
         $this->logs->enqueue($event);
     }
 
-    /**
-     * @return Query
-     */
     public function getLoggedEvent(): Query
     {
         if (! $this->hasLoggedEvents()) {
@@ -59,9 +50,6 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
         return $this->logs->dequeue();
     }
 
-    /**
-     * @return bool
-     */
     public function hasLoggedEvents(): bool
     {
         return ! $this->logs->isEmpty();

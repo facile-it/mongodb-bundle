@@ -27,12 +27,6 @@ final class Database extends MongoDatabase
     /**
      * Database constructor.
      *
-     * @param Manager $manager
-     * @param string $clientName
-     * @param string $databaseName
-     * @param array $options
-     * @param EventDispatcherInterface $eventDispatcher
-     *
      * @internal param DataCollectorLoggerInterface $logger
      */
     public function __construct(
@@ -49,7 +43,7 @@ final class Database extends MongoDatabase
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function selectCollection($collectionName, array $options = [])
     {
@@ -72,7 +66,7 @@ final class Database extends MongoDatabase
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function withOptions(array $options = [])
     {
