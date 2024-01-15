@@ -7,13 +7,10 @@ namespace Facile\MongoDbBundle\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class DropDatabaseCommand.
- */
 class DropDatabaseCommand extends AbstractCommand
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     protected function configure()
     {
@@ -24,7 +21,7 @@ class DropDatabaseCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

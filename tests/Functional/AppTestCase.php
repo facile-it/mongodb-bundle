@@ -9,9 +9,6 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class AppTestCase.
- */
 class AppTestCase extends TestCase
 {
     /** @var Application */
@@ -34,17 +31,11 @@ class AppTestCase extends TestCase
         $this->application = null;
     }
 
-    /**
-     * @return Application
-     */
     protected function getApplication(): Application
     {
         return $this->application;
     }
 
-    /**
-     * @return ContainerInterface
-     */
     protected function getContainer(): ContainerInterface
     {
         return $this->application->getKernel()->getContainer();

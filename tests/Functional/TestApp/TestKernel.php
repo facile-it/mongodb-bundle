@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Kernel;
 class TestKernel extends Kernel
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      *
      * @return Bundle[]
      */
@@ -26,7 +26,7 @@ class TestKernel extends Kernel
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {

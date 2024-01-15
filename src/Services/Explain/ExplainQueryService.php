@@ -9,11 +9,11 @@ use MongoDB\Driver\Cursor;
 
 class ExplainQueryService
 {
-    const VERBOSITY_QUERY_PLANNER = 'queryPlanner';
+    public const VERBOSITY_QUERY_PLANNER = 'queryPlanner';
 
-    const VERBOSITY_EXECUTION_STATS = 'executionStats';
+    public const VERBOSITY_EXECUTION_STATS = 'executionStats';
 
-    const VERBOSITY_ALL_PLAN_EXECUTION = 'allPlansExecution';
+    public const VERBOSITY_ALL_PLAN_EXECUTION = 'allPlansExecution';
 
     public const ACCEPTED_METHODS = [
         'count',
@@ -37,8 +37,6 @@ class ExplainQueryService
      * verbosity : queryPlanner | executionStats Mode | allPlansExecution (default)
      * The explain command provides information on the execution of the following commands:
      * count, distinct, group, find, findAndModify, delete, and update.
-     *
-     * @param ClientRegistry $clientRegistry
      */
     public function __construct(ClientRegistry $clientRegistry)
     {
@@ -48,12 +46,7 @@ class ExplainQueryService
     /**
      * Execute the operation.
      *
-     * @param Query $query
-     * @param string $verbosity
-     *
      * @throws \Exception
-     *
-     * @return Cursor
      */
     public function execute(Query $query, string $verbosity = self::VERBOSITY_ALL_PLAN_EXECUTION): Cursor
     {

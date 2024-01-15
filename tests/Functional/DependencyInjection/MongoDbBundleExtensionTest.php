@@ -20,9 +20,9 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
 {
-    const LOGGER_PUBLIC_ALIAS = 'facile_mongo_db.logger.public';
+    public const LOGGER_PUBLIC_ALIAS = 'facile_mongo_db.logger.public';
 
-    const DISPATCHER_PUBLIC_ALIAS = 'facile_mongo_db.event_dispatcher.public';
+    public const DISPATCHER_PUBLIC_ALIAS = 'facile_mongo_db.event_dispatcher.public';
 
     protected function setUp(): void
     {

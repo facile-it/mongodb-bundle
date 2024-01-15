@@ -10,10 +10,6 @@ use PHPUnit\Framework\TestCase;
 class FacileMongoDbBundleExtensionTest extends TestCase
 {
     /**
-     * @param string $label
-     * @param string $methodname
-     * @param string $expected
-     *
      * @dataProvider labelMethodProvider
      */
     public function test_queryDataTranslate(string $label, string $methodname, string $expected)
@@ -24,9 +20,6 @@ class FacileMongoDbBundleExtensionTest extends TestCase
 
     /**
      * @dataProvider explainMethodsProvider
-     *
-     * @param string $methodname
-     * @param bool $expected
      */
     public function test_isQueryExplainable(string $methodname, bool $expected)
     {

@@ -38,6 +38,9 @@ jobs:
           - php: 8.2
             mongo-ext: 1.15.0
             mongo-img: 6.0
+          - php: 8.3
+            mongo-ext: 1.16.0
+            mongo-img: 6.0
 
     steps:
       - name: Checkout
