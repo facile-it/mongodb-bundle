@@ -12,7 +12,7 @@ class DropDatabaseCommand extends AbstractCommand
     /**
      * @inheritDoc
      */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
         $this

@@ -43,7 +43,7 @@ abstract class AbstractCommand extends Command
     /**
      * @inheritDoc
      */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
         $this
@@ -53,7 +53,7 @@ abstract class AbstractCommand extends Command
     /**
      * @inheritDoc
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         parent::initialize($input, $output);
         $this->io = new SymfonyStyle($input, $output);

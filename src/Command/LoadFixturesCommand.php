@@ -24,7 +24,7 @@ class LoadFixturesCommand extends AbstractCommand
     /**
      * @inheritDoc
      */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
         $this
@@ -33,7 +33,7 @@ class LoadFixturesCommand extends AbstractCommand
             ->setDescription('Load fixtures and applies them');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         parent::initialize($input, $output);
         $this->loader = new MongoFixturesLoader($this->getContainer());
@@ -68,7 +68,7 @@ class LoadFixturesCommand extends AbstractCommand
         return 0;
     }
 
-    private function loadFixture(MongoFixtureInterface $indexList)
+    private function loadFixture(MongoFixtureInterface $indexList): void
     {
         $indexList->loadData();
         $indexList->loadIndexes();
@@ -90,7 +90,7 @@ class LoadFixturesCommand extends AbstractCommand
         return $paths;
     }
 
-    private function loadPaths(array $paths)
+    private function loadPaths(array $paths): void
     {
         foreach ($paths as $path) {
             if (is_dir($path)) {

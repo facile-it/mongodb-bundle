@@ -26,15 +26,12 @@ class MongoDbDataCollector extends DataCollector
     /** @var DataCollectorLoggerInterface */
     private $logger;
 
-    /** @var array */
-    protected $data;
-
     public function __construct()
     {
         $this->reset();
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->data = [
             self::QUERY_KEYWORD => [],
@@ -43,12 +40,12 @@ class MongoDbDataCollector extends DataCollector
         ];
     }
 
-    public function setLogger(DataCollectorLoggerInterface $logger)
+    public function setLogger(DataCollectorLoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
 
-    public function collect(Request $request, Response $response, $exception = null)
+    public function collect(Request $request, Response $response, $exception = null): void
     {
         if ($exception && ! $exception instanceof \Throwable) {
             throw new \InvalidArgumentException('Expecting \Throwable, got ' . get_debug_type($exception));
@@ -101,7 +98,7 @@ class MongoDbDataCollector extends DataCollector
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return 'mongodb';
     }
