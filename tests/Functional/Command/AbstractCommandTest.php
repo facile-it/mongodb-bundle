@@ -62,7 +62,7 @@ class AbstractCommandTest extends AppTestCase
 
 class FakeCommand extends AbstractCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
         $this

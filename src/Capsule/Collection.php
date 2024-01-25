@@ -10,7 +10,6 @@ use MongoDB\Collection as MongoCollection;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\ReadPreference;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @internal
@@ -230,12 +229,7 @@ final class Collection extends MongoCollection
     {
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 
-        $event = new QueryEvent($queryLog);
-        if (Kernel::VERSION_ID >= 40_300) {
-            $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
-        } else {
-            $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
-        }
+        $this->eventDispatcher->dispatch(new QueryEvent($queryLog), QueryEvent::QUERY_EXECUTED);
     }
 
     public function getClientName(): string

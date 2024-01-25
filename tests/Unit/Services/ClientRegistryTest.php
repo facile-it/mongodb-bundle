@@ -9,7 +9,6 @@ use Facile\MongoDbBundle\Services\ClientRegistry;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpKernel\Kernel;
 
 class ClientRegistryTest extends TestCase
 {
@@ -107,15 +106,9 @@ class ClientRegistryTest extends TestCase
             return true;
         });
 
-        if (Kernel::VERSION_ID >= 40_300) {
-            $eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED)
-                ->shouldBeCalledOnce()
-                ->willReturnArgument(0);
-        } else {
-            $eventDispatcher->dispatch(ConnectionEvent::CLIENT_CREATED, $event)
-                ->shouldBeCalledOnce()
-                ->willReturnArgument(1);
-        }
+        $eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED)
+            ->shouldBeCalledOnce()
+            ->willReturnArgument(0);
 
         return $eventDispatcher->reveal();
     }

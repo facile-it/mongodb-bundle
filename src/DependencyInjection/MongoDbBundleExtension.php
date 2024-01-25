@@ -26,7 +26,7 @@ final class MongoDbBundleExtension extends Extension
     /** @var ContainerBuilder */
     private $containerBuilder;
 
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $this->containerBuilder = $container;
         $config = $this->processConfiguration(new Configuration(), $configs);
@@ -42,8 +42,6 @@ final class MongoDbBundleExtension extends Extension
             $loader->load('profiler.xml');
             $this->attachDataCollectionListenerToEventManager();
         }
-
-        return $config;
     }
 
     private function mustCollectData(array $config): bool

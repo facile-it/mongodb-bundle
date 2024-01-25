@@ -22,12 +22,12 @@
         "php": "^7.4 || ^8.0",
         "ext-mongodb": "^1.6",
         "mongodb/mongodb": "^1.5",
-        "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0"
+        "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0 || ^7.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4",
-        "symfony/web-profiler-bundle": "^4.4 || ^5.0 || ^6.0",
-        "symfony/console": "^4.4 || ^5.0 || ^6.0",
+        "symfony/web-profiler-bundle": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+        "symfony/console": "^4.4 || ^5.0 || ^6.0 || ^7.0",
         "phpunit/phpunit": "^9.6.13",
         "symfony/phpunit-bridge": "^7.0",
         "facile-it/facile-coding-standard": "1.2.0",
