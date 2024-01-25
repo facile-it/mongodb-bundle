@@ -231,7 +231,7 @@ final class Collection extends MongoCollection
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 
         $event = new QueryEvent($queryLog);
-        if (Kernel::VERSION_ID >= 40300) {
+        if (Kernel::VERSION_ID >= 40_300) {
             $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
         } else {
             $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);

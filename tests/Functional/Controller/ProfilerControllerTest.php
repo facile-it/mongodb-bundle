@@ -31,7 +31,7 @@ class ProfilerControllerTest extends AppTestCase
         $query->setDatabase('testFunctionaldb');
         $query->setCollection('fooCollection');
         $query->setMethod('count');
-        $query->setFilters(['date' => new UTCDateTime((new \DateTime())->getTimestamp() * 1000)]);
+        $query->setFilters(['date' => new UTCDateTime((new \DateTime())->getTimestamp() * 1_000)]);
 
         $collector = $this->prophesize(MongoDbDataCollector::class);
         $collector->getQueries()->shouldBeCalledTimes(1)->willReturn([$query]);

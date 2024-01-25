@@ -61,7 +61,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080],
+                        ['host' => 'localhost', 'port' => 8_080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -92,7 +92,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080],
+                        ['host' => 'localhost', 'port' => 8_080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -100,7 +100,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'authSource' => null,
                     'replicaSet' => 'testReplica',
                     'ssl' => true,
-                    'connectTimeoutMS' => 3000,
+                    'connectTimeoutMS' => 3_000,
                     'readPreference' => 'primaryPreferred',
                 ],
             ],
@@ -123,7 +123,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080],
+                        ['host' => 'localhost', 'port' => 8_080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -131,7 +131,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                     'authSource' => null,
                     'replicaSet' => 'testReplica',
                     'ssl' => true,
-                    'connectTimeoutMS' => 3000,
+                    'connectTimeoutMS' => 3_000,
                     'readPreference' => 'primaryPreferred',
                 ],
             ],
@@ -154,7 +154,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'clients' => [
                 'test_client' => [
                     'hosts' => [
-                        ['host' => 'localhost', 'port' => 8080],
+                        ['host' => 'localhost', 'port' => 8_080],
                     ],
                     'uri' => null,
                     'username' => 'foo',
@@ -167,8 +167,8 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
                 ],
                 'other_client' => [
                     'hosts' => [
-                        ['host' => 'localhost.dev', 'port' => 8081],
-                        ['host' => 'localhost.dev2', 'port' => 27017],
+                        ['host' => 'localhost.dev', 'port' => 8_081],
+                        ['host' => 'localhost.dev2', 'port' => 27_017],
                     ],
                     'uri' => null,
                     'username' => 'mee',

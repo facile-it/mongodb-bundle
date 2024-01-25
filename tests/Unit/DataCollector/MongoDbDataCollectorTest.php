@@ -51,6 +51,6 @@ class MongoDbDataCollectorTest extends TestCase
             return new UTCDateTime('1000');
         }
 
-        return new UTCDateTime(1000);
+        return new UTCDateTime(1_000);
     }
 }

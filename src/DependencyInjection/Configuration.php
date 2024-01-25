@@ -103,7 +103,7 @@ final class Configuration implements ConfigurationInterface
 
         $hostsBuilder
             ->integerNode('port')
-            ->defaultValue(27017);
+            ->defaultValue(27_017);
     }
 
     private static function addDriversOption(NodeBuilder $builder): void
