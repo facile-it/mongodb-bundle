@@ -25,7 +25,7 @@ class DropCollectionCommand extends AbstractCommand
     /**
      * @inheritDoc
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $collection = $input->getArgument('collection');
 

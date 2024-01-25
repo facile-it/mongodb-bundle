@@ -1,7 +1,6 @@
 framework:
   secret: "Four can keep a secret, if three of them are dead."
-  annotations:
-    enabled: false
+  http_method_override: true
 
 mongo_db_bundle:
   clients:
@@ -10,7 +9,7 @@ mongo_db_bundle:
       password: rootPass
       authSource: admin
       hosts:
-      - { host: localhost, port: 27017 }
+      - { host: mongo, port: 27017 }
 
   connections:
     test_db:

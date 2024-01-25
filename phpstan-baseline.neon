@@ -1,26 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
-			count: 2
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Parameter \\#2 \\$eventName of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects string\\|null, Facile\\\\MongoDbBundle\\\\Event\\\\QueryEvent given\\.$#"
-			count: 2
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Variable \\$data on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
-			message: "#^Variable \\$filters on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 1
-			path: src/Capsule/Collection.php
-
-		-
 			message: "#^Property Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:\\$container \\(Symfony\\\\Component\\\\DependencyInjection\\\\Container\\) does not accept Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\|null\\.$#"
 			count: 1
 			path: src/Controller/ProfilerController.php
@@ -32,33 +12,8 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
-			count: 3
+			count: 7
 			path: src/DependencyInjection/Configuration.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\TreeBuilder\\:\\:root\\(\\)\\.$#"
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			message: "#^Variable \\$data on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 1
-			path: src/Models/Query.php
-
-		-
-			message: "#^Variable \\$filters on left side of \\?\\? always exists and is not nullable\\.$#"
-			count: 1
-			path: src/Models/Query.php
-
-		-
-			message: "#^Parameter \\#1 \\$event of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects object, string given\\.$#"
-			count: 1
-			path: src/Services/ClientRegistry.php
-
-		-
-			message: "#^Parameter \\#2 \\$eventName of method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) expects string\\|null, Facile\\\\MongoDbBundle\\\\Event\\\\ConnectionEvent given\\.$#"
-			count: 1
-			path: src/Services/ClientRegistry.php
 
 		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\DataCollectorLoggerInterface\\:\\:getConnections\\(\\) has invalid return type string\\.$#"
@@ -119,11 +74,6 @@ parameters:
 			message: "#^Property Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\AppTestCase\\:\\:\\$application \\(Symfony\\\\Bundle\\\\FrameworkBundle\\\\Console\\\\Application\\) does not accept null\\.$#"
 			count: 1
 			path: tests/Functional/AppTestCase.php
-
-		-
-			message: "#^Comparison operation \"\\>\\=\" between 1 and 0 is always true\\.$#"
-			count: 1
-			path: tests/Functional/TestApp/TestKernel.php
 
 		-
 			message: "#^Access to an undefined property MongoDB\\\\Model\\\\BSONDocument\\:\\:\\$fqcn\\.$#"

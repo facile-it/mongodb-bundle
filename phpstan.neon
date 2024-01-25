@@ -6,5 +6,6 @@ parameters:
     paths:
         - src/
         - tests/
+    treatPhpDocTypesAsCertain: false
     dynamicConstantNames:
         - Symfony\Component\HttpKernel\Kernel::VERSION_ID

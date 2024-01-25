@@ -1,0 +1,7 @@
+imports:
+  - { resource: ./config_test_61.yml }
+
+framework:
+  handle_all_throwables: true
+  php_errors:
+    log: true

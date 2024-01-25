@@ -203,11 +203,7 @@ final class Collection extends MongoCollection
         );
 
         $event = new QueryEvent($query);
-        if (Kernel::VERSION_ID >= 40300) {
-            $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_PREPARED);
-        } else {
-            $this->eventDispatcher->dispatch(QueryEvent::QUERY_PREPARED, $event);
-        }
+        $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_PREPARED);
 
         return $query;
     }
@@ -238,7 +234,7 @@ final class Collection extends MongoCollection
         if (Kernel::VERSION_ID >= 40300) {
             $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
         } else {
-            $this->eventDispatcher->dispatch(QueryEvent::QUERY_EXECUTED, $event);
+            $this->eventDispatcher->dispatch($event, QueryEvent::QUERY_EXECUTED);
         }
     }
 

@@ -21,9 +21,7 @@ final class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('mongo_db_bundle');
-        $rootBuilder = \method_exists(TreeBuilder::class, 'getRootNode')
-            ? $treeBuilder->getRootNode()
-            : $treeBuilder->root('mongo_db_bundle');
+        $rootBuilder = $treeBuilder->getRootNode();
 
         self::addDataCollection($rootBuilder->children());
         self::addClients($rootBuilder->children());

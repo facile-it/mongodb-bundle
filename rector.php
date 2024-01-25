@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
+use Rector\PHPUnit\PHPUnit100\Rector\Class_\AddProphecyTraitRector;
+use Rector\PHPUnit\Set\PHPUnitLevelSetList;
 use Rector\PHPUnit\Set\PHPUnitSetList;
-use Rector\Set\ValueObject\LevelSetList;
+use Rector\Symfony\Set\SymfonyLevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
@@ -14,9 +15,11 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     // register a single rule
-    $rectorConfig->rule(\Rector\PHPUnit\PHPUnit100\Rector\Class_\AddProphecyTraitRector::class);
+    $rectorConfig->rule(AddProphecyTraitRector::class);
 
     $rectorConfig->sets([
         PHPUnitSetList::PHPUNIT_90,
+        PHPUnitLevelSetList::UP_TO_PHPUNIT_90,
+        SymfonyLevelSetList::UP_TO_SYMFONY_44
     ]);
 };
