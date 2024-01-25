@@ -76,7 +76,7 @@ class ProfilerController implements ContainerAwareInterface
             if (\is_string($item) && 0 === strpos($item, 'ISODate')) {
                 $time = str_replace(['ISODate("', '")'], '', $item);
                 $dateTime = new \DateTime($time);
-                $item = new UTCDatetime($dateTime->getTimestamp() * 1000);
+                $item = new UTCDatetime($dateTime->getTimestamp() * 1_000);
             }
 
             $data[$key] = $this->walkAndConvertToUTCDatetime($item);

@@ -190,7 +190,7 @@ class CollectionTest extends AppTestCase
 
     protected function assertEventsDispatching($ev)
     {
-        if (Kernel::VERSION_ID >= 40300) {
+        if (Kernel::VERSION_ID >= 40_300) {
             $ev->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_PREPARED)->shouldBeCalled();
             $ev->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_EXECUTED)->shouldBeCalled();
         } else {
