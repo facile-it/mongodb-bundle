@@ -40,7 +40,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                 'clients' => [
                     'test_client' => [
                         'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080],
+                            ['host' => 'localhost', 'port' => 8_080],
                         ],
                         'username' => 'foo',
                         'password' => 'bar',
@@ -92,7 +92,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                 'clients' => [
                     'test_client' => [
                         'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080],
+                            ['host' => 'localhost', 'port' => 8_080],
                         ],
                         'username' => 'foo',
                         'password' => 'bar',
@@ -139,7 +139,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                 'clients' => [
                     'test_client' => [
                         'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080],
+                            ['host' => 'localhost', 'port' => 8_080],
                         ],
                         'username' => 'foo',
                         'password' => 'bar',
@@ -177,14 +177,14 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                 'clients' => [
                     'test_client' => [
                         'hosts' => [
-                            ['host' => 'localhost', 'port' => 8080],
+                            ['host' => 'localhost', 'port' => 8_080],
                         ],
                         'username' => 'foo',
                         'password' => 'bar',
                     ],
                     'other_client' => [
                         'hosts' => [
-                            ['host' => 'localhost.dev', 'port' => 8081],
+                            ['host' => 'localhost.dev', 'port' => 8_081],
                         ],
                         'username' => 'mee',
                         'password' => 'zod',

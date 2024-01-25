@@ -28,7 +28,7 @@ class ClientRegistryTest extends TestCase
                 'authSource' => null,
                 'replicaSet' => 'testReplica',
                 'ssl' => true,
-                'connectTimeoutMS' => 3000,
+                'connectTimeoutMS' => 3_000,
                 'readPreference' => 'primary',
             ],
         ];
@@ -48,7 +48,7 @@ class ClientRegistryTest extends TestCase
         $testConf = [
             'test_client' => [
                 'hosts' => [
-                    ['host' => 'host1', 'port' => 8080],
+                    ['host' => 'host1', 'port' => 8_080],
                 ],
                 'uri' => null,
                 'username' => 'foo',
@@ -56,7 +56,7 @@ class ClientRegistryTest extends TestCase
                 'authSource' => null,
                 'replicaSet' => 'testReplica',
                 'ssl' => true,
-                'connectTimeoutMS' => 3000,
+                'connectTimeoutMS' => 3_000,
                 'readPreference' => 'primary',
             ],
         ];
@@ -76,8 +76,8 @@ class ClientRegistryTest extends TestCase
         $testConf = [
             'test_client' => [
                 'hosts' => [
-                    ['host' => 'host1', 'port' => 8080],
-                    ['host' => 'host2', 'port' => 8081],
+                    ['host' => 'host1', 'port' => 8_080],
+                    ['host' => 'host2', 'port' => 8_081],
                 ],
                 'uri' => null,
                 'username' => 'foo',
@@ -85,7 +85,7 @@ class ClientRegistryTest extends TestCase
                 'authSource' => null,
                 'replicaSet' => 'testReplica',
                 'ssl' => true,
-                'connectTimeoutMS' => 3000,
+                'connectTimeoutMS' => 3_000,
                 'readPreference' => 'primary',
             ],
         ];
@@ -107,7 +107,7 @@ class ClientRegistryTest extends TestCase
             return true;
         });
 
-        if (Kernel::VERSION_ID >= 40300) {
+        if (Kernel::VERSION_ID >= 40_300) {
             $eventDispatcher->dispatch($event, ConnectionEvent::CLIENT_CREATED)
                 ->shouldBeCalledOnce()
                 ->willReturnArgument(0);

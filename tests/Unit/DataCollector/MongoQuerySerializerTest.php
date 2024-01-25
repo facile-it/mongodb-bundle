@@ -33,7 +33,7 @@ class MongoQuerySerializerTest extends TestCase
 
     public function unserializedDataProvider()
     {
-        $date = new UTCDateTime(1000);
+        $date = new UTCDateTime(1_000);
         $dateTime = $date->toDateTime();
         $isoDate = sprintf('ISODate("%sT%s+00:00")', $dateTime->format('Y-m-d'), $dateTime->format('H:i:s'));
 
