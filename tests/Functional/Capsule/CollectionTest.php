@@ -10,7 +10,6 @@ use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use MongoDB\Driver\Manager;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpKernel\Kernel;
 
 class CollectionTest extends AppTestCase
 {
@@ -190,12 +189,7 @@ class CollectionTest extends AppTestCase
 
     protected function assertEventsDispatching($ev)
     {
-        if (Kernel::VERSION_ID >= 40_300) {
-            $ev->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_PREPARED)->shouldBeCalled();
-            $ev->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_EXECUTED)->shouldBeCalled();
-        } else {
-            $ev->dispatch(QueryEvent::QUERY_PREPARED, Argument::type(QueryEvent::class))->shouldBeCalled();
-            $ev->dispatch(QueryEvent::QUERY_EXECUTED, Argument::type(QueryEvent::class))->shouldBeCalled();
-        }
+        $ev->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_PREPARED)->shouldBeCalled();
+        $ev->dispatch(Argument::type(QueryEvent::class), QueryEvent::QUERY_EXECUTED)->shouldBeCalled();
     }
 }
