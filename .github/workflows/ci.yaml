@@ -63,6 +63,6 @@ jobs:
       - name: Run tests
         run: bin/phpunit --coverage-clover=build/coverage-report.xml
       - name: Upload code coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           file: build/coverage-report.xml
