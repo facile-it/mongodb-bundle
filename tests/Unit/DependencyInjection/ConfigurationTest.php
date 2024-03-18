@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
-    public function test_empty_configuration_process()
+    public function test_empty_configuration_process(): void
     {
         $this->expectException(\Exception::class);
         $this->assertProcessedConfigurationEquals([
@@ -26,7 +26,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
-    public function test_uri_configuration_process()
+    public function test_uri_configuration_process(): void
     {
         $expectedConfiguration = [
             'clients' => [
@@ -55,7 +55,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
-    public function test_full_configuration_process()
+    public function test_full_configuration_process(): void
     {
         $expectedConfiguration = [
             'clients' => [
@@ -86,7 +86,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
-    public function test_options_configuration_process()
+    public function test_options_configuration_process(): void
     {
         $expectedConfiguration = [
             'clients' => [
@@ -117,7 +117,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
-    public function test_data_collection_disabled_configuration_process()
+    public function test_data_collection_disabled_configuration_process(): void
     {
         $expectedConfiguration = [
             'clients' => [
@@ -148,7 +148,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
-    public function test_multiple_connections_configuration_process()
+    public function test_multiple_connections_configuration_process(): void
     {
         $expectedConfiguration = [
             'clients' => [
@@ -201,7 +201,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         ]);
     }
 
-    public function test_configuration_blocks_invalid_read_preference_options()
+    public function test_configuration_blocks_invalid_read_preference_options(): void
     {
         $extensionConfigurationBuilder = new ExtensionConfigurationBuilder(new LoaderFactory());
         $extensionConfiguration = $extensionConfigurationBuilder

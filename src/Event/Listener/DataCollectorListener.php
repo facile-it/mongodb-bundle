@@ -15,20 +15,19 @@ use Facile\MongoDbBundle\Services\Loggers\DataCollectorLoggerInterface;
  */
 final class DataCollectorListener
 {
-    /** @var DataCollectorLoggerInterface */
-    private $logger;
+    private DataCollectorLoggerInterface $logger;
 
     public function __construct(DataCollectorLoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
-    public function onConnectionClientCreated(ConnectionEvent $event)
+    public function onConnectionClientCreated(ConnectionEvent $event): void
     {
         $this->logger->addConnection($event->getClientName());
     }
 
-    public function onQueryExecuted(QueryEvent $event)
+    public function onQueryExecuted(QueryEvent $event): void
     {
         $this->logger->logQuery($event->getQueryLog());
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Capsule\Database;
 use MongoDB\Driver\Manager;
@@ -13,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DatabaseTest extends TestCase
 {
-    use \Prophecy\PhpUnit\ProphecyTrait;
+    use ProphecyTrait;
 
     public function test_selectCollection(): void
     {

@@ -11,7 +11,7 @@ use Facile\MongoDbBundle\Fixtures\OrderedFixtureInterface;
 
 class TestOrderedMongoFixtures1 extends AbstractContainerAwareFixture implements MongoFixtureInterface, OrderedFixtureInterface
 {
-    public function loadData()
+    public function loadData(): void
     {
         $doc = [
             'type' => 'fixture',

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Services;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Facile\MongoDbBundle\Event\ConnectionEvent;
 use Facile\MongoDbBundle\Services\ClientRegistry;
 use PHPUnit\Framework\TestCase;
@@ -12,9 +13,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ClientRegistryTest extends TestCase
 {
-    use \Prophecy\PhpUnit\ProphecyTrait;
+    use ProphecyTrait;
 
-    public function test_client_connection_url_provided_manually()
+    public function test_client_connection_url_provided_manually(): void
     {
         $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null);
 
@@ -40,7 +41,7 @@ class ClientRegistryTest extends TestCase
         $this->assertEquals(['test_client.testdb'], $registry->getClientNames());
     }
 
-    public function test_client_connection_url_generation_singlehost()
+    public function test_client_connection_url_generation_singlehost(): void
     {
         $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null);
 
@@ -68,7 +69,7 @@ class ClientRegistryTest extends TestCase
         $this->assertEquals(['test_client.testdb'], $registry->getClientNames());
     }
 
-    public function test_client_connection_url_generation_multihost()
+    public function test_client_connection_url_generation_multihost(): void
     {
         $registry = new ClientRegistry($this->createEventDispatcherMock(), false, null);
 

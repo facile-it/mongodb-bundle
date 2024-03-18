@@ -11,51 +11,31 @@ namespace Facile\MongoDbBundle\Models;
  */
 final class Query
 {
-    /** @var float */
-    private $start;
+    private float $start;
 
-    /** @var string */
-    private $method;
+    private string $method = 'undefined';
 
-    /** @var string */
-    private $collection;
+    private string $collection = 'undefined';
 
-    /** @var array */
-    private $filters;
+    private array $filters = [];
 
     /** @var array|object */
-    private $data;
+    private $data = [];
 
-    /** @var array */
-    private $options;
+    private array $options = [];
 
     /** @var float */
-    private $executionTime;
+    private $executionTime = 0;
 
-    /** @var string */
-    private $readPreference;
+    private string $readPreference = 'undefined';
 
-    /** @var string */
-    private $client;
+    private string $client = 'undefined';
 
-    /** @var string */
-    private $database;
+    private string $database = 'undefined';
 
-    /**
-     * Query constructor.
-     */
     public function __construct()
     {
         $this->start = microtime(true);
-        $this->client = 'undefined';
-        $this->database = 'undefined';
-        $this->collection = 'undefined';
-        $this->method = 'undefined';
-        $this->filters = [];
-        $this->data = [];
-        $this->options = [];
-        $this->executionTime = 0;
-        $this->readPreference = 'undefined';
     }
 
     public function getStart(): float
@@ -68,7 +48,7 @@ final class Query
         return $this->collection;
     }
 
-    public function setCollection(string $collection)
+    public function setCollection(string $collection): void
     {
         $this->collection = $collection;
     }
@@ -78,7 +58,7 @@ final class Query
         return $this->method;
     }
 
-    public function setMethod(string $method)
+    public function setMethod(string $method): void
     {
         $this->method = $method;
     }
@@ -91,7 +71,7 @@ final class Query
     /**
      * @param array|object $filters
      */
-    public function setFilters($filters)
+    public function setFilters($filters): void
     {
         $this->filters = (array) ($filters ?? []);
     }
@@ -117,7 +97,7 @@ final class Query
         return $this->options;
     }
 
-    public function setOptions(array $options)
+    public function setOptions(array $options): void
     {
         $this->options = $options;
     }
@@ -127,7 +107,7 @@ final class Query
         return $this->executionTime;
     }
 
-    public function setExecutionTime(float $executionTime)
+    public function setExecutionTime(float $executionTime): void
     {
         $this->executionTime = $executionTime;
     }
@@ -137,7 +117,7 @@ final class Query
         return $this->readPreference;
     }
 
-    public function setReadPreference(string $readPreference)
+    public function setReadPreference(string $readPreference): void
     {
         $this->readPreference = $readPreference;
     }
@@ -147,7 +127,7 @@ final class Query
         return $this->client;
     }
 
-    public function setClient(string $client)
+    public function setClient(string $client): void
     {
         $this->client = $client;
     }
@@ -157,7 +137,7 @@ final class Query
         return $this->database;
     }
 
-    public function setDatabase(string $database)
+    public function setDatabase(string $database): void
     {
         $this->database = $database;
     }

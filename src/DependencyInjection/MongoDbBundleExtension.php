@@ -23,8 +23,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 final class MongoDbBundleExtension extends Extension
 {
-    /** @var ContainerBuilder */
-    private $containerBuilder;
+    private ?ContainerBuilder $containerBuilder = null;
 
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -76,7 +75,7 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder->setDefinition('mongo.connection_factory', $factoryDefinition);
     }
 
-    private function defineConnections(array $connections)
+    private function defineConnections(array $connections): void
     {
         foreach ($connections as $name => $conf) {
             $connectionDefinition = new Definition(

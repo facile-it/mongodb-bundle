@@ -9,10 +9,10 @@ use Facile\MongoDbBundle\Models\Query;
 class MongoQueryLogger implements DataCollectorLoggerInterface
 {
     /** @var \SplQueue|Query[] */
-    private $logs;
+    private \SplQueue $logs;
 
     /** @var array|string[] */
-    private $connections;
+    private array $connections = [];
 
     /**
      * MongoQueryLogger constructor.
@@ -20,10 +20,9 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
     public function __construct()
     {
         $this->logs = new \SplQueue();
-        $this->connections = [];
     }
 
-    public function addConnection(string $connection)
+    public function addConnection(string $connection): void
     {
         $this->connections[] = $connection;
     }
@@ -36,7 +35,7 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
         return $this->connections;
     }
 
-    public function logQuery(Query $event)
+    public function logQuery(Query $event): void
     {
         $this->logs->enqueue($event);
     }

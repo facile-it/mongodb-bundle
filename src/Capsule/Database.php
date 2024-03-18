@@ -15,14 +15,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class Database extends MongoDatabase
 {
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
-    /** @var string */
-    private $clientName;
+    private string $clientName;
 
-    /** @var string */
-    private $databaseName;
+    private string $databaseName;
 
     /**
      * Database constructor.

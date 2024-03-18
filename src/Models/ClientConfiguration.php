@@ -11,23 +11,17 @@ namespace Facile\MongoDbBundle\Models;
  */
 final class ClientConfiguration
 {
-    /** @var string */
-    private $uri;
+    private string $uri;
 
-    /** @var string */
-    private $username;
+    private string $username;
 
-    /** @var string */
-    private $password;
+    private string $password;
 
-    /** @var array */
-    private $options;
+    private array $options;
 
-    /** @var null|string */
-    private $authSource;
+    private ?string $authSource;
 
-    /** @var array */
-    private $driverOptions;
+    private array $driverOptions;
 
     public function __construct(
         string $uri,
@@ -60,10 +54,7 @@ final class ClientConfiguration
         return $this->password;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getAuthSource()
+    public function getAuthSource(): ?string
     {
         return $this->authSource;
     }
@@ -90,9 +81,10 @@ final class ClientConfiguration
     {
         return array_filter(
             $options,
-            function ($value): bool {
-                return ! empty($value) || \is_int($value) || \is_bool($value) || \is_float($value);
-            }
+            fn($value): bool => ! empty($value)
+                || \is_int($value)
+                || \is_bool($value)
+                || \is_float($value)
         );
     }
 }

@@ -9,10 +9,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class MongoFixturesLoader
 {
     /** @var array|MongoFixtureInterface[] */
-    private $loadedClasses;
+    private ?array $loadedClasses = null;
 
-    /** @var ContainerInterface */
-    private $container;
+    private ContainerInterface $container;
 
     public function __construct(ContainerInterface $container)
     {
@@ -78,7 +77,7 @@ final class MongoFixturesLoader
     /**
      * @param mixed $instance
      */
-    private function buildFixture($instance): MongoFixtureInterface
+    private function buildFixture(object $instance): MongoFixtureInterface
     {
         if ($instance instanceof AbstractContainerAwareFixture) {
             $instance->setContainer($this->container);
@@ -87,7 +86,7 @@ final class MongoFixturesLoader
         return $instance;
     }
 
-    public function addInstance(MongoFixtureInterface $list)
+    public function addInstance(MongoFixtureInterface $list): void
     {
         $listClass = \get_class($list);
 
@@ -113,7 +112,7 @@ final class MongoFixturesLoader
     /**
      * @return array|MongoFixtureInterface[]
      */
-    public function getLoadedClasses()
+    public function getLoadedClasses(): ?array
     {
         return $this->loadedClasses;
     }

@@ -27,8 +27,7 @@ class ExplainQueryService
         'aggregate',
     ];
 
-    /** @var ClientRegistry */
-    private $clientRegistry;
+    private ClientRegistry $clientRegistry;
 
     /**
      * Constructs a explain command.
