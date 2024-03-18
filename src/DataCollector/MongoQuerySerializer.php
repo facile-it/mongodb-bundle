@@ -22,7 +22,7 @@ final class MongoQuerySerializer
     /**
      * @param array|object $data
      *
-     * @return array|object
+     * @return mixed[]
      */
     private static function prepareUnserializableData($data): array
     {

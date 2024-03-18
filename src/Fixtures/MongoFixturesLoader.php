@@ -74,9 +74,6 @@ final class MongoFixturesLoader
         );
     }
 
-    /**
-     * @param mixed $instance
-     */
     private function buildFixture(object $instance): MongoFixtureInterface
     {
         if ($instance instanceof AbstractContainerAwareFixture) {
