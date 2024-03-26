@@ -15,25 +15,22 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 class ProfilerController implements ContainerAwareInterface
 {
-    /** @var Container */
-    private $container;
+    private ?ContainerInterface $container = null;
 
     /**
      * Sets the container.
      *
      * @param ContainerInterface|null $container A ContainerInterface instance or null
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(ContainerInterface $container = null): void
     {
         $this->container = $container;
     }
 
     /**
      * @throws \Exception
-     *
-     * @return JsonResponse
      */
-    public function explainAction($token, $queryNumber)
+    public function explainAction(string $token, $queryNumber): JsonResponse
     {
         /** @var Profiler $profiler */
         $profiler = $this->container->get('profiler');

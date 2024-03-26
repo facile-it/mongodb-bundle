@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  */
 class MongoLoggerTest extends TestCase
 {
-    public function test_logger_connections()
+    public function test_logger_connections(): void
     {
         $logger = new MongoQueryLogger();
 
@@ -23,7 +23,7 @@ class MongoLoggerTest extends TestCase
         self::assertEquals(['test_connection', 'test_connection2'], $logger->getConnections());
     }
 
-    public function test_logger_queries()
+    public function test_logger_queries(): void
     {
         $event1 = new Query();
         $event1->setCollection('coll1');

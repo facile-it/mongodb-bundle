@@ -12,7 +12,7 @@ use MongoDB\BSON\Serializable;
  */
 final class MongoQuerySerializer
 {
-    public static function serialize(Query $query)
+    public static function serialize(Query $query): void
     {
         $query->setFilters(self::prepareUnserializableData($query->getFilters()));
         $query->setData(self::prepareUnserializableData($query->getData()));
@@ -22,9 +22,9 @@ final class MongoQuerySerializer
     /**
      * @param array|object $data
      *
-     * @return array|object
+     * @return mixed[]
      */
-    private static function prepareUnserializableData($data)
+    private static function prepareUnserializableData($data): array
     {
         if ($data instanceof Serializable) {
             $data = $data->bsonSerialize();
@@ -50,7 +50,7 @@ final class MongoQuerySerializer
         }
 
         if (\is_array($item)) {
-            return self::prepareUnserializableData((array) $item);
+            return self::prepareUnserializableData($item);
         }
 
         if (\is_object($item)) {

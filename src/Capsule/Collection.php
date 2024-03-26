@@ -16,14 +16,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class Collection extends MongoCollection
 {
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
-    /** @var string */
-    private $clientName;
+    private string $clientName;
 
-    /** @var string */
-    private $databaseName;
+    private string $databaseName;
 
     public function __construct(
         Manager $manager,
@@ -225,7 +222,7 @@ final class Collection extends MongoCollection
         }
     }
 
-    private function notifyQueryExecution(Query $queryLog)
+    private function notifyQueryExecution(Query $queryLog): void
     {
         $queryLog->setExecutionTime(microtime(true) - $queryLog->getStart());
 

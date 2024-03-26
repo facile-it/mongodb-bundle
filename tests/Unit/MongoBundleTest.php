@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class MongoBundleTest extends TestCase
 {
-    public function test_bundle()
+    public function test_bundle(): void
     {
         $bundle = new FacileMongoDbBundle();
         $this->assertInstanceOf(MongoDbBundleExtension::class, $bundle->getContainerExtension());

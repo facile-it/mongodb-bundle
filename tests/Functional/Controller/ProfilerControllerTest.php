@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Functional\Controller;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Facile\MongoDbBundle\Controller\ProfilerController;
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\Models\Query;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 class ProfilerControllerTest extends AppTestCase
 {
-    use \Prophecy\PhpUnit\ProphecyTrait;
+    use ProphecyTrait;
 
     protected function setUp(): void
     {
@@ -24,7 +25,7 @@ class ProfilerControllerTest extends AppTestCase
         parent::setUp();
     }
 
-    public function test_explainAction()
+    public function test_explainAction(): void
     {
         $query = new Query();
         $query->setClient('test_client');
@@ -64,7 +65,7 @@ class ProfilerControllerTest extends AppTestCase
         $this->assertArrayNotHasKey('err', $data);
     }
 
-    public function test_explainAction_error()
+    public function test_explainAction_error(): void
     {
         $query = new Query();
         $query->setMethod('fooo');

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class LogEventTest extends TestCase
 {
-    public function test_construction()
+    public function test_construction(): void
     {
         $query = new Query();
         $query->setCollection('test_collection');

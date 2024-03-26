@@ -15,7 +15,7 @@ class ExplainQueryServiceTest extends AppTestCase
         parent::setUp();
     }
 
-    public function test_execute()
+    public function test_execute(): void
     {
         $query = new Query();
         $query->setMethod('findOne');
@@ -29,7 +29,7 @@ class ExplainQueryServiceTest extends AppTestCase
         $this->assertNotEmpty($explain);
     }
 
-    public function test_execute_not_available_method()
+    public function test_execute_not_available_method(): void
     {
         $query = new Query();
         $query->setMethod('fooooo');

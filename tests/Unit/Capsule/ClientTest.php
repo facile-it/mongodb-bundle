@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+namespace Facile\MongoDbBundle\Tests\Unit\Capsule;
+
+use Prophecy\PhpUnit\ProphecyTrait;
 use Facile\MongoDbBundle\Capsule\Client;
 use MongoDB\Client as MongoClient;
 use MongoDB\Collection as MongoCollection;
@@ -11,9 +14,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ClientTest extends TestCase
 {
-    use \Prophecy\PhpUnit\ProphecyTrait;
+    use ProphecyTrait;
 
-    public function test_mongodb_client_encapsulation()
+    public function test_mongodb_client_encapsulation(): void
     {
         $client = new Client('mongodb://localhost:27017', [], [], 'test_client', $this->prophesize(EventDispatcherInterface::class)->reveal());
 

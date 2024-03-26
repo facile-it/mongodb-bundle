@@ -30,7 +30,7 @@ class LoadFixturesCommandTest extends AppTestCase
         $this->conn->dropCollection('testFixturesOrderedCollection');
     }
 
-    public function test_command()
+    public function test_command(): void
     {
         $this->conn->createCollection('testFixturesCollection');
 
@@ -55,7 +55,7 @@ class LoadFixturesCommandTest extends AppTestCase
         self::assertStringContainsString('Done, loaded 4 fixtures files', $commandTester->getDisplay());
     }
 
-    public function test_command_not_fixtures_found()
+    public function test_command_not_fixtures_found(): void
     {
         $this->addCommandToApplication();
         $command = $this->getApplication()->find('mongodb:fixtures:load');
@@ -65,7 +65,7 @@ class LoadFixturesCommandTest extends AppTestCase
         $commandTester->execute([]);
     }
 
-    public function test_command_order_fixtures()
+    public function test_command_order_fixtures(): void
     {
         $this->conn->createCollection('testFixturesOrderedCollection');
 
@@ -107,7 +107,7 @@ class LoadFixturesCommandTest extends AppTestCase
         $this->conn->dropCollection('testFixturesOrderedCollection');
     }
 
-    private function addCommandToApplication()
+    private function addCommandToApplication(): void
     {
         $container = $this->getApplication()
             ->getKernel()

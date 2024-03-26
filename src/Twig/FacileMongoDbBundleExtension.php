@@ -8,12 +8,12 @@ use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-if (! class_exists('\Twig\Extension\AbstractExtension')) {
-    class_alias(\Twig_Extension::class, '\Twig\Extension\AbstractExtension');
+if (! class_exists(AbstractExtension::class)) {
+    class_alias(\Twig_Extension::class, AbstractExtension::class);
 }
 
-if (! class_exists('\Twig\TwigFunction')) {
-    class_alias(\Twig_Function::class, '\Twig\TwigFunction');
+if (! class_exists(TwigFunction::class)) {
+    class_alias(\Twig_Function::class, TwigFunction::class);
 }
 
 class FacileMongoDbBundleExtension extends AbstractExtension

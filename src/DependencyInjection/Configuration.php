@@ -23,15 +23,15 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('mongo_db_bundle');
         $rootBuilder = $treeBuilder->getRootNode();
 
-        self::addDataCollection($rootBuilder->children());
-        self::addClients($rootBuilder->children());
-        self::addConnections($rootBuilder->children());
-        self::addDriversOption($rootBuilder->children());
+        $this->addDataCollection($rootBuilder->children());
+        $this->addClients($rootBuilder->children());
+        $this->addConnections($rootBuilder->children());
+        $this->addDriversOption($rootBuilder->children());
 
         return $treeBuilder;
     }
 
-    private static function addDataCollection(NodeBuilder $builder): void
+    private function addDataCollection(NodeBuilder $builder): void
     {
         $builder
             ->booleanNode('data_collection')
@@ -39,7 +39,7 @@ final class Configuration implements ConfigurationInterface
             ->info('Disables Data Collection if needed');
     }
 
-    private static function addClients(NodeBuilder $builder): void
+    private function addClients(NodeBuilder $builder): void
     {
         $clientsBuilder = $builder
             ->arrayNode('clients')
@@ -49,7 +49,7 @@ final class Configuration implements ConfigurationInterface
             ->prototype('array')
             ->children();
 
-        self::addClientsHosts($clientsBuilder);
+        $this->addClientsHosts($clientsBuilder);
 
         $clientsBuilder
             ->scalarNode('uri')
@@ -89,7 +89,7 @@ final class Configuration implements ConfigurationInterface
             ->defaultNull();
     }
 
-    private static function addClientsHosts(NodeBuilder $builder): void
+    private function addClientsHosts(NodeBuilder $builder): void
     {
         $hostsBuilder = $builder
             ->arrayNode('hosts')
@@ -106,13 +106,13 @@ final class Configuration implements ConfigurationInterface
             ->defaultValue(27_017);
     }
 
-    private static function addDriversOption(NodeBuilder $builder): void
+    private function addDriversOption(NodeBuilder $builder): void
     {
         $builder
             ->scalarNode('driverOptions');
     }
 
-    private static function addConnections(NodeBuilder $builder): void
+    private function addConnections(NodeBuilder $builder): void
     {
         $connectionBuilder = $builder
             ->arrayNode('connections')

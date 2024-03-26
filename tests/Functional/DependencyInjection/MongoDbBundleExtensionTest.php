@@ -33,7 +33,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->container->setAlias(self::DISPATCHER_PUBLIC_ALIAS, new Alias('facile_mongo_db.event_dispatcher', true));
     }
 
-    public function test_load()
+    public function test_load(): void
     {
         $this->load(
             [
@@ -85,7 +85,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('mongo.explain_query_service', ExplainQueryService::class);
     }
 
-    public function test_load_data_collection_disabled()
+    public function test_load_data_collection_disabled(): void
     {
         $this->load(
             [
@@ -131,7 +131,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         self::assertCount(0, $ed->getListeners());
     }
 
-    public function test_load_env_prod()
+    public function test_load_env_prod(): void
     {
         $this->setParameter('kernel.debug', false);
         $this->load(
@@ -170,7 +170,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertSame('testdb', $defaultConnection->getDatabaseName());
     }
 
-    public function test_load_multiple()
+    public function test_load_multiple(): void
     {
         $this->load(
             [
@@ -236,7 +236,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
     /**
      * @dataProvider commandNamesProvider
      */
-    public function testCommands()
+    public function testCommands(): void
     {
         $command = 'facile_mongo_db.command.drop_database';
         $publicAlias = $command . '.public';

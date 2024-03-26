@@ -11,10 +11,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class AppTestCase extends TestCase
 {
-    /** @var Application */
-    private $application;
+    private ?Application $application = null;
 
-    private $env = 'test';
+    private string $env = 'test';
 
     protected function setUp(): void
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\DataCollector;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Facile\MongoDbBundle\DataCollector\MongoQuerySerializer;
 use Facile\MongoDbBundle\Models\Query;
 use MongoDB\BSON\UTCDateTime;
@@ -12,12 +13,12 @@ use PHPUnit\Framework\TestCase;
 
 class MongoQuerySerializerTest extends TestCase
 {
-    use \Prophecy\PhpUnit\ProphecyTrait;
+    use ProphecyTrait;
 
     /**
      * @dataProvider unserializedDataProvider
      */
-    public function test_serializer($unserializedData, $expectedSerialization)
+    public function test_serializer(array $unserializedData, $expectedSerialization): void
     {
         $query = new Query();
         $query->setFilters($unserializedData);
@@ -31,7 +32,7 @@ class MongoQuerySerializerTest extends TestCase
         $this->assertEquals($expectedSerialization, $query->getOptions()['test']);
     }
 
-    public function unserializedDataProvider()
+    public function unserializedDataProvider(): array
     {
         $date = new UTCDateTime(1_000);
         $dateTime = $date->toDateTime();
@@ -51,7 +52,7 @@ class MongoQuerySerializerTest extends TestCase
         ];
     }
 
-    public function test_serializer_regression_with_replaceOne()
+    public function test_serializer_regression_with_replaceOne(): void
     {
         $stdClass = new \stdClass();
         $stdClass->one = 'one';

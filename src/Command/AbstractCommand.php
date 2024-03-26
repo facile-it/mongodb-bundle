@@ -23,8 +23,7 @@ abstract class AbstractCommand extends Command
     /** @var Connection */
     protected $connection;
 
-    /** @var ContainerInterface */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * AbstractCommand constructor.

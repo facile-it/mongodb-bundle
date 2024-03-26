@@ -14,11 +14,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class Client extends MongoClient
 {
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
-    /** @var string */
-    private $clientName;
+    private string $clientName;
 
     /**
      * Client constructor.

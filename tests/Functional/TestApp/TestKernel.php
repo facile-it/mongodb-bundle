@@ -28,7 +28,7 @@ class TestKernel extends Kernel
     /**
      * @inheritDoc
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $suffix = '';
         $version = '';

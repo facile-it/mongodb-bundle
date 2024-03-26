@@ -8,15 +8,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractContainerAwareFixture
 {
-    /** @var ContainerInterface */
-    private $container;
+    private ContainerInterface $container;
 
     protected function getContainer(): ContainerInterface
     {
         return $this->container;
     }
 
-    public function setContainer(ContainerInterface $container)
+    public function setContainer(ContainerInterface $container): void
     {
         $this->container = $container;
     }

@@ -13,8 +13,7 @@ use MongoDB\Database;
  */
 final class ConnectionFactory
 {
-    /** @var ClientRegistry */
-    private $clientRegistry;
+    private ClientRegistry $clientRegistry;
 
     public function __construct(ClientRegistry $clientRegistry)
     {
