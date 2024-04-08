@@ -15,7 +15,7 @@ class AbstractCommandTest extends AppTestCase
     /**
      * @dataProvider commandOptionsProvider
      */
-    public function test_AbstractCommand_execution(array $arguments)
+    public function test_AbstractCommand_execution(array $arguments): void
     {
         $this->addCommandToApplication();
 
@@ -27,7 +27,7 @@ class AbstractCommandTest extends AppTestCase
         self::assertStringContainsString('Executed', $commandTester->getDisplay());
     }
 
-    public function test_AbstractCommand_connection_exception()
+    public function test_AbstractCommand_connection_exception(): void
     {
         $this->addCommandToApplication();
 
@@ -42,7 +42,7 @@ class AbstractCommandTest extends AppTestCase
         $commandTester->execute(['command' => $command->getName(), '--connection' => $unexistantConnectionName]);
     }
 
-    public function commandOptionsProvider()
+    public function commandOptionsProvider(): array
     {
         return [
             [[]],
@@ -50,7 +50,7 @@ class AbstractCommandTest extends AppTestCase
         ];
     }
 
-    private function addCommandToApplication()
+    private function addCommandToApplication(): void
     {
         $container = $this->getApplication()
             ->getKernel()

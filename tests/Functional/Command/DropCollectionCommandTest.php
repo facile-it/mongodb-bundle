@@ -11,7 +11,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class DropCollectionCommandTest extends AppTestCase
 {
-    public function test_command()
+    public function test_command(): void
     {
         /** @var Database $conn */
         $conn = $this->getContainer()->get('mongo.connection');
@@ -30,7 +30,7 @@ class DropCollectionCommandTest extends AppTestCase
         self::assertStringContainsString('Collection dropped', $commandTester->getDisplay());
     }
 
-    private function addCommandToApplication()
+    private function addCommandToApplication(): void
     {
         $container = $this->getApplication()
             ->getKernel()

@@ -23,8 +23,7 @@ class MongoDbDataCollector extends DataCollector
 
     public const TIME_KEYWORD = 'totalTime';
 
-    /** @var DataCollectorLoggerInterface */
-    private $logger;
+    private ?DataCollectorLoggerInterface $logger = null;
 
     public function __construct()
     {

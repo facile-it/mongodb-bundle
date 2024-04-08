@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class ExplainCommandBuilderTest extends TestCase
 {
-    public function test_count()
+    public function test_count(): void
     {
         $query = new Query();
         $query->setCollection('test_collection');
@@ -32,7 +32,7 @@ class ExplainCommandBuilderTest extends TestCase
         );
     }
 
-    public function test_distinct()
+    public function test_distinct(): void
     {
         $query = new Query();
         $query->setCollection('test_collection');
@@ -55,7 +55,7 @@ class ExplainCommandBuilderTest extends TestCase
         );
     }
 
-    public function test_aggregate()
+    public function test_aggregate(): void
     {
         $query = new Query();
         $query->setCollection('test_collection');
@@ -77,7 +77,7 @@ class ExplainCommandBuilderTest extends TestCase
     /**
      * @dataProvider findsProvider
      */
-    public function test_finds(string $method, bool $projection = false)
+    public function test_finds(string $method, bool $projection = false): void
     {
         $query = new Query();
         $query->setCollection('test_collection');
@@ -106,7 +106,7 @@ class ExplainCommandBuilderTest extends TestCase
         $this->assertEquals($expected, $args);
     }
 
-    public function findsProvider()
+    public function findsProvider(): array
     {
         return [
             ['find', true],
@@ -119,13 +119,13 @@ class ExplainCommandBuilderTest extends TestCase
     /**
      * @dataProvider deletedsProvider
      */
-    public function test_deletes(string $method, int $limit = 0)
+    public function test_deletes(string $method, int $limit = 0): void
     {
         $query = new Query();
         $query->setCollection('test_collection');
         $query->setMethod($method);
         $query->setFilters(['id' => 1]);
-        if ($limit) {
+        if ($limit !== 0) {
             $query->setOptions([
                 'limit' => $limit,
             ]);
@@ -146,7 +146,7 @@ class ExplainCommandBuilderTest extends TestCase
         $this->assertEquals($expected, $args);
     }
 
-    public function deletedsProvider()
+    public function deletedsProvider(): array
     {
         return [
             ['deleteOne', 0],

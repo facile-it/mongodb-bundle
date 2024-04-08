@@ -1,16 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Controller\\\\ProfilerController\\:\\:\\$container \\(Symfony\\\\Component\\\\DependencyInjection\\\\Container\\) does not accept Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\|null\\.$#"
-			count: 1
-			path: src/Controller/ProfilerController.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\DataCollector\\\\MongoQuerySerializer\\:\\:prepareUnserializableData\\(\\) never returns object so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DataCollector/MongoQuerySerializer.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
 			count: 7
 			path: src/DependencyInjection/Configuration.php
@@ -51,29 +41,14 @@ parameters:
 			path: src/Twig/FacileMongoDbBundleExtension.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Fixtures\\\\DataFixtures\\\\TestFixtures\\:\\:loadData\\(\\) should return array but return statement is missing\\.$#"
-			count: 1
-			path: tests/Fixtures/DataFixtures/TestFixtures.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Fixtures\\\\DataFixtures\\\\TestFixtures\\:\\:loadIndexes\\(\\) should return array but return statement is missing\\.$#"
 			count: 1
 			path: tests/Fixtures/DataFixtures/TestFixtures.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Fixtures\\\\DataFixtures\\\\TestOrderedMongoFixtures2\\:\\:loadData\\(\\) should return array but return statement is missing\\.$#"
-			count: 1
-			path: tests/Fixtures/DataFixtures/TestOrderedMongoFixtures2.php
-
-		-
 			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Fixtures\\\\DataFixtures\\\\TestOrderedMongoFixtures2\\:\\:loadIndexes\\(\\) should return array but return statement is missing\\.$#"
 			count: 1
 			path: tests/Fixtures/DataFixtures/TestOrderedMongoFixtures2.php
-
-		-
-			message: "#^Property Facile\\\\MongoDbBundle\\\\Tests\\\\Functional\\\\AppTestCase\\:\\:\\$application \\(Symfony\\\\Bundle\\\\FrameworkBundle\\\\Console\\\\Application\\) does not accept null\\.$#"
-			count: 1
-			path: tests/Functional/AppTestCase.php
 
 		-
 			message: "#^Access to an undefined property MongoDB\\\\Model\\\\BSONDocument\\:\\:\\$fqcn\\.$#"

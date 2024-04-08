@@ -18,8 +18,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class LoadFixturesCommand extends AbstractCommand
 {
-    /** @var MongoFixturesLoader */
-    private $loader;
+    private ?MongoFixturesLoader $loader = null;
 
     /**
      * @inheritDoc

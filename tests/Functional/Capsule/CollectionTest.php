@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Functional\Capsule;
 
+use Prophecy\PhpUnit\ProphecyTrait;
+use Facile\MongoDbBundle\Services\ClientRegistry;
+use MongoDB\Client;
 use Facile\MongoDbBundle\Capsule\Collection;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
@@ -13,19 +16,19 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CollectionTest extends AppTestCase
 {
-    use \Prophecy\PhpUnit\ProphecyTrait;
+    use ProphecyTrait;
 
     private function getManager(): Manager
     {
-        /** @var \Facile\MongoDbBundle\Services\ClientRegistry $reg */
+        /** @var ClientRegistry $reg */
         $reg = $this->getContainer()->get('mongo.client_registry');
-        /** @var \MongoDB\Client $client */
+        /** @var Client $client */
         $client = $reg->getClient('test_client', 'testdb');
 
         return $client->__debugInfo()['manager'];
     }
 
-    public function test_construction()
+    public function test_construction(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -35,7 +38,7 @@ class CollectionTest extends AppTestCase
         self::assertInstanceOf(\MongoDB\Collection::class, $coll);
     }
 
-    public function test_insertOne()
+    public function test_insertOne(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -46,7 +49,7 @@ class CollectionTest extends AppTestCase
         $coll->insertOne(['test' => 1]);
     }
 
-    public function test_updateOne()
+    public function test_updateOne(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -57,7 +60,7 @@ class CollectionTest extends AppTestCase
         $coll->updateOne(['filter' => 1], ['$set' => ['testField' => 1]]);
     }
 
-    public function test_count()
+    public function test_count(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -68,7 +71,7 @@ class CollectionTest extends AppTestCase
         $coll->count(['test' => 1]);
     }
 
-    public function test_find()
+    public function test_find(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -79,7 +82,7 @@ class CollectionTest extends AppTestCase
         $coll->find([]);
     }
 
-    public function test_findOne()
+    public function test_findOne(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -90,7 +93,7 @@ class CollectionTest extends AppTestCase
         $coll->findOne([]);
     }
 
-    public function test_findOneAndUpdate()
+    public function test_findOneAndUpdate(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -101,7 +104,7 @@ class CollectionTest extends AppTestCase
         $coll->findOneAndUpdate([], ['$set' => ['country' => 'us']]);
     }
 
-    public function test_findOneAndDelete()
+    public function test_findOneAndDelete(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -112,7 +115,7 @@ class CollectionTest extends AppTestCase
         $coll->findOneAndDelete([]);
     }
 
-    public function test_deleteOne()
+    public function test_deleteOne(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -123,7 +126,7 @@ class CollectionTest extends AppTestCase
         $coll->deleteOne([]);
     }
 
-    public function test_replaceOne()
+    public function test_replaceOne(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -134,7 +137,7 @@ class CollectionTest extends AppTestCase
         $coll->replaceOne([], []);
     }
 
-    public function test_aggregate()
+    public function test_aggregate(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -165,7 +168,7 @@ class CollectionTest extends AppTestCase
     }
 
     /** leave this test as last one to clean the collection*/
-    public function test_deleteMany()
+    public function test_deleteMany(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);
@@ -176,7 +179,7 @@ class CollectionTest extends AppTestCase
         $coll->deleteMany([]);
     }
 
-    public function test_distinct()
+    public function test_distinct(): void
     {
         $manager = $this->getManager();
         $ev = $this->prophesize(EventDispatcherInterface::class);

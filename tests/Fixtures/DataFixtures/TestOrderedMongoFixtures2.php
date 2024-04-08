@@ -10,10 +10,7 @@ use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
 
 class TestOrderedMongoFixtures2 extends AbstractContainerAwareFixture implements MongoFixtureInterface
 {
-    /**
-     * @return array
-     */
-    public function loadData()
+    public function loadData(): void
     {
         $doc = [
             'type' => 'fixture',

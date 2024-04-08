@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ClientConfigurationTest extends TestCase
 {
-    public function test_construction()
+    public function test_construction(): void
     {
         $conf = new ClientConfiguration(
             'localhost:27017',
@@ -32,7 +32,7 @@ class ClientConfigurationTest extends TestCase
         );
     }
 
-    public function test_construction_empty_credentials()
+    public function test_construction_empty_credentials(): void
     {
         $conf = new ClientConfiguration(
             'localhost:27017',
@@ -52,7 +52,7 @@ class ClientConfigurationTest extends TestCase
     /**
      * @dataProvider optionsDataProvider
      */
-    public function test_construction_with_options(array $options, array $expectedOptions)
+    public function test_construction_with_options(array $options, array $expectedOptions): void
     {
         $conf = new ClientConfiguration(
             'localhost:27017',
@@ -71,7 +71,7 @@ class ClientConfigurationTest extends TestCase
         );
     }
 
-    public function optionsDataProvider()
+    public function optionsDataProvider(): array
     {
         return [
             [   // set 1

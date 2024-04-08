@@ -19,27 +19,22 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 final class ClientRegistry
 {
     /** @var Client[] */
-    private $clients;
+    private array $clients = [];
 
     /** @var ClientConfiguration[] */
-    private $configurations;
+    private array $configurations = [];
 
-    /** @var bool */
-    private $debug;
+    private bool $debug;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
-    /** @var DriverOptionsInterface */
-    private $driverOptionsService;
+    private ?DriverOptionsInterface $driverOptionsService;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
         bool $debug,
         ?DriverOptionsInterface $driverOptionsService
     ) {
-        $this->clients = [];
-        $this->configurations = [];
         $this->debug = $debug;
         $this->eventDispatcher = $eventDispatcher;
         $this->driverOptionsService = $driverOptionsService;
@@ -55,7 +50,7 @@ final class ClientRegistry
     private function buildClientConfiguration(array $conf): ClientConfiguration
     {
         if (! $conf['uri']) {
-            $conf['uri'] = self::buildConnectionUri($conf['hosts']);
+            $conf['uri'] = $this->buildConnectionUri($conf['hosts']);
         }
 
         $conf['driverOptions'] = [];
@@ -78,14 +73,12 @@ final class ClientRegistry
         );
     }
 
-    private static function buildConnectionUri(array $hosts): string
+    private function buildConnectionUri(array $hosts): string
     {
         return 'mongodb://' . implode(
             ',',
             array_map(
-                static function (array $host): string {
-                    return sprintf('%s:%d', $host['host'], $host['port']);
-                },
+                static fn(array $host): string => sprintf('%s:%d', $host['host'], $host['port']),
                 $hosts
             )
         );
@@ -123,7 +116,7 @@ final class ClientRegistry
 
     private function buildClient(string $clientName, string $uri, array $options, array $driverOptions): Client
     {
-        if (true === $this->debug) {
+        if ($this->debug) {
             return new BundleClient($uri, $options, $driverOptions, $clientName, $this->eventDispatcher);
         }
 

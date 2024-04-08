@@ -12,7 +12,7 @@ class FacileMongoDbBundleExtensionTest extends TestCase
     /**
      * @dataProvider labelMethodProvider
      */
-    public function test_queryDataTranslate(string $label, string $methodname, string $expected)
+    public function test_queryDataTranslate(string $label, string $methodname, string $expected): void
     {
         $ext = new FacileMongoDbBundleExtension();
         $this->assertEquals($expected, $ext->queryDataTranslate($label, $methodname));
@@ -21,13 +21,13 @@ class FacileMongoDbBundleExtensionTest extends TestCase
     /**
      * @dataProvider explainMethodsProvider
      */
-    public function test_isQueryExplainable(string $methodname, bool $expected)
+    public function test_isQueryExplainable(string $methodname, bool $expected): void
     {
         $ext = new FacileMongoDbBundleExtension();
         $this->assertEquals($expected, $ext->isQueryExplainable($methodname));
     }
 
-    public function test_get_name()
+    public function test_get_name(): void
     {
         $ext = new FacileMongoDbBundleExtension();
         $this->assertEquals('facile_mongo_db_extesion', $ext->getName());

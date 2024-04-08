@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class DataCollectorListenerTest extends TestCase
 {
-    public function test_onConnectionClientCreated()
+    public function test_onConnectionClientCreated(): void
     {
         $event = new ConnectionEvent('test_client');
 
@@ -29,7 +29,7 @@ class DataCollectorListenerTest extends TestCase
         self::assertFalse($logger->hasLoggedEvents());
     }
 
-    public function test_onQueryExecuted()
+    public function test_onQueryExecuted(): void
     {
         $query = new Query();
 
