@@ -38,9 +38,10 @@ jobs:
           - php: 8.2
             mongo-ext: 1.15.0
             mongo-img: 6.0
+            symfony: "^6.4"
           - php: 8.3
-            mongo-ext: 1.16.0
-            mongo-img: 6.0
+            mongo-ext: 1.19.0
+            mongo-img: 7.0
 
     steps:
       - name: Checkout
