@@ -6,49 +6,45 @@ namespace Facile\MongoDbBundle\Controller;
 
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\DataCollector\MongoQuerySerializer;
+use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
 use MongoDB\BSON\UTCDateTime;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
-class ProfilerController implements ContainerAwareInterface
+class ProfilerController
 {
-    private ?ContainerInterface $container = null;
+    private ExplainQueryService $explain;
 
-    /**
-     * Sets the container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
-     */
-    public function setContainer(ContainerInterface $container = null): void
+    private ?Profiler $profiler;
+
+    public function __construct(ExplainQueryService $explain, ?Profiler $profiler)
     {
-        $this->container = $container;
+        $this->explain = $explain;
+        $this->profiler = $profiler;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function explainAction(string $token, $queryNumber): JsonResponse
     {
-        /** @var Profiler $profiler */
-        $profiler = $this->container->get('profiler');
-        $profiler->disable();
+        $this->profiler->disable();
 
-        $profile = $profiler->loadProfile($token);
-        /** @var MongoDbDataCollector $dataCollector */
+        $profile = $this->profiler->loadProfile($token);
+        if (! $profile) {
+            throw new \RuntimeException('No profile found');
+        }
+
         $dataCollector = $profile->getCollector('mongodb');
+        if (! $dataCollector instanceof MongoDbDataCollector) {
+            throw new \RuntimeException('MongoDb data collector not found');
+        }
+
         $queries = $dataCollector->getQueries();
 
         $query = $queries[$queryNumber];
 
         $query->setFilters($this->walkAndConvertToUTCDatetime($query->getFilters()));
 
-        $service = $this->container->get('mongo.explain_query_service');
-
         try {
-            $result = $service->execute($query);
+            $result = $this->explain->execute($query);
         } catch (\InvalidArgumentException $e) {
             return new JsonResponse([
                 'err' => $e->getMessage(),
