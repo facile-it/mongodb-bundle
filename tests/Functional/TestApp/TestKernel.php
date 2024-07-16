@@ -6,6 +6,7 @@ namespace Facile\MongoDbBundle\Tests\Functional\TestApp;
 
 use Facile\MongoDbBundle\FacileMongoDbBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
@@ -21,6 +22,7 @@ class TestKernel extends Kernel
     {
         return [
             new FrameworkBundle(),
+            new MonologBundle(),
             new FacileMongoDbBundle(),
         ];
     }

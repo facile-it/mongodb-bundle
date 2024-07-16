@@ -38,7 +38,8 @@
         "jangregor/phpstan-prophecy": "1.0.2",
         "phpspec/prophecy": "^1.17",
         "rector/rector": "^1.0.3",
-        "phpspec/prophecy-phpunit": "^2.0"
+        "phpspec/prophecy-phpunit": "^2.0",
+        "symfony/monolog-bundle": "*"
     },
     "minimum-stability": "stable",
     "suggest": {
