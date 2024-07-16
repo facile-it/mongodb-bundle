@@ -1,3 +1,6 @@
+parameters:
+  mongo_host: localhost
+
 framework:
   secret: "Four can keep a secret, if three of them are dead."
 
@@ -8,7 +11,7 @@ mongo_db_bundle:
       password: rootPass
       authSource: admin
       hosts:
-      - { host: mongo, port: 27017 }
+      - { host: '%mongo_host%', port: 27017 }
 
   connections:
     test_db:

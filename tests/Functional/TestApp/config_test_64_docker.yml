@@ -1,6 +1,0 @@
-imports:
-  - { resource: ./config_test_61_docker.yml }
-
-framework:
-  handle_all_throwables: true
-  php_errors: true
