@@ -1,0 +1,8 @@
+framework:
+  router: { resource: "%routing_config_dir%/routing.yaml" }
+  test: true
+  profiler: true
+
+twig:
+  exception_controller: ~
+  strict_variables: "%kernel.debug%"

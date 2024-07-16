@@ -4,99 +4,88 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Functional\Controller;
 
+use Facile\MongoDbBundle\Tests\Functional\TestApp\TestKernelWithProfiler;
 use Prophecy\PhpUnit\ProphecyTrait;
-use Facile\MongoDbBundle\Controller\ProfilerController;
-use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
-use Facile\MongoDbBundle\Models\Query;
-use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
-use MongoDB\BSON\UTCDateTime;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Profiler\Profile;
-use Symfony\Component\HttpKernel\Profiler\Profiler;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
-class ProfilerControllerTest extends AppTestCase
+class ProfilerControllerTest extends WebTestCase
 {
     use ProphecyTrait;
 
+    protected static function getKernelClass(): string
+    {
+        return TestKernelWithProfiler::class;
+    }
+
     protected function setUp(): void
     {
-        $this->setEnvDev();
+        $this->cleanUpDir(__DIR__ . '/../../../var/cache');
         parent::setUp();
     }
 
     public function test_explainAction(): void
     {
-        $query = new Query();
-        $query->setClient('test_client');
-        $query->setDatabase('testFunctionaldb');
-        $query->setCollection('fooCollection');
-        $query->setMethod('count');
-        $query->setFilters(['date' => new UTCDateTime((new \DateTime())->getTimestamp() * 1_000)]);
+        $client = self::createClient();
 
-        $collector = $this->prophesize(MongoDbDataCollector::class);
-        $collector->getQueries()->shouldBeCalledTimes(1)->willReturn([$query]);
+        $client->request('GET', '/trigger_query');
+        $this->assertResponseIsSuccessful();
+        $crawler = $client->request('GET', '/_profiler/latest?panel=mongodb');
 
-        $profile = $this->prophesize(Profile::class);
-        $profile->getCollector('mongodb')->shouldBeCalledTimes(1)->willReturn($collector->reveal());
-
-        $profiler = $this->prophesize(Profiler::class);
-        $profiler->loadProfile('fooToken')->shouldBeCalledTimes(1)->willReturn($profile->reveal());
-        $profiler->disable()->shouldBeCalledTimes(1);
-
-        $explainService = $this->getContainer()->get('mongo.explain_query_service');
-
-        $container = $this->prophesize(Container::class);
-        $container->get('profiler')->willReturn($profiler->reveal());
-        $container->get('mongo.explain_query_service')->willReturn($explainService);
-
-        $controller = new ProfilerController();
-        $controller->setContainer($container->reveal());
-
-        $response = $controller->explainAction('fooToken', 0);
-
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
-
-        $data = json_decode($response->getContent(), true);
-        $this->assertEquals(JSON_ERROR_NONE, json_last_error());
-
-        $this->assertTrue(is_array($data));
-        $this->assertArrayNotHasKey('err', $data);
+        $this->assertResponseIsSuccessful();
+        $this->assertHeadersArePresent($crawler, 'http://localhost/trigger_query');
+        $explainTable = $crawler->filterXPath('//table[2]');
+        $this->assertCrawlerTextContainsString('insertOne', $explainTable);
+        $this->assertCrawlerTextContainsString('test_collection', $explainTable);
+        $this->assertCrawlerTextContainsString('{ "foo": "bar" }', $explainTable);
     }
 
     public function test_explainAction_error(): void
     {
-        $query = new Query();
-        $query->setMethod('fooo');
+        $client = self::createClient();
 
-        $collector = $this->prophesize(MongoDbDataCollector::class);
-        $collector->getQueries()->shouldBeCalledTimes(1)->willReturn([$query]);
+        $client->request('GET', '/noop');
+        $this->assertResponseIsSuccessful();
+        $crawler = $client->request('GET', '/_profiler/latest?panel=mongodb');
+        $this->assertResponseIsSuccessful();
 
-        $profile = $this->prophesize(Profile::class);
-        $profile->getCollector('mongodb')->shouldBeCalledTimes(1)->willReturn($collector->reveal());
+        $this->assertHeadersArePresent($crawler, 'http://localhost/noop');
+        $explainTable = $crawler->filterXPath('//table[2]');
+        $this->assertCrawlerTextContainsString('No queries', $explainTable);
+    }
 
-        $profiler = $this->prophesize(Profiler::class);
-        $profiler->loadProfile('fooToken')->shouldBeCalledTimes(1)->willReturn($profile->reveal());
-        $profiler->disable()->shouldBeCalledTimes(1);
+    private function cleanUpDir(string $dir): bool
+    {
+        if (! file_exists($dir)) {
+            return false;
+        }
 
-        $explainService = $this->getContainer()->get('mongo.explain_query_service');
+        $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
 
-        $container = $this->prophesize(Container::class);
-        $container->get('profiler')->willReturn($profiler->reveal());
-        $container->get('mongo.explain_query_service')->willReturn($explainService);
+        foreach ($files as $file) {
+            if ($file->isDir()) {
+                $this->cleanUpDir($file->getRealPath());
+            } else {
+                unlink($file->getRealPath());
+            }
+        }
 
-        $controller = new ProfilerController();
-        $controller->setContainer($container->reveal());
+        return rmdir($dir);
+    }
 
-        $response = $controller->explainAction('fooToken', 0);
+    private function assertHeadersArePresent(Crawler $crawler, string $expectedTitle): void
+    {
+        $this->assertCrawlerTextContainsString($expectedTitle, $crawler->filterXPath('//h2[1]'));
+        $this->assertCrawlerTextContainsString('Mongo DB Query Metrics', $crawler->filterXPath('//h2[2]'));
+        $this->assertCrawlerTextContainsString('Connections list', $crawler->filterXPath('//h2[3]'));
+        $this->assertCrawlerTextContainsString('Queries Detail', $crawler->filterXPath('//h2[4]'));
+        $this->assertCrawlerTextContainsString('test_client.testFunctionaldb', $crawler->filterXPath('//table[1]'));
+    }
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
-
-        $data = json_decode($response->getContent(), true);
-
-        $this->assertTrue(is_array($data));
-        $this->assertArrayHasKey('err', $data);
+    private function assertCrawlerTextContainsString(string $needle, Crawler $explainTable): void
+    {
+        // silence 4.4 deprecation about whitespace normalization
+        $this->assertStringContainsString($needle, $explainTable->text('', true));
     }
 }

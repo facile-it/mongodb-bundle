@@ -1,0 +1,6 @@
+services:
+  Facile\MongoDbBundle\Tests\Functional\TestApp\MainController:
+    arguments:
+      $database: '@mongo.connection.test_db'
+    tags:
+      - controller.service_arguments
