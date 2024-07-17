@@ -6,6 +6,7 @@ namespace Facile\MongoDbBundle\Tests\Functional\TestApp;
 
 use Facile\MongoDbBundle\FacileMongoDbBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
@@ -21,6 +22,7 @@ class TestKernel extends Kernel
     {
         return [
             new FrameworkBundle(),
+            new MonologBundle(),
             new FacileMongoDbBundle(),
         ];
     }
@@ -30,22 +32,18 @@ class TestKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $suffix = '';
-        $version = '';
+        $loader->load(__DIR__ . '/config.yaml');
 
         if ('docker' === getenv('TEST_ENV')) {
-            $suffix = '_docker';
+            $loader->load(__DIR__ . '/docker.yaml');
         }
 
         if (version_compare(Kernel::VERSION, '6.1.0') >= 0) {
-            $version = '_61';
+            $loader->load(__DIR__ . '/deprecations_6.1.yml');
         }
 
         if (version_compare(Kernel::VERSION, '6.4.0') >= 0) {
-            $version = '_64';
+            $loader->load(__DIR__ . '/deprecations_6.4.yml');
         }
-
-        $configFile = sprintf('/config_test%s%s.yml', $version, $suffix);
-        $loader->load(__DIR__ . $configFile);
     }
 }

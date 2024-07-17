@@ -10,6 +10,8 @@ jobs:
   tests:
     name: Tests (PHP ${{ matrix.php }}, ext-mongodb ${{ matrix.mongo-ext }}, MongoDB ${{ matrix.mongo-img }}, Symfony ${{ matrix.symfony }})
     runs-on: ubuntu-latest
+    env:
+      SYMFONY_REQUIRE: ${{ matrix.symfony }}
     services:
       mongo:
         image: mongo:${{ matrix.mongo-img }}
@@ -38,9 +40,10 @@ jobs:
           - php: 8.2
             mongo-ext: 1.15.0
             mongo-img: 6.0
+            symfony: "^6.4"
           - php: 8.3
-            mongo-ext: 1.16.0
-            mongo-img: 6.0
+            mongo-ext: 1.19.0
+            mongo-img: 7.0
 
     steps:
       - name: Checkout
@@ -50,12 +53,10 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: mongodb-${{ matrix.mongo-ext }}
+          tools: flex
       - name: Allow unstable dependencies
         run: composer config minimum-stability dev
         if: matrix.symfony == 'dev-master'
-      - name: Restrict Symfony version
-        run: composer require "symfony/symfony:${{ matrix.symfony }}" --no-update
-        if: matrix.symfony
       - name: Install dependencies
         uses: ramsey/composer-install@v3
       - name: Await a bit for Mongo to spin up...
