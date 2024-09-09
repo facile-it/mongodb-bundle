@@ -35,7 +35,7 @@
         "symfony/routing": "^4.4 || ^5.0 || ^6.0 || ^7.0",
         "facile-it/facile-coding-standard": "1.2.0",
         "phpstan/phpstan": "1.12.0",
-        "phpstan/extension-installer": "1.4.2",
+        "phpstan/extension-installer": "1.4.3",
         "jangregor/phpstan-prophecy": "1.0.2",
         "phpspec/prophecy": "^1.17",
         "rector/rector": "^1.0.3",
