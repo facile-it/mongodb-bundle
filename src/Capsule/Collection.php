@@ -206,6 +206,10 @@ final class Collection extends MongoCollection
 
     private function translateReadPreference(ReadPreference $readPreference): string
     {
+        if (version_compare(phpversion('mongodb'), '1.20.0', '>=')) {
+            return $readPreference->getModeString();
+        }
+
         switch ($readPreference->getMode()) {
             case ReadPreference::RP_PRIMARY:
                 return 'primary';
