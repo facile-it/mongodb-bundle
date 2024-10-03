@@ -33,7 +33,7 @@ class DatabaseTest extends TestCase
         self::assertEquals('testdb', $debugInfo['databaseName']);
     }
 
-    public function test_withOptions_using_mongodb_extension_lower_than_1_20_0(): void
+    public function test_withOptions(): void
     {
         $manager = new Manager('mongodb://localhost');
         $logger = $this->prophesize(EventDispatcherInterface::class);
