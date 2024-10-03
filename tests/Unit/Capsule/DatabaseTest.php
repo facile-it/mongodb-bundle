@@ -35,10 +35,6 @@ class DatabaseTest extends TestCase
 
     public function test_withOptions_using_mongodb_extension_lower_than_1_20_0(): void
     {
-        if (version_compare(phpversion('mongodb'), '1.20.0', '>=')) {
-            $this->markTestSkipped('This test requires mongodb extension version 1.20.0 or later.');
-        }
-
         $manager = new Manager('mongodb://localhost');
         $logger = $this->prophesize(EventDispatcherInterface::class);
 
@@ -52,31 +48,16 @@ class DatabaseTest extends TestCase
         $debugInfo = $newDb->__debugInfo();
         self::assertSame($manager, $debugInfo['manager']);
         self::assertEquals('testdb', $debugInfo['databaseName']);
-        self::assertEquals(ReadPreference::RP_NEAREST, $debugInfo['readPreference']->getMode());
+
+        $this->assertReadPreferenceMode($debugInfo['readPreference']);
     }
 
-    /**
-     * @requires extension mongodb 1.20.0
-     */
-    public function test_withOptions_using_mongodb_extension_1_20_0_or_greater(): void
+    public function assertReadPreferenceMode(ReadPreference $readPreference): void
     {
-        if (version_compare(phpversion('mongodb'), '1.20.0', '<')) {
-            $this->markTestSkipped('This test requires mongodb extension version 1.20.0 or later.');
+        if (method_exists(ReadPreference::class, 'getModeString')) {
+            self::assertEquals(ReadPreference::NEAREST, $readPreference->getModeString());
+        } else {
+            self::assertEquals(ReadPreference::RP_NEAREST, $readPreference->getMode());
         }
-
-        $manager = new Manager('mongodb://localhost');
-        $logger = $this->prophesize(EventDispatcherInterface::class);
-
-        $db = new Database($manager, 'client_name', 'testdb', [], $logger->reveal());
-        self::assertInstanceOf(\MongoDB\Database::class, $db);
-
-        $newDb = $db->withOptions(['readPreference' => new ReadPreference(ReadPreference::NEAREST)]);
-
-        self::assertInstanceOf(Database::class, $newDb);
-
-        $debugInfo = $newDb->__debugInfo();
-        self::assertSame($manager, $debugInfo['manager']);
-        self::assertEquals('testdb', $debugInfo['databaseName']);
-        self::assertEquals(ReadPreference::NEAREST, $debugInfo['readPreference']->getModeString());
     }
 }
