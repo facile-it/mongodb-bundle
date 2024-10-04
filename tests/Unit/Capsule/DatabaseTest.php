@@ -48,6 +48,16 @@ class DatabaseTest extends TestCase
         $debugInfo = $newDb->__debugInfo();
         self::assertSame($manager, $debugInfo['manager']);
         self::assertEquals('testdb', $debugInfo['databaseName']);
-        self::assertEquals(ReadPreference::RP_NEAREST, $debugInfo['readPreference']->getMode());
+
+        $this->assertReadPreferenceMode($debugInfo['readPreference']);
+    }
+
+    public function assertReadPreferenceMode(ReadPreference $readPreference): void
+    {
+        if (method_exists(ReadPreference::class, 'getModeString')) {
+            self::assertEquals(ReadPreference::NEAREST, $readPreference->getModeString());
+        } else {
+            self::assertEquals(ReadPreference::RP_NEAREST, $readPreference->getMode());
+        }
     }
 }
