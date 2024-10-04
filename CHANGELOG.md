@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.6.1] (2024-10-04)
 ### Fixed
 * Fixed deprecation warnings using mongo-ext 1.20
 
@@ -214,7 +216,8 @@ First unstable release
 ## 0.1-alpha (2016-06-30)
 First release
 
-[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.6.0..master
+[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.6.1..master
+[1.6.1]: https://github.com/facile-it/mongodb-bundle/compare/1.6.0..1.6.1
 [1.6.0]: https://github.com/facile-it/mongodb-bundle/compare/1.5.0..1.6.0
 [1.5.0]: https://github.com/facile-it/mongodb-bundle/compare/1.4.0..1.5.0
 [1.4.0]: https://github.com/facile-it/mongodb-bundle/compare/1.3.0..1.4.0
