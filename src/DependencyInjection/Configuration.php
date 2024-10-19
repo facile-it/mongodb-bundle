@@ -107,6 +107,12 @@ final class Configuration implements ConfigurationInterface
             ->defaultValue(27_017);
     }
 
+    private function addUriOptions(NodeBuilder $builder): void
+    {
+        $builder
+            ->scalarNode('uriOptions');
+    }
+
     private function addDriversOption(NodeBuilder $builder): void
     {
         $builder
@@ -132,18 +138,5 @@ final class Configuration implements ConfigurationInterface
             ->scalarNode('database_name')
             ->isRequired()
             ->info('Database name');
-    }
-
-    private function addUriOptions(NodeBuilder $builder): void
-    {
-        $uriOptionsBuilder = $builder
-            ->arrayNode('uriOptions')
-            ->info('Additional connection string options')
-            ->children();
-
-        $uriOptionsBuilder
-            ->variableNode('context')
-            ->defaultValue([])
-            ->info('Overwrite any options with the same name in the uri parameter');
     }
 }

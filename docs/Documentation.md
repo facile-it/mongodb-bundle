@@ -109,18 +109,16 @@ namespace App\Services;
 
 use Facile\MongoDbBundle\Services\UriOptions\UriOptionsInterface;
 
-final class MyCustomUriOptionsProvider implements DriverOptionsInterface
+final class MyCustomUriOptionsProvider implements UriOptionsInterface
 {
-    /** @var string */
-    private $appname;
-    
-    public function __construct(string $appname) {
-        $this->appname = $appname;
-    }
+    private const APPNAME = 'APPNAME';
 
-    public function buildDriverOptions(array $clientConfiguration) : array {
-        $clientConfiguration['appname'] =  $this->appname;
-        return $clientConfiguration;
+    public function buildUriOptions(array $clientConfiguration): array
+    {
+        return array_merge(
+            $clientConfiguration,
+            ['appname' => self::APPNAME]
+        );
     }
 }
 ```
@@ -128,8 +126,6 @@ final class MyCustomUriOptionsProvider implements DriverOptionsInterface
 ```yaml
 # config/services.yaml
 App\Services\MyCustomUriOptionsProvider:
-  arguments:
-    $appname: 'APPNAME'
 ```
 
 Then use its service id as value of `uriOptions` in the bundle configuration.

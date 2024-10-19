@@ -65,7 +65,7 @@ final class ClientRegistry
             'readPreference' => $conf['readPreference'],
         ];
         if ($this->uriOptionsService instanceof UriOptionsInterface) {
-            $conf['options'] = $this->uriOptionsService->buildUriOptions($conf['uriOptions']);
+            $conf['uriOptions'] = $this->uriOptionsService->buildUriOptions($conf['uriOptions']);
         }
 
         $conf['driverOptions'] = [];
@@ -131,5 +131,13 @@ final class ClientRegistry
         }
 
         return new Client($uri, $options, $driverOptions);
+    }
+
+    /**
+     * @return ClientConfiguration[]
+     */
+    public function getConfigurations(): array
+    {
+        return $this->configurations;
     }
 }
