@@ -9,7 +9,7 @@ use MongoDB\Client;
 interface UriOptionsInterface
 {
     /**
-     * It creates an array of options for constructing a MongoDB\Client
+     * It creates an array of options for constructing a MongoDB\Client.
      *
      * @param array $clientConfiguration client's bundle configuration for which the options are needed
      *
