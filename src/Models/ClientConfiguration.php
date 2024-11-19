@@ -27,7 +27,7 @@ final class ClientConfiguration
         string $uri,
         string $username = '',
         string $password = '',
-        string $authSource = null,
+        ?string $authSource = null,
         array $options = [],
         array $driverOptions = []
     ) {
