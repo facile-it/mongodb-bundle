@@ -33,7 +33,12 @@ class DatabaseTest extends TestCase
         self::assertEquals('testdb', $debugInfo['databaseName']);
     }
 
-    public function test_withOptions(): void
+    /**
+     * @dataProvider readPreferenceDataProvider
+     *
+     * @param int|string $readPreference
+     */
+    public function test_withOptions($readPreference): void
     {
         $manager = new Manager('mongodb://localhost');
         $logger = $this->prophesize(EventDispatcherInterface::class);
@@ -41,7 +46,7 @@ class DatabaseTest extends TestCase
         $db = new Database($manager, 'client_name', 'testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);
 
-        $newDb = $db->withOptions(['readPreference' => new ReadPreference(ReadPreference::RP_NEAREST)]);
+        $newDb = $db->withOptions(['readPreference' => new ReadPreference($readPreference)]);
 
         self::assertInstanceOf(Database::class, $newDb);
 
@@ -49,15 +54,19 @@ class DatabaseTest extends TestCase
         self::assertSame($manager, $debugInfo['manager']);
         self::assertEquals('testdb', $debugInfo['databaseName']);
 
-        $this->assertReadPreferenceMode($debugInfo['readPreference']);
+        if (method_exists(ReadPreference::class, 'getModeString')) {
+            self::assertEquals(ReadPreference::NEAREST, $debugInfo['readPreference']->getModeString());
+        } else {
+            self::assertEquals(ReadPreference::RP_NEAREST, $debugInfo['readPreference']->getMode());
+        }
     }
 
-    public function assertReadPreferenceMode(ReadPreference $readPreference): void
+    public static function readPreferenceDataProvider(): array
     {
-        if (method_exists(ReadPreference::class, 'getModeString')) {
-            self::assertEquals(ReadPreference::NEAREST, $readPreference->getModeString());
-        } else {
-            self::assertEquals(ReadPreference::RP_NEAREST, $readPreference->getMode());
+        if (! method_exists(ReadPreference::class, 'getModeString')) {
+            return [[ReadPreference::RP_NEAREST]];
         }
+
+        return [[ReadPreference::NEAREST]];
     }
 }
