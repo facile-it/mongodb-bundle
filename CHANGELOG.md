@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Profiling for countDocuments() and estimatedDocumentCount() (#191) by [@phleauran](https://github.com/phleauran).
 ### Fixed
 * Fixed deprecation warnings using PHP 8.4
+* ProfilerController configuration (explain links).
 
 ## [1.6.1] (2024-10-04)
 ### Fixed
