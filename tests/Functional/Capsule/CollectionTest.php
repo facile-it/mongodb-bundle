@@ -71,6 +71,17 @@ class CollectionTest extends AppTestCase
         $coll->count(['test' => 1]);
     }
 
+    public function test_countDocuments(): void
+    {
+        $manager = $this->getManager();
+        $ev = $this->prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
+
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
+
+        $coll->countDocuments(['test' => 1]);
+    }
+
     public function test_find(): void
     {
         $manager = $this->getManager();
@@ -188,6 +199,17 @@ class CollectionTest extends AppTestCase
         $coll = new Collection($manager, 'test_client', 'testdb', 'test_collection', [], $ev->reveal());
 
         $coll->distinct('field');
+    }
+
+    public function test_estimatedDocumentCount(): void
+    {
+        $manager = $this->getManager();
+        $ev = $this->prophesize(EventDispatcherInterface::class);
+        $this->assertEventsDispatching($ev);
+
+        $coll = new Collection($manager, 'test_client', 'testdb', 'test_document', [], $ev->reveal());
+
+        $coll->estimatedDocumentCount();
     }
 
     protected function assertEventsDispatching($ev)

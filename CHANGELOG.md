@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.2] (2024-12-07)
+### Added
+* Profiling for countDocuments() and estimatedDocumentCount() (#191) by [@phleauran](https://github.com/phleauran).
+### Fixed
+* Fixed deprecation warnings using PHP 8.4
+* ProfilerController configuration (explain links).
+
 ## [1.6.1] (2024-10-04)
 ### Fixed
 * Fixed deprecation warnings using mongo-ext 1.20
@@ -216,7 +223,8 @@ First unstable release
 ## 0.1-alpha (2016-06-30)
 First release
 
-[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.6.1..master
+[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.6.2..master
+[1.6.1]: https://github.com/facile-it/mongodb-bundle/compare/1.6.1..1.6.2
 [1.6.1]: https://github.com/facile-it/mongodb-bundle/compare/1.6.0..1.6.1
 [1.6.0]: https://github.com/facile-it/mongodb-bundle/compare/1.5.0..1.6.0
 [1.5.0]: https://github.com/facile-it/mongodb-bundle/compare/1.4.0..1.5.0
