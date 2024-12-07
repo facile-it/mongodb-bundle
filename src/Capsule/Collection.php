@@ -63,6 +63,18 @@ final class Collection extends MongoCollection
     /**
      * @inheritDoc
      */
+    public function countDocuments($filter = [], array $options = [])
+    {
+        $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
+        $result = parent::countDocuments($query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
+
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function find($filter = [], array $options = [])
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
@@ -175,6 +187,18 @@ final class Collection extends MongoCollection
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, ['fieldName' => $fieldName], $options);
         $result = parent::distinct($fieldName, $query->getFilters(), $query->getOptions());
+        $this->notifyQueryExecution($query);
+
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function estimatedDocumentCount(array $options = [])
+    {
+        $query = $this->prepareQuery(__FUNCTION__, [], [], $options);
+        $result = parent::estimatedDocumentCount($options);
         $this->notifyQueryExecution($query);
 
         return $result;
