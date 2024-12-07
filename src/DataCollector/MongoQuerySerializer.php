@@ -24,7 +24,7 @@ final class MongoQuerySerializer
      *
      * @return mixed[]
      */
-    private static function prepareUnserializableData($data): array
+    private static function prepareUnserializableData($data, int $maxDepth = 256): array
     {
         if ($data instanceof Serializable) {
             $data = $data->bsonSerialize();
@@ -32,7 +32,7 @@ final class MongoQuerySerializer
 
         $newData = [];
         foreach ($data as $key => $item) {
-            $newData[$key] = self::prepareItemData($item);
+            $newData[$key] = self::prepareItemData($item, $maxDepth - 1);
         }
 
         return $newData;
@@ -43,19 +43,24 @@ final class MongoQuerySerializer
      *
      * @return mixed
      */
-    public static function prepareItemData($item)
+    public static function prepareItemData($item, int $maxDepth = 256)
     {
+        // Prevent infinite recursion
+        if ($maxDepth < 0) {
+            return null;
+        }
+
         if (\is_scalar($item)) {
             return $item;
         }
 
         if (\is_array($item)) {
-            return self::prepareUnserializableData($item);
+            return self::prepareUnserializableData($item, $maxDepth);
         }
 
         if (\is_object($item)) {
             if (method_exists($item, 'getArrayCopy')) {
-                return self::prepareUnserializableData($item->getArrayCopy());
+                return self::prepareUnserializableData($item->getArrayCopy(), $maxDepth);
             }
 
             if (method_exists($item, 'toDateTime')) {
@@ -70,7 +75,7 @@ final class MongoQuerySerializer
                 return $item->bsonSerialize();
             }
 
-            return self::prepareUnserializableData((array) $item);
+            return self::prepareUnserializableData((array) $item, $maxDepth);
         }
 
         return $item;

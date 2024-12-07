@@ -52,6 +52,29 @@ class MongoQuerySerializerTest extends TestCase
         ];
     }
 
+    public function test_serializer_terminating(): void
+    {
+        // tests that the serializer terminates when serializing an object which references itself
+        $selfReferencingObject = new class {
+            public $self;
+
+            public function __construct(
+            ) {
+                $this->self = $this;
+            }
+        };
+        $data = ['test' => $selfReferencingObject];
+
+        $query = new Query();
+        $query->setFilters($data);
+        $query->setData($data);
+        $query->setOptions($data);
+
+        MongoQuerySerializer::serialize($query);
+
+        $this->expectNotToPerformAssertions();
+    }
+
     public function test_serializer_regression_with_replaceOne(): void
     {
         $stdClass = new \stdClass();
