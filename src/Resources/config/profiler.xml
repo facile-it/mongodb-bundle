@@ -47,6 +47,7 @@
         <service id="facile_mongo_db.profiler_controller" class="Facile\MongoDbBundle\Controller\ProfilerController">
             <argument type="service" id="mongo.explain_query_service" />
             <argument type="service" id="profiler" on-invalid="null" />
+            <tag name="controller.service_arguments" />
         </service>
 
     </services>
