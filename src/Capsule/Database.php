@@ -39,10 +39,7 @@ final class Database extends MongoDatabase
         $this->databaseName = $databaseName;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function selectCollection($collectionName, array $options = [])
+    public function selectCollection($collectionName, array $options = []): Collection
     {
         $debug = $this->__debugInfo();
         $options += [
@@ -62,10 +59,7 @@ final class Database extends MongoDatabase
         );
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function withOptions(array $options = [])
+    public function withOptions(array $options = []): self
     {
         $debug = $this->__debugInfo();
         $options += [

@@ -7,8 +7,12 @@ namespace Facile\MongoDbBundle\Capsule;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Models\Query;
 use MongoDB\Collection as MongoCollection;
+use MongoDB\DeleteResult;
+use MongoDB\Driver\CursorInterface;
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\ReadPreference;
+use MongoDB\InsertOneResult;
+use MongoDB\UpdateResult;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -36,10 +40,7 @@ final class Collection extends MongoCollection
         $this->databaseName = $databaseName;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function aggregate(array $pipeline, array $options = [])
+    public function aggregate(array $pipeline, array $options = []): CursorInterface
     {
         $query = $this->prepareQuery(__FUNCTION__, [], $pipeline, $options);
         $result = parent::aggregate($query->getData(), $query->getOptions());
@@ -48,10 +49,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function count($filter = [], array $options = [])
+    public function count($filter = [], array $options = []): int
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::count($query->getFilters(), $query->getOptions());
@@ -60,10 +58,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function countDocuments($filter = [], array $options = [])
+    public function countDocuments($filter = [], array $options = []): int
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::countDocuments($query->getFilters(), $query->getOptions());
@@ -72,10 +67,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function find($filter = [], array $options = [])
+    public function find($filter = [], array $options = []): CursorInterface
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::find($query->getFilters(), $query->getOptions());
@@ -85,7 +77,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * @inheritDoc
+     * @return array|object|null
      */
     public function findOne($filter = [], array $options = [])
     {
@@ -97,7 +89,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * @inheritDoc
+     * @return array|object|null
      */
     public function findOneAndUpdate($filter, $update, array $options = [])
     {
@@ -109,7 +101,7 @@ final class Collection extends MongoCollection
     }
 
     /**
-     * @inheritDoc
+     * @return array|object|null
      */
     public function findOneAndDelete($filter, array $options = [])
     {
@@ -120,10 +112,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function deleteMany($filter, array $options = [])
+    public function deleteMany($filter, array $options = []): DeleteResult
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::deleteMany($query->getFilters(), $query->getOptions());
@@ -132,10 +121,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function deleteOne($filter, array $options = [])
+    public function deleteOne($filter, array $options = []): DeleteResult
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::deleteOne($query->getFilters(), $query->getOptions());
@@ -144,10 +130,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function replaceOne($filter, $replacement, array $options = [])
+    public function replaceOne($filter, $replacement, array $options = []): UpdateResult
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, $replacement, $options);
         $result = parent::replaceOne($query->getFilters(), $query->getData(), $query->getOptions());
@@ -156,10 +139,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function insertOne($document, array $options = [])
+    public function insertOne($document, array $options = []): InsertOneResult
     {
         $query = $this->prepareQuery(__FUNCTION__, [], $document, $options);
         $result = parent::insertOne($query->getData(), $query->getOptions());
@@ -168,10 +148,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function updateOne($filter, $update, array $options = [])
+    public function updateOne($filter, $update, array $options = []): UpdateResult
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, $update, $options);
         $result = parent::updateOne($query->getFilters(), $query->getData(), $query->getOptions());
@@ -180,10 +157,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function distinct($fieldName, $filter = [], array $options = [])
+    public function distinct($fieldName, $filter = [], array $options = []): array
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, ['fieldName' => $fieldName], $options);
         $result = parent::distinct($fieldName, $query->getFilters(), $query->getOptions());
@@ -192,10 +166,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function estimatedDocumentCount(array $options = [])
+    public function estimatedDocumentCount(array $options = []): int
     {
         $query = $this->prepareQuery(__FUNCTION__, [], [], $options);
         $result = parent::estimatedDocumentCount($options);

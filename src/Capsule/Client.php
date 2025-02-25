@@ -37,10 +37,7 @@ final class Client extends MongoClient
         $this->clientName = $clientName;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function selectDatabase($databaseName, array $options = [])
+    public function selectDatabase($databaseName, array $options = []): Database
     {
         $debug = $this->__debugInfo();
         $options += [
@@ -50,10 +47,7 @@ final class Client extends MongoClient
         return new Database($debug['manager'], $this->clientName, $databaseName, $options, $this->eventDispatcher);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function selectCollection($databaseName, $collectionName, array $options = [])
+    public function selectCollection($databaseName, $collectionName, array $options = []): Collection
     {
         $debug = $this->__debugInfo();
         $options += [
