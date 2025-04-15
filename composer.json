@@ -20,8 +20,8 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "ext-mongodb": "^1.6",
-        "mongodb/mongodb": "^1.5",
+        "ext-mongodb": "^1.6 || ^2.0",
+        "mongodb/mongodb": "^1.5 || ^2.0",
         "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0 || ^7.0"
     },
     "require-dev": {
