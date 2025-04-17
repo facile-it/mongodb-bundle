@@ -40,7 +40,7 @@ class TestKernelWithProfiler extends TestKernel
         parent::build($container);
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes)
+    protected function configureRoutes(/** RouteCollectionBuilder */ $routes)
     {
         // noop - 4.4 backward compat
     }

@@ -6,21 +6,6 @@ parameters:
 			path: src/DependencyInjection/Configuration.php
 
 		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\DataCollectorLoggerInterface\\:\\:getConnections\\(\\) has invalid return type string\\.$#"
-			count: 1
-			path: src/Services/Loggers/DataCollectorLoggerInterface.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\MongoQueryLogger\\:\\:getConnections\\(\\) has invalid return type string\\.$#"
-			count: 1
-			path: src/Services/Loggers/MongoQueryLogger.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Services\\\\Loggers\\\\MongoQueryLogger\\:\\:getConnections\\(\\) should return array\\<string\\> but returns array\\<string\\>\\.$#"
-			count: 1
-			path: src/Services/Loggers/MongoQueryLogger.php
-
-		-
 			message: "#^Class Twig_Extension not found\\.$#"
 			count: 1
 			path: src/Twig/FacileMongoDbBundleExtension.php
@@ -29,26 +14,6 @@ parameters:
 			message: "#^Class Twig_Function not found\\.$#"
 			count: 1
 			path: src/Twig/FacileMongoDbBundleExtension.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Twig\\\\FacileMongoDbBundleExtension\\:\\:getFunctions\\(\\) has invalid return type Twig_SimpleFunction\\.$#"
-			count: 1
-			path: src/Twig/FacileMongoDbBundleExtension.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Twig\\\\FacileMongoDbBundleExtension\\:\\:getFunctions\\(\\) should return array\\<Twig_SimpleFunction\\> but returns array\\<int, Twig\\\\TwigFunction\\>\\.$#"
-			count: 1
-			path: src/Twig/FacileMongoDbBundleExtension.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Fixtures\\\\DataFixtures\\\\TestFixtures\\:\\:loadIndexes\\(\\) should return array but return statement is missing\\.$#"
-			count: 1
-			path: tests/Fixtures/DataFixtures/TestFixtures.php
-
-		-
-			message: "#^Method Facile\\\\MongoDbBundle\\\\Tests\\\\Fixtures\\\\DataFixtures\\\\TestOrderedMongoFixtures2\\:\\:loadIndexes\\(\\) should return array but return statement is missing\\.$#"
-			count: 1
-			path: tests/Fixtures/DataFixtures/TestOrderedMongoFixtures2.php
 
 		-
 			message: "#^Access to an undefined property MongoDB\\\\Model\\\\BSONDocument\\:\\:\\$fqcn\\.$#"

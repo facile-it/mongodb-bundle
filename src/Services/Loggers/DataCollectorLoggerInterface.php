@@ -17,7 +17,7 @@ interface DataCollectorLoggerInterface
     public function addConnection(string $connection);
 
     /**
-     * @return array|\string[]
+     * @return string[]
      */
     public function getConnections(): array;
 }
