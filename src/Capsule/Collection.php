@@ -40,7 +40,7 @@ final class Collection extends MongoCollection
         $this->databaseName = $databaseName;
     }
 
-    public function aggregate(array $pipeline, array $options = []): CursorInterface
+    public function aggregate(array|\MongoDB\Builder\Pipeline $pipeline, array $options = []): CursorInterface
     {
         $query = $this->prepareQuery(__FUNCTION__, [], $pipeline, $options);
         $result = parent::aggregate($query->getData(), $query->getOptions());
@@ -76,10 +76,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @return array|object|null
-     */
-    public function findOne($filter = [], array $options = [])
+    public function findOne($filter = [], array $options = []): array|object|null
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::findOne($query->getFilters(), $query->getOptions());
@@ -88,10 +85,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @return array|object|null
-     */
-    public function findOneAndUpdate($filter, $update, array $options = [])
+    public function findOneAndUpdate($filter, $update, array $options = []): array|object|null
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, $update, $options);
         $result = parent::findOneAndUpdate($query->getFilters(), $query->getData(), $query->getOptions());
@@ -100,10 +94,7 @@ final class Collection extends MongoCollection
         return $result;
     }
 
-    /**
-     * @return array|object|null
-     */
-    public function findOneAndDelete($filter, array $options = [])
+    public function findOneAndDelete($filter, array $options = []): array|object|null
     {
         $query = $this->prepareQuery(__FUNCTION__, $filter, [], $options);
         $result = parent::findOneAndDelete($query->getFilters(), $query->getOptions());
