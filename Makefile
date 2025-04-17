@@ -44,11 +44,7 @@ docker-compose.override.yml:
 	PHP_VERSION=$(PHP_VERSION) MONGODB_EXTENSION_VERSION=$(MONGODB_EXTENSION_VERSION) MONGODB_VERSION=$(MONGODB_VERSION) $(DOCKER_COMPOSE) exec php composer install
 
 .PHONY: setup setup-74
-setup: setup-74
-setup-74: PHP_VERSION=7.4
-setup-74: MONGODB_EXTENSION_VERSION=1.6.0
-setup-74: MONGODB_VERSION=3.4.2
-setup-74: | --build --setup-common
+setup: setup-81
 
 .PHONY: setup-81
 setup-81: PHP_VERSION=8.1
@@ -61,6 +57,12 @@ setup-82: PHP_VERSION=8.2
 setup-82: MONGODB_EXTENSION_VERSION=1.15.0
 setup-82: MONGODB_VERSION=6.0
 setup-82: | --build --setup-common
+
+.PHONY: setup-84
+setup-84: PHP_VERSION=8.4
+setup-84: MONGODB_EXTENSION_VERSION=2.0.0
+setup-84: MONGODB_VERSION=6.0
+setup-84: | --build --setup-common
 
 .PHONY: sh stop
 sh: docker-compose.yml
