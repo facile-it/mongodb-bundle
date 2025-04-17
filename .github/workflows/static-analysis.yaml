@@ -13,15 +13,15 @@ jobs:
         include:
           - description: Validate composer.json
             script: composer validate
-            php: 7.4
+            php: 8.1
             mongo-ext: "1.20"
           - description: Code style
             script: composer cs-check
-            php: 7.4
+            php: 8.1
             mongo-ext: "1.20"
           - description: PHPStan
             script: bin/phpstan analyze
-            php: 7.4
+            php: 8.1
             mongo-ext: "1.20"
           - description: PHPStan with driver v2
             script: bin/phpstan analyze
