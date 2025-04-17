@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Capsule;
 
+use MongoDB\Builder\Pipeline;
 use Facile\MongoDbBundle\Event\QueryEvent;
 use Facile\MongoDbBundle\Models\Query;
 use MongoDB\Collection as MongoCollection;
@@ -20,27 +21,18 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class Collection extends MongoCollection
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    private string $clientName;
-
-    private string $databaseName;
-
     public function __construct(
         Manager $manager,
-        string $clientName,
-        string $databaseName,
+        private readonly string $clientName,
+        private readonly string $databaseName,
         string $collectionName,
         array $options,
-        EventDispatcherInterface $eventDispatcher
+        private readonly EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($manager, $databaseName, $collectionName, $options);
-        $this->eventDispatcher = $eventDispatcher;
-        $this->clientName = $clientName;
-        $this->databaseName = $databaseName;
+        parent::__construct($manager, $this->databaseName, $collectionName, $options);
     }
 
-    public function aggregate(array|\MongoDB\Builder\Pipeline $pipeline, array $options = []): CursorInterface
+    public function aggregate(array|Pipeline $pipeline, array $options = []): CursorInterface
     {
         $query = $this->prepareQuery(__FUNCTION__, [], $pipeline, $options);
         $result = parent::aggregate($query->getData(), $query->getOptions());
@@ -196,20 +188,14 @@ final class Collection extends MongoCollection
             return $readPreference->getModeString();
         }
 
-        switch ($readPreference->getMode()) {
-            case ReadPreference::RP_PRIMARY:
-                return 'primary';
-            case ReadPreference::RP_PRIMARY_PREFERRED:
-                return 'primaryPreferred';
-            case ReadPreference::RP_SECONDARY:
-                return 'secondary';
-            case ReadPreference::RP_SECONDARY_PREFERRED:
-                return 'secondaryPreferred';
-            case ReadPreference::RP_NEAREST:
-                return 'nearest';
-            default:
-                return 'undefined';
-        }
+        return match ($readPreference->getMode()) {
+            ReadPreference::RP_PRIMARY => 'primary',
+            ReadPreference::RP_PRIMARY_PREFERRED => 'primaryPreferred',
+            ReadPreference::RP_SECONDARY => 'secondary',
+            ReadPreference::RP_SECONDARY_PREFERRED => 'secondaryPreferred',
+            ReadPreference::RP_NEAREST => 'nearest',
+            default => 'undefined',
+        };
     }
 
     private function notifyQueryExecution(Query $queryLog): void

@@ -52,7 +52,7 @@ class LoadFixturesCommand extends AbstractCommand
         $this->loadPaths($paths);
 
         $fixtures = $this->loader->getLoadedClasses();
-        if (empty($fixtures)) {
+        if ($fixtures === null || $fixtures === []) {
             throw new \InvalidArgumentException(
                 sprintf('Could not find any class to load in: %s', "\n\n- " . implode("\n- ", $paths))
             );
@@ -71,7 +71,7 @@ class LoadFixturesCommand extends AbstractCommand
     {
         $indexList->loadData();
         $indexList->loadIndexes();
-        $this->io->writeln('Loaded fixture: ' . \get_class($indexList));
+        $this->io->writeln('Loaded fixture: ' . $indexList::class);
     }
 
     private function prepareSearchPaths(InputInterface $input, KernelInterface $kernel): array

@@ -27,8 +27,6 @@ class ExplainQueryService
         'aggregate',
     ];
 
-    private ClientRegistry $clientRegistry;
-
     /**
      * Constructs a explain command.
      *
@@ -37,9 +35,8 @@ class ExplainQueryService
      * The explain command provides information on the execution of the following commands:
      * count, distinct, group, find, findAndModify, delete, and update.
      */
-    public function __construct(ClientRegistry $clientRegistry)
+    public function __construct(private readonly ClientRegistry $clientRegistry)
     {
-        $this->clientRegistry = $clientRegistry;
     }
 
     /**

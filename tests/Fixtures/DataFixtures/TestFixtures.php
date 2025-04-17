@@ -26,7 +26,9 @@ class TestFixtures extends AbstractContainerAwareFixture implements MongoFixture
     /**
      * @return array
      */
-    public function loadIndexes() {}
+    public function loadIndexes()
+    {
+    }
 
     public function collection(): string
     {

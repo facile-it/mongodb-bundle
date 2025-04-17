@@ -38,12 +38,7 @@ final class MongoQuerySerializer
         return $newData;
     }
 
-    /**
-     * @param mixed $item
-     *
-     * @return mixed
-     */
-    public static function prepareItemData($item, int $maxDepth = 256)
+    public static function prepareItemData(mixed $item, int $maxDepth = 256): mixed
     {
         // Prevent infinite recursion
         if ($maxDepth < 0) {

@@ -23,15 +23,12 @@ abstract class AbstractCommand extends Command
     /** @var Connection */
     protected $connection;
 
-    private ContainerInterface $container;
-
     /**
      * AbstractCommand constructor.
      */
-    public function __construct(ContainerInterface $container, ?string $name = null)
+    public function __construct(private readonly ContainerInterface $container, ?string $name = null)
     {
         parent::__construct($name);
-        $this->container = $container;
     }
 
     protected function getContainer(): ContainerInterface

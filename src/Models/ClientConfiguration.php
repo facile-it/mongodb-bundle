@@ -11,32 +11,14 @@ namespace Facile\MongoDbBundle\Models;
  */
 final class ClientConfiguration
 {
-    private string $uri;
-
-    private string $username;
-
-    private string $password;
-
-    private array $options;
-
-    private ?string $authSource;
-
-    private array $driverOptions;
-
     public function __construct(
-        string $uri,
-        string $username = '',
-        string $password = '',
-        ?string $authSource = null,
-        array $options = [],
-        array $driverOptions = []
+        private readonly string $uri,
+        private readonly string $username = '',
+        private readonly string $password = '',
+        private readonly ?string $authSource = null,
+        private readonly array $options = [],
+        private readonly array $driverOptions = []
     ) {
-        $this->uri = $uri;
-        $this->username = $username;
-        $this->password = $password;
-        $this->options = $options;
-        $this->authSource = $authSource;
-        $this->driverOptions = $driverOptions;
     }
 
     public function getUri(): string
@@ -81,7 +63,7 @@ final class ClientConfiguration
     {
         return array_filter(
             $options,
-            fn($value): bool => ! empty($value)
+            fn ($value): bool => ! empty($value)
                 || \is_int($value)
                 || \is_bool($value)
                 || \is_float($value)

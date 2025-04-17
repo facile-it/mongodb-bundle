@@ -24,20 +24,11 @@ final class ClientRegistry
     /** @var ClientConfiguration[] */
     private array $configurations = [];
 
-    private bool $debug;
-
-    private EventDispatcherInterface $eventDispatcher;
-
-    private ?DriverOptionsInterface $driverOptionsService;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        bool $debug,
-        ?DriverOptionsInterface $driverOptionsService
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly bool $debug,
+        private readonly ?DriverOptionsInterface $driverOptionsService
     ) {
-        $this->debug = $debug;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->driverOptionsService = $driverOptionsService;
     }
 
     public function addClientsConfigurations(array $configurations): void
@@ -78,7 +69,7 @@ final class ClientRegistry
         return 'mongodb://' . implode(
             ',',
             array_map(
-                static fn(array $host): string => sprintf('%s:%d', $host['host'], $host['port']),
+                static fn (array $host): string => sprintf('%s:%d', $host['host'], $host['port']),
                 $hosts
             )
         );

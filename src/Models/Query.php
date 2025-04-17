@@ -11,7 +11,7 @@ namespace Facile\MongoDbBundle\Models;
  */
 final class Query
 {
-    private float $start;
+    private readonly float $start;
 
     private string $method = 'undefined';
 
