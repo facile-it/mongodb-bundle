@@ -55,7 +55,7 @@ class MongoQuerySerializerTest extends TestCase
     public function test_serializer_terminating(): void
     {
         // tests that the serializer terminates when serializing an object which references itself
-        $selfReferencingObject = new class () {
+        $selfReferencingObject = new class {
             public self $self;
 
             public function __construct(

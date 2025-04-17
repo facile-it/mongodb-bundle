@@ -11,9 +11,7 @@ final class MongoFixturesLoader
     /** @var array|MongoFixtureInterface[] */
     private ?array $loadedClasses = null;
 
-    public function __construct(private readonly ContainerInterface $container)
-    {
-    }
+    public function __construct(private readonly ContainerInterface $container) {}
 
     /**
      * @return array

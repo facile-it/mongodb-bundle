@@ -23,9 +23,7 @@ class TestFixtures extends AbstractContainerAwareFixture implements MongoFixture
         $collection->insertOne($doc);
     }
 
-    public function loadIndexes()
-    {
-    }
+    public function loadIndexes() {}
 
     public function collection(): string
     {

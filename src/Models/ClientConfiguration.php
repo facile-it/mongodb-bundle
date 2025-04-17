@@ -18,8 +18,7 @@ final class ClientConfiguration
         private readonly ?string $authSource = null,
         private readonly array $options = [],
         private readonly array $driverOptions = []
-    ) {
-    }
+    ) {}
 
     public function getUri(): string
     {
@@ -63,7 +62,7 @@ final class ClientConfiguration
     {
         return array_filter(
             $options,
-            fn ($value): bool => ! empty($value)
+            fn($value): bool => ! empty($value)
                 || \is_int($value)
                 || \is_bool($value)
                 || \is_float($value)

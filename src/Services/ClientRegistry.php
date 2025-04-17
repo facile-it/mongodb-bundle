@@ -28,8 +28,7 @@ final class ClientRegistry
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly bool $debug,
         private readonly ?DriverOptionsInterface $driverOptionsService
-    ) {
-    }
+    ) {}
 
     public function addClientsConfigurations(array $configurations): void
     {
@@ -69,7 +68,7 @@ final class ClientRegistry
         return 'mongodb://' . implode(
             ',',
             array_map(
-                static fn (array $host): string => sprintf('%s:%d', $host['host'], $host['port']),
+                static fn(array $host): string => sprintf('%s:%d', $host['host'], $host['port']),
                 $hosts
             )
         );

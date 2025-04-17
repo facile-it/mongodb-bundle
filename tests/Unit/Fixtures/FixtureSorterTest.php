@@ -22,7 +22,7 @@ class FixtureSorterTest extends TestCase
         $collectionsSorted = implode(
             '',
             array_map(
-                static fn (MongoFixtureInterface $fixture): string => $fixture->collection(),
+                static fn(MongoFixtureInterface $fixture): string => $fixture->collection(),
                 FixtureSorter::sort($toLoad)
             )
         );
@@ -51,17 +51,11 @@ class FixtureSorterTest extends TestCase
     private function mockUnordered(string $collectionName): MongoFixtureInterface
     {
         return new class ($collectionName) implements MongoFixtureInterface {
-            public function __construct(private readonly string $collectionName)
-            {
-            }
+            public function __construct(private readonly string $collectionName) {}
 
-            public function loadData(): void
-            {
-            }
+            public function loadData(): void {}
 
-            public function loadIndexes(): void
-            {
-            }
+            public function loadIndexes(): void {}
 
             public function collection(): string
             {
@@ -76,17 +70,11 @@ class FixtureSorterTest extends TestCase
             public function __construct(
                 private readonly int $order,
                 private readonly string $collectionName
-            )
-            {
-            }
+            ) {}
 
-            public function loadData(): void
-            {
-            }
+            public function loadData(): void {}
 
-            public function loadIndexes(): void
-            {
-            }
+            public function loadIndexes(): void {}
 
             public function collection(): string
             {

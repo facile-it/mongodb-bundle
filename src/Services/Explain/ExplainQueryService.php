@@ -35,9 +35,7 @@ class ExplainQueryService
      * The explain command provides information on the execution of the following commands:
      * count, distinct, group, find, findAndModify, delete, and update.
      */
-    public function __construct(private readonly ClientRegistry $clientRegistry)
-    {
-    }
+    public function __construct(private readonly ClientRegistry $clientRegistry) {}
 
     /**
      * Execute the operation.
