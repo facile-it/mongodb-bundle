@@ -43,7 +43,7 @@ docker-compose.override.yml:
 	PHP_VERSION=$(PHP_VERSION) MONGODB_EXTENSION_VERSION=$(MONGODB_EXTENSION_VERSION) MONGODB_VERSION=$(MONGODB_VERSION) $(DOCKER_COMPOSE) up -d --force-recreate
 	PHP_VERSION=$(PHP_VERSION) MONGODB_EXTENSION_VERSION=$(MONGODB_EXTENSION_VERSION) MONGODB_VERSION=$(MONGODB_VERSION) $(DOCKER_COMPOSE) exec php composer install
 
-.PHONY: setup setup-74
+.PHONY: setup setup-81
 setup: setup-81
 
 .PHONY: setup-81
@@ -74,16 +74,16 @@ stop: docker-compose.yml
 .PHONY: test-docker-targets
 test-docker-targets:
 	$(MAKE) stop
-	$(MAKE) setup-74
-	$(DOCKER_COMPOSE) exec php bash -c "php -v | head -1 | cut -d ' ' -f 2 | grep -Eq '7\.4\.\d*'"
-	$(DOCKER_COMPOSE) exec php make test
-	$(MAKE) stop
 	$(MAKE) setup-81
 	$(DOCKER_COMPOSE) exec php bash -c "php -v | head -1 | cut -d ' ' -f 2 | grep -Eq '8\.1\.\d*'"
 	$(DOCKER_COMPOSE) exec php make test
 	$(MAKE) stop
 	$(MAKE) setup-82
 	$(DOCKER_COMPOSE) exec php bash -c "php -v | head -1 | cut -d ' ' -f 2 | grep -Eq '8\.2\.\d*'"
+	$(DOCKER_COMPOSE) exec php make test
+	$(MAKE) stop
+	$(MAKE) setup-84
+	$(DOCKER_COMPOSE) exec php bash -c "php -v | head -1 | cut -d ' ' -f 2 | grep -Eq '8\.4\.\d*'"
 	$(DOCKER_COMPOSE) exec php make test
 	$(MAKE) stop
 	@echo
