@@ -13,10 +13,20 @@ jobs:
         include:
           - description: Validate composer.json
             script: composer validate
+            php: 8.1
+            mongo-ext: "1.20"
           - description: Code style
             script: composer cs-check
+            php: 8.1
+            mongo-ext: "1.20"
           - description: PHPStan
             script: bin/phpstan analyze
+            php: 8.1
+            mongo-ext: "1.20"
+          - description: PHPStan with driver v2
+            script: bin/phpstan analyze
+            php: 8.4
+            mongo-ext: "2.0"
 
     name: ${{ matrix.description }}
     runs-on: ubuntu-latest
@@ -26,7 +36,9 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: ${{ matrix.php }}
+          extensions: mongodb-${{ matrix.mongo-ext }}
+          coverage: none
       - name: Install dependencies
         uses: ramsey/composer-install@v3
       - run: ${{ matrix.script }}

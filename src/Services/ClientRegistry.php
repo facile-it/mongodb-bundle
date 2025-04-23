@@ -24,21 +24,11 @@ final class ClientRegistry
     /** @var ClientConfiguration[] */
     private array $configurations = [];
 
-    private bool $debug;
-
-    private EventDispatcherInterface $eventDispatcher;
-
-    private ?DriverOptionsInterface $driverOptionsService;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        bool $debug,
-        ?DriverOptionsInterface $driverOptionsService
-    ) {
-        $this->debug = $debug;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->driverOptionsService = $driverOptionsService;
-    }
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly bool $debug,
+        private readonly ?DriverOptionsInterface $driverOptionsService
+    ) {}
 
     public function addClientsConfigurations(array $configurations): void
     {

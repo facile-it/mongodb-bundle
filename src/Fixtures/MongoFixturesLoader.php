@@ -11,12 +11,7 @@ final class MongoFixturesLoader
     /** @var array|MongoFixtureInterface[] */
     private ?array $loadedClasses = null;
 
-    private ContainerInterface $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
+    public function __construct(private readonly ContainerInterface $container) {}
 
     /**
      * @return array
@@ -38,7 +33,7 @@ final class MongoFixturesLoader
     /**
      * @return array
      */
-    private function loadFromIterator(\Iterator $iterator)
+    private function loadFromIterator(\Iterator $iterator): mixed
     {
         $includedFiles = [];
         foreach ($iterator as $file) {
@@ -85,7 +80,7 @@ final class MongoFixturesLoader
 
     public function addInstance(MongoFixtureInterface $list): void
     {
-        $listClass = \get_class($list);
+        $listClass = $list::class;
 
         if (! isset($this->loadedClasses[$listClass])) {
             $this->loadedClasses[$listClass] = $list;

@@ -9,9 +9,9 @@ use Facile\MongoDbBundle\Models\Query;
 class MongoQueryLogger implements DataCollectorLoggerInterface
 {
     /** @var \SplQueue|Query[] */
-    private \SplQueue $logs;
+    private readonly \SplQueue $logs;
 
-    /** @var array|string[] */
+    /** @var string[] */
     private array $connections = [];
 
     /**
@@ -28,7 +28,7 @@ class MongoQueryLogger implements DataCollectorLoggerInterface
     }
 
     /**
-     * @return array|\string[]
+     * @return string[]
      */
     public function getConnections(): array
     {

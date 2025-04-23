@@ -27,13 +27,13 @@ class FacileMongoDbBundleExtension extends AbstractExtension
     ];
 
     /**
-     * @return \Twig_SimpleFunction[]
+     * @return TwigFunction[]
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new TwigFunction('dataLabelTranslate', [$this, 'queryDataTranslate']),
-            new TwigFunction('isQueryExplainable', [$this, 'isQueryExplainable']),
+            new TwigFunction('dataLabelTranslate', $this->queryDataTranslate(...)),
+            new TwigFunction('isQueryExplainable', $this->isQueryExplainable(...)),
         ];
     }
 

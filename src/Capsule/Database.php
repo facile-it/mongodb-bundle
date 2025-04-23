@@ -15,12 +15,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class Database extends MongoDatabase
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    private string $clientName;
-
-    private string $databaseName;
-
     /**
      * Database constructor.
      *
@@ -28,15 +22,12 @@ final class Database extends MongoDatabase
      */
     public function __construct(
         Manager $manager,
-        string $clientName,
-        string $databaseName,
+        private readonly string $clientName,
+        private readonly string $databaseName,
         array $options,
-        EventDispatcherInterface $eventDispatcher
+        private readonly EventDispatcherInterface $eventDispatcher
     ) {
-        parent::__construct($manager, $databaseName, $options);
-        $this->eventDispatcher = $eventDispatcher;
-        $this->clientName = $clientName;
-        $this->databaseName = $databaseName;
+        parent::__construct($manager, $this->databaseName, $options);
     }
 
     public function selectCollection($collectionName, array $options = []): Collection

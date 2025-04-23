@@ -18,7 +18,7 @@ class MongoQuerySerializerTest extends TestCase
     /**
      * @dataProvider unserializedDataProvider
      */
-    public function test_serializer(array $unserializedData, $expectedSerialization): void
+    public function test_serializer(array $unserializedData, string|int|array $expectedSerialization): void
     {
         $query = new Query();
         $query->setFilters($unserializedData);
@@ -56,7 +56,7 @@ class MongoQuerySerializerTest extends TestCase
     {
         // tests that the serializer terminates when serializing an object which references itself
         $selfReferencingObject = new class {
-            public $self;
+            public self $self;
 
             public function __construct(
             ) {

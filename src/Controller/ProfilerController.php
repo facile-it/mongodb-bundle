@@ -13,15 +13,10 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 class ProfilerController
 {
-    private ExplainQueryService $explain;
-
-    private ?Profiler $profiler;
-
-    public function __construct(ExplainQueryService $explain, ?Profiler $profiler)
-    {
-        $this->explain = $explain;
-        $this->profiler = $profiler;
-    }
+    public function __construct(
+        private readonly ExplainQueryService $explain,
+        private readonly ?Profiler $profiler
+    ) {}
 
     public function explainAction(string $token, $queryNumber): JsonResponse
     {
@@ -66,7 +61,7 @@ class ProfilerController
         }
 
         foreach ($data as $key => $item) {
-            if (\is_string($item) && 0 === strpos($item, 'ISODate')) {
+            if (\is_string($item) && str_starts_with($item, 'ISODate')) {
                 $time = str_replace(['ISODate("', '")'], '', $item);
                 $dateTime = new \DateTime($time);
                 $item = new UTCDatetime($dateTime->getTimestamp() * 1_000);

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.8.0] (TBD)
+### Added
+* Support for ext-mongodb 2.0 and mongodb/mongodb 2.0 (#198)
+### Removed
+* Support for PHP 7.4 and 8.0 (#198)
+* Support for ext-mongodb lower than 1.12.0 (#198)
+
 ## [1.7.0] (2025-02-25)
 ### Added
 * Return types to Capsule classes (#197) by [@garak](https://github.com/garak).

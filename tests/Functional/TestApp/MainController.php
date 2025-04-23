@@ -9,12 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MainController
 {
-    private Database $database;
-
-    public function __construct(Database $database)
-    {
-        $this->database = $database;
-    }
+    public function __construct(private readonly Database $database) {}
 
     public function noop(): Response
     {

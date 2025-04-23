@@ -14,10 +14,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 final class Client extends MongoClient
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    private string $clientName;
-
     /**
      * Client constructor.
      *
@@ -29,12 +25,10 @@ final class Client extends MongoClient
         $uri,
         array $uriOptions,
         array $driverOptions,
-        string $clientName,
-        EventDispatcherInterface $eventDispatcher
+        private readonly string $clientName,
+        private readonly EventDispatcherInterface $eventDispatcher
     ) {
         parent::__construct($uri, $uriOptions, $driverOptions);
-        $this->eventDispatcher = $eventDispatcher;
-        $this->clientName = $clientName;
     }
 
     public function selectDatabase($databaseName, array $options = []): Database
