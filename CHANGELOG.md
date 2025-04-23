@@ -6,12 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.8.0] (TBD)
+## [1.8.0] (2025-04-23)
 ### Added
-* Support for ext-mongodb 2.0 and mongodb/mongodb 2.0 (#198)
+* Support for ext-mongodb 2.0 and mongodb/mongodb 2.0 (#198) by [@Jean85](https://github.com/Jean85).
 ### Removed
-* Support for PHP 7.4 and 8.0 (#198)
-* Support for ext-mongodb lower than 1.12.0 (#198)
+* Support for PHP 7.4 and 8.0 (#198) by [@Jean85](https://github.com/Jean85).
+* Support for ext-mongodb lower than 1.12.0 (#198) by [@Jean85](https://github.com/Jean85).
 
 ## [1.7.0] (2025-02-25)
 ### Added
@@ -236,7 +236,8 @@ First unstable release
 ## 0.1-alpha (2016-06-30)
 First release
 
-[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.7.0..master
+[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.8.0..master
+[1.8.0]: https://github.com/facile-it/mongodb-bundle/compare/1.7.0..1.8.0
 [1.7.0]: https://github.com/facile-it/mongodb-bundle/compare/1.6.2..1.7.0
 [1.6.2]: https://github.com/facile-it/mongodb-bundle/compare/1.6.1..1.6.2
 [1.6.1]: https://github.com/facile-it/mongodb-bundle/compare/1.6.0..1.6.1
