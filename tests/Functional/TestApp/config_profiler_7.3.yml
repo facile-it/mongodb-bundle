@@ -1,0 +1,8 @@
+framework:
+  router: { resource: "%routing_config_dir%/routing_7.3.yaml" }
+  test: true
+  profiler:
+    collect_serializer_data: true
+
+web_profiler:
+  toolbar: true

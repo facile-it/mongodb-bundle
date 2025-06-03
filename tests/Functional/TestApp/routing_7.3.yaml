@@ -1,0 +1,17 @@
+noop:
+  path:  /noop
+  defaults: { _controller: '\Facile\MongoDbBundle\Tests\Functional\TestApp\MainController::noop' }
+
+trigger_query:
+  path:  /trigger_query
+  defaults: { _controller: '\Facile\MongoDbBundle\Tests\Functional\TestApp\MainController::triggerQuery' }
+
+## profiler
+
+web_profiler_wdt:
+  resource: '@WebProfilerBundle/Resources/config/routing/wdt.php'
+  prefix: /_wdt
+
+web_profiler_profiler:
+  resource: '@WebProfilerBundle/Resources/config/routing/profiler.php'
+  prefix: /_profiler
