@@ -48,6 +48,10 @@ jobs:
             mongo-ext: 1.21.0
             mongo-img: 7.0
           - php: 8.4
+            mongo-ext: 1.21.0
+            mongo-img: 7.0
+            symfony: "^8.0"
+          - php: 8.4
             mongo-ext: 2.0
             mongo-img: 7.0
 
@@ -60,9 +64,6 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: mongodb-${{ matrix.mongo-ext }}
           tools: flex
-      - name: Allow unstable dependencies
-        run: composer config minimum-stability dev
-        if: matrix.symfony == 'dev-master'
       - name: Install dependencies
         uses: ramsey/composer-install@v3
         env:
