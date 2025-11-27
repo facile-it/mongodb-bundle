@@ -65,6 +65,8 @@ jobs:
         if: matrix.symfony == 'dev-master'
       - name: Install dependencies
         uses: ramsey/composer-install@v3
+        env:
+          COMPOSER_NO_SECURITY_BLOCKING: "1"
       - name: Await a bit for Mongo to spin up...
         run: sleep 10
       - name: Run tests
