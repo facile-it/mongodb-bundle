@@ -44,14 +44,15 @@ jobs:
           - php: 8.3
             mongo-ext: 1.19.0
             mongo-img: 7.0
-          - php: 8.4
-            mongo-ext: 1.21.0
-            mongo-img: 7.0
+            symfony: "^7.4"
           - php: 8.4
             mongo-ext: 1.21.0
             mongo-img: 7.0
             symfony: "^8.0"
           - php: 8.4
+            mongo-ext: 2.0
+            mongo-img: 7.0
+          - php: 8.5
             mongo-ext: 2.0
             mongo-img: 7.0
 
