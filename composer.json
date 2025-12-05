@@ -34,13 +34,14 @@
         "symfony/phpunit-bridge": "^7.0",
         "symfony/routing": "^5.4 || ^6.0 || ^7.0 || ^8.0",
         "facile-it/facile-coding-standard": "1.4.1",
-        "phpstan/phpstan": "1.12.7",
+        "phpstan/phpstan": "2.1.33",
         "phpstan/extension-installer": "1.4.3",
-        "jangregor/phpstan-prophecy": "1.0.2",
+        "jangregor/phpstan-prophecy": "2.2.0",
         "phpspec/prophecy": "^1.17",
-        "rector/rector": "^1.0.3",
+        "rector/rector": "2.2.11",
         "phpspec/prophecy-phpunit": "^2.0",
-        "symfony/monolog-bundle": "*"
+        "symfony/monolog-bundle": "*",
+        "phpstan/phpstan-symfony": "2.0.9"
     },
     "minimum-stability": "stable",
     "suggest": {

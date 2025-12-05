@@ -33,12 +33,7 @@ class DatabaseTest extends TestCase
         self::assertEquals('testdb', $debugInfo['databaseName']);
     }
 
-    /**
-     * @dataProvider readPreferenceDataProvider
-     *
-     * @param int|string $readPreference
-     */
-    public function test_withOptions($readPreference): void
+    public function test_withOptions(): void
     {
         $manager = new Manager('mongodb://localhost');
         $logger = $this->prophesize(EventDispatcherInterface::class);
@@ -46,27 +41,13 @@ class DatabaseTest extends TestCase
         $db = new Database($manager, 'client_name', 'testdb', [], $logger->reveal());
         self::assertInstanceOf(\MongoDB\Database::class, $db);
 
-        $newDb = $db->withOptions(['readPreference' => new ReadPreference($readPreference)]);
+        $newDb = $db->withOptions(['readPreference' => new ReadPreference(ReadPreference::NEAREST)]);
 
         self::assertInstanceOf(Database::class, $newDb);
 
         $debugInfo = $newDb->__debugInfo();
         self::assertSame($manager, $debugInfo['manager']);
         self::assertEquals('testdb', $debugInfo['databaseName']);
-
-        if (method_exists(ReadPreference::class, 'getModeString')) {
-            self::assertEquals(ReadPreference::NEAREST, $debugInfo['readPreference']->getModeString());
-        } else {
-            self::assertEquals(ReadPreference::RP_NEAREST, $debugInfo['readPreference']->getMode());
-        }
-    }
-
-    public static function readPreferenceDataProvider(): array
-    {
-        if (! method_exists(ReadPreference::class, 'getModeString')) {
-            return [[ReadPreference::RP_NEAREST]];
-        }
-
-        return [[ReadPreference::NEAREST]];
+        self::assertEquals(ReadPreference::NEAREST, $debugInfo['readPreference']->getModeString());
     }
 }

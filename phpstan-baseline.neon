@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
-			count: 7
-			path: src/DependencyInjection/Configuration.php
-
-		-
 			message: "#^Class Twig_Extension not found\\.$#"
 			count: 1
 			path: src/Twig/FacileMongoDbBundleExtension.php
