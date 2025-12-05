@@ -56,7 +56,7 @@ class AbstractCommandTest extends AppTestCase
             ->getKernel()
             ->getContainer();
 
-        $this->getApplication()->add(new FakeCommand($container));
+        $this->getApplication()->addCommands([new FakeCommand($container)]);
     }
 }
 
