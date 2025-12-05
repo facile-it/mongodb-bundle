@@ -14,7 +14,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -30,15 +30,15 @@ final class MongoDbBundleExtension extends Extension
         $this->containerBuilder = $container;
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.php');
 
         $this->defineClientRegistry($config, $container->getParameter('kernel.debug'));
         $this->defineConnectionFactory();
         $this->defineConnections($config['connections']);
 
         if ($this->mustCollectData($config)) {
-            $loader->load('profiler.xml');
+            $loader->load('profiler.php');
             $this->attachDataCollectionListenerToEventManager();
         }
     }
