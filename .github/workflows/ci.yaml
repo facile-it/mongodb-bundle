@@ -20,11 +20,11 @@ jobs:
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: rootPass
-#        options: >-
-#          --health-cmd '/etc/init.d/mongodb status || exit 1'
-#          --health-interval 5s
-#          --health-timeout 3s
-#          --health-retries 5
+        options: >-
+          --health-cmd 'mongo --eval "db.adminCommand(\"ping\")"'
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     strategy:
       matrix:
@@ -72,12 +72,6 @@ jobs:
           dependency-versions: ${{ matrix.dependencies }}
         env:
           COMPOSER_NO_SECURITY_BLOCKING: "1"
-      - name: Await a bit for Mongo to spin up...
-        uses: iFaxity/wait-on-action@v1
-        with:
-          interval: 1000
-          resource: tcp://localhost:27017
-          timeout: 120000
       - name: Run tests
         run: bin/phpunit --coverage-clover=build/coverage-report.xml
       - name: Upload code coverage
