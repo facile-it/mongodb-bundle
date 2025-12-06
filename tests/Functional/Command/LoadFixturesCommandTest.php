@@ -113,6 +113,6 @@ class LoadFixturesCommandTest extends AppTestCase
             ->getKernel()
             ->getContainer();
 
-        $this->getApplication()->add(new LoadFixturesCommand($container));
+        $this->getApplication()->addCommands([new LoadFixturesCommand($container)]);
     }
 }

@@ -35,6 +35,6 @@ class DropDatabaseCommandTest extends AppTestCase
             ->getKernel()
             ->getContainer();
 
-        $this->getApplication()->add(new DropDatabaseCommand($container));
+        $this->getApplication()->addCommands([new DropDatabaseCommand($container)]);
     }
 }

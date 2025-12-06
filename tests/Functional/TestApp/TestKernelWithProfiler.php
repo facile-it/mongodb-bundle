@@ -32,10 +32,6 @@ class TestKernelWithProfiler extends TestKernel
         } else {
             $loader->load(__DIR__ . '/config_profiler.yml');
         }
-
-        if (version_compare(Kernel::VERSION, '5.1.0') >= 0) {
-            $loader->load(__DIR__ . '/deprecations_5.1.yml');
-        }
     }
 
     protected function build(ContainerBuilder $container): void

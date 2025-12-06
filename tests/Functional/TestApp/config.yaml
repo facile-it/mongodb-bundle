@@ -2,6 +2,9 @@ parameters:
   mongo_host: localhost
 
 framework:
+  router:
+    resource: false
+    utf8: true
   secret: "Four can keep a secret, if three of them are dead."
 
 mongo_db_bundle:
