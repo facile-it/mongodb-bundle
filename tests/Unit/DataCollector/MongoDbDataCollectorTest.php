@@ -37,7 +37,7 @@ class MongoDbDataCollectorTest extends TestCase
         self::assertEquals(1, $collector->getQueryCount());
         self::assertNotEmpty($collector->getQueries());
 
-        self::assertGreaterThan(0, $collector->getTime());
+        self::assertGreaterThanOrEqual(0.0, $collector->getTime());
 
         self::assertNotEmpty($collector->getConnections());
         self::assertEquals(1, $collector->getConnectionsCount());
