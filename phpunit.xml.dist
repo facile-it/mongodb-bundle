@@ -13,7 +13,7 @@
   </coverage>
   <php>
     <ini name="error_reporting" value="-1"/>
-    <env name="SYMFONY_DEPRECATIONS_HELPER" value="true"/>
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=0"/>
   </php>
   <testsuites>
     <testsuite name="MongoBundle Test Suite">
