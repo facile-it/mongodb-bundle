@@ -4,7 +4,7 @@ This bundle integrates the official [mongodb/mongo-php-library] driver library (
 with your Symfony app.
 
 [![PHP](https://img.shields.io/badge/php-%5E8.1-blue.svg)](https://img.shields.io/badge/php-%5E8.1-blue.svg)
-[![MongoDB](https://img.shields.io/badge/MongoDB-%5E3.0-lightgrey.svg)](https://img.shields.io/badge/MongoDB-%5E3.0-lightgrey.svg)
+[![MongoDB](https://img.shields.io/badge/MongoDB-%5E5.0-lightgrey.svg)](https://img.shields.io/badge/MongoDB-%5E5.0-lightgrey.svg)
 [![ext-mongodb](https://img.shields.io/badge/ext_mongodb-%5E1.12.0%7C%5E2.0-orange.svg)](https://img.shields.io/badge/ext_mongodb-%5E1.12.0%7C%5E2.svg)
 [![Flex Support](https://img.shields.io/badge/Flex-supported-brightgreen.svg)]()
 

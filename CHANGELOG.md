@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+* Support for Symfony 8.0 (#203) by [@Jean85](https://github.com/Jean85).
+### Removed
+* Support for Symfony below 5.4 (#203) by [@Jean85](https://github.com/Jean85).
+* CI testing from MongoDB below 5.0 (#203) by [@Jean85](https://github.com/Jean85).
 
 ## [1.8.0] (2025-04-23)
 ### Added

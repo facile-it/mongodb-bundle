@@ -36,6 +36,6 @@ class DropCollectionCommandTest extends AppTestCase
             ->getKernel()
             ->getContainer();
 
-        $this->getApplication()->add(new DropCollectionCommand($container));
+        $this->getApplication()->addCommands([new DropCollectionCommand($container)]);
     }
 }
