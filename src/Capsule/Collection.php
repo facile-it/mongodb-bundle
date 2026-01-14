@@ -184,18 +184,7 @@ final class Collection extends MongoCollection
 
     private function translateReadPreference(ReadPreference $readPreference): string
     {
-        if (method_exists(ReadPreference::class, 'getModeString')) {
-            return $readPreference->getModeString();
-        }
-
-        return match ($readPreference->getMode()) {
-            ReadPreference::RP_PRIMARY => 'primary',
-            ReadPreference::RP_PRIMARY_PREFERRED => 'primaryPreferred',
-            ReadPreference::RP_SECONDARY => 'secondary',
-            ReadPreference::RP_SECONDARY_PREFERRED => 'secondaryPreferred',
-            ReadPreference::RP_NEAREST => 'nearest',
-            default => 'undefined',
-        };
+        return $readPreference->getModeString();
     }
 
     private function notifyQueryExecution(Query $queryLog): void

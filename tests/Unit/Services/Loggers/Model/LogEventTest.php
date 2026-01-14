@@ -11,6 +11,7 @@ class LogEventTest extends TestCase
 {
     public function test_construction(): void
     {
+        $microtime = microtime(true);
         $query = new Query();
         $query->setCollection('test_collection');
         $query->setMethod('find');
@@ -20,7 +21,7 @@ class LogEventTest extends TestCase
         $query->setDatabase('test_db');
         $query->setReadPreference('secondaryPreferred');
 
-        $this->assertNotNull($query->getStart());
+        $this->assertGreaterThanOrEqual($microtime, $query->getStart());
         $this->assertEquals('test_collection', $query->getCollection());
         $this->assertEquals('find', $query->getMethod());
         $this->assertEquals(1_000, $query->getExecutionTime());

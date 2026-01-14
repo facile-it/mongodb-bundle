@@ -37,7 +37,7 @@ class MongoDbDataCollectorTest extends TestCase
         self::assertEquals(1, $collector->getQueryCount());
         self::assertNotEmpty($collector->getQueries());
 
-        self::assertIsFloat($collector->getTime());
+        self::assertGreaterThanOrEqual(0.0, $collector->getTime());
 
         self::assertNotEmpty($collector->getConnections());
         self::assertEquals(1, $collector->getConnectionsCount());
@@ -47,10 +47,6 @@ class MongoDbDataCollectorTest extends TestCase
 
     public function getUtcDateTime(): UTCDateTime
     {
-        if (phpversion('mongodb') === '1.2.0-dev') {
-            return new UTCDateTime('1000');
-        }
-
         return new UTCDateTime(1_000);
     }
 }
