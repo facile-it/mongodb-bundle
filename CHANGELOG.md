@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [2.0.0] (2026-01-14)
 ### Added
 * Support for Symfony 8.0 (#203) by [@Jean85](https://github.com/Jean85).
 ### Removed
@@ -241,7 +242,8 @@ First unstable release
 ## 0.1-alpha (2016-06-30)
 First release
 
-[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/1.8.0..master
+[Unreleased]: https://github.com/facile-it/mongodb-bundle/compare/2.0.0..master
+[2.0.0]: https://github.com/facile-it/mongodb-bundle/compare/1.8.0..2.0.0
 [1.8.0]: https://github.com/facile-it/mongodb-bundle/compare/1.7.0..1.8.0
 [1.7.0]: https://github.com/facile-it/mongodb-bundle/compare/1.6.2..1.7.0
 [1.6.2]: https://github.com/facile-it/mongodb-bundle/compare/1.6.1..1.6.2
