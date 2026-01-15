@@ -69,13 +69,13 @@ mongo_db_bundle:
       password: 'what-a-secret'
       authSource: '' # the database name with the user’s credentials
       replicaSet: '' # default null (no replica) (experimental)
-      ssl: false
+      ssl: false # when using MongoDB Atlas must be set to true as TLS is required there
       connectTimeoutMS: 3000 # default null (no timeout)
       readPreference: primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
 
     other_client: ~ # same as upper configuration
 
-  # connections section, these represents your Database object reference
+  # connections section, these represent your Database object reference
   connections:
 
     foo_db:
