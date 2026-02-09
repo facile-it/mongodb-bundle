@@ -38,7 +38,7 @@
         "phpstan/extension-installer": "1.4.3",
         "jangregor/phpstan-prophecy": "2.2.0",
         "phpspec/prophecy": "^1.17",
-        "rector/rector": "2.3.5",
+        "rector/rector": "2.3.6",
         "phpspec/prophecy-phpunit": "^2.0",
         "symfony/monolog-bundle": "*",
         "phpstan/phpstan-symfony": "2.0.12"
