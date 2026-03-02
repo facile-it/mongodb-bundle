@@ -41,7 +41,7 @@
         "rector/rector": "2.3.8",
         "phpspec/prophecy-phpunit": "^2.0",
         "symfony/monolog-bundle": "*",
-        "phpstan/phpstan-symfony": "2.0.14"
+        "phpstan/phpstan-symfony": "2.0.15"
     },
     "minimum-stability": "stable",
     "suggest": {
