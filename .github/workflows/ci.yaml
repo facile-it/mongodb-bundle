@@ -67,7 +67,7 @@ jobs:
           extensions: mongodb-${{ matrix.mongo-ext }}
           tools: flex
       - name: Install dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
         with:
           dependency-versions: ${{ matrix.dependencies }}
         env:
