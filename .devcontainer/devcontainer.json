@@ -1,0 +1,7 @@
+{
+  "name": "mongodb-bundle (PHP 8.4 + MongoDB 7.0)",
+
+  "dockerComposeFile": ["../docker-compose.yml", "../docker-compose.override.yml"],
+  "service": "php",
+  "workspaceFolder": "/home/user-dev/project"
+}
