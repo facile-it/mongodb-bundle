@@ -1,5 +1,5 @@
 services:
-  php-devcontaner:
+  php-devcontainer:
     extends: php
     depends_on: []
     command: /bin/sh -c "while sleep 1000; do :; done"
