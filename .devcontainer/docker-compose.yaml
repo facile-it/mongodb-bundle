@@ -8,3 +8,4 @@ services:
         MONGODB_EXTENSION_VERSION: ${MONGODB_EXTENSION_VERSION:-1.6.0}
     volumes:
         - ../:/home/user-dev/project
+    command: /bin/sh -c "while sleep 1000; do :; done"
