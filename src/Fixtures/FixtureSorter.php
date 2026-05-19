@@ -17,14 +17,14 @@ final class FixtureSorter
     {
         return static function ($a, $b): int {
             if ($a instanceof OrderedFixtureInterface && $b instanceof OrderedFixtureInterface) {
-                return $a->getOrder() - $b->getOrder();
+                return $a->getOrder() <=> $b->getOrder();
             }
 
-            if ($a instanceof OrderedFixtureInterface && ! $b instanceof OrderedFixtureInterface) {
+            if ($a instanceof OrderedFixtureInterface) {
                 return 1;
             }
 
-            if (! $a instanceof OrderedFixtureInterface && $b instanceof OrderedFixtureInterface) {
+            if ($b instanceof OrderedFixtureInterface) {
                 return -1;
             }
 
