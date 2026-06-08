@@ -35,7 +35,9 @@ class ExplainQueryService
      * The explain command provides information on the execution of the following commands:
      * count, distinct, group, find, findAndModify, delete, and update.
      */
-    public function __construct(private readonly ClientRegistry $clientRegistry) {}
+    public function __construct(
+        private readonly ClientRegistry $clientRegistry,
+    ) {}
 
     /**
      * Execute the operation.
@@ -46,7 +48,7 @@ class ExplainQueryService
     {
         if (! \in_array($query->getMethod(), self::ACCEPTED_METHODS, true)) {
             throw new \InvalidArgumentException(
-                'Cannot explain the method \'' . $query->getMethod() . '\'. Allowed methods: ' . implode(', ', self::ACCEPTED_METHODS)
+                'Cannot explain the method \'' . $query->getMethod() . '\'. Allowed methods: ' . implode(', ', self::ACCEPTED_METHODS),
             );
         }
 
@@ -55,7 +57,7 @@ class ExplainQueryService
         return $manager
             ->executeCommand(
                 $query->getDatabase(),
-                new Command(ExplainCommandBuilder::createCommandArgs($query, $verbosity))
+                new Command(ExplainCommandBuilder::createCommandArgs($query, $verbosity)),
             );
     }
 }

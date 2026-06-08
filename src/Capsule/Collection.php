@@ -27,7 +27,7 @@ final class Collection extends MongoCollection
         private readonly string $databaseName,
         string $collectionName,
         array $options,
-        private readonly EventDispatcherInterface $eventDispatcher
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
         parent::__construct($manager, $this->databaseName, $collectionName, $options);
     }
@@ -173,7 +173,7 @@ final class Collection extends MongoCollection
         $query->setDatabase($this->getDatabaseName());
         $query->setCollection($this->getCollectionName());
         $query->setReadPreference(
-            $this->translateReadPreference($options['readPreference'] ?? $this->__debugInfo()['readPreference'])
+            $this->translateReadPreference($options['readPreference'] ?? $this->__debugInfo()['readPreference']),
         );
 
         $event = new QueryEvent($query);

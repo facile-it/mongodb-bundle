@@ -23,8 +23,8 @@ class FixtureSorterTest extends TestCase
             '',
             array_map(
                 static fn(MongoFixtureInterface $fixture): string => $fixture->collection(),
-                FixtureSorter::sort($toLoad)
-            )
+                FixtureSorter::sort($toLoad),
+            ),
         );
 
         $this->assertStringContainsString('a', $collectionsSorted);
@@ -43,7 +43,7 @@ class FixtureSorterTest extends TestCase
         foreach ($others as $other) {
             $this->assertGreaterThan(
                 strpos($collectionsSorted, (string) $other),
-                strpos($collectionsSorted, $collection)
+                strpos($collectionsSorted, $collection),
             );
         }
     }
@@ -51,7 +51,9 @@ class FixtureSorterTest extends TestCase
     private function mockUnordered(string $collectionName): MongoFixtureInterface
     {
         return new class ($collectionName) implements MongoFixtureInterface {
-            public function __construct(private readonly string $collectionName) {}
+            public function __construct(
+                private readonly string $collectionName,
+            ) {}
 
             public function loadData(): void {}
 
@@ -69,7 +71,7 @@ class FixtureSorterTest extends TestCase
         return new class ($order, $collectionName) implements MongoFixtureInterface, OrderedFixtureInterface {
             public function __construct(
                 private readonly int $order,
-                private readonly string $collectionName
+                private readonly string $collectionName,
             ) {}
 
             public function loadData(): void {}

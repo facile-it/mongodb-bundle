@@ -22,7 +22,7 @@ class MongoDbDataCollectorTest extends TestCase
             [
                 'data' => new BSONDocument(['test' => 'test']),
                 'date' => $this->getUtcDateTime(),
-            ]
+            ],
         );
 
         $logger = new MongoQueryLogger();

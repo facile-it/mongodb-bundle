@@ -26,7 +26,7 @@ final class Client extends MongoClient
         array $uriOptions,
         array $driverOptions,
         private readonly string $clientName,
-        private readonly EventDispatcherInterface $eventDispatcher
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
         parent::__construct($uri, $uriOptions, $driverOptions);
     }

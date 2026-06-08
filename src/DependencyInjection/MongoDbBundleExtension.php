@@ -59,7 +59,7 @@ final class MongoDbBundleExtension extends Extension
                 new Reference('facile_mongo_db.event_dispatcher'),
                 $debug,
                 $this->defineDriverOptionsFactory($config),
-            ]
+            ],
         );
         $clientRegistryDefinition->addMethodCall('addClientsConfigurations', [$clientsConfig]);
         $clientRegistryDefinition->setPublic(true);
@@ -83,7 +83,7 @@ final class MongoDbBundleExtension extends Extension
                 [
                     $conf['client_name'],
                     $conf['database_name'],
-                ]
+                ],
             );
             $connectionDefinition->setFactory([new Reference('mongo.connection_factory'), 'createConnection']);
             $connectionDefinition->setPublic(true);
@@ -100,14 +100,14 @@ final class MongoDbBundleExtension extends Extension
             [
                 ConnectionEvent::CLIENT_CREATED,
                 [new Reference('facile_mongo_db.data_collector.listener'), 'onConnectionClientCreated'],
-            ]
+            ],
         );
         $eventManagerDefinition->addMethodCall(
             'addListener',
             [
                 QueryEvent::QUERY_EXECUTED,
                 [new Reference('facile_mongo_db.data_collector.listener'), 'onQueryExecuted'],
-            ]
+            ],
         );
     }
 
