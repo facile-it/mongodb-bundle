@@ -215,7 +215,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $this->expectExceptionMessage('Invalid configuration for path "mongo_db_bundle.clients.test_client.readPreference": Invalid readPreference option "fakeOption", must be one of [primary, primaryPreferred, secondary, secondaryPreferred, nearest]');
         $processor->processConfiguration(
             $configuration,
-            $extensionConfiguration->getConfiguration()
+            $extensionConfiguration->getConfiguration(),
         );
     }
 

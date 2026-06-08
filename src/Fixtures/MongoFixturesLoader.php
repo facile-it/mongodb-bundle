@@ -11,7 +11,9 @@ final class MongoFixturesLoader
     /** @var array|MongoFixtureInterface[] */
     private ?array $loadedClasses = null;
 
-    public function __construct(private readonly ContainerInterface $container) {}
+    public function __construct(
+        private readonly ContainerInterface $container,
+    ) {}
 
     /**
      * @return array
@@ -24,7 +26,7 @@ final class MongoFixturesLoader
 
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($dir),
-            \RecursiveIteratorIterator::LEAVES_ONLY
+            \RecursiveIteratorIterator::LEAVES_ONLY,
         );
 
         return $this->loadFromIterator($iterator);
@@ -65,7 +67,7 @@ final class MongoFixturesLoader
 
                 return $classList;
             },
-            []
+            [],
         );
     }
 

@@ -15,7 +15,7 @@ class ProfilerController
 {
     public function __construct(
         private readonly ExplainQueryService $explain,
-        private readonly ?Profiler $profiler
+        private readonly ?Profiler $profiler,
     ) {}
 
     public function explainAction(string $token, $queryNumber): JsonResponse

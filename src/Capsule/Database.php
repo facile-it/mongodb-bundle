@@ -25,7 +25,7 @@ final class Database extends MongoDatabase
         private readonly string $clientName,
         private readonly string $databaseName,
         array $options,
-        private readonly EventDispatcherInterface $eventDispatcher
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
         parent::__construct($manager, $this->databaseName, $options);
     }
@@ -46,7 +46,7 @@ final class Database extends MongoDatabase
             $this->databaseName,
             $collectionName,
             $options,
-            $this->eventDispatcher
+            $this->eventDispatcher,
         );
     }
 

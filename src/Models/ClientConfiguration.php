@@ -17,7 +17,7 @@ final class ClientConfiguration
         private readonly string $password = '',
         private readonly ?string $authSource = null,
         private readonly array $options = [],
-        private readonly array $driverOptions = []
+        private readonly array $driverOptions = [],
     ) {}
 
     public function getUri(): string
@@ -48,8 +48,8 @@ final class ClientConfiguration
                     'username' => $this->username,
                     'password' => $this->password,
                 ],
-                $this->options
-            )
+                $this->options,
+            ),
         );
     }
 
@@ -65,7 +65,7 @@ final class ClientConfiguration
             fn($value): bool => ! empty($value)
                 || \is_int($value)
                 || \is_bool($value)
-                || \is_float($value)
+                || \is_float($value),
         );
     }
 }

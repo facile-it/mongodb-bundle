@@ -13,7 +13,9 @@ use MongoDB\Database;
  */
 final class ConnectionFactory
 {
-    public function __construct(private readonly ClientRegistry $clientRegistry) {}
+    public function __construct(
+        private readonly ClientRegistry $clientRegistry,
+    ) {}
 
     public function createConnection(string $clientName, string $databaseName): Database
     {

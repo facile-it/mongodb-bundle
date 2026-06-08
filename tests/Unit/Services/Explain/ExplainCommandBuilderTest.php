@@ -28,7 +28,7 @@ class ExplainCommandBuilderTest extends TestCase
                 ],
                 'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
             ],
-            $args
+            $args,
         );
     }
 
@@ -51,7 +51,7 @@ class ExplainCommandBuilderTest extends TestCase
                 ],
                 'verbosity' => ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
             ],
-            $args
+            $args,
         );
     }
 
@@ -70,7 +70,7 @@ class ExplainCommandBuilderTest extends TestCase
                 'pipeline' => $query->getData(),
                 'explain' => true,
             ],
-            $args
+            $args,
         );
     }
 

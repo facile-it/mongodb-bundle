@@ -54,7 +54,7 @@ class LoadFixturesCommand extends AbstractCommand
         $fixtures = $this->loader->getLoadedClasses();
         if ($fixtures === null || $fixtures === []) {
             throw new \InvalidArgumentException(
-                sprintf('Could not find any class to load in: %s', "\n\n- " . implode("\n- ", $paths))
+                sprintf('Could not find any class to load in: %s', "\n\n- " . implode("\n- ", $paths)),
             );
         }
 

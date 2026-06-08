@@ -52,7 +52,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                         'database_name' => 'testdb',
                     ],
                 ],
-            ]
+            ],
         );
         $this->compile();
         // Alias connections
@@ -105,7 +105,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                     ],
                 ],
                 'data_collection' => false,
-            ]
+            ],
         );
         $this->compile();
         // Alias connections
@@ -151,7 +151,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                         'database_name' => 'testdb',
                     ],
                 ],
-            ]
+            ],
         );
         $this->compile();
 
@@ -204,7 +204,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                         'database_name' => 'testdb_2',
                     ],
                 ],
-            ]
+            ],
         );
         $this->compile();
 
@@ -253,7 +253,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
                         'database_name' => 'testdb',
                     ],
                 ],
-            ]
+            ],
         );
 
         $this->compile();

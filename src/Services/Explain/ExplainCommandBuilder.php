@@ -13,7 +13,7 @@ class ExplainCommandBuilder
      */
     public static function createCommandArgs(
         Query $query,
-        string $verbosity = ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION
+        string $verbosity = ExplainQueryService::VERBOSITY_ALL_PLAN_EXECUTION,
     ): array {
         if ('aggregate' === $query->getMethod()) {
             return [

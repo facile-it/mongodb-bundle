@@ -27,7 +27,7 @@ final class ClientRegistry
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly bool $debug,
-        private readonly ?DriverOptionsInterface $driverOptionsService
+        private readonly ?DriverOptionsInterface $driverOptionsService,
     ) {}
 
     public function addClientsConfigurations(array $configurations): void
@@ -59,7 +59,7 @@ final class ClientRegistry
                 'connectTimeoutMS' => $conf['connectTimeoutMS'],
                 'readPreference' => $conf['readPreference'],
             ],
-            $conf['driverOptions']
+            $conf['driverOptions'],
         );
     }
 
@@ -69,8 +69,8 @@ final class ClientRegistry
             ',',
             array_map(
                 static fn(array $host): string => sprintf('%s:%d', $host['host'], $host['port']),
-                $hosts
-            )
+                $hosts,
+            ),
         );
     }
 
@@ -93,7 +93,7 @@ final class ClientRegistry
             $options = array_merge(
                 ['database' => $databaseName],
                 $conf->getAuthSource() !== null ? ['authSource' => $conf->getAuthSource()] : [],
-                $conf->getOptions()
+                $conf->getOptions(),
             );
             $this->clients[$clientKey] = $this->buildClient($name, $conf->getUri(), $options, $conf->getDriverOptions());
 

@@ -41,7 +41,7 @@ class LoadFixturesCommandTest extends AppTestCase
             [
                 'command' => $command->getName(),
                 'addFixturesPath' => __DIR__ . '/../../Fixtures/DataFixtures',
-            ]
+            ],
         );
 
         $collection = $this->conn->selectCollection('testFixturesCollection');
@@ -76,7 +76,7 @@ class LoadFixturesCommandTest extends AppTestCase
             [
                 'command' => $command->getName(),
                 'addFixturesPath' => __DIR__ . '/../../Fixtures/DataFixtures',
-            ]
+            ],
         );
 
         $collection = $this->conn->selectCollection('testFixturesOrderedCollection');
