@@ -68,6 +68,11 @@
         "allow-plugins": {
             "facile-it/facile-coding-standard": true,
             "phpstan/extension-installer": true
+        },
+        "policy": {
+            "advisories": {
+                "block": false
+            }
         }
     },
     "scripts": {
