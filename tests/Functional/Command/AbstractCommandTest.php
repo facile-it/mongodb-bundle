@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Functional\Command;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Component\Console\Command\Command;
 use Facile\MongoDbBundle\Command\AbstractCommand;
 use Facile\MongoDbBundle\Tests\Functional\AppTestCase;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,9 +14,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class AbstractCommandTest extends AppTestCase
 {
-    /**
-     * @dataProvider commandOptionsProvider
-     */
+    #[DataProvider('commandOptionsProvider')]
     public function test_AbstractCommand_execution(array $arguments): void
     {
         $this->addCommandToApplication();
@@ -42,7 +42,7 @@ class AbstractCommandTest extends AppTestCase
         $commandTester->execute(['command' => $command->getName(), '--connection' => $unexistantConnectionName]);
     }
 
-    public function commandOptionsProvider(): array
+    public static function commandOptionsProvider(): array
     {
         return [
             [[]],
@@ -74,6 +74,6 @@ class FakeCommand extends AbstractCommand
     {
         $this->io->writeln('Executed');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

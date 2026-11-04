@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Controller;
 
+use Symfony\Component\HttpKernel\Profiler\Profile;
 use Facile\MongoDbBundle\DataCollector\MongoDbDataCollector;
 use Facile\MongoDbBundle\DataCollector\MongoQuerySerializer;
 use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
@@ -23,7 +24,7 @@ class ProfilerController
         $this->profiler->disable();
 
         $profile = $this->profiler->loadProfile($token);
-        if (! $profile) {
+        if (! $profile instanceof Profile) {
             throw new \RuntimeException('No profile found');
         }
 

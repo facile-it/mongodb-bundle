@@ -24,10 +24,7 @@ return RectorConfig::configure()
         true,
         false
     )
-    ->withRules([
-        AddProphecyTraitRector::class,
-    ])
-    ->withSets([
-        PHPUnitSetList::PHPUNIT_90,
-        SymfonySetList::SYMFONY_44,
-    ]);
+    ->withComposerBased(
+        phpunit: true,
+        symfony: true,
+    );

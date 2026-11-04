@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
+use Symfony\Component\Console\Command\Command;
 use Facile\MongoDbBundle\Fixtures\FixtureSorter;
 use Facile\MongoDbBundle\Fixtures\MongoFixtureInterface;
 use Facile\MongoDbBundle\Fixtures\MongoFixturesLoader;
@@ -64,7 +65,7 @@ class LoadFixturesCommand extends AbstractCommand
 
         $this->io->writeln(sprintf('Done, loaded %d fixtures files', \count($fixtures)));
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     private function loadFixture(MongoFixtureInterface $indexList): void

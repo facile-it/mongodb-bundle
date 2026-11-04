@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,6 +34,6 @@ class DropCollectionCommand extends AbstractCommand
         $this->connection->dropCollection($collection);
         $this->io->writeln('Collection dropped');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
