@@ -11,7 +11,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class LoadFixturesCommandTest extends AppTestCase
 {
-    private ?Database $conn;
+    private Database $conn;
 
     protected function setUp(): void
     {
