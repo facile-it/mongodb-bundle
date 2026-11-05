@@ -235,9 +235,8 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
     }
 
     #[DataProvider('commandNamesProvider')]
-    public function testCommands(): void
+    public function testCommands(string $command): void
     {
-        $command = 'facile_mongo_db.command.drop_database';
         $publicAlias = $command . '.public';
         $this->container->setAlias($publicAlias, new Alias($command, true));
 
