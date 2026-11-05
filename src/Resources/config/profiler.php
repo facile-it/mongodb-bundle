@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Facile\MongoDbBundle\Controller\ProfilerController;
@@ -9,7 +11,7 @@ use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
 use Facile\MongoDbBundle\Services\Loggers\MongoQueryLogger;
 use Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $services = $container->services();
 
     $services->set('facile_mongo_db.logger', MongoQueryLogger::class)

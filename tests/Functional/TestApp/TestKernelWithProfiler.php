@@ -10,7 +10,6 @@ use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class TestKernelWithProfiler extends TestKernel
 {
@@ -39,15 +38,5 @@ class TestKernelWithProfiler extends TestKernel
         $container->setParameter('routing_config_dir', __DIR__);
 
         parent::build($container);
-    }
-
-    protected function configureRoutes(/** RouteCollectionBuilder */ $routes)
-    {
-        // noop - 4.4 backward compat
-    }
-
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
-    {
-        // noop - 4.4 backward compat
     }
 }

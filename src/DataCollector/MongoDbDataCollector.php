@@ -51,7 +51,6 @@ class MongoDbDataCollector extends DataCollector
         }
 
         while ($this->logger->hasLoggedEvents()) {
-            /** @var Query $event */
             $event = $this->logger->getLoggedEvent();
 
             MongoQuerySerializer::serialize($event);

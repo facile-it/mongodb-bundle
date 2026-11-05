@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Facile\MongoDbBundle\Command\DropCollectionCommand;
@@ -7,7 +9,7 @@ use Facile\MongoDbBundle\Command\DropDatabaseCommand;
 use Facile\MongoDbBundle\Command\LoadFixturesCommand;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-return static function (ContainerConfigurator $container) {
+return static function (ContainerConfigurator $container): void {
     $services = $container->services();
 
     $services->set('facile_mongo_db.event_dispatcher', EventDispatcher::class)

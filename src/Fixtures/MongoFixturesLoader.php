@@ -18,7 +18,7 @@ final class MongoFixturesLoader
     /**
      * @return array
      */
-    public function loadFromDirectory(string $dir)
+    public function loadFromDirectory(string $dir): mixed
     {
         if (! is_dir($dir)) {
             throw new \InvalidArgumentException(sprintf('"%s" does not exist', $dir));
@@ -84,15 +84,13 @@ final class MongoFixturesLoader
     {
         $listClass = $list::class;
 
-        if (! isset($this->loadedClasses[$listClass])) {
-            $this->loadedClasses[$listClass] = $list;
-        }
+        $this->loadedClasses[$listClass] ??= $list;
     }
 
     /**
      * @return array
      */
-    public function loadFromFile(string $fileName)
+    public function loadFromFile(string $fileName): mixed
     {
         if (! is_readable($fileName)) {
             throw new \InvalidArgumentException(sprintf('"%s" does not exist or is not readable', $fileName));

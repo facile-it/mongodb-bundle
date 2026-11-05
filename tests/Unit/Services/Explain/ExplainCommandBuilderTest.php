@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Services\Explain;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Facile\MongoDbBundle\Models\Query;
 use Facile\MongoDbBundle\Services\Explain\ExplainCommandBuilder;
 use Facile\MongoDbBundle\Services\Explain\ExplainQueryService;
@@ -74,9 +75,7 @@ class ExplainCommandBuilderTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider findsProvider
-     */
+    #[DataProvider('findsProvider')]
     public function test_finds(string $method, bool $projection = false): void
     {
         $query = new Query();
@@ -106,7 +105,7 @@ class ExplainCommandBuilderTest extends TestCase
         $this->assertEquals($expected, $args);
     }
 
-    public function findsProvider(): array
+    public static function findsProvider(): array
     {
         return [
             ['find', true],
@@ -116,9 +115,7 @@ class ExplainCommandBuilderTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider deletedsProvider
-     */
+    #[DataProvider('deletedsProvider')]
     public function test_deletes(string $method, int $limit = 0): void
     {
         $query = new Query();
@@ -146,7 +143,7 @@ class ExplainCommandBuilderTest extends TestCase
         $this->assertEquals($expected, $args);
     }
 
-    public function deletedsProvider(): array
+    public static function deletedsProvider(): array
     {
         return [
             ['deleteOne', 0],

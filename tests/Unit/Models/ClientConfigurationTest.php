@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MongoBundle\Tests\unit\Models;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Facile\MongoDbBundle\Models\ClientConfiguration;
 use PHPUnit\Framework\TestCase;
 
@@ -49,9 +50,7 @@ class ClientConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider optionsDataProvider
-     */
+    #[DataProvider('optionsDataProvider')]
     public function test_construction_with_options(array $options, array $expectedOptions): void
     {
         $conf = new ClientConfiguration(
@@ -71,7 +70,7 @@ class ClientConfigurationTest extends TestCase
         );
     }
 
-    public function optionsDataProvider(): array
+    public static function optionsDataProvider(): array
     {
         return [
             [   // set 1

@@ -4,23 +4,20 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\Twig;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Facile\MongoDbBundle\Twig\FacileMongoDbBundleExtension;
 use PHPUnit\Framework\TestCase;
 
 class FacileMongoDbBundleExtensionTest extends TestCase
 {
-    /**
-     * @dataProvider labelMethodProvider
-     */
+    #[DataProvider('labelMethodProvider')]
     public function test_queryDataTranslate(string $label, string $methodname, string $expected): void
     {
         $ext = new FacileMongoDbBundleExtension();
         $this->assertEquals($expected, $ext->queryDataTranslate($label, $methodname));
     }
 
-    /**
-     * @dataProvider explainMethodsProvider
-     */
+    #[DataProvider('explainMethodsProvider')]
     public function test_isQueryExplainable(string $methodname, bool $expected): void
     {
         $ext = new FacileMongoDbBundleExtension();
@@ -33,7 +30,7 @@ class FacileMongoDbBundleExtensionTest extends TestCase
         $this->assertEquals('facile_mongo_db_extesion', $ext->getName());
     }
 
-    public function labelMethodProvider(): array
+    public static function labelMethodProvider(): array
     {
         return [
             ['filters', 'aggregate', 'Pipeline'],
@@ -45,7 +42,7 @@ class FacileMongoDbBundleExtensionTest extends TestCase
         ];
     }
 
-    public function explainMethodsProvider(): array
+    public static function explainMethodsProvider(): array
     {
         return [
             ['aggregate', true],

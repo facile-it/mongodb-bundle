@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Command;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -29,6 +30,6 @@ class DropDatabaseCommand extends AbstractCommand
         $this->connection->drop();
         $this->io->writeln('Database dropped');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

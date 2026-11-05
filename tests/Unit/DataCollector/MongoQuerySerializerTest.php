@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Unit\DataCollector;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Facile\MongoDbBundle\DataCollector\MongoQuerySerializer;
 use Facile\MongoDbBundle\Models\Query;
@@ -15,9 +16,7 @@ class MongoQuerySerializerTest extends TestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @dataProvider unserializedDataProvider
-     */
+    #[DataProvider('unserializedDataProvider')]
     public function test_serializer(array $unserializedData, string|int|array $expectedSerialization): void
     {
         $query = new Query();
@@ -32,7 +31,7 @@ class MongoQuerySerializerTest extends TestCase
         $this->assertEquals($expectedSerialization, $query->getOptions()['test']);
     }
 
-    public function unserializedDataProvider(): array
+    public static function unserializedDataProvider(): array
     {
         $date = new UTCDateTime(1_000);
         $dateTime = $date->toDateTime();

@@ -2,6 +2,7 @@
 
 namespace Facile\MongoDbBundle\Tests\Functional\DependencyInjection;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Facile\MongoDbBundle\Capsule\Database as LoggerDatabase;
 use Facile\MongoDbBundle\Command\AbstractCommand;
 use Facile\MongoDbBundle\DependencyInjection\MongoDbBundleExtension;
@@ -233,12 +234,9 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertSame('testdb_2', $testConnection->getDatabaseName());
     }
 
-    /**
-     * @dataProvider commandNamesProvider
-     */
-    public function testCommands(): void
+    #[DataProvider('commandNamesProvider')]
+    public function testCommands(string $command): void
     {
-        $command = 'facile_mongo_db.command.drop_database';
         $publicAlias = $command . '.public';
         $this->container->setAlias($publicAlias, new Alias($command, true));
 
@@ -262,7 +260,7 @@ class MongoDbBundleExtensionTest extends AbstractExtensionTestCase
         $this->assertInstanceOf(AbstractCommand::class, $this->container->get($publicAlias));
     }
 
-    public function commandNamesProvider(): array
+    public static function commandNamesProvider(): array
     {
         return [
             ['facile_mongo_db.command.drop_database'],
