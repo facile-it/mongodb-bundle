@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Facile\MongoDbBundle\Tests\Functional\TestApp;
 
-use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
