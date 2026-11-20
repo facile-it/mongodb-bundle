@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+* ...
+## [2.0.1] (2026-11-20)
+* Switch from `Symfony\Component\HttpKernel\DependencyInjection\Extension` to `Symfony\Component\DependencyInjection\Extension\Extension` to avoid a Symfony 8.1 deprecation (#259) by [@MorrisHannessen](https://github.com/MorrisHannessen)
+
 ## [2.0.0] (2026-01-14)
 ### Added
 * Support for Symfony 8.0 (#203) by [@Jean85](https://github.com/Jean85).
